@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { LETTERS, QuestionBlocks } from '@/components/QuestionBlocks';
+import { TimeLimitEditor } from '@/components/TimeLimitEditor';
 import { TopBar } from '@/components/TopBar';
 import { requireAdminPage } from '@/lib/adminSession';
 import { closeExpiredAssessments } from '@/lib/assessment';
@@ -47,8 +48,9 @@ export default async function CandidatePage({ params }: { params: Promise<{ id: 
         </div>
 
         {row.status !== 'completed' ? (
-          <div className="note">
-            {row.status === 'invited' ? 'The candidate has not started this assessment yet.' : 'The candidate is currently taking this assessment.'}
+          <div className="note" style={{ justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
+            <span>{row.status === 'invited' ? 'The candidate has not started this assessment yet.' : 'The candidate is currently taking this assessment. A new time limit applies immediately.'}</span>
+            <TimeLimitEditor id={row.id} minutes={Math.round(row.time_limit_seconds / 60)} />
           </div>
         ) : (
           <>

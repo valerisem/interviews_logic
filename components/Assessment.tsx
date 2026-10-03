@@ -6,15 +6,20 @@ import { LETTERS, QuestionBlocks } from './QuestionBlocks';
 import { TopBar } from './TopBar';
 
 type InProgress = Extract<CandidateState, { status: 'in_progress' }>;
+type View = CandidateState | { status: 'enrol' };
 
 const BLOCKED_KEYS = new Set(['c', 'x', 'v', 'a', 'p', 's', 'u']);
 
 /** Block selection, copy/paste, the context menu and common copy/print shortcuts. Screenshots cannot be blocked. */
 function useCopyProtection() {
   useEffect(() => {
-    const prevent = (e: Event) => e.preventDefault();
+    // Text inputs (the enrolment form) stay usable; everything else is protected.
+    const inField = (e: Event) => e.target instanceof HTMLInputElement;
+    const prevent = (e: Event) => {
+      if (!inField(e)) e.preventDefault();
+    };
     const onKey = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && BLOCKED_KEYS.has(e.key.toLowerCase())) e.preventDefault();
+      if (!inField(e) && (e.ctrlKey || e.metaKey) && BLOCKED_KEYS.has(e.key.toLowerCase())) e.preventDefault();
     };
     const events = ['copy', 'cut', 'paste', 'contextmenu', 'selectstart', 'dragstart'] as const;
     events.forEach((ev) => document.addEventListener(ev, prevent));
@@ -67,8 +72,10 @@ async function post(url: string, body?: unknown): Promise<{ state?: CandidateSta
   return { state: data as CandidateState };
 }
 
-export function Assessment({ token, initial, recruiterEmail }: { token: string; initial: CandidateState; recruiterEmail: string }) {
-  const [state, setState] = useState<CandidateState>(initial);
+export function Assessment({ token: initialToken = '', initial, recruiterEmail }: { token?: string; initial: View; recruiterEmail: string }) {
+  const [token, setToken] = useState(initialToken);
+  const [state, setState] = useState<View>(initial);
+  const [details, setDetails] = useState({ name: '', email: '', role: 'Campaign Manager' });
   const [selected, setSelected] = useState<string[]>([]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
@@ -116,12 +123,29 @@ export function Assessment({ token, initial, recruiterEmail }: { token: string; 
     return () => window.clearInterval(id);
   }, [state.status, token, apply]);
 
-  async function start() {
+  async function start(e?: React.FormEvent) {
+    e?.preventDefault();
     setBusy(true);
-    const { state: s, error: e } = await post(`/api/a/${token}/start`);
+    setError('');
+    if (state.status === 'enrol') {
+      const res = await fetch('/api/start', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(details),
+      });
+      const data = await res.json().catch(() => ({}));
+      setBusy(false);
+      if (!res.ok) return setError(data.error ?? 'Something went wrong. Please try again.');
+      setToken(data.token);
+      // Give the assessment its own address so a reload resumes it instead of starting again.
+      window.history.replaceState(null, '', `/a/${data.token}`);
+      apply(data.state);
+      return;
+    }
+    const { state: s, error: err } = await post(`/api/a/${token}/start`);
     setBusy(false);
     if (s) apply(s);
-    else setError(e!);
+    else setError(err!);
   }
 
   async function submit(q: InProgress) {
@@ -149,8 +173,10 @@ export function Assessment({ token, initial, recruiterEmail }: { token: string; 
     );
   }
 
-  if (state.status === 'invited') {
-    const minutes = Math.round(state.timeLimitSeconds / 60);
+  if (state.status === 'enrol' || state.status === 'invited') {
+    const enrol = state.status === 'enrol';
+    const set = (k: keyof typeof details) => (e: React.ChangeEvent<HTMLInputElement>) =>
+      setDetails((d) => ({ ...d, [k]: e.target.value }));
     return (
       <div className="protected">
         <TopBar><span className="topbar-meta">Candidate assessment</span></TopBar>
@@ -166,20 +192,36 @@ export function Assessment({ token, initial, recruiterEmail }: { token: string; 
           <div className="facts">
             <div><span className="fact-value">12</span><span className="muted">Questions</span></div>
             <div><span className="fact-value">~5 min</span><span className="muted">Approximate time</span></div>
-            <div><span className="fact-value">{minutes} min</span><span className="muted">Time limit</span></div>
+            <div><span className="fact-value">1 at a time</span><span className="muted">No going back</span></div>
           </div>
           <div className="stack body" style={{ gap: 10 }}>
             <p>The assessment contains 12 questions and should take approximately 5 minutes.</p>
             <p>You will see one question at a time.</p>
             <p>Once you start, the timer will begin.</p>
           </div>
+          {enrol && (
+            <div className="enrol">
+              <label className="field">
+                What’s your name?
+                <input className="input" form="enrol" name="name" autoComplete="name" placeholder="Full name" required value={details.name} onChange={set('name')} />
+              </label>
+              <label className="field">
+                What’s your email?
+                <input className="input" form="enrol" name="email" type="email" autoComplete="email" placeholder="you@example.com" required value={details.email} onChange={set('email')} />
+              </label>
+              <label className="field">
+                Which role are you interviewing for?
+                <input className="input" form="enrol" name="role" required value={details.role} onChange={set('role')} />
+              </label>
+            </div>
+          )}
           <div className="note">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6D3FE0" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 11v5" /><path d="M12 8h.01" /></svg>
             <span>If you require a reasonable adjustment to complete this assessment, please contact your recruiter before pressing Start.</span>
           </div>
           {error && <p className="error" role="alert">{error}</p>}
-          <div className="row" style={{ paddingTop: 4 }}>
-            <button type="button" className="btn btn-primary" onClick={start} disabled={busy}>
+          <form id="enrol" className="row" style={{ paddingTop: 4 }} onSubmit={start}>
+            <button type="submit" className="btn btn-primary" disabled={busy}>
               {busy ? 'Starting…' : 'Start Assessment'}
             </button>
             <a
@@ -188,7 +230,7 @@ export function Assessment({ token, initial, recruiterEmail }: { token: string; 
             >
               Contact Recruiter
             </a>
-          </div>
+          </form>
         </main>
       </div>
     );

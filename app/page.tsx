@@ -1,13 +1,8 @@
-import { TopBar } from '@/components/TopBar';
+import { Assessment } from '@/components/Assessment';
 
+export const dynamic = 'force-dynamic';
+
+/** The one public assessment link: candidates enter their details and start straight away. */
 export default function Home() {
-  return (
-    <>
-      <TopBar />
-      <main className="page center">
-        <h1 className="title-md">Candidate assessments</h1>
-        <p className="body">Please open the personal assessment link your recruiter sent you.</p>
-      </main>
-    </>
-  );
+  return <Assessment initial={{ status: 'enrol' }} recruiterEmail={process.env.RECRUITER_EMAIL ?? ''} />;
 }

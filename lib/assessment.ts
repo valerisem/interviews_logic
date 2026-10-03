@@ -130,6 +130,64 @@ export async function startAssessment(row: AssessmentRow): Promise<CandidateStat
 
 export class AnswerError extends Error {}
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+export function defaultTimeLimitSeconds(): number {
+  const minutes = Number(process.env.DEFAULT_TIME_LIMIT_MINUTES ?? 5);
+  return Math.round((Number.isFinite(minutes) && minutes > 0 ? minutes : 5) * 60);
+}
+
+/** Self-enrolment from the public page: save the candidate's details and start the timer straight away. */
+export async function enrolAndStart(input: { name?: unknown; email?: unknown; role?: unknown }) {
+  const name = String(input.name ?? '').trim().slice(0, 120);
+  const email = String(input.email ?? '').trim().toLowerCase().slice(0, 200);
+  const role = String(input.role ?? '').trim().slice(0, 120);
+  if (!name) throw new AnswerError('Please enter your name.');
+  if (!EMAIL_RE.test(email)) throw new AnswerError('Please enter a valid email address.');
+  if (!role) throw new AnswerError('Please enter the role you’re interviewing for.');
+
+  // One attempt per email, so the questions can't be seen first and retaken.
+  const { data: existing, error: lookupError } = await db()
+    .from('assessments')
+    .select('id')
+    .eq('candidate_email', email)
+    .limit(1);
+  if (lookupError) throw lookupError;
+  if (existing?.length) {
+    throw new AnswerError('An assessment has already been started with this email. Please contact your recruiter if you need help.');
+  }
+
+  const { data, error } = await db()
+    .from('assessments')
+    .insert({
+      token: newToken(),
+      candidate_name: name,
+      candidate_email: email,
+      role,
+      assessment_version: ASSESSMENT_VERSION,
+      time_limit_seconds: defaultTimeLimitSeconds(),
+    })
+    .select('*')
+    .single();
+  if (error) throw error;
+
+  const row = data as AssessmentRow;
+  return { token: row.token, state: await startAssessment(row) };
+}
+
+/** Recruiter change to a candidate's time limit. Applies immediately, including mid-assessment. */
+export async function updateTimeLimit(id: string, minutes: number): Promise<void> {
+  if (!Number.isFinite(minutes) || minutes < 1 || minutes > 240) {
+    throw new AnswerError('Time limit must be between 1 and 240 minutes.');
+  }
+  const { error } = await db()
+    .from('assessments')
+    .update({ time_limit_seconds: Math.round(minutes * 60) })
+    .eq('id', id)
+    .neq('status', 'completed');
+  if (error) throw error;
+}
+
 /** Record the answer to the current question and move forward. There is no way back. */
 export async function submitAnswer(row: AssessmentRow, questionIndex: number, selected: unknown): Promise<CandidateState> {
   if (row.status !== 'in_progress') return candidateState(row);

@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { CopyButton } from '@/components/CopyButton';
-import { CreateLinkForm } from '@/components/CreateLinkForm';
+import { TimeLimitEditor } from '@/components/TimeLimitEditor';
 import { TopBar } from '@/components/TopBar';
 import { requireAdminPage } from '@/lib/adminSession';
-import { closeExpiredAssessments } from '@/lib/assessment';
+import { closeExpiredAssessments, defaultTimeLimitSeconds } from '@/lib/assessment';
 import { formatDate, formatDuration } from '@/lib/format';
 import { db } from '@/lib/supabase';
 import { CATEGORIES, type AssessmentRow, type Category } from '@/lib/types';
@@ -51,11 +51,21 @@ export default async function Dashboard() {
           <p className="body">Scores inform the hiring decision. They never reject a candidate automatically. The final decision rests with the recruiter or hiring manager.</p>
         </div>
 
-        <CreateLinkForm defaultMinutes={Number(process.env.DEFAULT_TIME_LIMIT_MINUTES ?? 5)} />
+        <section className="panel" style={{ gap: 12 }}>
+          <h2 className="h2">Assessment link</h2>
+          <div className="link-box">
+            <code style={{ fontSize: 14 }}>{base || 'Set APP_BASE_URL'}</code>
+            {base && <CopyButton text={base} label="Copy" />}
+          </div>
+          <p className="muted">
+            Send every candidate the same link. They enter their name, email and role and start straight away.
+            Default time limit: {Math.round(defaultTimeLimitSeconds() / 60)} min. Change it per candidate below, even while they are taking the test.
+          </p>
+        </section>
 
         <section className="table-wrap">
           {rows.length === 0 ? (
-            <p className="empty">No assessments yet. Generate a link above to invite a candidate.</p>
+            <p className="empty">No candidates yet. Share the assessment link above.</p>
           ) : (
             <div className="table-scroll">
               <table className="data">
@@ -66,7 +76,8 @@ export default async function Dashboard() {
                     <th>Date</th>
                     <th>Overall /100</th>
                     {CATEGORIES.map((c) => <th key={c}>{SHORT_LABELS[c]}</th>)}
-                    <th>Time</th>
+                    <th>Time taken</th>
+                    <th>Time limit</th>
                     <th>Tab leaves</th>
                     <th></th>
                   </tr>
@@ -89,11 +100,14 @@ export default async function Dashboard() {
                         <td key={c} className="num">{r.category_scores ? `${r.category_scores[c].score}%` : '—'}</td>
                       ))}
                       <td className="num">{formatDuration(r.completion_time_seconds)}</td>
+                      <td className="num">
+                        {r.status === 'completed'
+                          ? `${Math.round(r.time_limit_seconds / 60)} min`
+                          : <TimeLimitEditor id={r.id} minutes={Math.round(r.time_limit_seconds / 60)} />}
+                      </td>
                       <td className="num">{r.status === 'invited' ? '—' : r.tab_leave_count}</td>
                       <td>
-                        {r.status === 'invited'
-                          ? <CopyButton text={`${base}/a/${r.token}`} />
-                          : <Link href={`/admin/candidates/${r.id}`} style={{ fontWeight: 500 }}>Review</Link>}
+                        <Link href={`/admin/candidates/${r.id}`} style={{ fontWeight: 500 }}>Review</Link>
                       </td>
                     </tr>
                   ))}

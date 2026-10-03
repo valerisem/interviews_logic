@@ -8,14 +8,16 @@ Built with Next.js (App Router) and Supabase. It runs on any Node host (Vercel, 
 
 ## How it works
 
-**Candidate** (`/a/<token>`)
-1. Landing page with the required wording, plus **Start Assessment** and **Contact Recruiter** (mailto) buttons. The timer does not run on this page.
-2. Pressing Start generates the candidate's 12 questions on the server and starts the server-side clock. Candidates see one question at a time, with "Question n of 12" and a countdown. There is no back navigation, and no right/wrong or score feedback.
-3. On submit or timeout, the completion screen shows only: *"Assessment completed. Thank you. Your responses have been submitted successfully and will be reviewed as part of your application."*
+**Candidate**: one public link for everyone (the site root, e.g. `https://assessment.yourdomain.com`)
+1. The landing page shows the required wording and asks for **name**, **email** and **the role they're interviewing for**. It has **Start Assessment** and **Contact Recruiter** (mailto `RECRUITER_EMAIL`) buttons. The timer does not run on this page.
+2. **Start Assessment** saves the details, generates the candidate's 12 questions on the server and starts the server-side clock immediately. The page address changes to `/a/<token>`, so a reload resumes the same attempt. Each email can take the assessment once.
+3. Candidates see one question at a time, with "Question n of 12" and a countdown. There is no back navigation, and no right/wrong or score feedback.
+4. On submit or timeout, the completion screen shows only: *"Assessment completed. Thank you. Your responses have been submitted successfully and will be reviewed as part of your application."*
 
 **Recruiter** (`/admin`, password protected)
-- Generate a unique link per candidate, with a custom time limit for reasonable adjustments.
-- The table shows name, email, role, date, overall score, the six category scores, completion time and number of tab leaves.
+- Shows the shared assessment link with a copy button. There are no per-candidate links to generate.
+- The table shows name, email, role, date, overall score (/100), the six category scores (%), time taken, time limit and number of tab leaves.
+- **Time limit** can be edited per candidate after they enrol, including while they're taking the test (for example, a reasonable adjustment). The new limit applies immediately, and the candidate's countdown updates on their next answer.
 - **Review** opens every question with the candidate's answer, the correct answer and the result. You can expand each question to see it as the candidate saw it.
 - Scores never reject anyone automatically. The recruiter or hiring manager makes the decision.
 
@@ -37,7 +39,7 @@ Each candidate gets randomly drawn templates, randomised names, budgets, dates a
 ## Scoring
 
 - One mark per question. A "pick two" question needs both correct picks. Overall score = correct / 12 × 100.
-- Category scores are the percentage correct within each category.
+- Category scores are the percentage correct within each category (e.g. 67% = 2 of 3).
 - Completion time is stored separately and is **not** combined with accuracy.
 
 ## Anti-copy / anti-AI measures
