@@ -64,7 +64,7 @@ export default async function Dashboard() {
                     <th>Candidate</th>
                     <th>Role</th>
                     <th>Date</th>
-                    <th>Overall</th>
+                    <th>Overall /100</th>
                     {CATEGORIES.map((c) => <th key={c}>{SHORT_LABELS[c]}</th>)}
                     <th>Time</th>
                     <th>Tab leaves</th>
@@ -86,7 +86,7 @@ export default async function Dashboard() {
                           : <span className="tag">{r.status === 'invited' ? 'Not started' : 'In progress'}</span>}
                       </td>
                       {CATEGORIES.map((c) => (
-                        <td key={c} className="num">{r.category_scores ? r.category_scores[c].score : '—'}</td>
+                        <td key={c} className="num">{r.category_scores ? `${r.category_scores[c].score}%` : '—'}</td>
                       ))}
                       <td className="num">{formatDuration(r.completion_time_seconds)}</td>
                       <td className="num">{r.status === 'invited' ? '—' : r.tab_leave_count}</td>

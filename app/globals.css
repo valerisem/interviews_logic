@@ -13,11 +13,8 @@
   --pink: #e91e8c;
   --pink-tint: #fdf2f8;
   --pink-ink: #a3105c;
-  --green-tint: #ecf7f0;
-  --green-ink: #17663a;
   --radius: 12px;
   --font: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-brand: 'Montserrat', 'Inter', sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -31,7 +28,7 @@ button, input, select { font: inherit; color: inherit; }
 .topbar { border-bottom: 1px solid var(--border); padding: 0 16px; position: relative; }
 .topbar-inner { max-width: 1080px; margin: 0 auto; height: 64px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 .topbar-inner.wide { max-width: 1240px; }
-.wordmark { font-family: var(--font-brand); font-weight: 800; font-size: 13px; letter-spacing: 0.14em; color: var(--text); }
+.logo { height: 28px; width: auto; display: block; }
 .topbar-meta { font-size: 14px; color: var(--muted); }
 .progress-track { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--border); }
 .progress-fill { height: 2px; background: var(--purple); transition: width 300ms cubic-bezier(.4, 0, .2, 1); }
@@ -131,7 +128,7 @@ table.data th:last-child, table.data td:last-child { padding-right: 20px; text-a
 .num { font-variant-numeric: tabular-nums; white-space: nowrap; }
 .score-pill { display: inline-block; min-width: 36px; text-align: center; padding: 3px 8px; border-radius: 6px; background: var(--purple-tint); color: var(--purple-ink); font-weight: 600; }
 .tag { display: inline-block; font-size: 12px; color: var(--text-2); background: var(--surface); border-radius: 6px; padding: 3px 8px; white-space: nowrap; }
-.tag.ok { background: var(--green-tint); color: var(--green-ink); font-weight: 500; }
+.tag.ok { background: var(--purple-tint); color: var(--purple-ink); font-weight: 500; }
 .tag.bad { background: var(--pink-tint); color: var(--pink-ink); font-weight: 500; }
 .empty { padding: 40px 20px; text-align: center; color: var(--muted); font-size: 14px; }
 
@@ -143,7 +140,7 @@ table.data th:last-child, table.data td:last-child { padding-right: 20px; text-a
   .stats { grid-template-columns: 1fr; }
   .stats > div + div { border-left: 0; border-top: 1px solid var(--border); }
 }
-.bar-row { display: grid; grid-template-columns: minmax(140px, 220px) minmax(0, 1fr) 72px; gap: 16px; align-items: center; font-size: 14px; }
+.bar-row { display: grid; grid-template-columns: minmax(140px, 220px) minmax(0, 1fr) 150px; gap: 16px; align-items: center; font-size: 14px; }
 .bar-track { height: 4px; background: var(--border); border-radius: 999px; overflow: hidden; }
 .bar-fill { height: 4px; background: var(--purple); border-radius: 999px; }
 

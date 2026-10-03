@@ -2,7 +2,8 @@ export function TopBar({ children, wide, progress }: { children?: React.ReactNod
   return (
     <header className="topbar">
       <div className={`topbar-inner${wide ? ' wide' : ''}`}>
-        <div className="wordmark">HOUSE OF MARKETERS</div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img className="logo" src="/logo-horizontal.png" alt="House of Marketers" width={138} height={28} />
         {children}
       </div>
       {progress !== undefined && (

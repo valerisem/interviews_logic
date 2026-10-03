@@ -73,14 +73,17 @@ export default async function CandidatePage({ params }: { params: Promise<{ id: 
             </div>
 
             <section className="stack" style={{ gap: 14 }}>
-              <h2 className="h2">Category scores</h2>
+              <div className="stack-sm">
+                <h2 className="h2">Category scores</h2>
+                <p className="muted">Percentage of questions answered correctly in each skill area.</p>
+              </div>
               {CATEGORIES.map((c) => {
                 const s = row.category_scores![c];
                 return (
                   <div className="bar-row" key={c}>
                     <span style={{ color: 'var(--text-2)' }}>{CATEGORY_LABELS[c]}</span>
                     <div className="bar-track"><div className="bar-fill" style={{ width: `${s.score}%` }} /></div>
-                    <span className="num" style={{ textAlign: 'right', fontWeight: 600 }}>{s.score} <span className="muted">({s.correct}/{s.total})</span></span>
+                    <span className="num" style={{ textAlign: 'right' }}><strong style={{ fontWeight: 600 }}>{s.score}%</strong> <span className="muted">· {s.correct} of {s.total} correct</span></span>
                   </div>
                 );
               })}
