@@ -10,13 +10,13 @@ import { addDays, dayMonth, money, num, ranking, randomDate, single, type Priori
  *   3. Applying Requirements     30s  three creators vs five requirements: which one qualifies (or more than one)
  *   4. Prioritisation            30s  rank four items; weighted scoring
  *   5. Logical Reasoning         25s  campaign dependencies, one objectively correct answer
- *   6. Operational Judgement     30s  realistic situation, one clearly preferable response
+ *   6. Operational Judgement     30s  report figures don’t match the dashboard two hours before the deadline
  *
  * Every question is generated from a seeded RNG so candidates receive different
  * names, figures and scenarios, and the answer key is computed from those values.
  */
 
-export const CM_VERSION = 'CM-2026.6';
+export const CM_VERSION = 'CM-2026.7';
 export const CM_TIMES = [15, 30, 30, 30, 25, 30];
 
 // ---------------------------------------------------------------------------
@@ -102,11 +102,11 @@ function q1AttentionToDetail(rng: Rng): Question {
 // ---------------------------------------------------------------------------
 
 function q2FinancialAccuracy(rng: Rng): Question {
-  const creator = rng.int(15000, 30000, 250);
-  const paidMedia = rng.int(4000, 10000, 500);
-  const production = rng.int(1000, 4000, 250);
-  const agency = rng.int(3000, 7000, 500);
-  const total = creator + paidMedia + production + agency;
+  const creator = rng.int(20000, 35000, 250);
+  const paidMedia = rng.int(6000, 12000, 500);
+  const production = rng.int(2000, 5000, 250);
+  const other = rng.int(4000, 9000, 500);
+  const total = creator + paidMedia + production + other;
 
   const outcome = rng.pick(['MORE', 'LESS', 'EQUAL'] as const);
   const delta = rng.pick([250, 500, 750, 1000]);
@@ -124,8 +124,8 @@ function q2FinancialAccuracy(rng: Rng): Question {
         rows: [
           ['Creator Costs', money(creator)],
           ['Paid Media', money(paidMedia)],
-          ['Production Costs', money(production)],
-          ['Agency Fee', money(agency)],
+          ['Production / Fulfilment Costs', money(production)],
+          ['Other Campaign Costs', money(other)],
         ],
       },
     ],
@@ -335,76 +335,31 @@ function q5Logic(rng: Rng): Question {
 // ---------------------------------------------------------------------------
 
 function q6Judgement(rng: Rng): Question {
-  const hours = rng.int(5, 7);
-  const days = rng.int(3, 5);
-  const variants: { id: string; situation: string[]; correct: string; wrong: string[] }[] = [
-    {
-      id: 'Q6-missed-post',
-      situation: [
-        'A creator was due to post yesterday.',
-        'They have not posted.',
-        `You followed up this morning and have received no response for ${hours} hours.`,
-        'The client has not raised the issue yet.',
-        `The final campaign deadline is ${days} days away.`,
-      ],
-      correct: 'Follow up again, use another agreed contact method if available, establish a revised posting time and flag the risk internally.',
-      wrong: [
-        'Wait until the final campaign deadline because there is still time.',
-        'Immediately tell the client that the creator has failed the campaign.',
-        'Immediately terminate the creator and replace them.',
-      ],
-    },
-    {
-      id: 'Q6-report-mismatch',
-      situation: [
-        'The client expects a performance report at 3:00 PM today.',
-        'At 1:00 PM you notice the views in your report do not match the platform dashboard.',
-        'Your manager is in meetings all afternoon.',
-      ],
-      correct: 'Check the source data, correct the report, and let the client know it will arrive with verified figures if there is a short delay.',
-      wrong: [
-        'Send the report on time with the figures you have.',
-        'Ask the client to check the platform dashboard themselves.',
-        'Wait until your manager is free before doing anything.',
-      ],
-    },
-    {
-      id: 'Q6-missing-message',
-      situation: [
-        'A creator’s draft is strong but is missing a mandatory brand message.',
-        `Posting is due in ${rng.int(2, 3)} days.`,
-        'The client must approve the draft before it is posted.',
-      ],
-      correct: 'Ask the creator for a quick edit that adds the brand message, then send the draft for client approval.',
-      wrong: [
-        'Send the draft to the client as it is.',
-        'Add the message yourself as on-screen text without telling anyone.',
-        'Replace the creator immediately.',
-      ],
-    },
-    {
-      id: 'Q6-scope-creep',
-      situation: [
-        'On a call, the client asks for two extra creator posts.',
-        'They do not want to change the budget.',
-        'Creator fees are already agreed.',
-      ],
-      correct: 'Acknowledge the request, check creator availability and cost, and come back with options and the budget impact.',
-      wrong: [
-        'Agree immediately to keep the client happy.',
-        'Refuse outright because it is not in the contract.',
-        'Ask the creators to make the extra posts for free.',
-      ],
-    },
-  ];
-  const v = rng.pick(variants);
   return single(rng, {
-    templateId: v.id,
+    templateId: 'Q6-report-mismatch',
     category: 'operational_judgement',
     timeLimitSeconds: CM_TIMES[5],
-    blocks: [{ type: 'list', items: v.situation }],
+    blocks: [
+      {
+        type: 'list',
+        title: 'Scenario',
+        items: [
+          'The client expects a performance report at 3:00 PM today.',
+          'At 1:00 PM, you notice that the views in your report do not match the platform dashboard.',
+          'Your manager is in meetings all afternoon.',
+        ],
+      },
+    ],
     prompt: 'What is the best next step?',
-    options: [{ text: v.correct, correct: true }, ...v.wrong.map((text) => ({ text }))],
+    options: [
+      { text: 'Wait until your manager is free before taking any action.' },
+      { text: 'Send the report at 3:00 PM using the figures currently available so the deadline is not missed.' },
+      {
+        text: 'Check the source data, correct the report, and immediately flag the discrepancy and any revised timing to the Account Manager so the client can be updated with verified information.',
+        correct: true,
+      },
+      { text: 'Contact the client directly, explain that the report is wrong, and ask them to wait for a corrected version.' },
+    ],
     shuffle: true,
   });
 }
