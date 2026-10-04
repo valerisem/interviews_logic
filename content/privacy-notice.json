@@ -46,18 +46,19 @@
       ]
     },
     {
-      "title": "4. Our lawful basis",
+      "title": "4. Lawful basis for processing",
       "blocks": [
-        "We process ordinary recruitment and assessment data on the basis of our legitimate interests under Article 6(1)(f) UK GDPR. Our legitimate interest is assessing candidates fairly and effectively for roles at House of Marketers and maintaining the integrity of our recruitment process.",
-        "We have carried out a Legitimate Interests Assessment to consider the necessity and impact of this processing.",
-        "We do not rely on consent as the lawful basis for the ordinary assessment data described in this notice.",
-        "Where health or disability information is processed for recruitment adjustments, we rely on the relevant employment-law obligations and the applicable special-category condition under UK data protection law."
+        "We process ordinary recruitment and assessment information on the basis of our legitimate interests under Article 6(1)(f) UK GDPR. Our legitimate interests are assessing candidates fairly and effectively for roles at House of Marketers, administering our recruitment process, and protecting the integrity and reliability of our assessments.",
+        "We do not rely on your consent to process ordinary recruitment and assessment information.",
+        "If you voluntarily provide health or disability information in connection with a request for a reasonable adjustment, we process that information only where necessary to consider and provide the adjustment and to comply with our obligations under applicable employment and equality law. This information is treated separately from your assessment results and is not used to disadvantage your application."
       ]
     },
     {
-      "title": "5. Reasonable adjustments and health information",
+      "title": "5. Reasonable adjustments",
       "blocks": [
-        "If you voluntarily provide health or disability information in order to request a reasonable adjustment, we process that information only for the purpose of considering and providing that adjustment. This information is handled separately from assessment scoring and is not used to disadvantage your application.",
+        "If you need a reasonable adjustment to participate in the assessment, please contact your recruiter before starting or as soon as possible. Adjustments may include additional time, an alternative format or use of assistive technology.",
+        "You do not need to disclose a diagnosis. Please tell us what adjustment would help you participate.",
+        "Adjustment information is handled separately from assessment scoring and will not disadvantage your application.",
         "The assessment application itself does not record your diagnosis or the reason for an adjustment."
       ]
     },

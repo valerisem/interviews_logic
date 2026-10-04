@@ -320,9 +320,9 @@ export function Assessment({ token: initialToken = '', initial, testMode = false
               <li>Each question has its own timer. When it runs out, your current answer is saved and the next question starts.</li>
               <li>You can’t go back to a previous question or change an answer once you’ve moved on.</li>
               <li>
-                Please stay on this page until you finish. For assessment integrity, the system records when you switch away
-                from the assessment tab or window. This is not an automatic fail and is reviewed in context. The timer keeps
-                running while you are away.
+                Please stay on this page until you finish. For assessment integrity, the system records the number of times
+                you switch away from the assessment tab or window. The timer keeps running while you are away. This is not an
+                automatic fail and is reviewed in context.
               </li>
               <li>You can take the assessment only once.</li>
             </ol>
@@ -363,7 +363,7 @@ export function Assessment({ token: initialToken = '', initial, testMode = false
                 {busy ? 'Starting…' : 'Start Assessment'}
               </button>
             </div>
-            <p className="footnote">
+            <p className="adjustments">
               If you need any reasonable adjustment to take part in this assessment, please contact your recruiter before
               starting or as soon as possible. Adjustments may include additional time, an alternative format or use of
               assistive technology. You do not need to disclose a diagnosis; please simply tell us what adjustment would
