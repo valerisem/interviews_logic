@@ -1,6 +1,6 @@
 # Candidate Assessment — House of Marketers
 
-Short, timed work-skills assessments for **Campaign Manager** and **Account Manager** candidates: 6 questions each: 4 minutes of question time for Campaign Manager, 2¾ minutes for Account Manager. The candidate picks the role they're interviewing for on the landing page, and that decides which assessment they take.
+Short, timed work-skills assessments for **Campaign Manager** and **Account Manager** candidates: 6 questions each: 4 minutes of question time for Campaign Manager, 3 minutes for Account Manager. The candidate picks the role they're interviewing for on the landing page, and that decides which assessment they take.
 
 - **Campaign Manager:** attention to detail, numerical accuracy, following campaign requirements, prioritisation, logical reasoning, operational judgement.
 - **Account Manager:** attention to detail, commercial accuracy, interpreting client requirements, prioritisation, commercial reasoning, client judgement.
@@ -45,9 +45,9 @@ Timers keep running if the candidate leaves the tab or closes the page. Question
 
 | # | Category | Time | Format |
 |---|---|---|---|
-| 1 | Attention to Detail | 15s | Two versions of a client campaign (budget, markets, launch, creators, usage rights, reporting); count the differences (1–3), never spelling tricks |
+| 1 | Attention to Detail | 30s | Two versions of a client campaign (budget, markets, launch, creators, usage rights, reporting); count the differences (1–3), never spelling tricks |
 | 2 | Commercial Accuracy | 30s | Total costs vs client budget: pick the variance, e.g. + £500 / − £500 / = £0 / + £1,000 |
-| 3 | Client Requirements | 25s | Client brief and proposed plan side by side; exactly one requirement is unmet (Germany creators, TikTok share, launch date or creator count) |
+| 3 | Client Requirements | 25s | Client brief and proposed plan side by side; exactly one requirement is missed by the smallest margin (one creator short, TikTok one under 50% shown as e.g. 12 of 25, or launch one day late), and every passing value also sits close to its threshold |
 | 4 | Prioritisation | 30s | Drag four account items into priority order; same weighted scoring |
 | 5 | Commercial Reasoning | 35s | Client changes the budget with the same scope; what happens to the amount remaining |
 | 6 | Client Judgement | 30s | Scope change: the client adds France on the same budget and end date. Which option fits (replace the 4 uncontracted UK slots with 4 French creators)? Figures vary; options shuffled |

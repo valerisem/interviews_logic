@@ -3,24 +3,24 @@ import type { Question } from '../types';
 import { addDays, dayMonth, money, num, ranking, randomDate, single, type PriorityScenario } from './shared';
 
 /*
- * Account Manager assessment: 6 timed questions, 165 seconds in total.
+ * Account Manager assessment: 6 timed questions, 180 seconds in total.
  *
- *   1. Attention to Detail        15s  two versions of a client campaign, count the differences (1–3)
+ *   1. Attention to Detail        30s  two versions of a client campaign, count the differences (1–3)
  *   2. Commercial Accuracy        30s  variance between total costs and budget: +£x / −£x / £0
- *   3. Client Requirements        25s  brief vs proposed plan, find the one requirement it misses
+ *   3. Client Requirements        25s  brief vs proposed plan, find the one requirement it narrowly misses
  *   4. Prioritisation             30s  rank four account items; weighted scoring
  *   5. Commercial Reasoning       35s  effect of a budget change on the amount remaining
  *   6. Scope Change               30s  add France on the same budget: which option fits
  */
 
-export const AM_VERSION = 'AM-2026.2';
-export const AM_TIMES = [15, 30, 25, 30, 35, 30];
+export const AM_VERSION = 'AM-2026.3';
+export const AM_TIMES = [30, 30, 25, 30, 35, 30];
 
 const MARKETS = ['UK', 'Germany', 'France', 'Spain', 'Italy', 'Netherlands', 'Ireland', 'Sweden'];
 const REPORTING = ['Weekly', 'Fortnightly', 'Monthly'];
 
 // ---------------------------------------------------------------------------
-// 1. Attention to Detail (15s) — commercially meaningful differences only
+// 1. Attention to Detail (30s) — commercially meaningful differences only
 // ---------------------------------------------------------------------------
 
 function q1AttentionToDetail(rng: Rng): Question {
@@ -118,7 +118,7 @@ function q2CommercialAccuracy(rng: Rng): Question {
 }
 
 // ---------------------------------------------------------------------------
-// 3. Interpreting a Client Brief (25s) — exactly one requirement is not met
+// 3. Interpreting a Client Brief (25s) — exactly one requirement is narrowly missed
 // ---------------------------------------------------------------------------
 
 function q3ClientBrief(rng: Rng): Question {
@@ -129,17 +129,15 @@ function q3ClientBrief(rng: Rng): Question {
   const minFollowing = rng.pick([25000, 50000, 100000]);
   const issue = rng.pick(['germany', 'tiktok', 'launch', 'total'] as const);
 
-  // Start from a plan that meets every requirement, then break exactly one.
-  let total = minCreators + rng.int(1, 6);
-  let germany = minGermany + rng.int(1, 3);
-  if (issue === 'total') total = minCreators - rng.int(1, 3);
-  if (issue === 'germany') germany = minGermany - rng.int(1, 2);
-  if (germany >= total) germany = Math.floor(total / 2);
+  // Every value sits close to its threshold, so nothing stands out at a glance. Exactly one
+  // requirement is missed, by the smallest possible margin (one creator, one day).
+  const total = issue === 'total' ? minCreators - 1 : minCreators + rng.int(0, 2);
+  const germany = issue === 'germany' ? minGermany - 1 : minGermany + rng.int(0, 1);
   const uk = total - germany;
-  const half = Math.ceil(total / 2);
-  const tiktok = issue === 'tiktok' ? half - rng.int(1, 3) : Math.min(total, half + rng.int(0, 4));
+  const half = Math.ceil(total / 2); // smallest count that is at least 50%
+  const tiktok = issue === 'tiktok' ? half - 1 : half + rng.int(0, 1);
   const instagram = total - tiktok;
-  const launch = issue === 'launch' ? addDays(deadline, rng.int(1, 4)) : addDays(deadline, -rng.int(1, 5));
+  const launch = addDays(deadline, issue === 'launch' ? 1 : -rng.int(0, 2));
 
   return single(rng, {
     templateId: `AM-Q3-${issue}`,
@@ -168,7 +166,7 @@ function q3ClientBrief(rng: Rng): Question {
               ['Creators', String(total)],
               ['UK Creators', String(uk)],
               ['Germany Creators', String(germany)],
-              ['TikTok Creators', String(tiktok)],
+              ['TikTok Creators', `${tiktok} of ${total}`],
               ['Instagram Creators', String(instagram)],
               ['Launch', dayMonth(launch)],
               ['All Creators', `${num(minFollowing)}+ followers`],
@@ -221,7 +219,7 @@ const PRIORITY_SCENARIOS: PriorityScenario[] = [
       ['A client’s CMO has escalated that a creator’s live post mentions a competitor brand.', 3],
       ['A £60k contract renewal needs your sign-off by 3:00 PM today.', 2],
       ['A client has asked for copies of last month’s invoices by the end of the week.', 1],
-      ['A prospect wants to book an introductory call for next week.', 1],
+      ['An existing client has asked for pricing for an additional campaign they want to launch next month.', 1],
     ],
   },
   {

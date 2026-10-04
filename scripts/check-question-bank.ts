@@ -32,6 +32,24 @@ function checkThreeCreators(q: Question, seed: number) {
   if (expected !== actual) fail(`seed ${seed}: Q3 answer key says "${actual}" but the table gives "${expected}"`);
 }
 
+/** Re-derive the AM Q3 answer from the brief and plan as shown: exactly one requirement must fail. */
+function checkClientBrief(q: Question, seed: number) {
+  const cols = q.blocks.find((b) => b.type === 'columns');
+  if (!cols || cols.type !== 'columns') return fail(`seed ${seed}: AM Q3 has no columns`);
+  const get = (i: number, k: string) => cols.records[i].rows.find((r) => r[0] === k)![1];
+  const n = (v: string) => Number(v.replace(/[^0-9]/g, ''));
+  const date = (v: string) => Date.parse(`${v} 2026`);
+  const [tiktok, total] = get(1, 'TikTok Creators').split(' of ').map(Number);
+  const fails: string[] = [];
+  if (n(get(1, 'Creators')) < n(get(0, 'Minimum Creators'))) fails.push('Increase the total number of creators');
+  if (n(get(1, 'Germany Creators')) < n(get(0, 'Germany-Based Creators'))) fails.push('Increase the number of Germany-based creators');
+  if (tiktok * 2 < total) fails.push('Increase the number of TikTok creators');
+  if (date(get(1, 'Launch')) > date(get(0, 'Launch Deadline'))) fails.push('Move the launch date earlier');
+  if (total !== n(get(1, 'Creators')) || n(get(1, 'UK Creators')) + n(get(1, 'Germany Creators')) !== total) fails.push('inconsistent totals');
+  const actual = q.options.find((o) => o.id === q.correct[0])!.text;
+  if (fails.length !== 1 || fails[0] !== actual) fail(`seed ${seed}: AM Q3 key "${actual}" but table fails ${JSON.stringify(fails)}`);
+}
+
 for (const def of Object.values(ASSESSMENTS)) {
 const generateAssessment = def.generate;
 const QUESTION_TIMES = def.times;
@@ -61,6 +79,7 @@ for (let seed = 1; seed <= RUNS; seed++) {
     }
     contents.add(JSON.stringify(q.blocks));
     if (q.templateId === 'Q3-three-creators') checkThreeCreators(q, seed);
+    if (q.templateId.startsWith('AM-Q3-')) checkClientBrief(q, seed);
   });
   const perfect = qs.map((q, i) => ({ questionIndex: i, selected: q.correct, answeredAt: '', timeTakenMs: 0, timedOut: false }));
   if (scoreAssessment(qs, perfect).overallScore !== 100) fail(`seed ${seed}: perfect answers did not score 100`);
