@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { AnswerError, enrolAndStart } from '@/lib/assessment';
 
-/** Public: a candidate enters name, email and role, and the assessment starts immediately. */
+/** Public: a candidate enters name, email and role, confirms the privacy notice, and starts immediately. */
 export async function POST(req: Request) {
   try {
     const body = await req.json().catch(() => ({}));

@@ -1,70 +1,78 @@
-# Candidate Assessment
+# Candidate Assessment — House of Marketers
 
-A short, timed assessment for Campaign Manager candidates. It covers attention to detail, following instructions, prioritisation, numerical reasoning, logical reasoning and operational judgement.
+A short, timed work-skills assessment for Campaign Manager candidates: 6 questions, 145 seconds of question time, about 3 minutes overall.
 
-It measures job-relevant skills only. It does not attempt to identify or diagnose ADHD, autism, dyslexia, neurodivergence, disability, health conditions or personality traits.
+It measures attention to detail, numerical accuracy, following campaign requirements, prioritisation, logical reasoning, operational judgement and working accurately under time pressure. It does **not** attempt to identify or diagnose ADHD, autism, dyslexia, neurodivergence, disability, health conditions or personality traits.
 
-Built with Next.js (App Router) and Supabase. It runs on any Node host (Vercel, Railway, your own server) under your own domain.
+Next.js (App Router) + Supabase. Runs on any Node host (Railway, Vercel, your own server) under your own domain.
 
-## How it works
+## Candidate flow (one public link: the site root)
 
-**Candidate**: one public link for everyone (the site root, e.g. `https://assessment.yourdomain.com`)
-1. The landing page shows the required wording and asks for **name**, **email** and **the role they're interviewing for**. It has **Start Assessment** and **Contact Recruiter** (mailto `RECRUITER_EMAIL`) buttons. The timer does not run on this page.
-2. **Start Assessment** saves the details, generates the candidate's 12 questions on the server and starts the server-side clock immediately. The page address changes to `/a/<token>`, so a reload resumes the same attempt. Each email can take the assessment once.
-3. Candidates see one question at a time, with "Question n of 12" and a countdown. There is no back navigation, and no right/wrong or score feedback.
-4. On submit or timeout, the completion screen shows only: *"Assessment completed. Thank you. Your responses have been submitted successfully and will be reviewed as part of your application."*
+1. **Landing:** name, email, role, and a required checkbox: *"I confirm that I have read and understood the Candidate Assessment Privacy Notice"* (links to `/privacy`). Also shows **Contact Recruiter** and the reasonable-adjustment wording. No timer runs here.
+2. **Start Assessment** saves the details and the privacy confirmation (with the notice's effective date), generates the candidate's questions and starts question 1. The address becomes `/a/<token>`, so a reload resumes the same attempt. Each email can take the assessment once.
+3. **Questions:** one per screen, each with its own visible timer. All the information needed stays visible. There is no going back and no right/wrong feedback. When a timer runs out, whatever is selected at that moment is recorded and the next question starts.
+4. **Completion:** *"Assessment completed. Thank you. Your responses have been submitted successfully and will be reviewed as part of your application."* No score is shown.
 
-**Recruiter** (`/admin`, password protected)
-- Shows the shared assessment link with a copy button. There are no per-candidate links to generate.
-- The table shows name, email, role, date, overall score (/100), the six category scores (%), time taken, time limit and number of tab leaves.
-- **Time limit** can be edited per candidate after they enrol, including while they're taking the test (for example, a reasonable adjustment). The new limit applies immediately, and the candidate's countdown updates on their next answer.
-- **Review** opens every question with the candidate's answer, the correct answer and the result. You can expand each question to see it as the candidate saw it.
-- Scores never reject anyone automatically. The recruiter or hiring manager makes the decision.
+Timers keep running if the candidate leaves the tab or closes the page. Questions whose time has passed are recorded as unanswered.
 
-## Question bank
+| # | Category | Time | Format |
+|---|---|---|---|
+| 1 | Attention to Detail | 15s | Two campaign records side by side, count the differences (1, 2 or 3) |
+| 2 | Financial Accuracy | 25s | Four cost lines vs approved budget: MORE / LESS / EQUAL |
+| 3 | Following Requirements | 20s | Five creator rules + missing-information rule: APPROVE / REJECT / NEEDS REVIEW |
+| 4 | Prioritisation | 30s | Drag four items into priority order (mouse, touch, or arrow buttons) |
+| 5 | Logical Reasoning | 25s | Campaign dependency rules, one objectively correct statement |
+| 6 | Operational Judgement | 30s | Realistic Campaign Manager situation, one clearly preferable response |
 
-`lib/questionBank.ts` contains 23 generator templates:
+Every question is generated per candidate (`lib/questionBank.ts`):
 
-| Category | Per assessment | Templates |
-|---|---|---|
-| Attention to Detail | 3 | version differences, budget reconciliation, campaign record with two errors (pick two), handle mismatch, posting window |
-| Following Instructions | 2 | creator approval rules, content sign-off rules; the two questions always have different correct outcomes (Approve / Reject / Needs Review) |
-| Prioritisation | 2 | 5 scenarios (live incorrect claims, broken discount code, Spark Ads blocker, missing #ad, wrong brand tag) |
-| Numerical Reasoning | 2 | budget remaining, % remaining (same figures), cost per 1,000 views, engagement rate, fee increase |
-| Logical Reasoning | 2 | 7 rule-based templates (must follow, launch before approval, affirming the consequent, contract rule, some/all, sequence, only-if) |
-| Operational Judgement | 1 | 4 scenarios |
-
-Each candidate gets randomly drawn templates, randomised names, budgets, dates and thresholds, and shuffled question and option order. Correct answers are computed from the generated values. `npm test` generates 5,000 assessments and checks structure, mix and scoring. The current bank yields about 4,900 distinct template combinations across 5,000 candidates.
+- **Q1:** names, fees, dates and values vary, with 1, 2 or 3 small differences.
+- **Q2:** the figures vary; the outcome is MORE, LESS or EQUAL in roughly equal shares, with differences of £250–£1,000.
+- **Q3:** the outcome is APPROVE, REJECT or NEEDS REVIEW in roughly equal shares. Reject cases fail exactly one rule by a small margin; Needs Review cases have one field missing.
+- **Q4–Q6:** drawn from four equivalent scenarios each. Options are shuffled where appropriate, and Q4's display order is randomised.
 
 ## Scoring
 
-- One mark per question. A "pick two" question needs both correct picks. Overall score = correct / 12 × 100.
-- Category scores are the percentage correct within each category (e.g. 67% = 2 of 3).
-- Completion time is stored separately and is **not** combined with accuracy.
+- Each question is scored 0–1, and each category has one question. Overall score = average × 100.
+- **Prioritisation is weighted, not one rigid order.** 60% goes to ranking the high-risk item first (15% if it is second). 40% goes to how well the other three follow their relative urgency, where equally urgent items may go in either order. That part is cut to a quarter if the high-risk item isn't first. Examples: the ideal order scores 100, putting an internal update first scores about 25.
+- Completion time is stored separately and is not part of the score. Nobody is rejected automatically; a recruiter or hiring manager decides.
 
-## Anti-copy / anti-AI measures
+## Reasonable adjustments
 
-- Text selection, copy, cut, paste, right-click, drag and the common Ctrl/⌘ shortcuts (C, X, V, A, P, S, U) are disabled, and printing renders a blank page.
-- One question at a time, and no going back (enforced on the server, not just in the UI).
-- The timer is server-side, so it keeps running if the candidate leaves the tab or reloads.
-- Each time the candidate leaves the tab or window, it is counted and shown to the recruiter. Leaving is never penalised automatically.
-- Varied values, a large bank and randomised order mean candidates don't all see the same questions.
+Candidates are asked to contact their recruiter before starting. In the dashboard a recruiter can give any candidate **extra time** (None, +25%, +50%, +100%), applied to every remaining question. This can be done even mid-assessment. The app never asks for or stores the reason for an adjustment.
+
+## Recruiter dashboard (`/admin`, password protected)
+
+- Shows the shared assessment link with a copy button.
+- For each candidate: name, email, role, date, overall score, the six category scores, time taken, extra time and tab leaves.
+- **Review** shows each question with the time used, the candidate's answer, the correct answer (the ideal order for Q4) and the result. It also shows the question exactly as the candidate saw it.
+
+## Anti-copy measures
+
+- Text selection, copy/cut/paste, right-click, drag and common Ctrl/⌘ shortcuts are disabled outside the form fields, and printing is blank.
+- One question per screen; no going back (enforced on the server); timers are kept on the server.
+- Leaving the tab or window is counted and shown to the recruiter, never penalised.
 - Correct answers never reach the browser.
 
-Screenshots and photos of the screen **cannot** be blocked on a normal website, and the app does not claim to block them.
+Screenshots can't be blocked on a normal website, and the app doesn't claim to block them.
+
+## Design
+
+House of Marketers brand colours taken from the logo: indigo `#200888` and fuchsia `#F0438F`, with brand navy `#0B0E1A` for dark mode. Headings use Montserrat, body text uses Inter. Every page has a **light/dark switch** next to the logo, which sits top-right; the choice is remembered in the browser. Dark mode uses a white version of the horizontal logo.
+
+## Privacy notice
+
+`/privacy` renders `content/privacy-notice.json`, the Candidate Assessment Privacy Notice (effective 4 October 2026). To update it, edit that file; candidates' confirmations record the effective date they agreed to.
 
 ## Setup
 
-1. **Supabase**: run `supabase/migrations/20261003000000_create_candidate_assessments.sql` in the SQL editor (or `supabase db push`). It creates the `candidate_assessments` table with RLS enabled and no public policies, so only the server, using the service role key, can access it.
-2. **Environment**: copy `.env.example` to `.env.local` and fill in the values.
-3. **Run**:
+1. **Supabase:** apply the files in `supabase/migrations/` in order. They create `public.candidate_assessments` with RLS enabled and no public policies, so only the server, using the service role key, can access it. These have already been applied to the *Team* project.
+2. **Environment:** copy `.env.example` to `.env.local` and fill it in.
+3. **Run:**
    ```bash
    npm install
-   npm run dev       # http://localhost:3000/admin
+   npm test          # question bank + scoring checks
+   npm run dev       # http://localhost:3000 (candidate) and /admin (recruiter)
    npm run build && npm start
    ```
-4. **Deploy**: deploy to Vercel or any Node host, set the same environment variables, point your domain at it, and set `APP_BASE_URL` to that domain.
-
-## Data stored (`public.candidate_assessments`)
-
-Candidate name, email, role, assessment version, questions received (with options in the order shown), answers submitted, correct answers, overall score, category scores, completion time, start/completion timestamps, time limit, timeout flag and number of tab/window changes.
+4. **Deploy:** set the same environment variables on your host, point your domain at it and set `APP_BASE_URL`.

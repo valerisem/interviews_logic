@@ -1,23 +1,29 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { ExtraTimeSelect } from '@/components/ExtraTimeSelect';
+import { extraTimeLabel } from '@/lib/extraTime';
 import { LETTERS, QuestionBlocks } from '@/components/QuestionBlocks';
-import { TimeLimitEditor } from '@/components/TimeLimitEditor';
 import { TopBar } from '@/components/TopBar';
 import { requireAdminPage } from '@/lib/adminSession';
 import { closeExpiredAssessments } from '@/lib/assessment';
+import { QUESTION_TIMES } from '@/lib/questionBank';
 import { formatDate, formatDuration } from '@/lib/format';
-import { isCorrect } from '@/lib/scoring';
+import { questionScore } from '@/lib/scoring';
 import { db } from '@/lib/supabase';
 import { CATEGORIES, CATEGORY_LABELS, type AssessmentRow, type Question } from '@/lib/types';
 
 export const dynamic = 'force-dynamic';
 
-function describe(q: Question, ids: string[]): string {
-  if (!ids.length) return 'No answer (time ran out)';
+function letterAnswer(q: Question, ids: string[]): string {
   return q.options
     .map((o, i) => (ids.includes(o.id) ? `${LETTERS[i]} · ${o.text}` : null))
     .filter(Boolean)
     .join(' / ');
+}
+
+function rankingAnswer(q: Question, ids: string[]): string {
+  const text = new Map(q.options.map((o) => [o.id, o.text]));
+  return ids.map((id, i) => `${i + 1}. ${text.get(id)}`).join('\n');
 }
 
 export default async function CandidatePage({ params }: { params: Promise<{ id: string }> }) {
@@ -32,99 +38,105 @@ export default async function CandidatePage({ params }: { params: Promise<{ id: 
   const row = data as AssessmentRow;
   const questions = row.questions ?? [];
   const answers = new Map(row.answers.map((a) => [a.questionIndex, a]));
+  const totalSeconds = Math.round(QUESTION_TIMES.reduce((a, b) => a + b, 0) * Number(row.time_multiplier));
+  const done = row.status === 'completed';
 
   return (
     <>
-      <TopBar>
-        <Link href="/admin" style={{ fontSize: 14, fontWeight: 500, color: 'var(--text-2)' }}>← All candidates</Link>
-      </TopBar>
+      <TopBar left={<Link href="/admin" className="header-link">← All Candidates</Link>} />
       <main className="admin narrow">
-        <div className="stack-sm">
+        <div className="stack" style={{ gap: 8 }}>
           <h1 className="title-md">{row.candidate_name}</h1>
           <p className="muted" style={{ fontSize: 14 }}>
-            {row.candidate_email} · {row.role} · {formatDate(row.completed_at ?? row.started_at)} · Version {row.assessment_version} ·{' '}
-            {Math.round(row.time_limit_seconds / 60)} min limit
+            {row.candidate_email} · {row.role} · {formatDate(row.started_at)} · Version {row.assessment_version}
+            {row.privacy_notice_ack_at ? ' · Privacy notice confirmed' : ''}
           </p>
         </div>
 
-        {row.status !== 'completed' ? (
-          <div className="note" style={{ justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
-            <span>{row.status === 'invited' ? 'The candidate has not started this assessment yet.' : 'The candidate is currently taking this assessment. A new time limit applies immediately.'}</span>
-            <TimeLimitEditor id={row.id} minutes={Math.round(row.time_limit_seconds / 60)} />
+        <div className="stats">
+          <div className="stat">
+            <div className="stat-value accent">{done ? row.overall_score : '—'}<small> / 100</small></div>
+            <div className="stat-label">{done ? 'Score' : 'In Progress'}</div>
           </div>
-        ) : (
-          <>
-            <div className="stats">
-              <div>
-                <span className="muted">Overall score</span>
-                <span className="stat-value" style={{ color: 'var(--purple)' }}>
-                  {row.overall_score}<span style={{ fontSize: 16, color: 'var(--muted)', fontWeight: 500 }}> / 100</span>
-                </span>
-                <span className="muted">{row.correct_count} of {questions.length} correct</span>
-              </div>
-              <div>
-                <span className="muted">Completion time</span>
-                <span className="stat-value">{formatDuration(row.completion_time_seconds)}</span>
-                <span className="muted">{row.timed_out ? 'Time limit reached' : 'Recorded separately from score'}</span>
-              </div>
-              <div>
-                <span className="muted">Left the tab</span>
-                <span className="stat-value">{row.tab_leave_count}</span>
-                <span className="muted">times during the assessment</span>
-              </div>
-            </div>
+          <div className="stat">
+            <div className="stat-value">{formatDuration(row.completion_time_seconds)}</div>
+            <div className="stat-label">Time Taken · Of {formatDuration(totalSeconds)}</div>
+          </div>
+          <div className="stat">
+            <div className="stat-value">{row.tab_leave_count}</div>
+            <div className="stat-label">Tab Leaves</div>
+          </div>
+        </div>
 
-            <section className="stack" style={{ gap: 14 }}>
-              <div className="stack-sm">
-                <h2 className="h2">Category scores</h2>
-                <p className="muted">Percentage of questions answered correctly in each skill area.</p>
+        {!done && (
+          <div className="row" style={{ gap: 12 }}>
+            <span className="muted" style={{ fontWeight: 600 }}>Extra Time</span>
+            <ExtraTimeSelect id={row.id} value={Number(row.time_multiplier)} />
+          </div>
+        )}
+        {done && Number(row.time_multiplier) !== 1 && <p className="muted">Extra time: {extraTimeLabel(row.time_multiplier)}</p>}
+
+        {done && row.category_scores && (
+          <section className="stack">
+            <h2 className="h2">Category Scores</h2>
+            {CATEGORIES.map((c) => (
+              <div className="bar-row" key={c}>
+                <span>{CATEGORY_LABELS[c]}</span>
+                <div className="bar-track"><div className="bar-fill" style={{ width: `${row.category_scores![c]}%` }} /></div>
+                <strong>{row.category_scores![c]}%</strong>
               </div>
-              {CATEGORIES.map((c) => {
-                const s = row.category_scores![c];
-                return (
-                  <div className="bar-row" key={c}>
-                    <span style={{ color: 'var(--text-2)' }}>{CATEGORY_LABELS[c]}</span>
-                    <div className="bar-track"><div className="bar-fill" style={{ width: `${s.score}%` }} /></div>
-                    <span className="num" style={{ textAlign: 'right' }}><strong style={{ fontWeight: 600 }}>{s.score}%</strong> <span className="muted">· {s.correct} of {s.total} correct</span></span>
-                  </div>
-                );
-              })}
-            </section>
-          </>
+            ))}
+          </section>
         )}
 
         {questions.length > 0 && (
-          <section className="stack">
+          <section className="stack" style={{ gap: 12 }}>
             <h2 className="h2">Answers</h2>
             {questions.map((q, i) => {
               const answer = answers.get(i);
-              const ok = isCorrect(q, answer);
-              const pending = row.status !== 'completed' && !answer;
+              const score = questionScore(q, answer);
+              const pending = !answer;
+              const allowed = Math.round(q.timeLimitSeconds * Number(row.time_multiplier));
+              const given = !answer
+                ? '—'
+                : !answer.selected.length
+                  ? 'No answer (time ran out)'
+                  : q.kind === 'ranking'
+                    ? rankingAnswer(q, answer.selected)
+                    : letterAnswer(q, answer.selected);
+              const correct = q.kind === 'ranking' ? rankingAnswer(q, q.correct) : letterAnswer(q, q.correct);
+              const result = q.kind === 'ranking' ? `${Math.round(score * 100)} / 100 Points` : score === 1 ? 'Correct' : 'Incorrect';
               return (
                 <article className="review" key={i}>
-                  <div className="row" style={{ justifyContent: 'space-between' }}>
-                    <div className="row" style={{ gap: 10 }}>
-                      <span style={{ fontWeight: 600 }}>Question {i + 1}</span>
-                      <span className="tag">{CATEGORY_LABELS[q.category]}</span>
+                  <div className="review-head">
+                    <div className="row" style={{ gap: 10, alignItems: 'baseline' }}>
+                      <span className="review-title">Question {i + 1}</span>
+                      <span className="muted">
+                        {CATEGORY_LABELS[q.category]} · {answer ? `${Math.round(answer.timeTakenMs / 1000)}s of ${allowed}s` : `${allowed}s`}
+                        {answer?.timedOut ? ' · Time ran out' : ''}
+                      </span>
                     </div>
-                    {!pending && <span className={`tag ${ok ? 'ok' : 'bad'}`}>{ok ? 'Correct' : 'Incorrect'}</span>}
+                    {!pending && (
+                      <span className="result"><span className={`dot${score === 1 ? '' : ' bad'}`} />{result}</span>
+                    )}
                   </div>
                   <p style={{ fontSize: 15, fontWeight: 500 }}>{q.prompt}</p>
                   <div className="answer-grid">
-                    <div><span className="muted" style={{ fontSize: 14 }}>Candidate answer</span>&nbsp;&nbsp;<strong style={{ fontWeight: 600 }}>{pending ? '—' : describe(q, answer?.selected ?? [])}</strong></div>
-                    <div><span className="muted" style={{ fontSize: 14 }}>Correct answer</span>&nbsp;&nbsp;<strong style={{ fontWeight: 600 }}>{describe(q, q.correct)}</strong></div>
+                    <div><span className="muted" style={{ fontSize: 14 }}>Candidate Answer</span><br /><strong className={q.kind === 'ranking' ? 'ranked' : undefined}>{given}</strong></div>
+                    <div>
+                      <span className="muted" style={{ fontSize: 14 }}>{q.kind === 'ranking' ? 'Ideal Order (Item 1 Must Lead)' : 'Correct Answer'}</span><br />
+                      <strong className={q.kind === 'ranking' ? 'ranked' : undefined}>{correct}</strong>
+                    </div>
                   </div>
                   <details>
-                    <summary>Show the question as the candidate saw it</summary>
+                    <summary>Show The Question As The Candidate Saw It</summary>
                     <div className="stack">
                       <QuestionBlocks blocks={q.blocks} />
-                      <ul className="option-list">
+                      <ul style={{ margin: 0, paddingLeft: 20, display: 'flex', flexDirection: 'column', gap: 6, fontSize: 14 }}>
                         {q.options.map((o, j) => (
                           <li key={o.id}>
-                            <strong>{LETTERS[j]}</strong>
-                            <span>{o.text}</span>
-                            {q.correct.includes(o.id) && <span className="mark">correct</span>}
-                            {answer?.selected.includes(o.id) && <span className="mark">selected</span>}
+                            {q.kind === 'single' ? <strong>{LETTERS[j]}. </strong> : null}
+                            {o.text}
                           </li>
                         ))}
                       </ul>

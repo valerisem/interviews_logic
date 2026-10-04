@@ -2,8 +2,8 @@ import type { Block } from '@/lib/types';
 
 function Record({ title, rows }: { title?: string; rows: [string, string][] }) {
   return (
-    <div className="record">
-      {title && <div className="record-title">{title}</div>}
+    <div className="card">
+      {title && <div className="card-title">{title}</div>}
       {rows.map(([k, v], i) => (
         <div className="record-row" key={i}>
           <span>{k}</span>
@@ -14,7 +14,7 @@ function Record({ title, rows }: { title?: string; rows: [string, string][] }) {
   );
 }
 
-/** Renders the scenario content shown above a question prompt. Used by both candidate and recruiter views. */
+/** The scenario content above a question. Used by the candidate view and the recruiter review. */
 export function QuestionBlocks({ blocks }: { blocks: Block[] }) {
   return (
     <>
@@ -24,9 +24,10 @@ export function QuestionBlocks({ blocks }: { blocks: Block[] }) {
             return <p className="q-text" key={i}>{b.text}</p>;
           case 'list':
             return (
-              <ul className="q-list" key={i}>
-                {b.items.map((item, j) => <li key={j}>{item}</li>)}
-              </ul>
+              <div className="card" key={i}>
+                {b.title && <div className="card-title">{b.title}</div>}
+                <ul>{b.items.map((item, j) => <li key={j}>{item}</li>)}</ul>
+              </div>
             );
           case 'record':
             return <Record key={i} title={b.title} rows={b.rows} />;
