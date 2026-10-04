@@ -37,7 +37,7 @@ Timers keep running if the candidate leaves the tab or closes the page. Question
 | 1 | Attention to Detail | 30s | Two campaign records side by side, count the differences (1, 2 or 3) |
 | 2 | Financial Accuracy | 45s | Four cost lines vs client budget, answered with a row of three buttons: £x MORE / £x LESS / EQUAL |
 | 3 | Following Requirements | 45s | Five campaign requirements and three creators side by side: which creator meets all of them (A, B, C or More than one) |
-| 4 | Prioritisation | 45s | Drag four items into priority order (mouse, touch, or arrow buttons) |
+| 4 | Prioritisation | 45s | Drag four items into priority order (mouse, touch, or arrow buttons); scored on the high-risk item being first |
 | 5 | Logical Reasoning | 45s | Campaign dependency rules, one objectively correct statement |
 | 6 | Operational Judgement | 30s | Report views don’t match the platform dashboard two hours before a 3:00 PM client deadline, manager unavailable: check, correct and flag to the Account Manager. Options shuffled |
 
@@ -48,7 +48,7 @@ Timers keep running if the candidate leaves the tab or closes the page. Question
 | 1 | Attention to Detail | 30s | Two versions of a client campaign (budget, markets, launch, creators, usage rights, reporting); count the differences (1–3), never spelling tricks |
 | 2 | Commercial Accuracy | 30s | Total costs vs client budget: pick the variance, e.g. + £500 / − £500 / = £0 / + £1,000 |
 | 3 | Client Requirements | 25s | Client brief and proposed plan side by side; exactly one requirement is missed by the smallest margin (one creator short, TikTok one under 50% shown as e.g. 12 of 25, or launch one day late), and every passing value also sits close to its threshold |
-| 4 | Prioritisation | 30s | Drag four account items into priority order; same weighted scoring |
+| 4 | Prioritisation | 30s | Drag four account items into priority order; scored on the high-risk item being first |
 | 5 | Commercial Reasoning | 35s | Client changes the budget with the same scope; what happens to the amount remaining |
 | 6 | Client Judgement | 30s | Scope change: the client adds France on the same budget and end date. Which option fits (replace the 4 uncontracted UK slots with 4 French creators)? Figures vary; options shuffled |
 
@@ -66,7 +66,7 @@ Every Campaign Manager question is generated per candidate:
 ## Scoring
 
 - Each question is scored 0–1, and each category has one question (the categories differ by role). Overall score = average × 100.
-- **Prioritisation is weighted, not one rigid order.** 60% goes to ranking the high-risk item first (15% if it is second). 40% goes to how well the other three follow their relative urgency, where equally urgent items may go in either order. That part is cut to a quarter if the high-risk item isn't first. Examples: the ideal order scores 100, putting an internal update first scores about 25.
+- **Prioritisation (both roles):** full credit if the high-risk item is placed first, nothing otherwise. The order of positions 2–4 doesn't affect the score; the full ranking is stored and shown to the recruiter in Review.
 - Completion time is stored separately and is not part of the score. Nobody is rejected automatically; a recruiter or hiring manager decides.
 
 ## Reasonable adjustments
@@ -81,7 +81,7 @@ Candidates are asked to contact their recruiter before starting. In the dashboar
 - Shows the shared assessment link with a copy button, and one tab per role (Campaign Manager / Account Manager), each with its own category columns.
 - For each candidate: name, email, role, date, overall score, the six category scores, time taken, extra time and tab leaves.
 - **Take Test** opens the assessment in test mode (see below).
-- **Review** shows each question with the time used, the candidate's answer, the correct answer (the ideal order for Q4) and the result. It also shows the question exactly as the candidate saw it.
+- **Review** shows each question with the time used, the candidate's answer, the correct answer (a suggested order for Q4, where only item 1 is scored) and the result. It also shows the question exactly as the candidate saw it.
 
 ## Test mode
 

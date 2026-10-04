@@ -1,28 +1,13 @@
 import type { Category, CategoryScores, Question, SubmittedAnswer } from './types';
 
 /**
- * Prioritisation scoring (0–1), weighted rather than one rigid order:
- * - 60% for putting the high-risk item first (15% if it is second, nothing lower);
- * - 40% for how well the other three follow their relative urgency, where items of
- *   equal urgency may go in either order. If the high-risk item is not first, this
- *   part is scaled down to a quarter, so e.g. putting an internal report first scores low.
+ * Prioritisation scoring: full credit if the high-risk item is placed first, otherwise none.
+ * The order of positions 2–4 is stored for recruiter review but does not affect the score.
  */
 export function rankingScore(q: Question, order: string[]): number {
   const r = q.ranking;
   if (!r || order.length !== q.options.length) return 0;
-  const pos = order.indexOf(r.critical);
-  const criticalPart = pos === 0 ? 0.6 : pos === 1 ? 0.15 : 0;
-  const rest = order.filter((id) => id !== r.critical);
-  let pairs = 0;
-  let agree = 0;
-  for (let i = 0; i < rest.length; i++) {
-    for (let j = i + 1; j < rest.length; j++) {
-      pairs++;
-      if (r.urgency[rest[i]] >= r.urgency[rest[j]]) agree++;
-    }
-  }
-  const restPart = 0.4 * (pairs ? agree / pairs : 1) * (pos === 0 ? 1 : 0.25);
-  return Math.round((criticalPart + restPart) * 100) / 100;
+  return order[0] === r.critical ? 1 : 0;
 }
 
 /** Score for one question, from 0 to 1. */

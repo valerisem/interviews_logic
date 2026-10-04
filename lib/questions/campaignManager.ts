@@ -8,7 +8,7 @@ import { addDays, dayMonth, money, num, ranking, randomDate, single, type Priori
  *   1. Attention to Detail       30s  two campaign records, count the differences (1–3)
  *   2. Financial Accuracy        45s  costs vs client budget: £x MORE / £x LESS / EQUAL
  *   3. Applying Requirements     45s  three creators vs five requirements: which one qualifies (or more than one)
- *   4. Prioritisation            45s  rank four items; weighted scoring
+ *   4. Prioritisation            45s  rank four items; scored on the high-risk item being first
  *   5. Logical Reasoning         45s  campaign dependencies, one objectively correct answer
  *   6. Operational Judgement     30s  report figures don’t match the dashboard two hours before the deadline
  *
@@ -216,7 +216,7 @@ function q3Requirements(rng: Rng): Question {
 }
 
 // ---------------------------------------------------------------------------
-// 4. Prioritisation (45s) — drag to rank, weighted scoring
+// 4. Prioritisation (45s) — drag to rank; only the first item is scored
 // ---------------------------------------------------------------------------
 
 const INTRO = 'It is 10:00 AM and you have four things requiring attention.';

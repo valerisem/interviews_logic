@@ -8,7 +8,7 @@ import { addDays, dayMonth, money, num, ranking, randomDate, single, type Priori
  *   1. Attention to Detail        30s  two versions of a client campaign, count the differences (1–3)
  *   2. Commercial Accuracy        30s  variance between total costs and budget: +£x / −£x / £0
  *   3. Client Requirements        25s  brief vs proposed plan, find the one requirement it narrowly misses
- *   4. Prioritisation             30s  rank four account items; weighted scoring
+ *   4. Prioritisation             30s  rank four account items; scored on the high-risk item being first
  *   5. Commercial Reasoning       35s  effect of a budget change on the amount remaining
  *   6. Scope Change               30s  add France on the same budget: which option fits
  */

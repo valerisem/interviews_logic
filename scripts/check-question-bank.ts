@@ -86,15 +86,15 @@ for (let seed = 1; seed <= RUNS; seed++) {
   if (scoreAssessment(qs, []).overallScore !== 0) fail(`seed ${seed}: no answers did not score 0`);
 }
 
-// Weighted ranking examples from the brief.
+// Ranking: only the high-risk item in first place counts.
 const sample = generateAssessment(42)[3];
 const [crit] = sample.correct;
 const others = sample.correct.slice(1);
 const cases: [string, string[], (s: number) => boolean][] = [
   ['ideal order', sample.correct, (s) => s === 1],
-  ['critical first, rest reversed', [crit, ...[...others].reverse()], (s) => s >= 0.6 && s < 1],
-  ['critical second', [others[0], crit, others[1], others[2]], (s) => s > 0 && s <= 0.3],
-  ['critical last', [...others, crit], (s) => s < 0.15],
+  ['critical first, rest reversed', [crit, ...[...others].reverse()], (s) => s === 1],
+  ['critical second', [others[0], crit, others[1], others[2]], (s) => s === 0],
+  ['critical last', [...others, crit], (s) => s === 0],
 ];
 for (const [label, order, ok] of cases) {
   const s = rankingScore(sample, order);

@@ -106,7 +106,7 @@ export default async function CandidatePage({ params }: { params: Promise<{ id: 
                     ? rankingAnswer(q, answer.selected)
                     : letterAnswer(q, answer.selected);
               const correct = q.kind === 'ranking' ? rankingAnswer(q, q.correct) : letterAnswer(q, q.correct);
-              const result = q.kind === 'ranking' ? `${Math.round(score * 100)} / 100 Points` : score === 1 ? 'Correct' : 'Incorrect';
+              const result = score === 1 ? 'Correct' : 'Incorrect';
               return (
                 <article className="review" key={i}>
                   <div className="review-head">
@@ -125,7 +125,7 @@ export default async function CandidatePage({ params }: { params: Promise<{ id: 
                   <div className="answer-grid">
                     <div><span className="muted" style={{ fontSize: 14 }}>Candidate Answer</span><br /><strong className={q.kind === 'ranking' ? 'ranked' : undefined}>{given}</strong></div>
                     <div>
-                      <span className="muted" style={{ fontSize: 14 }}>{q.kind === 'ranking' ? 'Ideal Order (Item 1 Must Lead)' : 'Correct Answer'}</span><br />
+                      <span className="muted" style={{ fontSize: 14 }}>{q.kind === 'ranking' ? 'Suggested Order (Only Item 1 Is Scored)' : 'Correct Answer'}</span><br />
                       <strong className={q.kind === 'ranking' ? 'ranked' : undefined}>{correct}</strong>
                     </div>
                   </div>
