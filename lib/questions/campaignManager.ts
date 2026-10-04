@@ -3,12 +3,12 @@ import type { Question } from '../types';
 import { addDays, dayMonth, money, num, ranking, randomDate, single, type PriorityScenario } from './shared';
 
 /*
- * Campaign Manager assessment: 6 timed questions, 210 seconds in total.
+ * Campaign Manager assessment: 6 timed questions, 200 seconds in total.
  *
  *   1. Attention to Detail       20s  two campaign records, count the differences (1–3)
  *   2. Financial Accuracy        40s  costs vs client budget: £x MORE / £x LESS / EQUAL
  *   3. Applying Requirements     40s  three creators vs five requirements: which one qualifies (or more than one)
- *   4. Prioritisation            40s  rank four items; scored on the high-risk item being first
+ *   4. Prioritisation            30s  rank four items; scored on the high-risk item being first
  *   5. Logical Reasoning         40s  campaign dependencies, one objectively correct answer
  *   6. Operational Judgement     30s  report figures don’t match the dashboard two hours before the deadline
  *
@@ -16,8 +16,8 @@ import { addDays, dayMonth, money, num, ranking, randomDate, single, type Priori
  * names, figures and scenarios, and the answer key is computed from those values.
  */
 
-export const CM_VERSION = 'CM-2026.10';
-export const CM_TIMES = [20, 40, 40, 40, 40, 30];
+export const CM_VERSION = 'CM-2026.11';
+export const CM_TIMES = [20, 40, 40, 30, 40, 30];
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -216,7 +216,7 @@ function q3Requirements(rng: Rng): Question {
 }
 
 // ---------------------------------------------------------------------------
-// 4. Prioritisation (40s) — drag to rank; only the first item is scored
+// 4. Prioritisation (30s) — drag to rank; only the first item is scored
 // ---------------------------------------------------------------------------
 
 const INTRO = 'It is 10:00 AM and you have four things requiring attention.';
