@@ -30,7 +30,7 @@ export default async function Dashboard() {
   await closeExpiredAssessments();
 
   const { data, error } = await db()
-    .from('assessments')
+    .from('candidate_assessments')
     .select('id, token, candidate_name, candidate_email, role, status, overall_score, category_scores, completion_time_seconds, tab_leave_count, started_at, completed_at, created_at, time_limit_seconds')
     .order('created_at', { ascending: false })
     .limit(500);

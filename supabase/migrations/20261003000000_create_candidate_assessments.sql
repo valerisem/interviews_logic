@@ -1,5 +1,5 @@
--- Candidate assessments: one row per assessment link.
-create table if not exists public.assessments (
+-- Candidate assessments: one row per candidate attempt.
+create table if not exists public.candidate_assessments (
   id                      uuid primary key default gen_random_uuid(),
   token                   text not null unique,
 
@@ -37,24 +37,25 @@ create table if not exists public.assessments (
   created_at              timestamptz not null default now()
 );
 
-create index if not exists assessments_created_at_idx on public.assessments (created_at desc);
+create index if not exists candidate_assessments_created_at_idx on public.candidate_assessments (created_at desc);
+create index if not exists candidate_assessments_email_idx on public.candidate_assessments (candidate_email);
 
 -- The app talks to this table only from the server with the service role key.
 -- RLS is enabled with no policies, so the anon/public key cannot read or write it.
-alter table public.assessments enable row level security;
+alter table public.candidate_assessments enable row level security;
 
 -- Atomic counter for the number of times a candidate left the assessment tab.
-create or replace function public.increment_tab_leave(p_token text)
+create or replace function public.candidate_assessment_tab_leave(p_token text)
 returns void
 language sql
 security definer
 set search_path = public
 as $$
-  update public.assessments
+  update public.candidate_assessments
      set tab_leave_count = tab_leave_count + 1
    where token = p_token
      and status = 'in_progress';
 $$;
 
-revoke all on function public.increment_tab_leave(text) from public, anon, authenticated;
-grant execute on function public.increment_tab_leave(text) to service_role;
+revoke all on function public.candidate_assessment_tab_leave(text) from public, anon, authenticated;
+grant execute on function public.candidate_assessment_tab_leave(text) to service_role;

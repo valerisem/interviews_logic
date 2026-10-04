@@ -22,7 +22,7 @@ export function newToken(): string {
 
 export async function getByToken(token: string): Promise<AssessmentRow | null> {
   if (!TOKEN_RE.test(token)) return null;
-  const { data, error } = await db().from('assessments').select('*').eq('token', token).maybeSingle();
+  const { data, error } = await db().from('candidate_assessments').select('*').eq('token', token).maybeSingle();
   if (error) throw error;
   return data as AssessmentRow | null;
 }
@@ -51,7 +51,7 @@ async function finalize(row: AssessmentRow, answers: SubmittedAnswer[], timedOut
   const { overallScore, correctCount, categoryScores } = scoreAssessment(questions, answers);
   const elapsed = Math.round((Date.now() - new Date(row.started_at!).getTime()) / 1000);
   const { error } = await db()
-    .from('assessments')
+    .from('candidate_assessments')
     .update({
       status: 'completed',
       answers,
@@ -106,7 +106,7 @@ export async function startAssessment(row: AssessmentRow): Promise<CandidateStat
   if (!questions.length) throw new Error('Could not generate questions');
 
   const { data, error } = await db()
-    .from('assessments')
+    .from('candidate_assessments')
     .update({
       status: 'in_progress',
       seed,
@@ -148,7 +148,7 @@ export async function enrolAndStart(input: { name?: unknown; email?: unknown; ro
 
   // One attempt per email, so the questions can't be seen first and retaken.
   const { data: existing, error: lookupError } = await db()
-    .from('assessments')
+    .from('candidate_assessments')
     .select('id')
     .eq('candidate_email', email)
     .limit(1);
@@ -158,7 +158,7 @@ export async function enrolAndStart(input: { name?: unknown; email?: unknown; ro
   }
 
   const { data, error } = await db()
-    .from('assessments')
+    .from('candidate_assessments')
     .insert({
       token: newToken(),
       candidate_name: name,
@@ -181,7 +181,7 @@ export async function updateTimeLimit(id: string, minutes: number): Promise<void
     throw new AnswerError('Time limit must be between 1 and 240 minutes.');
   }
   const { error } = await db()
-    .from('assessments')
+    .from('candidate_assessments')
     .update({ time_limit_seconds: Math.round(minutes * 60) })
     .eq('id', id)
     .neq('status', 'completed');
@@ -219,7 +219,7 @@ export async function submitAnswer(row: AssessmentRow, questionIndex: number, se
   const nextIndex = questionIndex + 1;
 
   const { data, error } = await db()
-    .from('assessments')
+    .from('candidate_assessments')
     .update({ answers, current_index: nextIndex })
     .eq('id', row.id)
     .eq('status', 'in_progress')
@@ -238,7 +238,7 @@ export async function submitAnswer(row: AssessmentRow, questionIndex: number, se
 
 /** Score any assessment whose time ran out after the candidate closed the page. */
 export async function closeExpiredAssessments(): Promise<void> {
-  const { data, error } = await db().from('assessments').select('*').eq('status', 'in_progress');
+  const { data, error } = await db().from('candidate_assessments').select('*').eq('status', 'in_progress');
   if (error) throw error;
   for (const row of (data ?? []) as AssessmentRow[]) {
     if (isExpired(row)) await candidateState(row);
@@ -246,6 +246,6 @@ export async function closeExpiredAssessments(): Promise<void> {
 }
 
 export async function recordTabLeave(token: string): Promise<void> {
-  const { error } = await db().rpc('increment_tab_leave', { p_token: token });
+  const { error } = await db().rpc('candidate_assessment_tab_leave', { p_token: token });
   if (error) throw error;
 }

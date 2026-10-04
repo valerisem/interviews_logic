@@ -26,7 +26,7 @@ export default async function CandidatePage({ params }: { params: Promise<{ id: 
   if (!/^[0-9a-f-]{36}$/i.test(id)) notFound();
   await closeExpiredAssessments();
 
-  const { data, error } = await db().from('assessments').select('*').eq('id', id).maybeSingle();
+  const { data, error } = await db().from('candidate_assessments').select('*').eq('id', id).maybeSingle();
   if (error) throw error;
   if (!data) notFound();
   const row = data as AssessmentRow;

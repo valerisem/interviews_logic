@@ -55,7 +55,7 @@ Screenshots and photos of the screen **cannot** be blocked on a normal website, 
 
 ## Setup
 
-1. **Supabase**: run `supabase/migrations/20261003000000_create_assessments.sql` in the SQL editor (or `supabase db push`). It creates the `assessments` table with RLS enabled and no public policies, so only the server, using the service role key, can access it.
+1. **Supabase**: run `supabase/migrations/20261003000000_create_candidate_assessments.sql` in the SQL editor (or `supabase db push`). It creates the `candidate_assessments` table with RLS enabled and no public policies, so only the server, using the service role key, can access it.
 2. **Environment**: copy `.env.example` to `.env.local` and fill in the values.
 3. **Run**:
    ```bash
@@ -65,6 +65,6 @@ Screenshots and photos of the screen **cannot** be blocked on a normal website, 
    ```
 4. **Deploy**: deploy to Vercel or any Node host, set the same environment variables, point your domain at it, and set `APP_BASE_URL` to that domain.
 
-## Data stored (`public.assessments`)
+## Data stored (`public.candidate_assessments`)
 
 Candidate name, email, role, assessment version, questions received (with options in the order shown), answers submitted, correct answers, overall score, category scores, completion time, start/completion timestamps, time limit, timeout flag and number of tab/window changes.
