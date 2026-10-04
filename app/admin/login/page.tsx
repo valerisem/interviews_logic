@@ -4,6 +4,8 @@ const ERRORS: Record<string, string> = {
   domain: 'Please sign in with your houseofmarketers.com Google account, or the Google account your access was set up for.',
   not_allowed: 'This account doesn’t have admin access.',
   failed: 'Google sign-in didn’t complete. Please try again.',
+  password: 'That email and password don’t match.',
+  locked: 'Too many attempts. Please wait 15 minutes and try again.',
 };
 
 export default async function LoginPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
@@ -23,6 +25,12 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
           </svg>
           Sign In With Google
         </a>
+        <div className="divider"><span>or</span></div>
+        <form method="post" action="/api/auth/password" className="stack" style={{ gap: 12 }}>
+          <input className="input" name="email" type="email" autoComplete="username" placeholder="Email" required aria-label="Email" />
+          <input className="input" name="password" type="password" autoComplete="current-password" placeholder="Password" required aria-label="Password" />
+          <button type="submit" className="btn btn-primary">Sign In</button>
+        </form>
       </main>
     </>
   );

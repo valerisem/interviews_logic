@@ -78,7 +78,8 @@ Candidates are asked to contact their recruiter before starting. In the dashboar
 **Sign-in is with Google only.** Two ways in, no extra tables:
 
 - **Team members:** a verified houseofmarketers.com Google account belonging to a team member listed in `ADMIN_TEAM_IDS` (comma-separated ids from `public.team`, currently `3,1,10`: Valeria, Inigo, Valeriia). Work email and leaving date come from the team record, and access stops automatically once they have left.
-- **People outside the company:** verified Google accounts listed by email in `ADMIN_EXTRA_EMAILS` (currently maddy.worger@majorplayers.co.uk).
+- **People outside the company:** verified Google accounts listed by email in `ADMIN_EXTRA_EMAILS`. Google only lets them in if the OAuth consent screen is set to External.
+- **Email and password:** for admins who can't use Google sign-in (currently maddy.worger@majorplayers.co.uk), the sign-in page also has an email and password form. Accounts are listed in `ADMIN_PASSWORDS` as `email:salt:hash` (scrypt); only the hash is stored. Five wrong attempts lock that email for 15 minutes. To add someone or reset a password, generate a new hash with `node -e "const c=require('crypto');const s=c.randomBytes(16).toString('hex');console.log(s+':'+c.scryptSync(process.argv[1],s,32).toString('hex'))" 'the-password'` and set `ADMIN_PASSWORDS` to `email:<output>`.
 
 
 - Shows the shared assessment link with a copy button, and one tab per role (Campaign Manager / Account Manager), each with its own category columns.

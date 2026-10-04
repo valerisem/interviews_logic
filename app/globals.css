@@ -238,6 +238,8 @@ table.data th:last-child, table.data td:last-child { padding-right: 20px; text-a
 .header-btn:hover { border-color: var(--heading); color: var(--heading); }
 button.header-btn { background: var(--bg); cursor: pointer; font-family: inherit; }
 button.header-btn:disabled { opacity: 0.6; cursor: default; }
+.divider { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 13px; }
+.divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 .btn-google { background: #fff; color: #1f1f1f; border-color: #dadce0; font-weight: 600; }
 .btn-google:hover { color: #1f1f1f; background: #f8f9fa; }
 .icon-danger { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 8px; background: none; border: 0; padding: 0; color: var(--muted); cursor: pointer; }
