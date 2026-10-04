@@ -1,4 +1,5 @@
 import 'server-only';
+import { appUrl } from './appUrl';
 
 /*
  * Google sign-in for recruiters (OpenID Connect, authorisation-code flow).
@@ -21,8 +22,7 @@ function clientId(): string {
 }
 
 export function redirectUri(requestUrl: string): string {
-  const base = (process.env.APP_BASE_URL || new URL(requestUrl).origin).replace(/\/$/, '');
-  return `${base}/api/auth/google/callback`;
+  return appUrl('/api/auth/google/callback', requestUrl).toString();
 }
 
 export function randomToken(): string {

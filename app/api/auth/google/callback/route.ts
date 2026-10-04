@@ -1,3 +1,4 @@
+import { appUrl } from '@/lib/appUrl';
 import { NextResponse } from 'next/server';
 import { ADMIN_COOKIE, SESSION_HOURS, createSessionValue } from '@/lib/auth';
 import { OAUTH_COOKIE, checkClaims, exchangeCode } from '@/lib/google';
@@ -7,7 +8,7 @@ import { isAdminEmail } from '@/lib/admins';
 export async function GET(req: Request) {
   const url = new URL(req.url);
   const fail = (reason: string) => {
-    const res = NextResponse.redirect(new URL(`/admin/login?error=${reason}`, req.url), 303);
+    const res = NextResponse.redirect(appUrl(`/admin/login?error=${reason}`, req.url), 303);
     res.cookies.delete({ name: OAUTH_COOKIE, path: '/api/auth/google' });
     return res;
   };
@@ -23,7 +24,7 @@ export async function GET(req: Request) {
 
     if (!(await isAdminEmail(result.email))) return fail('not_allowed');
 
-    const res = NextResponse.redirect(new URL('/admin', req.url), 303);
+    const res = NextResponse.redirect(appUrl('/admin', req.url), 303);
     res.cookies.delete({ name: OAUTH_COOKIE, path: '/api/auth/google' });
     res.cookies.set(ADMIN_COOKIE, await createSessionValue(result.email), {
       httpOnly: true,
