@@ -323,6 +323,16 @@ export function Assessment({ token: initialToken = '', initial, testMode = false
               <li>You can take the assessment only once.</li>
             </ol>
           </section>
+          <section className="rules" aria-labelledby="adjustments-title">
+            <h2 id="adjustments-title" className="rules-title">Reasonable Adjustments</h2>
+            <p style={{ fontSize: 15, lineHeight: 1.6 }}>
+              If you need any reasonable adjustment to take part in this assessment, please contact your recruiter before
+              starting or as soon as possible. Adjustments may include additional time, an alternative format or use of
+              assistive technology. You do not need to disclose a diagnosis; please simply tell us what adjustment would
+              help you participate. Adjustment information will be handled separately from assessment scoring and will not
+              disadvantage your application.
+            </p>
+          </section>
           <form id="enrol" className="stack" style={{ gap: 16 }} onSubmit={start}>
             <label className="field">
               What’s your name?
@@ -359,7 +369,6 @@ export function Assessment({ token: initialToken = '', initial, testMode = false
                 {busy ? 'Starting…' : 'Start Assessment'}
               </button>
             </div>
-            <p className="muted">If you require a reasonable adjustment to complete this assessment, please contact your recruiter before starting.</p>
           </div>
         </main>
       </div>
