@@ -305,9 +305,10 @@ export async function updateExtraTime(id: string, multiplier: number): Promise<v
   if (error) throw error;
 }
 
-/** Permanently delete one submission (admin only; the route checks the session). */
-export async function deleteAssessment(id: string): Promise<void> {
-  const { error } = await db().from(TABLE).delete().eq('id', id);
+/** Permanently delete submissions (admin only; the routes check the session). */
+export async function deleteAssessments(ids: string[]): Promise<void> {
+  if (!ids.length) return;
+  const { error } = await db().from(TABLE).delete().in('id', ids);
   if (error) throw error;
 }
 

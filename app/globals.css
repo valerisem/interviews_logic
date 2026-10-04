@@ -197,7 +197,7 @@ table.data { width: 100%; min-width: 1120px; border-collapse: collapse; font-siz
 table.data th { text-align: left; color: var(--muted); font-size: 12px; font-weight: 600; padding: 14px 8px; border-bottom: 1px solid var(--border); }
 table.data td { padding: 14px 8px; border-bottom: 1px solid var(--border); vertical-align: middle; }
 table.data tr:last-child td { border-bottom: 0; }
-table.data td:first-child { white-space: normal; min-width: 170px; max-width: 230px; }
+table.data td:nth-child(2) { white-space: normal; min-width: 170px; max-width: 230px; }
 table.data th:first-child, table.data td:first-child { padding-left: 20px; }
 table.data th:last-child, table.data td:last-child { padding-right: 20px; text-align: right; }
 .num { font-variant-numeric: tabular-nums; }
@@ -240,6 +240,10 @@ button.header-btn { background: var(--bg); cursor: pointer; font-family: inherit
 button.header-btn:disabled { opacity: 0.6; cursor: default; }
 .btn-google { background: #fff; color: #1f1f1f; border-color: #dadce0; font-weight: 600; }
 .btn-google:hover { color: #1f1f1f; background: #f8f9fa; }
-.link-danger { background: none; border: 0; padding: 0; font: inherit; font-weight: 600; color: var(--muted); cursor: pointer; }
-.link-danger:hover { color: var(--fuchsia); }
-.link-danger:disabled { opacity: 0.6; cursor: default; }
+.icon-danger { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 8px; background: none; border: 0; padding: 0; color: var(--muted); cursor: pointer; }
+.icon-danger:hover { color: var(--fuchsia); background: var(--sel-tint); }
+.icon-danger:disabled { opacity: 0.6; cursor: default; }
+table.data .select-cell { width: 1%; min-width: 0; padding-right: 4px; }
+.checkbox { width: 16px; height: 16px; accent-color: var(--fuchsia); cursor: pointer; vertical-align: middle; }
+.bulk-bar { display: flex; align-items: center; justify-content: flex-end; gap: 16px; margin-bottom: -16px; font-size: 14px; font-weight: 600; color: var(--heading); }
+.btn-danger { background: var(--fuchsia); color: #fff; display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px; font-size: 14px; }

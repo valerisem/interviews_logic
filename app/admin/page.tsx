@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { CopyButton } from '@/components/CopyButton';
+import { BulkDelete, SelectAll } from '@/components/BulkDelete';
 import { DeleteButton } from '@/components/DeleteButton';
 import { ExtraTimeSelect } from '@/components/ExtraTimeSelect';
 import { extraTimeLabel } from '@/lib/extraTime';
@@ -68,6 +69,7 @@ export default async function Dashboard({ searchParams }: { searchParams: Promis
           ))}
         </nav>
 
+        <BulkDelete key={type} />
         <div className="table-wrap">
           {rows.length === 0 ? (
             <p className="empty">No {def.role} candidates yet. Share the assessment link to get started.</p>
@@ -75,6 +77,7 @@ export default async function Dashboard({ searchParams }: { searchParams: Promis
             <table className="data">
               <thead>
                 <tr>
+                  <th className="select-cell"><SelectAll key={type} /></th>
                   <th>Candidate</th>
                   <th>Date</th>
                   <th>Score</th>
@@ -88,6 +91,9 @@ export default async function Dashboard({ searchParams }: { searchParams: Promis
               <tbody>
                 {rows.map((r) => (
                   <tr key={r.id}>
+                    <td className="select-cell">
+                      <input type="checkbox" className="checkbox row-select" value={r.id} aria-label={`Select ${r.candidate_name}`} />
+                    </td>
                     <td>
                       <div style={{ fontWeight: 600 }}>{r.candidate_name}{isTestAttempt(r) && <span className="test-pill">Test</span>}</div>
                       <div className="muted">{r.candidate_email} · {r.role}</div>

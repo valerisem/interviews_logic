@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { TrashIcon } from './TrashIcon';
 
 /** Permanently deletes a submission after a confirmation prompt. */
 export function DeleteButton({ id, name, redirectTo }: { id: string; name: string; redirectTo?: string }) {
@@ -22,8 +23,8 @@ export function DeleteButton({ id, name, redirectTo }: { id: string; name: strin
 
   return (
     <span className="row" style={{ gap: 8, flexWrap: 'nowrap' }}>
-      <button type="button" className="link-danger" disabled={busy} onClick={remove}>
-        {busy ? 'Deleting…' : 'Delete'}
+      <button type="button" className="icon-danger" disabled={busy} onClick={remove} aria-label={`Delete ${name}'s submission`} title="Delete">
+        <TrashIcon />
       </button>
       {failed && <span className="error" style={{ fontSize: 13 }}>Not deleted</span>}
     </span>

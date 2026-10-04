@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/adminSession';
-import { AnswerError, deleteAssessment, updateExtraTime } from '@/lib/assessment';
+import { AnswerError, deleteAssessments, updateExtraTime } from '@/lib/assessment';
 
 /** Set a candidate's extra time (a reasonable adjustment). The reason is never recorded. */
 export async function PATCH(req: Request, ctx: { params: Promise<{ id: string }> }) {
@@ -24,7 +24,7 @@ export async function DELETE(_req: Request, ctx: { params: Promise<{ id: string 
   const { id } = await ctx.params;
   if (!/^[0-9a-f-]{36}$/i.test(id)) return NextResponse.json({ error: 'Not found' }, { status: 404 });
   try {
-    await deleteAssessment(id);
+    await deleteAssessments([id]);
     return NextResponse.json({ ok: true });
   } catch (e) {
     console.error(e);
