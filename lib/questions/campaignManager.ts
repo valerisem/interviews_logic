@@ -3,21 +3,21 @@ import type { Question } from '../types';
 import { addDays, dayMonth, money, num, ranking, randomDate, single, type PriorityScenario } from './shared';
 
 /*
- * Campaign Manager assessment: 6 timed questions, 230 seconds in total.
+ * Campaign Manager assessment: 6 timed questions, 210 seconds in total.
  *
  *   1. Attention to Detail       20s  two campaign records, count the differences (1–3)
- *   2. Financial Accuracy        45s  costs vs client budget: £x MORE / £x LESS / EQUAL
- *   3. Applying Requirements     45s  three creators vs five requirements: which one qualifies (or more than one)
- *   4. Prioritisation            45s  rank four items; scored on the high-risk item being first
- *   5. Logical Reasoning         45s  campaign dependencies, one objectively correct answer
+ *   2. Financial Accuracy        40s  costs vs client budget: £x MORE / £x LESS / EQUAL
+ *   3. Applying Requirements     40s  three creators vs five requirements: which one qualifies (or more than one)
+ *   4. Prioritisation            40s  rank four items; scored on the high-risk item being first
+ *   5. Logical Reasoning         40s  campaign dependencies, one objectively correct answer
  *   6. Operational Judgement     30s  report figures don’t match the dashboard two hours before the deadline
  *
  * Every question is generated from a seeded RNG so candidates receive different
  * names, figures and scenarios, and the answer key is computed from those values.
  */
 
-export const CM_VERSION = 'CM-2026.9';
-export const CM_TIMES = [20, 45, 45, 45, 45, 30];
+export const CM_VERSION = 'CM-2026.10';
+export const CM_TIMES = [20, 40, 40, 40, 40, 30];
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -98,7 +98,7 @@ function q1AttentionToDetail(rng: Rng): Question {
 }
 
 // ---------------------------------------------------------------------------
-// 2. Financial Accuracy (45s)
+// 2. Financial Accuracy (40s)
 // ---------------------------------------------------------------------------
 
 function q2FinancialAccuracy(rng: Rng): Question {
@@ -142,7 +142,7 @@ function q2FinancialAccuracy(rng: Rng): Question {
 }
 
 // ---------------------------------------------------------------------------
-// 3. Applying Campaign Requirements (45s) — three creators, which one qualifies
+// 3. Applying Campaign Requirements (40s) — three creators, which one qualifies
 // ---------------------------------------------------------------------------
 
 type Criterion = 'followers' | 'engagement' | 'fee' | 'location' | 'ukAudience';
@@ -216,7 +216,7 @@ function q3Requirements(rng: Rng): Question {
 }
 
 // ---------------------------------------------------------------------------
-// 4. Prioritisation (45s) — drag to rank; only the first item is scored
+// 4. Prioritisation (40s) — drag to rank; only the first item is scored
 // ---------------------------------------------------------------------------
 
 const INTRO = 'It is 10:00 AM and you have four things requiring attention.';
@@ -269,7 +269,7 @@ function q4Prioritisation(rng: Rng): Question {
 }
 
 // ---------------------------------------------------------------------------
-// 5. Logical Reasoning (45s)
+// 5. Logical Reasoning (40s)
 // ---------------------------------------------------------------------------
 
 function q5Logic(rng: Rng): Question {
