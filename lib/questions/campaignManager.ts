@@ -3,9 +3,9 @@ import type { Question } from '../types';
 import { addDays, dayMonth, money, num, ranking, randomDate, single, type PriorityScenario } from './shared';
 
 /*
- * Campaign Manager assessment: 6 timed questions, 240 seconds in total.
+ * Campaign Manager assessment: 6 timed questions, 230 seconds in total.
  *
- *   1. Attention to Detail       30s  two campaign records, count the differences (1–3)
+ *   1. Attention to Detail       20s  two campaign records, count the differences (1–3)
  *   2. Financial Accuracy        45s  costs vs client budget: £x MORE / £x LESS / EQUAL
  *   3. Applying Requirements     45s  three creators vs five requirements: which one qualifies (or more than one)
  *   4. Prioritisation            45s  rank four items; scored on the high-risk item being first
@@ -16,8 +16,8 @@ import { addDays, dayMonth, money, num, ranking, randomDate, single, type Priori
  * names, figures and scenarios, and the answer key is computed from those values.
  */
 
-export const CM_VERSION = 'CM-2026.8';
-export const CM_TIMES = [30, 45, 45, 45, 45, 30];
+export const CM_VERSION = 'CM-2026.9';
+export const CM_TIMES = [20, 45, 45, 45, 45, 30];
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -39,7 +39,7 @@ const NAME_VARIANTS: [string, string][] = [
 ];
 
 // ---------------------------------------------------------------------------
-// 1. Attention to Detail (30s)
+// 1. Attention to Detail (20s)
 // ---------------------------------------------------------------------------
 
 function q1AttentionToDetail(rng: Rng): Question {

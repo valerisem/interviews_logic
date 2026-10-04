@@ -3,9 +3,9 @@ import type { Question } from '../types';
 import { addDays, dayMonth, money, num, ranking, randomDate, single, type PriorityScenario } from './shared';
 
 /*
- * Account Manager assessment: 6 timed questions, 180 seconds in total.
+ * Account Manager assessment: 6 timed questions, 170 seconds in total.
  *
- *   1. Attention to Detail        30s  two versions of a client campaign, count the differences (1–3)
+ *   1. Attention to Detail        20s  two versions of a client campaign, count the differences (1–3)
  *   2. Commercial Accuracy        30s  variance between total costs and budget: +£x / −£x / £0
  *   3. Client Requirements        25s  brief vs proposed plan, find the one requirement it narrowly misses
  *   4. Prioritisation             30s  rank four account items; scored on the high-risk item being first
@@ -13,14 +13,14 @@ import { addDays, dayMonth, money, num, ranking, randomDate, single, type Priori
  *   6. Scope Change               30s  add France on the same budget: which option fits
  */
 
-export const AM_VERSION = 'AM-2026.3';
-export const AM_TIMES = [30, 30, 25, 30, 35, 30];
+export const AM_VERSION = 'AM-2026.4';
+export const AM_TIMES = [20, 30, 25, 30, 35, 30];
 
 const MARKETS = ['UK', 'Germany', 'France', 'Spain', 'Italy', 'Netherlands', 'Ireland', 'Sweden'];
 const REPORTING = ['Weekly', 'Fortnightly', 'Monthly'];
 
 // ---------------------------------------------------------------------------
-// 1. Attention to Detail (30s) — commercially meaningful differences only
+// 1. Attention to Detail (20s) — commercially meaningful differences only
 // ---------------------------------------------------------------------------
 
 function q1AttentionToDetail(rng: Rng): Question {

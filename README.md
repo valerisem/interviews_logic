@@ -1,6 +1,6 @@
 # Candidate Assessment — House of Marketers
 
-Short, timed work-skills assessments for **Campaign Manager** and **Account Manager** candidates: 6 questions each: 4 minutes of question time for Campaign Manager, 3 minutes for Account Manager. The candidate picks the role they're interviewing for on the landing page, and that decides which assessment they take.
+Short, timed work-skills assessments for **Campaign Manager** and **Account Manager** candidates: 6 questions each: 3 minutes 50 seconds of question time for Campaign Manager, 2 minutes 50 seconds for Account Manager. The candidate picks the role they're interviewing for on the landing page, and that decides which assessment they take.
 
 - **Campaign Manager:** attention to detail, numerical accuracy, following campaign requirements, prioritisation, logical reasoning, operational judgement.
 - **Account Manager:** attention to detail, commercial accuracy, interpreting client requirements, prioritisation, commercial reasoning, client judgement.
@@ -34,7 +34,7 @@ Timers keep running if the candidate leaves the tab or closes the page. Question
 
 | # | Category | Time | Format |
 |---|---|---|---|
-| 1 | Attention to Detail | 30s | Two campaign records side by side, count the differences (1, 2 or 3) |
+| 1 | Attention to Detail | 20s | Two campaign records side by side, count the differences (1, 2 or 3) |
 | 2 | Financial Accuracy | 45s | Four cost lines vs client budget, answered with a row of three buttons: £x MORE / £x LESS / EQUAL |
 | 3 | Following Requirements | 45s | Five campaign requirements and three creators side by side: which creator meets all of them (A, B, C or More than one) |
 | 4 | Prioritisation | 45s | Drag four items into priority order (mouse, touch, or arrow buttons); scored on the high-risk item being first |
@@ -45,7 +45,7 @@ Timers keep running if the candidate leaves the tab or closes the page. Question
 
 | # | Category | Time | Format |
 |---|---|---|---|
-| 1 | Attention to Detail | 30s | Two versions of a client campaign (budget, markets, launch, creators, usage rights, reporting); count the differences (1–3), never spelling tricks |
+| 1 | Attention to Detail | 20s | Two versions of a client campaign (budget, markets, launch, creators, usage rights, reporting); count the differences (1–3), never spelling tricks |
 | 2 | Commercial Accuracy | 30s | Total costs vs client budget: pick the variance, e.g. + £500 / − £500 / = £0 / + £1,000 |
 | 3 | Client Requirements | 25s | Client brief and proposed plan side by side; exactly one requirement is missed by the smallest margin (one creator short, TikTok one under 50% shown as e.g. 12 of 25, or launch one day late), and every passing value also sits close to its threshold |
 | 4 | Prioritisation | 30s | Drag four account items into priority order; scored on the high-risk item being first |
