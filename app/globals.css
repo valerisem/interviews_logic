@@ -73,7 +73,7 @@ button, input, select { font: inherit; color: inherit; }
 .h2 { font-family: var(--display); font-weight: 700; letter-spacing: -0.01em; font-size: 20px; color: var(--heading); }
 .meta { font-size: 15px; color: var(--muted); }
 .rules { background: var(--surface); border-radius: var(--radius); padding: 20px 22px; display: flex; flex-direction: column; gap: 12px; }
-.footnote { font-size: 12.5px; line-height: 1.55; color: var(--muted); }
+.footnote { font-size: 11px; font-style: italic; line-height: 1.5; color: var(--muted); word-spacing: normal; }
 .rules-title { font-family: var(--display); font-weight: 700; font-size: 16px; color: var(--heading); }
 .rules ol { margin: 0; padding: 0; list-style: none; counter-reset: rule; display: flex; flex-direction: column; gap: 10px; }
 .rules li { counter-increment: rule; display: grid; grid-template-columns: 24px 1fr; gap: 10px; font-size: 15px; line-height: 1.55; }
