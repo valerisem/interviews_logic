@@ -7,7 +7,7 @@ import { checkPassword, tooManyAttempts } from '@/lib/passwordLogin';
 export async function POST(req: Request) {
   const form = await req.formData().catch(() => null);
   const email = String(form?.get('email') ?? '').trim().toLowerCase();
-  const password = String(form?.get('password') ?? '');
+  const password = String(form?.get('password') ?? '').trim();
   const fail = (reason: string) => NextResponse.redirect(appUrl(`/admin/login?error=${reason}`, req.url), 303);
 
   if (!email || !password) return fail('password');
