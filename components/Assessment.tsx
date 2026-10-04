@@ -186,6 +186,17 @@ export function Assessment({ token: initialToken = '', initial, testMode = false
     setClock(next);
   }, [setClock]);
 
+  // Test mode only: start a fresh attempt with the same name and email (same role unless one is given).
+  async function retake(type?: AssessmentType) {
+    setBusy(true);
+    const { data, error: err } = await postJson<{ token: string; state: CandidateState }>(`/api/a/${token}/retake`, { assessmentType: type });
+    setBusy(false);
+    if (!data) return setError(err!);
+    setToken(data.token);
+    window.history.replaceState(null, '', `/form/a/${data.token}`);
+    apply(data.state);
+  }
+
   // Test mode only: pause or resume the timer, keeping the current selection.
   async function togglePause(q: InProgress) {
     setBusy(true);
@@ -268,6 +279,17 @@ export function Assessment({ token: initialToken = '', initial, testMode = false
           <p className="meta" style={{ fontSize: 16, lineHeight: 1.6 }}>
             Thank you. Your responses have been submitted successfully and will be reviewed as part of your application.
           </p>
+          {state.testMode && (
+            <div style={{ display: 'grid', gap: 10, width: '100%', maxWidth: 320, marginTop: 12 }}>
+              {ROLES.map(([value, label]) => (
+                <button key={value} type="button" className="btn btn-primary" disabled={busy} onClick={() => retake(value)}>
+                  Retake {label}
+                </button>
+              ))}
+              <a href="/admin" className="btn btn-secondary">Dashboard</a>
+            </div>
+          )}
+          {error && <p className="error" role="alert">{error}</p>}
         </main>
       </div>
     );
@@ -361,6 +383,11 @@ export function Assessment({ token: initialToken = '', initial, testMode = false
           {state.testMode && (
             <button type="button" className="header-btn" disabled={busy} onClick={() => togglePause(state)}>
               {state.paused ? 'Resume' : 'Pause'}
+            </button>
+          )}
+          {state.testMode && (
+            <button type="button" className="header-btn" disabled={busy} onClick={() => retake()}>
+              Restart
             </button>
           )}
           </span>

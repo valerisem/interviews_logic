@@ -28,7 +28,7 @@ export type CandidateState =
       testMode: boolean;
       paused: boolean;
     }
-  | { status: 'completed' };
+  | { status: 'completed'; testMode: boolean };
 
 export class AnswerError extends Error {}
 
@@ -127,7 +127,7 @@ async function catchUp(row: AssessmentRow): Promise<AssessmentRow> {
 /** The candidate's current view. */
 export async function candidateState(input: AssessmentRow): Promise<CandidateState> {
   const row = await catchUp(input);
-  if (row.status !== 'in_progress') return { status: 'completed' };
+  if (row.status !== 'in_progress') return { status: 'completed', testMode: isTestAttempt(row) };
   const q = row.questions![row.current_index];
   return {
     status: 'in_progress',
@@ -209,7 +209,7 @@ export async function enrolAndStart(input: { name?: unknown; email?: unknown; as
 /** Record the answer to the current question and move on. There is no way back. */
 export async function submitAnswer(input: AssessmentRow, questionIndex: number, selected: unknown, timedOut: boolean): Promise<CandidateState> {
   const row = await catchUp(input);
-  if (row.status !== 'in_progress') return { status: 'completed' };
+  if (row.status !== 'in_progress') return { status: 'completed', testMode: isTestAttempt(row) };
   // Answers for anything other than the current question are ignored.
   if (questionIndex !== row.current_index) return candidateState(row);
   if (isPaused(row)) throw new AnswerError('Resume the assessment to continue.');
@@ -273,6 +273,20 @@ export async function setPaused(input: AssessmentRow, pause: boolean): Promise<C
     .maybeSingle();
   if (error) throw error;
   return candidateState((data as AssessmentRow | null) ?? (await getByToken(row.token))!);
+}
+
+/** Test mode (the route also requires an admin session): start a fresh attempt with the same details, optionally for the other role. */
+export async function retakeTest(row: AssessmentRow, assessmentType?: unknown) {
+  if (!isTestAttempt(row)) throw new AnswerError('Only test attempts can be retaken.');
+  return enrolAndStart(
+    {
+      name: row.candidate_name,
+      email: row.candidate_email,
+      assessmentType: isAssessmentType(assessmentType) ? assessmentType : row.assessment_type,
+      privacyAck: true,
+    },
+    true,
+  );
 }
 
 /** Close any assessment whose remaining questions ran out after the candidate left. */
