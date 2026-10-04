@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: 'Privacy Notice · House of Marketers
 export default function PrivacyNotice() {
   return (
     <>
-      <TopBar left={<Link href="/" className="header-link">← Back To Assessment</Link>} />
+      <TopBar left={<Link href="/form" className="header-link">← Back To Assessment</Link>} />
       <main className="page doc">
         <h1 className="title-md">Candidate Assessment <span className="accent">Privacy Notice</span></h1>
         <p className="muted" style={{ fontSize: 14, marginBottom: 8 }}>Effective date: {notice.effectiveDate}</p>

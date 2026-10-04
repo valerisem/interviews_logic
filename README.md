@@ -9,10 +9,22 @@ Both also measure working accurately under time pressure. It does **not** attemp
 
 Next.js (App Router) + Supabase. Runs on any Node host (Railway, Vercel, your own server) under your own domain.
 
-## Candidate flow (one public link: the site root)
+## Addresses
 
-1. **Landing:** a short description and the rules (6 questions, about 3 minutes, a timer per question, no going back, stay on the page, one attempt). The candidate enters name, email and the role they're interviewing for (Campaign Manager or Account Manager), and ticks a required checkbox: *"I confirm that I have read and understood the Candidate Assessment Privacy Notice"* (links to `/privacy`). The reasonable-adjustment wording is shown under Start. No timer runs here.
-2. **Start Assessment** saves the details and the privacy confirmation (with the notice's effective date), generates the candidate's questions and starts question 1. The address becomes `/a/<token>`, so a reload resumes the same attempt. Each email can take the assessment once.
+The app runs on **houseofmarketer.com**, next to a redirect to the main website:
+
+| Path | What it serves |
+|---|---|
+| `/form` | Candidate assessment (the link you send candidates) |
+| `/form/privacy` | Candidate Assessment Privacy Notice |
+| `/form/a/<token>` | A candidate's attempt, so a reload resumes it |
+| `/admin` | Admin dashboard (Google sign-in) |
+| anything else | Redirects (302) to `REDIRECT_URL`, https://houseofmarketers.com |
+
+## Candidate flow (`/form`)
+
+1. **Landing:** a short description and the rules (6 questions, about 3 minutes, a timer per question, no going back, stay on the page, one attempt). The candidate enters name, email and the role they're interviewing for (Campaign Manager or Account Manager), and ticks a required checkbox: *"I confirm that I have read and understood the Candidate Assessment Privacy Notice"* (links to `/form/privacy`). The reasonable-adjustment wording is shown under Start. No timer runs here.
+2. **Start Assessment** saves the details and the privacy confirmation (with the notice's effective date), generates the candidate's questions and starts question 1. The address becomes `/form/a/<token>`, so a reload resumes the same attempt. Each email can take the assessment once.
 3. **Questions:** one per screen, each with its own visible timer. All the information needed stays visible. There is no going back and no right/wrong feedback. When a timer runs out, whatever is selected at that moment is recorded and the next question starts.
 4. **Completion:** *"Assessment completed. Thank you. Your responses have been submitted successfully and will be reviewed as part of your application."* No score is shown.
 
@@ -85,7 +97,7 @@ House of Marketers brand colours taken from the logo: indigo `#200888` and fuchs
 
 ## Privacy notice
 
-`/privacy` renders `content/privacy-notice.json`, the Candidate Assessment Privacy Notice (effective 4 October 2026). To update it, edit that file; candidates' confirmations record the effective date they agreed to.
+`/form/privacy` renders `content/privacy-notice.json`, the Candidate Assessment Privacy Notice (effective 4 October 2026). To update it, edit that file; candidates' confirmations record the effective date they agreed to.
 
 ## Setup
 

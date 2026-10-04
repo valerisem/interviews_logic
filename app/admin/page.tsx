@@ -33,7 +33,7 @@ export default async function Dashboard({ searchParams }: { searchParams: Promis
   const all = (data ?? []) as Row[];
   const rows = all.filter((r) => (r.assessment_type ?? 'campaign_manager') === type);
   const counts = Object.fromEntries(ASSESSMENT_TYPES.map((t) => [t, all.filter((r) => (r.assessment_type ?? 'campaign_manager') === t).length]));
-  const base = (process.env.APP_BASE_URL ?? '').replace(/\/$/, '');
+  const base = process.env.APP_BASE_URL ? `${process.env.APP_BASE_URL.replace(/\/$/, '')}/form` : '';
 
   return (
     <>

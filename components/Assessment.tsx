@@ -233,7 +233,7 @@ export function Assessment({ token: initialToken = '', initial }: { token?: stri
     if (!data) return setError(err!);
     setToken(data.token);
     // Give the attempt its own address so a reload resumes it rather than starting again.
-    window.history.replaceState(null, '', `/a/${data.token}`);
+    window.history.replaceState(null, '', `/form/a/${data.token}`);
     apply(data.state);
   }
 
@@ -303,7 +303,7 @@ export function Assessment({ token: initialToken = '', initial }: { token?: stri
               <input type="checkbox" checked={privacyAck} onChange={(e) => setPrivacyAck(e.target.checked)} required />
               <span>
                 I confirm that I have read and understood the{' '}
-                <a href="/privacy" target="_blank" rel="noopener">Candidate Assessment Privacy Notice</a>.
+                <a href="/form/privacy" target="_blank" rel="noopener">Candidate Assessment Privacy Notice</a>.
               </span>
             </label>
           </form>
