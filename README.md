@@ -11,7 +11,7 @@ Next.js (App Router) + Supabase. Runs on any Node host (Railway, Vercel, your ow
 
 ## Candidate flow (one public link: the site root)
 
-1. **Landing:** name, email, the role they're interviewing for (Campaign Manager or Account Manager), and a required checkbox: *"I confirm that I have read and understood the Candidate Assessment Privacy Notice"* (links to `/privacy`). Also shows **Contact Recruiter** and the reasonable-adjustment wording. No timer runs here.
+1. **Landing:** a short description and the rules (6 questions, about 3 minutes, a timer per question, no going back, stay on the page, one attempt). The candidate enters name, email and the role they're interviewing for (Campaign Manager or Account Manager), and ticks a required checkbox: *"I confirm that I have read and understood the Candidate Assessment Privacy Notice"* (links to `/privacy`). The reasonable-adjustment wording is shown under Start. No timer runs here.
 2. **Start Assessment** saves the details and the privacy confirmation (with the notice's effective date), generates the candidate's questions and starts question 1. The address becomes `/a/<token>`, so a reload resumes the same attempt. Each email can take the assessment once.
 3. **Questions:** one per screen, each with its own visible timer. All the information needed stays visible. There is no going back and no right/wrong feedback. When a timer runs out, whatever is selected at that moment is recorded and the next question starts.
 4. **Completion:** *"Assessment completed. Thank you. Your responses have been submitted successfully and will be reviewed as part of your application."* No score is shown.
@@ -61,7 +61,14 @@ Every Campaign Manager question is generated per candidate:
 
 Candidates are asked to contact their recruiter before starting. In the dashboard a recruiter can give any candidate **extra time** (None, +25%, +50%, +100%), applied to every remaining question. This can be done even mid-assessment. The app never asks for or stores the reason for an adjustment.
 
-## Recruiter dashboard (`/admin`, password protected)
+## Recruiter dashboard (`/admin`)
+
+**Sign-in is with Google only.** A recruiter must use a verified houseofmarketers.com Google account and be on the admin list, `public.assessment_admins`. That list references people in `public.team` by team id; their work email comes from the team record, and access stops automatically once their leaving date has passed. To add someone:
+
+```sql
+insert into public.assessment_admins (team_id) values (<team id>);
+```
+
 
 - Shows the shared assessment link with a copy button, and one tab per role (Campaign Manager / Account Manager), each with its own category columns.
 - For each candidate: name, email, role, date, overall score, the six category scores, time taken, extra time and tab leaves.
@@ -78,7 +85,7 @@ Screenshots can't be blocked on a normal website, and the app doesn't claim to b
 
 ## Design
 
-House of Marketers brand colours taken from the logo: indigo `#200888` and fuchsia `#F0438F`, with brand navy `#0B0E1A` for dark mode. Headings use Montserrat, body text uses Inter. Every page has a **light/dark switch** next to the logo, which sits top-right; the choice is remembered in the browser. Dark mode uses a white version of the horizontal logo.
+House of Marketers brand colours taken from the logo: indigo `#200888` and fuchsia `#F0438F`, with brand navy `#0B0E1A` for dark mode. Headings use Montserrat and body text uses Inter. Both are bundled with the app, so they don't depend on Google Fonts. Every page has a **light/dark switch** next to the logo, which sits top-right; the choice is remembered in the browser. Dark mode uses a white version of the horizontal logo.
 
 ## Privacy notice
 
@@ -88,11 +95,12 @@ House of Marketers brand colours taken from the logo: indigo `#200888` and fuchs
 
 1. **Supabase:** apply the files in `supabase/migrations/` in order. They create `public.candidate_assessments` with RLS enabled and no public policies, so only the server, using the service role key, can access it. These have already been applied to the *Team* project.
 2. **Environment:** copy `.env.example` to `.env.local` and fill it in.
-3. **Run:**
+3. **Google sign-in:** in Google Cloud Console → APIs & Services → Credentials, create an OAuth client ID (type *Web application*). Add the authorised redirect URI `<APP_BASE_URL>/api/auth/google/callback`, then set `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`.
+4. **Run:**
    ```bash
    npm install
    npm test          # question bank + scoring checks
    npm run dev       # http://localhost:3000 (candidate) and /admin (recruiter)
    npm run build && npm start
    ```
-4. **Deploy:** set the same environment variables on your host, point your domain at it and set `APP_BASE_URL`.
+5. **Deploy:** set the same environment variables on your host, point your domain at it and set `APP_BASE_URL`.

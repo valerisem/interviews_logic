@@ -1,14 +1,20 @@
 import 'server-only';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { ADMIN_COOKIE, isValidSession } from './auth';
+import { ADMIN_COOKIE, readSession } from './auth';
 
-/** Defence in depth for admin pages and routes, on top of middleware. */
-export async function isAdmin(): Promise<boolean> {
+/** The signed-in recruiter's email, or null. Defence in depth on top of middleware. */
+export async function adminEmail(): Promise<string | null> {
   const store = await cookies();
-  return isValidSession(store.get(ADMIN_COOKIE)?.value);
+  return readSession(store.get(ADMIN_COOKIE)?.value);
 }
 
-export async function requireAdminPage(): Promise<void> {
-  if (!(await isAdmin())) redirect('/admin/login');
+export async function isAdmin(): Promise<boolean> {
+  return (await adminEmail()) !== null;
+}
+
+export async function requireAdminPage(): Promise<string> {
+  const email = await adminEmail();
+  if (!email) redirect('/admin/login');
+  return email;
 }

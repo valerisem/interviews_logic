@@ -18,7 +18,7 @@ type Row = Pick<
 >;
 
 export default async function Dashboard({ searchParams }: { searchParams: Promise<{ type?: string }> }) {
-  await requireAdminPage();
+  const email = await requireAdminPage();
   await closeExpiredAssessments();
   const { type: requested } = await searchParams;
   const type = isAssessmentType(requested) ? requested : 'campaign_manager';
@@ -40,9 +40,12 @@ export default async function Dashboard({ searchParams }: { searchParams: Promis
       <TopBar
         wide
         right={
+          <span className="row" style={{ gap: 16, flexWrap: 'nowrap' }}>
+          <span className="muted" style={{ fontSize: 14 }}>{email}</span>
           <form method="post" action="/api/admin/logout">
             <button type="submit" className="header-link" style={{ background: 'none', border: 0, cursor: 'pointer', color: 'var(--heading)' }}>Sign Out</button>
           </form>
+          </span>
         }
       />
       <main className="admin">

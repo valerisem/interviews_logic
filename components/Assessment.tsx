@@ -147,7 +147,7 @@ function RankingList({ items, order, onChange }: { items: Option[]; order: strin
 
 // ---------------------------------------------------------------------------
 
-export function Assessment({ token: initialToken = '', initial, recruiterEmail }: { token?: string; initial: View; recruiterEmail: string }) {
+export function Assessment({ token: initialToken = '', initial }: { token?: string; initial: View }) {
   const [token, setToken] = useState(initialToken);
   const [state, setState] = useState<View>(initial);
   const [details, setDetails] = useState({ name: '', email: '' });
@@ -262,8 +262,22 @@ export function Assessment({ token: initialToken = '', initial, recruiterEmail }
         <main className="page">
           <div className="stack">
             <h1 className="title">Candidate <span className="accent">Assessment</span></h1>
-            <p className="meta">6 questions · About 3 minutes · Each question has its own timer</p>
+            <p className="lead">
+              This assessment is designed to see how you work with information: checking details, working with numbers,
+              following requirements, prioritising and making everyday work decisions. It is one part of our recruitment
+              process, and your answers are reviewed by our team.
+            </p>
           </div>
+          <section className="rules" aria-labelledby="rules-title">
+            <h2 id="rules-title" className="rules-title">How It Works</h2>
+            <ol>
+              <li>There are 6 questions, and the assessment takes around 3 minutes.</li>
+              <li>Each question has its own timer. When it runs out, your current answer is saved and the next question starts.</li>
+              <li>You can’t go back to a previous question or change an answer once you’ve moved on.</li>
+              <li>Please stay on this page until you finish. The timer keeps running if you switch tabs or windows, and switching is recorded.</li>
+              <li>You can take the assessment only once.</li>
+            </ol>
+          </section>
           <form id="enrol" className="stack" style={{ gap: 16 }} onSubmit={start}>
             <label className="field">
               What’s your name?
@@ -299,9 +313,6 @@ export function Assessment({ token: initialToken = '', initial, recruiterEmail }
               <button type="submit" form="enrol" className="btn btn-primary" disabled={busy || !privacyAck || !assessmentType}>
                 {busy ? 'Starting…' : 'Start Assessment'}
               </button>
-              <a className="btn btn-secondary" href={`mailto:${recruiterEmail}?subject=${encodeURIComponent('Candidate Assessment')}`}>
-                Contact Recruiter
-              </a>
             </div>
             <p className="muted">If you require a reasonable adjustment to complete this assessment, please contact your recruiter before starting.</p>
           </div>

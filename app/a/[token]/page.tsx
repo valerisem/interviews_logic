@@ -10,6 +10,5 @@ export default async function AssessmentPage({ params }: { params: Promise<{ tok
   if (!row) notFound();
 
   const state = await candidateState(row);
-  const recruiterEmail = process.env.RECRUITER_EMAIL ?? '';
-  return <Assessment token={token} initial={state} recruiterEmail={recruiterEmail} />;
+  return <Assessment token={token} initial={state} />;
 }
