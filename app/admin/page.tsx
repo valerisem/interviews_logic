@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { CopyButton } from '@/components/CopyButton';
+import { DeleteButton } from '@/components/DeleteButton';
 import { ExtraTimeSelect } from '@/components/ExtraTimeSelect';
 import { extraTimeLabel } from '@/lib/extraTime';
 import { TopBar } from '@/components/TopBar';
@@ -99,7 +100,12 @@ export default async function Dashboard({ searchParams }: { searchParams: Promis
                     <td className="num">{formatDuration(r.completion_time_seconds)}</td>
                     <td>{r.status === 'completed' ? extraTimeLabel(r.time_multiplier) : <ExtraTimeSelect id={r.id} value={Number(r.time_multiplier)} />}</td>
                     <td className="num">{r.tab_leave_count}</td>
-                    <td><Link href={`/admin/candidates/${r.id}`} style={{ fontWeight: 700 }}>Review</Link></td>
+                    <td>
+                      <span className="row" style={{ gap: 16, flexWrap: 'nowrap' }}>
+                        <Link href={`/admin/candidates/${r.id}`} style={{ fontWeight: 700 }}>Review</Link>
+                        <DeleteButton id={r.id} name={r.candidate_name} />
+                      </span>
+                    </td>
                   </tr>
                 ))}
               </tbody>

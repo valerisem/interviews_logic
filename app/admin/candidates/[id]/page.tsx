@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { DeleteButton } from '@/components/DeleteButton';
 import { notFound } from 'next/navigation';
 import { ExtraTimeSelect } from '@/components/ExtraTimeSelect';
 import { extraTimeLabel } from '@/lib/extraTime';
@@ -52,6 +53,7 @@ export default async function CandidatePage({ params }: { params: Promise<{ id: 
             {row.candidate_email} · {row.role} · {formatDate(row.started_at)} · Version {row.assessment_version}
             {row.privacy_notice_ack_at ? ' · Privacy notice confirmed' : ''}
           </p>
+          <DeleteButton id={row.id} name={row.candidate_name} redirectTo={`/admin?type=${def.type}`} />
         </div>
 
         <div className="stats">

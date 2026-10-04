@@ -305,6 +305,12 @@ export async function updateExtraTime(id: string, multiplier: number): Promise<v
   if (error) throw error;
 }
 
+/** Permanently delete one submission (admin only; the route checks the session). */
+export async function deleteAssessment(id: string): Promise<void> {
+  const { error } = await db().from(TABLE).delete().eq('id', id);
+  if (error) throw error;
+}
+
 export async function recordTabLeave(token: string): Promise<void> {
   const { error } = await db().rpc('candidate_assessment_tab_leave', { p_token: token });
   if (error) throw error;
