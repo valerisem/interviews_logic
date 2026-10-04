@@ -167,20 +167,39 @@ export function Assessment({ token: initialToken = '', initial, testMode = false
   useCopyProtection();
   useLeaveTracking(token, state.status === 'in_progress');
 
-  const apply = useCallback((next: CandidateState) => {
-    setState(next);
-    setSelected([]);
-    setTouched(false);
-    setError('');
+  const setClock = useCallback((next: CandidateState) => {
     if (next.status === 'in_progress') {
-      setOrder(next.question.options.map((o) => o.id));
       // The server sets the deadline; the clock keeps running whether or not this tab is visible.
-      endsAt.current = Date.now() + next.remainingSeconds * 1000;
+      endsAt.current = next.paused ? null : Date.now() + next.remainingSeconds * 1000;
       setRemaining(next.remainingSeconds);
     } else {
       endsAt.current = null;
     }
   }, []);
+
+  const apply = useCallback((next: CandidateState) => {
+    setState(next);
+    setSelected([]);
+    setTouched(false);
+    setError('');
+    if (next.status === 'in_progress') setOrder(next.question.options.map((o) => o.id));
+    setClock(next);
+  }, [setClock]);
+
+  // Test mode only: pause or resume the timer, keeping the current selection.
+  async function togglePause(q: InProgress) {
+    setBusy(true);
+    const { data, error: err } = await postJson<CandidateState>(`/api/a/${token}/pause`, { paused: !q.paused });
+    setBusy(false);
+    if (!data) return setError(err!);
+    setError('');
+    if (data.status === 'in_progress' && data.index === q.index) {
+      setState(data);
+      setClock(data);
+    } else {
+      apply(data);
+    }
+  }
 
   useEffect(() => {
     if (initial.status === 'in_progress') apply(initial);
@@ -334,10 +353,17 @@ export function Assessment({ token: initialToken = '', initial, testMode = false
       <TopBar
         progress={state.index / state.total}
         left={
-          <div className={`timer${remaining <= 5 ? ' low' : ''}`} role="timer" aria-label="Time left on this question">
+          <span className="row" style={{ gap: 8, flexWrap: 'nowrap' }}>
+          <div className={`timer${remaining <= 5 && !state.paused ? ' low' : ''}`} role="timer" aria-label="Time left on this question">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8" /><path d="M12 9v4l2 2" /><path d="M9 2h6" /></svg>
-            <span>{formatClock(remaining)}</span>
+            <span>{formatClock(remaining)}{state.paused ? ' · Paused' : ''}</span>
           </div>
+          {state.testMode && (
+            <button type="button" className="header-btn" disabled={busy} onClick={() => togglePause(state)}>
+              {state.paused ? 'Resume' : 'Pause'}
+            </button>
+          )}
+          </span>
         }
       />
       <main className="page question" key={state.index}>
@@ -372,7 +398,7 @@ export function Assessment({ token: initialToken = '', initial, testMode = false
         )}
         {error && <p className="error" role="alert">{error}</p>}
         <div className="q-footer">
-          <button type="button" className="btn btn-primary" disabled={busy || !ready} onClick={() => submit(state, false)}>
+          <button type="button" className="btn btn-primary" disabled={busy || !ready || state.paused} onClick={() => submit(state, false)}>
             {busy ? 'Saving…' : isLast ? 'Submit Assessment' : 'Next Question'}
           </button>
         </div>

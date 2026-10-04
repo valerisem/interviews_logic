@@ -226,5 +226,7 @@ table.data th:last-child, table.data td:last-child { padding-right: 20px; text-a
 .header-btn { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border-radius: 10px; border: 1px solid var(--border); font-size: 14px; font-weight: 600; color: var(--heading); white-space: nowrap; }
 .test-pill { display: inline-flex; align-items: center; margin-left: 8px; padding: 2px 10px; border-radius: 999px; background: var(--sel-tint); color: var(--fuchsia); font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; vertical-align: middle; white-space: nowrap; }
 .header-btn:hover { border-color: var(--heading); color: var(--heading); }
+button.header-btn { background: var(--bg); cursor: pointer; font-family: inherit; }
+button.header-btn:disabled { opacity: 0.6; cursor: default; }
 .btn-google { background: #fff; color: #1f1f1f; border-color: #dadce0; font-weight: 600; }
 .btn-google:hover { color: #1f1f1f; background: #f8f9fa; }

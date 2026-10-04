@@ -24,6 +24,9 @@ export type CandidateState =
       remainingSeconds: number;
       questionSeconds: number;
       question: PublicQuestion;
+      /** Test attempts only: the admin can pause the timer. */
+      testMode: boolean;
+      paused: boolean;
     }
   | { status: 'completed' };
 
@@ -50,8 +53,25 @@ function questionMs(row: AssessmentRow, i: number): number {
   return row.questions![i].timeLimitSeconds * Number(row.time_multiplier) * 1000;
 }
 
-function deadline(row: AssessmentRow): number {
-  return new Date(row.question_started_at!).getTime() + questionMs(row, row.current_index);
+/*
+ * Test-mode pause, without extra columns: while paused, question_started_at holds
+ * PAUSE_BASE + the time already used on the question. That lies far in the future,
+ * so nothing expires, and resuming sets it back to now − time used.
+ */
+const PAUSE_BASE = Date.UTC(9000, 0, 1);
+
+function startedAtMs(row: AssessmentRow): number {
+  return new Date(row.question_started_at!).getTime();
+}
+
+function isPaused(row: AssessmentRow): boolean {
+  return startedAtMs(row) >= PAUSE_BASE;
+}
+
+function remainingMs(row: AssessmentRow): number {
+  const limit = questionMs(row, row.current_index);
+  const used = isPaused(row) ? startedAtMs(row) - PAUSE_BASE : Date.now() - startedAtMs(row);
+  return Math.max(0, limit - used);
 }
 
 function finalFields(row: AssessmentRow, answers: SubmittedAnswer[]) {
@@ -74,7 +94,7 @@ function finalFields(row: AssessmentRow, answers: SubmittedAnswer[]) {
  * having started when the previous one ended.
  */
 async function catchUp(row: AssessmentRow): Promise<AssessmentRow> {
-  if (row.status !== 'in_progress') return row;
+  if (row.status !== 'in_progress' || isPaused(row)) return row;
   const now = Date.now();
   const total = row.questions!.length;
   let index = row.current_index;
@@ -113,9 +133,11 @@ export async function candidateState(input: AssessmentRow): Promise<CandidateSta
     status: 'in_progress',
     index: row.current_index,
     total: row.questions!.length,
-    remainingSeconds: Math.max(0, (deadline(row) - Date.now()) / 1000),
+    remainingSeconds: remainingMs(row) / 1000,
     questionSeconds: questionMs(row, row.current_index) / 1000,
     question: toPublic(q),
+    testMode: isTestAttempt(row),
+    paused: isPaused(row),
   };
 }
 
@@ -190,6 +212,7 @@ export async function submitAnswer(input: AssessmentRow, questionIndex: number, 
   if (row.status !== 'in_progress') return { status: 'completed' };
   // Answers for anything other than the current question are ignored.
   if (questionIndex !== row.current_index) return candidateState(row);
+  if (isPaused(row)) throw new AnswerError('Resume the assessment to continue.');
 
   const q = row.questions![questionIndex];
   const valid = new Set(q.options.map((o) => o.id));
@@ -231,6 +254,25 @@ export async function submitAnswer(input: AssessmentRow, questionIndex: number, 
   if (error) throw error;
   const fresh = (data as AssessmentRow | null) ?? (await getByToken(row.token))!;
   return candidateState(fresh);
+}
+
+/** Test attempts only (the route also requires an admin session): pause or resume the current question's timer. */
+export async function setPaused(input: AssessmentRow, pause: boolean): Promise<CandidateState> {
+  if (!isTestAttempt(input)) throw new AnswerError('Only test attempts can be paused.');
+  const row = await catchUp(input);
+  if (row.status !== 'in_progress' || isPaused(row) === pause) return candidateState(row);
+  const used = questionMs(row, row.current_index) - remainingMs(row);
+  const startedAt = pause ? PAUSE_BASE + used : Date.now() - used;
+  const { data, error } = await db()
+    .from(TABLE)
+    .update({ question_started_at: new Date(startedAt).toISOString() })
+    .eq('id', row.id)
+    .eq('status', 'in_progress')
+    .eq('current_index', row.current_index)
+    .select('*')
+    .maybeSingle();
+  if (error) throw error;
+  return candidateState((data as AssessmentRow | null) ?? (await getByToken(row.token))!);
 }
 
 /** Close any assessment whose remaining questions ran out after the candidate left. */
