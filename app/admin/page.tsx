@@ -4,7 +4,7 @@ import { ExtraTimeSelect } from '@/components/ExtraTimeSelect';
 import { extraTimeLabel } from '@/lib/extraTime';
 import { TopBar } from '@/components/TopBar';
 import { requireAdminPage } from '@/lib/adminSession';
-import { closeExpiredAssessments } from '@/lib/assessment';
+import { closeExpiredAssessments, isTestAttempt } from '@/lib/assessment';
 import { formatDate, formatDuration } from '@/lib/format';
 import { db } from '@/lib/supabase';
 import { ASSESSMENTS, ASSESSMENT_TYPES, isAssessmentType } from '@/lib/questionBank';
@@ -14,7 +14,7 @@ export const dynamic = 'force-dynamic';
 
 type Row = Pick<
   AssessmentRow,
-  'id' | 'candidate_name' | 'candidate_email' | 'role' | 'assessment_type' | 'status' | 'overall_score' | 'category_scores' | 'completion_time_seconds' | 'tab_leave_count' | 'started_at' | 'time_multiplier'
+  'id' | 'candidate_name' | 'candidate_email' | 'role' | 'assessment_type' | 'assessment_version' | 'status' | 'overall_score' | 'category_scores' | 'completion_time_seconds' | 'tab_leave_count' | 'started_at' | 'time_multiplier'
 >;
 
 export default async function Dashboard({ searchParams }: { searchParams: Promise<{ type?: string }> }) {
@@ -26,7 +26,7 @@ export default async function Dashboard({ searchParams }: { searchParams: Promis
 
   const { data, error } = await db()
     .from('candidate_assessments')
-    .select('id, candidate_name, candidate_email, role, assessment_type, status, overall_score, category_scores, completion_time_seconds, tab_leave_count, started_at, time_multiplier')
+    .select('id, candidate_name, candidate_email, role, assessment_type, assessment_version, status, overall_score, category_scores, completion_time_seconds, tab_leave_count, started_at, time_multiplier')
     .order('created_at', { ascending: false })
     .limit(500);
   if (error) throw error;
@@ -41,6 +41,7 @@ export default async function Dashboard({ searchParams }: { searchParams: Promis
         wide
         right={
           <span className="row" style={{ gap: 16, flexWrap: 'nowrap' }}>
+          <a href="/form" target="_blank" rel="noopener" className="header-btn">Take Test</a>
           <span className="muted" style={{ fontSize: 14 }}>{email}</span>
           <form method="post" action="/api/admin/logout">
             <button type="submit" className="header-link" style={{ background: 'none', border: 0, cursor: 'pointer', color: 'var(--heading)' }}>Sign Out</button>
@@ -87,7 +88,7 @@ export default async function Dashboard({ searchParams }: { searchParams: Promis
                 {rows.map((r) => (
                   <tr key={r.id}>
                     <td>
-                      <div style={{ fontWeight: 600 }}>{r.candidate_name}</div>
+                      <div style={{ fontWeight: 600 }}>{r.candidate_name}{isTestAttempt(r) && <span className="test-pill">Test</span>}</div>
                       <div className="muted">{r.candidate_email} · {r.role}</div>
                     </td>
                     <td className="num">{formatDate(r.started_at)}</td>

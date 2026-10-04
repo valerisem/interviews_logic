@@ -35,7 +35,7 @@ Timers keep running if the candidate leaves the tab or closes the page. Question
 | # | Category | Time | Format |
 |---|---|---|---|
 | 1 | Attention to Detail | 15s | Two campaign records side by side, count the differences (1, 2 or 3) |
-| 2 | Financial Accuracy | 25s | Four cost lines vs approved budget: MORE / LESS / EQUAL |
+| 2 | Financial Accuracy | 25s | Four cost lines vs approved budget: a row of three buttons, MORE / LESS / EQUAL |
 | 3 | Following Requirements | 20s | Five creator rules + missing-information rule: APPROVE / REJECT / NEEDS REVIEW |
 | 4 | Prioritisation | 30s | Drag four items into priority order (mouse, touch, or arrow buttons) |
 | 5 | Logical Reasoning | 25s | Campaign dependency rules, one objectively correct statement |
@@ -80,7 +80,12 @@ Candidates are asked to contact their recruiter before starting. In the dashboar
 
 - Shows the shared assessment link with a copy button, and one tab per role (Campaign Manager / Account Manager), each with its own category columns.
 - For each candidate: name, email, role, date, overall score, the six category scores, time taken, extra time and tab leaves.
+- **Take Test** opens the assessment in test mode (see below).
 - **Review** shows each question with the time used, the candidate's answer, the correct answer (the ideal order for Q4) and the result. It also shows the question exactly as the candidate saw it.
+
+## Test mode
+
+While signed in to the dashboard, `/form` runs in **test mode** (shown in the header): the one-attempt-per-email rule is skipped, so you can take either assessment as often as you like. Test attempts are saved like any other, with `-TEST` added to the assessment version, and are tagged **Test** on the dashboard. Candidates are never in test mode.
 
 ## Anti-copy measures
 
@@ -97,7 +102,7 @@ House of Marketers brand colours taken from the logo: indigo `#200888` and fuchs
 
 ## Privacy notice
 
-`/form/privacy` renders `content/privacy-notice.json`, the Candidate Assessment Privacy Notice (effective 4 October 2026). To update it, edit that file; candidates' confirmations record the effective date they agreed to.
+`/form/privacy` renders `content/privacy-notice.json` full width, with a contents list beside the text. It is the Candidate Assessment Privacy Notice (effective 4 October 2026). To update it, edit that file; candidates' confirmations record the effective date they agreed to.
 
 ## Setup
 

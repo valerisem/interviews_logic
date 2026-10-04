@@ -42,6 +42,7 @@ export interface Draft {
   shuffle?: boolean;
   /** With shuffle: keep the last option last (e.g. "There is not enough information"). */
   keepLast?: boolean;
+  layout?: Question['layout'];
 }
 
 /** A single-choice question with exactly one correct option. */
@@ -61,6 +62,7 @@ export function single(rng: Rng, d: Draft): Question {
     blocks: d.blocks,
     prompt: d.prompt,
     kind: 'single',
+    ...(d.layout ? { layout: d.layout } : {}),
     options: opts.map(({ id, text }) => ({ id, text })),
     correct,
   };

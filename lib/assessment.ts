@@ -43,7 +43,7 @@ export async function getByToken(token: string): Promise<AssessmentRow | null> {
 }
 
 function toPublic(q: Question): PublicQuestion {
-  return { blocks: q.blocks, prompt: q.prompt, kind: q.kind, options: q.options };
+  return { blocks: q.blocks, prompt: q.prompt, kind: q.kind, options: q.options, ...(q.layout ? { layout: q.layout } : {}) };
 }
 
 function questionMs(row: AssessmentRow, i: number): number {
@@ -120,7 +120,12 @@ export async function candidateState(input: AssessmentRow): Promise<CandidateSta
 }
 
 /** Public enrolment: save the candidate's details and start the first question straight away. */
-export async function enrolAndStart(input: { name?: unknown; email?: unknown; assessmentType?: unknown; privacyAck?: unknown }) {
+/** Suffix on assessment_version marking an attempt taken by a signed-in admin in test mode. */
+export const TEST_SUFFIX = '-TEST';
+export const isTestAttempt = (row: Pick<AssessmentRow, 'assessment_version'>) => row.assessment_version?.endsWith(TEST_SUFFIX) ?? false;
+
+/** testMode: a signed-in admin is testing, so the one-attempt rule is skipped and the row is marked as a test. */
+export async function enrolAndStart(input: { name?: unknown; email?: unknown; assessmentType?: unknown; privacyAck?: unknown }, testMode = false) {
   const name = String(input.name ?? '').trim().slice(0, 120);
   const email = String(input.email ?? '').trim().toLowerCase().slice(0, 200);
   if (!name) throw new AnswerError('Please enter your name.');
@@ -130,10 +135,12 @@ export async function enrolAndStart(input: { name?: unknown; email?: unknown; as
   if (input.privacyAck !== true) throw new AnswerError('Please confirm that you have read the Candidate Assessment Privacy Notice.');
 
   // One attempt per email, so the questions can't be previewed and retaken.
-  const { data: existing, error: lookupError } = await db().from(TABLE).select('id').eq('candidate_email', email).limit(1);
-  if (lookupError) throw lookupError;
-  if (existing?.length) {
-    throw new AnswerError('An assessment has already been started with this email. Please contact your recruiter if you need help.');
+  if (!testMode) {
+    const { data: existing, error: lookupError } = await db().from(TABLE).select('id').eq('candidate_email', email).limit(1);
+    if (lookupError) throw lookupError;
+    if (existing?.length) {
+      throw new AnswerError('An assessment has already been started with this email. Please contact your recruiter if you need help.');
+    }
   }
 
   let questions: Question[] = [];
@@ -157,7 +164,7 @@ export async function enrolAndStart(input: { name?: unknown; email?: unknown; as
       candidate_email: email,
       role: assessment.role,
       assessment_type: assessment.type,
-      assessment_version: assessment.version,
+      assessment_version: testMode ? `${assessment.version}${TEST_SUFFIX}` : assessment.version,
       status: 'in_progress',
       seed,
       questions,

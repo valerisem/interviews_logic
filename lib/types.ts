@@ -63,6 +63,8 @@ export interface Question {
   kind: 'single' | 'ranking';
   /** Options (or items to rank) in the order the candidate first sees them. */
   options: Option[];
+  /** single only: 'bar' shows short options as a row of equal buttons (e.g. MORE / LESS / EQUAL). */
+  layout?: 'bar';
   /** single: the one correct id. ranking: the ideal order. */
   correct: string[];
   /** ranking only: the item that must come first, and how urgent the others are (higher = more urgent). */
@@ -70,7 +72,7 @@ export interface Question {
 }
 
 /** What the candidate's browser receives: no category, template or answer key. */
-export type PublicQuestion = Pick<Question, 'blocks' | 'prompt' | 'kind' | 'options'>;
+export type PublicQuestion = Pick<Question, 'blocks' | 'prompt' | 'kind' | 'options' | 'layout'>;
 
 export interface SubmittedAnswer {
   questionIndex: number;

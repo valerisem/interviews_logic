@@ -147,7 +147,7 @@ function RankingList({ items, order, onChange }: { items: Option[]; order: strin
 
 // ---------------------------------------------------------------------------
 
-export function Assessment({ token: initialToken = '', initial }: { token?: string; initial: View }) {
+export function Assessment({ token: initialToken = '', initial, testMode = false }: { token?: string; initial: View; testMode?: boolean }) {
   const [token, setToken] = useState(initialToken);
   const [state, setState] = useState<View>(initial);
   const [details, setDetails] = useState({ name: '', email: '' });
@@ -258,7 +258,18 @@ export function Assessment({ token: initialToken = '', initial }: { token?: stri
     const set = (k: keyof typeof details) => (e: React.ChangeEvent<HTMLInputElement>) => setDetails((d) => ({ ...d, [k]: e.target.value }));
     return (
       <div className="protected">
-        <TopBar right={<a href="/admin/login" className="header-btn">Admin Sign In</a>} />
+        <TopBar
+          right={
+            testMode ? (
+              <span className="row" style={{ gap: 8, flexWrap: 'nowrap' }}>
+                <span className="test-pill">Test Mode</span>
+                <a href="/admin" className="header-btn">Dashboard</a>
+              </span>
+            ) : (
+              <a href="/admin/login" className="header-btn">Admin Sign In</a>
+            )
+          }
+        />
         <main className="page">
           <div className="stack">
             <h1 className="title">Candidate <span className="accent">Assessment</span></h1>
@@ -353,13 +364,13 @@ export function Assessment({ token: initialToken = '', initial }: { token?: stri
             <p className="muted">Drag the items, or use the arrows, to put them in order. 1 is the highest priority.</p>
           </>
         ) : (
-          <fieldset className="options" aria-labelledby="prompt">
+          <fieldset className={`options${q.layout === 'bar' ? ' options-bar' : ''}`} aria-labelledby="prompt">
             {q.options.map((o, i) => {
               const on = selected.includes(o.id);
               return (
                 <label key={o.id} className={`option${on ? ' selected' : ''}`}>
                   <input type="radio" name="answer" checked={on} onChange={() => setSelected([o.id])} />
-                  <span className="badge">{LETTERS[i]}</span>
+                  {q.layout !== 'bar' && <span className="badge">{LETTERS[i]}</span>}
                   <span>{o.text}</span>
                 </label>
               );

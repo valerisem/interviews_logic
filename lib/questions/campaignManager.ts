@@ -130,10 +130,11 @@ function q2FinancialAccuracy(rng: Rng): Question {
       },
     ],
     prompt: 'Compared with the approved client budget, the total campaign costs are:',
+    layout: 'bar',
     options: [
-      { text: 'MORE than the approved budget', correct: outcome === 'MORE' },
-      { text: 'LESS than the approved budget', correct: outcome === 'LESS' },
-      { text: 'EQUAL to the approved budget', correct: outcome === 'EQUAL' },
+      { text: 'MORE', correct: outcome === 'MORE' },
+      { text: 'LESS', correct: outcome === 'LESS' },
+      { text: 'EQUAL', correct: outcome === 'EQUAL' },
     ],
   });
 }
