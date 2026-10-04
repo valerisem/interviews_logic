@@ -316,7 +316,7 @@ export function Assessment({ token: initialToken = '', initial, testMode = false
           <section className="rules" aria-labelledby="rules-title">
             <h2 id="rules-title" className="rules-title">How It Works</h2>
             <ol>
-              <li>There are 6 questions, and the assessment takes around 3 minutes.</li>
+              <li>There are 6 questions, and the assessment takes around 3 to 4 minutes.</li>
               <li>Each question has its own timer. When it runs out, your current answer is saved and the next question starts.</li>
               <li>You can’t go back to a previous question or change an answer once you’ve moved on.</li>
               <li>

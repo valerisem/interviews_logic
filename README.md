@@ -1,6 +1,6 @@
 # Candidate Assessment — House of Marketers
 
-Short, timed work-skills assessments for **Campaign Manager** and **Account Manager** candidates: 6 questions each, 160–165 seconds of question time, about 3 minutes overall. The candidate picks the role they're interviewing for on the landing page, and that decides which assessment they take.
+Short, timed work-skills assessments for **Campaign Manager** and **Account Manager** candidates: 6 questions each: 4 minutes of question time for Campaign Manager, 2¾ minutes for Account Manager. The candidate picks the role they're interviewing for on the landing page, and that decides which assessment they take.
 
 - **Campaign Manager:** attention to detail, numerical accuracy, following campaign requirements, prioritisation, logical reasoning, operational judgement.
 - **Account Manager:** attention to detail, commercial accuracy, interpreting client requirements, prioritisation, commercial reasoning, client judgement.
@@ -23,7 +23,7 @@ The app runs on **houseofmarketer.com**, next to a redirect to the main website:
 
 ## Candidate flow (`/form`)
 
-1. **Landing:** the rules (6 questions, about 3 minutes, a timer per question, no going back, stay on the page, one attempt). The candidate enters name, email and the role they're interviewing for (Campaign Manager or Account Manager), and ticks a required checkbox: *"I confirm that I have read and understood the Candidate Assessment Privacy Notice"* (links to `/form/privacy`). A small italic footnote under Start Assessment asks candidates to contact their recruiter before starting or as soon as possible (extra time, an alternative format or assistive technology), says no diagnosis is needed, and that adjustment information is kept separate from scoring and won't disadvantage them. No timer runs here.
+1. **Landing:** the rules (6 questions, around 3 to 4 minutes, a timer per question, no going back, stay on the page, one attempt). The candidate enters name, email and the role they're interviewing for (Campaign Manager or Account Manager), and ticks a required checkbox: *"I confirm that I have read and understood the Candidate Assessment Privacy Notice"* (links to `/form/privacy`). A small italic footnote under Start Assessment asks candidates to contact their recruiter before starting or as soon as possible (extra time, an alternative format or assistive technology), says no diagnosis is needed, and that adjustment information is kept separate from scoring and won't disadvantage them. No timer runs here.
 2. **Start Assessment** saves the details and the privacy confirmation (with the notice's effective date), generates the candidate's questions and starts question 1. The address becomes `/form/a/<token>`, so a reload resumes the same attempt. Each email can take the assessment once.
 3. **Questions:** one per screen, each with its own visible timer. All the information needed stays visible. There is no going back and no right/wrong feedback. When a timer runs out, whatever is selected at that moment is recorded and the next question starts.
 4. **Completion:** *"Assessment completed. Thank you. Your responses have been submitted successfully and will be reviewed as part of your application."* No score is shown.
@@ -34,11 +34,11 @@ Timers keep running if the candidate leaves the tab or closes the page. Question
 
 | # | Category | Time | Format |
 |---|---|---|---|
-| 1 | Attention to Detail | 15s | Two campaign records side by side, count the differences (1, 2 or 3) |
-| 2 | Financial Accuracy | 30s | Four cost lines vs client budget, answered with a row of three buttons: £x MORE / £x LESS / EQUAL |
-| 3 | Following Requirements | 30s | Five campaign requirements and three creators side by side: which creator meets all of them (A, B, C or More than one) |
-| 4 | Prioritisation | 30s | Drag four items into priority order (mouse, touch, or arrow buttons) |
-| 5 | Logical Reasoning | 25s | Campaign dependency rules, one objectively correct statement |
+| 1 | Attention to Detail | 30s | Two campaign records side by side, count the differences (1, 2 or 3) |
+| 2 | Financial Accuracy | 45s | Four cost lines vs client budget, answered with a row of three buttons: £x MORE / £x LESS / EQUAL |
+| 3 | Following Requirements | 45s | Five campaign requirements and three creators side by side: which creator meets all of them (A, B, C or More than one) |
+| 4 | Prioritisation | 45s | Drag four items into priority order (mouse, touch, or arrow buttons) |
+| 5 | Logical Reasoning | 45s | Campaign dependency rules, one objectively correct statement |
 | 6 | Operational Judgement | 30s | Report views don’t match the platform dashboard two hours before a 3:00 PM client deadline, manager unavailable: check, correct and flag to the Account Manager. Options shuffled |
 
 ### Account Manager (`lib/questions/accountManager.ts`)
