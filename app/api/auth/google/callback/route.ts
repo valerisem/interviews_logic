@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { ADMIN_COOKIE, SESSION_HOURS, createSessionValue } from '@/lib/auth';
 import { OAUTH_COOKIE, checkClaims, exchangeCode } from '@/lib/google';
-import { db } from '@/lib/supabase';
+import { isAdminEmail } from '@/lib/admins';
 
 /** Google sends the recruiter back here. Only listed houseofmarketers.com accounts get a session. */
 export async function GET(req: Request) {
@@ -21,9 +21,7 @@ export async function GET(req: Request) {
     const result = checkClaims(await exchangeCode(code, req.url), nonce);
     if ('error' in result) return fail(result.error);
 
-    const { data: allowed, error } = await db().rpc('is_assessment_admin', { p_email: result.email });
-    if (error) throw error;
-    if (!allowed) return fail('not_allowed');
+    if (!(await isAdminEmail(result.email))) return fail('not_allowed');
 
     const res = NextResponse.redirect(new URL('/admin', req.url), 303);
     res.cookies.delete({ name: OAUTH_COOKIE, path: '/api/auth/google' });

@@ -258,7 +258,7 @@ export function Assessment({ token: initialToken = '', initial }: { token?: stri
     const set = (k: keyof typeof details) => (e: React.ChangeEvent<HTMLInputElement>) => setDetails((d) => ({ ...d, [k]: e.target.value }));
     return (
       <div className="protected">
-        <TopBar />
+        <TopBar right={<a href="/admin/login" className="header-btn">Admin Sign In</a>} />
         <main className="page">
           <div className="stack">
             <h1 className="title">Candidate <span className="accent">Assessment</span></h1>

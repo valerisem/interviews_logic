@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
 // Fonts are bundled with the app so they always load, even where Google Fonts is blocked.
-import '@fontsource-variable/inter';
-import '@fontsource/montserrat/latin-700.css';
-import '@fontsource/montserrat/latin-800.css';
+import '@fontsource-variable/plus-jakarta-sans';
 import './globals.css';
 
 export const metadata: Metadata = {

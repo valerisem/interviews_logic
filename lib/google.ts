@@ -3,7 +3,7 @@ import 'server-only';
 /*
  * Google sign-in for recruiters (OpenID Connect, authorisation-code flow).
  * Only verified Google Workspace accounts on ALLOWED_DOMAIN are accepted, and the
- * email must also be on the admin list (see public.is_assessment_admin).
+ * email must also belong to a team member listed in ADMIN_TEAM_IDS (see lib/admins.ts).
  */
 
 export const ALLOWED_DOMAIN = 'houseofmarketers.com';

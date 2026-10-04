@@ -2,7 +2,7 @@ import { TopBar } from '@/components/TopBar';
 
 const ERRORS: Record<string, string> = {
   domain: 'Please sign in with your houseofmarketers.com Google account.',
-  not_allowed: 'This account doesn’t have access to the recruiter dashboard yet. Ask an admin to add you.',
+  not_allowed: 'This account doesn’t have admin access.',
   failed: 'Google sign-in didn’t complete. Please try again.',
 };
 
@@ -12,10 +12,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
     <>
       <TopBar />
       <main className="login">
-        <div className="stack" style={{ gap: 8 }}>
-          <h1 className="title-md">Recruiter <span className="accent">Sign In</span></h1>
-          <p className="meta">For House of Marketers team members with dashboard access.</p>
-        </div>
+        <h1 className="title-md nowrap">Admin <span className="accent">Sign In</span></h1>
         {error && <p className="error" role="alert">{ERRORS[error] ?? ERRORS.failed}</p>}
         <a href="/api/auth/google" className="btn btn-google">
           <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">
@@ -26,7 +23,6 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
           </svg>
           Sign In With Google
         </a>
-        <p className="muted">Only houseofmarketers.com accounts can sign in.</p>
       </main>
     </>
   );

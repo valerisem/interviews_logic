@@ -63,11 +63,7 @@ Candidates are asked to contact their recruiter before starting. In the dashboar
 
 ## Recruiter dashboard (`/admin`)
 
-**Sign-in is with Google only.** A recruiter must use a verified houseofmarketers.com Google account and be on the admin list, `public.assessment_admins`. That list references people in `public.team` by team id; their work email comes from the team record, and access stops automatically once their leaving date has passed. To add someone:
-
-```sql
-insert into public.assessment_admins (team_id) values (<team id>);
-```
+**Sign-in is with Google only.** A recruiter must use a verified houseofmarketers.com Google account and be a team member listed in the `ADMIN_TEAM_IDS` setting (comma-separated ids from `public.team`, currently `3`). Their work email and leaving date are read from the team record, and access stops automatically once they have left. No extra tables are used.
 
 
 - Shows the shared assessment link with a copy button, and one tab per role (Campaign Manager / Account Manager), each with its own category columns.
@@ -85,7 +81,7 @@ Screenshots can't be blocked on a normal website, and the app doesn't claim to b
 
 ## Design
 
-House of Marketers brand colours taken from the logo: indigo `#200888` and fuchsia `#F0438F`, with brand navy `#0B0E1A` for dark mode. Headings use Montserrat and body text uses Inter. Both are bundled with the app, so they don't depend on Google Fonts. Every page has a **light/dark switch** next to the logo, which sits top-right; the choice is remembered in the browser. Dark mode uses a white version of the horizontal logo.
+House of Marketers brand colours taken from the logo: indigo `#200888` and fuchsia `#F0438F`, with brand navy `#0B0E1A` for dark mode. Typeface: Plus Jakarta Sans, bundled with the app so it doesn't depend on Google Fonts. Every page has a **light/dark switch** next to the logo (the landing page also has an **Admin Sign In** button there), which sits top-right; the choice is remembered in the browser. Dark mode uses a white version of the horizontal logo.
 
 ## Privacy notice
 
