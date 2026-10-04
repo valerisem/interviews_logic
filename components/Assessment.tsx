@@ -271,14 +271,7 @@ export function Assessment({ token: initialToken = '', initial, testMode = false
           }
         />
         <main className="page">
-          <div className="stack">
-            <h1 className="title">Candidate <span className="accent">Assessment</span></h1>
-            <p className="lead">
-              This assessment is designed to see how you work with information: checking details, working with numbers,
-              following requirements, prioritising and making everyday work decisions. It is one part of our recruitment
-              process, and your answers are reviewed by our team.
-            </p>
-          </div>
+          <h1 className="title">Candidate <span className="accent">Assessment</span></h1>
           <section className="rules" aria-labelledby="rules-title">
             <h2 id="rules-title" className="rules-title">How It Works</h2>
             <ol>

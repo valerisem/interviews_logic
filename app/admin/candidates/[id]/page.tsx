@@ -46,7 +46,7 @@ export default async function CandidatePage({ params }: { params: Promise<{ id: 
     <>
       <TopBar left={<Link href={`/admin?type=${def.type}`} className="header-link">← All Candidates</Link>} />
       <main className="admin narrow">
-        <div className="stack" style={{ gap: 8 }}>
+        <div className="stack page-head" style={{ gap: 8 }}>
           <h1 className="title-md">{row.candidate_name}</h1>
           <p className="muted" style={{ fontSize: 14 }}>
             {row.candidate_email} · {row.role} · {formatDate(row.started_at)} · Version {row.assessment_version}

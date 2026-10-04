@@ -67,9 +67,11 @@ button, input, select { font: inherit; color: inherit; }
 
 .title { font-family: var(--display); font-weight: 700; font-size: 44px; line-height: 1.08; letter-spacing: -0.03em; color: var(--heading); }
 .title-md { font-family: var(--display); font-weight: 700; font-size: 38px; line-height: 1.1; letter-spacing: -0.03em; color: var(--heading); }
+/* Page titles are centred on every page. */
+.title, .title-md { text-align: center; }
+.page-head { align-items: center; text-align: center; }
 .h2 { font-family: var(--display); font-weight: 700; letter-spacing: -0.01em; font-size: 20px; color: var(--heading); }
 .meta { font-size: 15px; color: var(--muted); }
-.lead { font-size: 16px; line-height: 1.65; color: var(--muted); }
 .rules { background: var(--surface); border-radius: var(--radius); padding: 20px 22px; display: flex; flex-direction: column; gap: 12px; }
 .rules-title { font-family: var(--display); font-weight: 700; font-size: 16px; color: var(--heading); }
 .rules ol { margin: 0; padding: 0; list-style: none; counter-reset: rule; display: flex; flex-direction: column; gap: 10px; }
@@ -147,8 +149,8 @@ button, input, select { font: inherit; color: inherit; }
 
 /* ---------- Privacy notice ---------- */
 .doc { max-width: 1112px; margin: 0 auto; padding: 56px 16px 80px; font-size: 15px; line-height: 1.7; }
-.doc-head { display: flex; flex-direction: column; gap: 10px; padding-bottom: 32px; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
-.doc-intro { font-size: 17px; line-height: 1.65; color: var(--muted); }
+.doc-head { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; padding-bottom: 32px; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
+.doc-intro { width: 100%; font-size: 17px; line-height: 1.65; color: var(--muted); }
 .doc-grid { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 64px; align-items: start; }
 .doc-toc { position: sticky; top: 24px; display: flex; flex-direction: column; gap: 12px; }
 .doc-toc-title { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
@@ -176,7 +178,8 @@ button, input, select { font: inherit; color: inherit; }
 .tab.active { color: var(--heading); border-bottom-color: var(--fuchsia); }
 .tab-count { font-family: var(--font); font-size: 12px; font-weight: 700; background: var(--surface); color: var(--muted); border-radius: 999px; padding: 2px 8px; }
 .tab.active .tab-count { background: var(--fuchsia); color: #fff; }
-.admin-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
+.admin-head { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.admin-head .share { justify-content: center; }
 .share { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .share code { font-size: 14px; background: var(--surface); border-radius: 8px; padding: 9px 12px; word-break: break-all; }
 .table-wrap { border: 1px solid var(--border); border-radius: 14px; overflow-x: auto; }
