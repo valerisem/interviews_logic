@@ -1,10 +1,12 @@
 import 'server-only';
 import { appUrl } from './appUrl';
+import { extraAdminEmails } from './admins';
 
 /*
  * Google sign-in for recruiters (OpenID Connect, authorisation-code flow).
- * Only verified Google Workspace accounts on ALLOWED_DOMAIN are accepted, and the
- * email must also belong to a team member listed in ADMIN_TEAM_IDS (see lib/admins.ts).
+ * Verified Google Workspace accounts on ALLOWED_DOMAIN are accepted, plus the verified
+ * Google accounts listed in ADMIN_EXTRA_EMAILS. The email must then be an admin
+ * (see lib/admins.ts).
  */
 
 export const ALLOWED_DOMAIN = 'houseofmarketers.com';
@@ -39,7 +41,6 @@ export function authorisationUrl(requestUrl: string, state: string, nonce: strin
     scope: 'openid email profile',
     state,
     nonce,
-    hd: ALLOWED_DOMAIN, // pre-selects the company account; enforced again below
     prompt: 'select_account',
   });
   return `${AUTH_URL}?${params}`;
@@ -69,7 +70,9 @@ export function checkClaims(c: GoogleClaims, nonce: string, now = Date.now()): {
   if (!c.exp || c.exp * 1000 < now) return { error: 'failed' };
   if (!c.nonce || c.nonce !== nonce) return { error: 'failed' };
   const email = (c.email ?? '').toLowerCase();
-  if (!c.email_verified || c.hd !== ALLOWED_DOMAIN || !email.endsWith(`@${ALLOWED_DOMAIN}`)) return { error: 'domain' };
+  if (!c.email_verified) return { error: 'domain' };
+  const companyAccount = c.hd === ALLOWED_DOMAIN && email.endsWith(`@${ALLOWED_DOMAIN}`);
+  if (!companyAccount && !extraAdminEmails().includes(email)) return { error: 'domain' };
   return { email };
 }
 

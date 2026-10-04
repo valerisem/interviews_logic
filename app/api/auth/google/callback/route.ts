@@ -4,7 +4,7 @@ import { ADMIN_COOKIE, SESSION_HOURS, createSessionValue } from '@/lib/auth';
 import { OAUTH_COOKIE, checkClaims, exchangeCode } from '@/lib/google';
 import { isAdminEmail } from '@/lib/admins';
 
-/** Google sends the recruiter back here. Only listed houseofmarketers.com accounts get a session. */
+/** Google sends the recruiter back here. Only listed admins (team members or ADMIN_EXTRA_EMAILS) get a session. */
 export async function GET(req: Request) {
   const url = new URL(req.url);
   const fail = (reason: string) => {

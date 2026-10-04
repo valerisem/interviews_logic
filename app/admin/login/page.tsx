@@ -1,7 +1,7 @@
 import { TopBar } from '@/components/TopBar';
 
 const ERRORS: Record<string, string> = {
-  domain: 'Please sign in with your houseofmarketers.com Google account.',
+  domain: 'Please sign in with your houseofmarketers.com Google account, or the Google account your access was set up for.',
   not_allowed: 'This account doesn’t have admin access.',
   failed: 'Google sign-in didn’t complete. Please try again.',
 };

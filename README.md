@@ -75,7 +75,10 @@ Candidates are asked to contact their recruiter before starting. In the dashboar
 
 ## Recruiter dashboard (`/admin`)
 
-**Sign-in is with Google only.** A recruiter must use a verified houseofmarketers.com Google account and be a team member listed in the `ADMIN_TEAM_IDS` setting (comma-separated ids from `public.team`, currently `3`). Their work email and leaving date are read from the team record, and access stops automatically once they have left. No extra tables are used.
+**Sign-in is with Google only.** Two ways in, no extra tables:
+
+- **Team members:** a verified houseofmarketers.com Google account belonging to a team member listed in `ADMIN_TEAM_IDS` (comma-separated ids from `public.team`, currently `3,1,10`: Valeria, Inigo, Valeriia). Work email and leaving date come from the team record, and access stops automatically once they have left.
+- **People outside the company:** verified Google accounts listed by email in `ADMIN_EXTRA_EMAILS` (currently maddy.worger@majorplayers.co.uk).
 
 
 - Shows the shared assessment link with a copy button, and one tab per role (Campaign Manager / Account Manager), each with its own category columns.
