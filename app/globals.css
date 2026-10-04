@@ -158,6 +158,7 @@ button, input, select { font: inherit; color: inherit; }
 .doc-toc a::before { content: counter(toc) '.'; color: var(--muted); }
 .doc-toc a:hover { color: var(--heading); border-left-color: var(--fuchsia); }
 .doc-body { display: flex; flex-direction: column; gap: 36px; }
+.doc-body p, .doc-body li, .doc-intro { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
 .doc-section { display: flex; flex-direction: column; gap: 12px; scroll-margin-top: 24px; }
 .doc-section h2 { font-family: var(--display); font-weight: 700; font-size: 20px; letter-spacing: -0.01em; color: var(--heading); }
 .doc-section ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
