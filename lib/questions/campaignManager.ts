@@ -3,11 +3,11 @@ import type { Question } from '../types';
 import { addDays, dayMonth, money, num, ranking, randomDate, single, type PriorityScenario } from './shared';
 
 /*
- * Campaign Manager assessment: 6 timed questions, 150 seconds in total.
+ * Campaign Manager assessment: 6 timed questions, 160 seconds in total.
  *
  *   1. Attention to Detail       15s  two campaign records, count the differences (1–3)
  *   2. Financial Accuracy        30s  costs vs client budget: £x MORE / £x LESS / EQUAL
- *   3. Applying Requirements     20s  three creators vs five requirements: which one qualifies (or more than one)
+ *   3. Applying Requirements     30s  three creators vs five requirements: which one qualifies (or more than one)
  *   4. Prioritisation            30s  rank four items; weighted scoring
  *   5. Logical Reasoning         25s  campaign dependencies, one objectively correct answer
  *   6. Operational Judgement     30s  realistic situation, one clearly preferable response
@@ -16,8 +16,8 @@ import { addDays, dayMonth, money, num, ranking, randomDate, single, type Priori
  * names, figures and scenarios, and the answer key is computed from those values.
  */
 
-export const CM_VERSION = 'CM-2026.5';
-export const CM_TIMES = [15, 30, 20, 30, 25, 30];
+export const CM_VERSION = 'CM-2026.6';
+export const CM_TIMES = [15, 30, 30, 30, 25, 30];
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -142,7 +142,7 @@ function q2FinancialAccuracy(rng: Rng): Question {
 }
 
 // ---------------------------------------------------------------------------
-// 3. Applying Campaign Requirements (20s) — three creators, which one qualifies
+// 3. Applying Campaign Requirements (30s) — three creators, which one qualifies
 // ---------------------------------------------------------------------------
 
 type Criterion = 'followers' | 'engagement' | 'fee' | 'location' | 'ukAudience';

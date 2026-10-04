@@ -1,6 +1,6 @@
 # Candidate Assessment — House of Marketers
 
-Short, timed work-skills assessments for **Campaign Manager** and **Account Manager** candidates: 6 questions each, 145–150 seconds of question time, about 3 minutes overall. The candidate picks the role they're interviewing for on the landing page, and that decides which assessment they take.
+Short, timed work-skills assessments for **Campaign Manager** and **Account Manager** candidates: 6 questions each, 145–160 seconds of question time, about 3 minutes overall. The candidate picks the role they're interviewing for on the landing page, and that decides which assessment they take.
 
 - **Campaign Manager:** attention to detail, numerical accuracy, following campaign requirements, prioritisation, logical reasoning, operational judgement.
 - **Account Manager:** attention to detail, commercial accuracy, interpreting client requirements, prioritisation, commercial reasoning, client judgement.
@@ -36,7 +36,7 @@ Timers keep running if the candidate leaves the tab or closes the page. Question
 |---|---|---|---|
 | 1 | Attention to Detail | 15s | Two campaign records side by side, count the differences (1, 2 or 3) |
 | 2 | Financial Accuracy | 30s | Four cost lines vs client budget, answered with a row of three buttons: £x MORE / £x LESS / EQUAL |
-| 3 | Following Requirements | 20s | Five campaign requirements and three creators side by side: which creator meets all of them (A, B, C or More than one) |
+| 3 | Following Requirements | 30s | Five campaign requirements and three creators side by side: which creator meets all of them (A, B, C or More than one) |
 | 4 | Prioritisation | 30s | Drag four items into priority order (mouse, touch, or arrow buttons) |
 | 5 | Logical Reasoning | 25s | Campaign dependency rules, one objectively correct statement |
 | 6 | Operational Judgement | 30s | Realistic Campaign Manager situation, one clearly preferable response |
