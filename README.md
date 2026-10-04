@@ -1,6 +1,6 @@
 # Candidate Assessment — House of Marketers
 
-Short, timed work-skills assessments for **Campaign Manager** and **Account Manager** candidates: 6 questions each, 145 seconds of question time, about 3 minutes overall. The candidate picks the role they're interviewing for on the landing page, and that decides which assessment they take.
+Short, timed work-skills assessments for **Campaign Manager** and **Account Manager** candidates: 6 questions each, 145–150 seconds of question time, about 3 minutes overall. The candidate picks the role they're interviewing for on the landing page, and that decides which assessment they take.
 
 - **Campaign Manager:** attention to detail, numerical accuracy, following campaign requirements, prioritisation, logical reasoning, operational judgement.
 - **Account Manager:** attention to detail, commercial accuracy, interpreting client requirements, prioritisation, commercial reasoning, client judgement.
@@ -35,7 +35,7 @@ Timers keep running if the candidate leaves the tab or closes the page. Question
 | # | Category | Time | Format |
 |---|---|---|---|
 | 1 | Attention to Detail | 15s | Two campaign records side by side, count the differences (1, 2 or 3) |
-| 2 | Financial Accuracy | 25s | Four cost lines vs approved budget: a row of three buttons, MORE / LESS / EQUAL |
+| 2 | Financial Accuracy | 30s | Four cost lines vs client budget, answered with a row of buttons: £x MORE / £x LESS / EQUAL / a £2x decoy |
 | 3 | Following Requirements | 20s | Five creator rules + missing-information rule: APPROVE / REJECT / NEEDS REVIEW |
 | 4 | Prioritisation | 30s | Drag four items into priority order (mouse, touch, or arrow buttons) |
 | 5 | Logical Reasoning | 25s | Campaign dependency rules, one objectively correct statement |
@@ -59,7 +59,7 @@ Q2 is over, under or exact about a third of the time each. Q5 has the budget red
 Every Campaign Manager question is generated per candidate:
 
 - **Q1:** names, fees, dates and values vary, with 1, 2 or 3 small differences.
-- **Q2:** the figures vary; the outcome is MORE, LESS or EQUAL in roughly equal shares, with differences of £250–£1,000.
+- **Q2:** the figures vary; the outcome is MORE, LESS or EQUAL in roughly equal shares, with differences of £250–£1,000. The options always read £x MORE, £x LESS, EQUAL and a decoy of double the difference.
 - **Q3:** the outcome is APPROVE, REJECT or NEEDS REVIEW in roughly equal shares. Reject cases fail exactly one rule by a small margin; Needs Review cases have one field missing.
 - **Q4–Q6:** drawn from four equivalent scenarios each. Options are shuffled where appropriate, and Q4's display order is randomised.
 

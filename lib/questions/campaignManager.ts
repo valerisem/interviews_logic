@@ -3,10 +3,10 @@ import type { Question } from '../types';
 import { addDays, dayMonth, money, num, ranking, randomDate, single, type PriorityScenario } from './shared';
 
 /*
- * Campaign Manager assessment: 6 timed questions, 145 seconds in total.
+ * Campaign Manager assessment: 6 timed questions, 150 seconds in total.
  *
  *   1. Attention to Detail       15s  two campaign records, count the differences (1–3)
- *   2. Financial Accuracy        25s  costs vs approved budget: MORE / LESS / EQUAL
+ *   2. Financial Accuracy        30s  costs vs client budget: £x MORE / £x LESS / EQUAL / £2x decoy
  *   3. Following Requirements    20s  apply creator rules: APPROVE / REJECT / NEEDS REVIEW
  *   4. Prioritisation            30s  rank four items; weighted scoring
  *   5. Logical Reasoning         25s  campaign dependencies, one objectively correct answer
@@ -16,8 +16,8 @@ import { addDays, dayMonth, money, num, ranking, randomDate, single, type Priori
  * names, figures and scenarios, and the answer key is computed from those values.
  */
 
-export const CM_VERSION = 'CM-2026.2';
-export const CM_TIMES = [15, 25, 20, 30, 25, 30];
+export const CM_VERSION = 'CM-2026.3';
+export const CM_TIMES = [15, 30, 20, 30, 25, 30];
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -98,7 +98,7 @@ function q1AttentionToDetail(rng: Rng): Question {
 }
 
 // ---------------------------------------------------------------------------
-// 2. Financial Accuracy (25s)
+// 2. Financial Accuracy (30s)
 // ---------------------------------------------------------------------------
 
 function q2FinancialAccuracy(rng: Rng): Question {
@@ -129,12 +129,15 @@ function q2FinancialAccuracy(rng: Rng): Question {
         ],
       },
     ],
-    prompt: 'Compared with the approved client budget, the total campaign costs are:',
+    prompt: 'How do the total campaign costs compare with the client budget?',
     layout: 'bar',
+    // Fixed order: £x MORE, £x LESS, EQUAL, then a double-difference decoy in either direction.
+    // When the outcome is EQUAL, x is still a plausible difference, so the options look the same.
     options: [
-      { text: 'MORE', correct: outcome === 'MORE' },
-      { text: 'LESS', correct: outcome === 'LESS' },
+      { text: `${money(delta)} MORE`, correct: outcome === 'MORE' },
+      { text: `${money(delta)} LESS`, correct: outcome === 'LESS' },
       { text: 'EQUAL', correct: outcome === 'EQUAL' },
+      { text: `${money(delta * 2)} ${rng.pick(['MORE', 'LESS'])}` },
     ],
   });
 }

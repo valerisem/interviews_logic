@@ -383,7 +383,11 @@ export function Assessment({ token: initialToken = '', initial, testMode = false
             <p className="muted">Drag the items, or use the arrows, to put them in order. 1 is the highest priority.</p>
           </>
         ) : (
-          <fieldset className={`options${q.layout === 'bar' ? ' options-bar' : ''}`} aria-labelledby="prompt">
+          <fieldset
+            className={`options${q.layout === 'bar' ? ' options-bar' : ''}`}
+            style={q.layout === 'bar' ? ({ '--n': q.options.length } as React.CSSProperties) : undefined}
+            aria-labelledby="prompt"
+          >
             {q.options.map((o, i) => {
               const on = selected.includes(o.id);
               return (

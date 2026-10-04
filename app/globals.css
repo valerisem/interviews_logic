@@ -125,9 +125,10 @@ button, input, select { font: inherit; color: inherit; }
 .option input { position: absolute; opacity: 0; pointer-events: none; }
 .badge { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 8px; flex: none; font-family: var(--display); font-weight: 700; font-size: 13px; background: var(--surface); color: var(--heading); }
 .option.selected .badge, .rank-item .badge { background: var(--fuchsia); color: #fff; }
-.options-bar { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.options-bar { display: grid; grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr)); gap: 12px; }
 .options-bar .option { justify-content: center; min-height: 72px; font-size: 18px; font-weight: 700; letter-spacing: 0.06em; text-align: center; }
 .options-bar .option.selected { color: var(--fuchsia); }
+@media (max-width: 640px) { .options-bar { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 480px) { .options-bar { gap: 8px; } .options-bar .option { min-height: 60px; font-size: 16px; padding: 12px 8px; } }
 
 .rank-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
