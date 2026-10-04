@@ -29,6 +29,7 @@ export default async function Dashboard({ searchParams }: { searchParams: Promis
   const { data, error } = await db()
     .from('candidate_assessments')
     .select('id, candidate_name, candidate_email, role, assessment_type, assessment_version, status, overall_score, category_scores, completion_time_seconds, tab_leave_count, started_at, time_multiplier')
+    .is('hidden_at', null)
     .order('created_at', { ascending: false })
     .limit(500);
   if (error) throw error;

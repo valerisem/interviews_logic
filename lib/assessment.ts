@@ -305,10 +305,10 @@ export async function updateExtraTime(id: string, multiplier: number): Promise<v
   if (error) throw error;
 }
 
-/** Permanently delete submissions (admin only; the routes check the session). */
-export async function deleteAssessments(ids: string[]): Promise<void> {
+/** Remove submissions from the dashboard (admin only; the routes check the session). The rows stay in the database. */
+export async function hideAssessments(ids: string[]): Promise<void> {
   if (!ids.length) return;
-  const { error } = await db().from(TABLE).delete().in('id', ids);
+  const { error } = await db().from(TABLE).update({ hidden_at: new Date().toISOString() }).in('id', ids).is('hidden_at', null);
   if (error) throw error;
 }
 

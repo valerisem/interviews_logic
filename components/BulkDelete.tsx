@@ -54,7 +54,7 @@ export function BulkDelete() {
 
   async function remove() {
     const ids = checkedIds();
-    if (!ids.length || !window.confirm(`Delete ${ids.length} submission${ids.length === 1 ? '' : 's'}? This can't be undone.`)) return;
+    if (!ids.length || !window.confirm(`Delete ${ids.length} submission${ids.length === 1 ? '' : 's'} from the dashboard?`)) return;
     setBusy(true);
     const res = await fetch('/api/admin/assessments', {
       method: 'DELETE',

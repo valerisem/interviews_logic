@@ -96,6 +96,8 @@ export interface AssessmentRow {
   role: string;
   assessment_type: AssessmentType;
   assessment_version: string;
+  /** Set when removed from the dashboard; the row is kept. */
+  hidden_at?: string | null;
   time_multiplier: number;
   status: 'invited' | 'in_progress' | 'completed';
   seed: number | null;

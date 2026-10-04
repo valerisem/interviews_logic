@@ -81,7 +81,7 @@ Candidates are asked to contact their recruiter before starting. In the dashboar
 - Shows the shared assessment link with a copy button, and one tab per role (Campaign Manager / Account Manager), each with its own category columns.
 - For each candidate: name, email, role, date, overall score, the six category scores, time taken, extra time and tab leaves.
 - **Take Test** opens the assessment in test mode (see below).
-- **Delete:** the trash icon (on each row and on the Review page) permanently deletes a submission after a confirmation prompt. To delete in bulk, tick the rows (or the header box to select the whole tab) and click **Delete Selected**.
+- **Delete:** the trash icon (on each row and on the Review page) removes a submission from the dashboard after a confirmation prompt. It is not deleted from the database: the row stays in `candidate_assessments` with `hidden_at` set. To delete in bulk, tick the rows (or the header box to select the whole tab) and click **Delete Selected**.
 - **Review** shows each question with the time used, the candidate's answer, the correct answer (a suggested order for Q4, where only item 1 is scored) and the result. It also shows the question exactly as the candidate saw it.
 
 ## Test mode
