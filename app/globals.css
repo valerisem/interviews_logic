@@ -83,6 +83,13 @@ button, input, select { font: inherit; color: inherit; }
 .field { display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: var(--text); }
 .input { min-height: 48px; border: 1px solid transparent; background: var(--surface); border-radius: 10px; padding: 0 14px; font-size: 15px; font-weight: 400; color: var(--text); }
 .input:focus { border-color: var(--heading); outline: none; }
+.role-choice { border: 0; padding: 0; margin: 0; }
+.role-choice legend { padding: 0; margin-bottom: 6px; }
+.role-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.role-options .option { min-height: 52px; font-size: 15px; font-weight: 600; }
+.radio-dot { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--muted); flex: none; box-sizing: border-box; }
+.option.selected .radio-dot { border: 6px solid var(--fuchsia); }
+@media (max-width: 420px) { .role-options { grid-template-columns: 1fr; } }
 .check { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; line-height: 1.5; cursor: pointer; }
 .check input { width: 20px; height: 20px; margin: 1px 0 0; flex: none; accent-color: var(--fuchsia); }
 .check a { font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
@@ -134,6 +141,12 @@ button, input, select { font: inherit; color: inherit; }
 .doc .footer { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 13px; color: var(--muted); }
 
 /* ---------- Admin ---------- */
+.tabs { display: flex; gap: 8px; border-bottom: 1px solid var(--border); margin-bottom: -16px; }
+.tab { display: inline-flex; align-items: center; gap: 8px; padding: 10px 4px; margin-right: 20px; font-family: var(--display); font-weight: 800; font-size: 15px; color: var(--muted); border-bottom: 3px solid transparent; margin-bottom: -1px; }
+.tab:hover { color: var(--heading); }
+.tab.active { color: var(--heading); border-bottom-color: var(--fuchsia); }
+.tab-count { font-family: var(--font); font-size: 12px; font-weight: 700; background: var(--surface); color: var(--muted); border-radius: 999px; padding: 2px 8px; }
+.tab.active .tab-count { background: var(--fuchsia); color: #fff; }
 .admin-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
 .share { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .share code { font-size: 14px; background: var(--surface); border-radius: 8px; padding: 9px 12px; word-break: break-all; }

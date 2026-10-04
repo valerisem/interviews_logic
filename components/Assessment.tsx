@@ -2,12 +2,17 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { CandidateState } from '@/lib/assessment';
-import type { Option } from '@/lib/types';
+import type { AssessmentType, Option } from '@/lib/types';
 import { LETTERS, QuestionBlocks } from './QuestionBlocks';
 import { TopBar } from './TopBar';
 
 type InProgress = Extract<CandidateState, { status: 'in_progress' }>;
 type View = CandidateState | { status: 'enrol' };
+
+const ROLES: [AssessmentType, string][] = [
+  ['campaign_manager', 'Campaign Manager'],
+  ['account_manager', 'Account Manager'],
+];
 
 const BLOCKED_KEYS = new Set(['c', 'x', 'v', 'a', 'p', 's', 'u']);
 
@@ -145,7 +150,8 @@ function RankingList({ items, order, onChange }: { items: Option[]; order: strin
 export function Assessment({ token: initialToken = '', initial, recruiterEmail }: { token?: string; initial: View; recruiterEmail: string }) {
   const [token, setToken] = useState(initialToken);
   const [state, setState] = useState<View>(initial);
-  const [details, setDetails] = useState({ name: '', email: '', role: 'Campaign Manager' });
+  const [details, setDetails] = useState({ name: '', email: '' });
+  const [assessmentType, setAssessmentType] = useState<AssessmentType | ''>('');
   const [privacyAck, setPrivacyAck] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
   const [order, setOrder] = useState<string[]>([]);
@@ -218,10 +224,11 @@ export function Assessment({ token: initialToken = '', initial, recruiterEmail }
 
   async function start(e: React.FormEvent) {
     e.preventDefault();
+    if (!assessmentType) return setError('Please choose the role you’re interviewing for.');
     if (!privacyAck) return setError('Please confirm that you have read the Candidate Assessment Privacy Notice.');
     setBusy(true);
     setError('');
-    const { data, error: err } = await postJson<{ token: string; state: CandidateState }>('/api/start', { ...details, privacyAck });
+    const { data, error: err } = await postJson<{ token: string; state: CandidateState }>('/api/start', { ...details, assessmentType, privacyAck });
     setBusy(false);
     if (!data) return setError(err!);
     setToken(data.token);
@@ -266,10 +273,18 @@ export function Assessment({ token: initialToken = '', initial, recruiterEmail }
               What’s your email?
               <input className="input" name="email" type="email" autoComplete="email" placeholder="you@example.com" required value={details.email} onChange={set('email')} />
             </label>
-            <label className="field">
-              Which role are you interviewing for?
-              <input className="input" name="role" required value={details.role} onChange={set('role')} />
-            </label>
+            <fieldset className="field role-choice">
+              <legend>Which role are you interviewing for?</legend>
+              <div className="role-options">
+                {ROLES.map(([value, label]) => (
+                  <label key={value} className={`option${assessmentType === value ? ' selected' : ''}`}>
+                    <input type="radio" name="role" value={value} checked={assessmentType === value} onChange={() => setAssessmentType(value)} required />
+                    <span className="radio-dot" aria-hidden="true" />
+                    <span>{label}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
             <label className="check" style={{ paddingTop: 4 }}>
               <input type="checkbox" checked={privacyAck} onChange={(e) => setPrivacyAck(e.target.checked)} required />
               <span>
@@ -281,7 +296,7 @@ export function Assessment({ token: initialToken = '', initial, recruiterEmail }
           <div className="stack">
             {error && <p className="error" role="alert">{error}</p>}
             <div className="row">
-              <button type="submit" form="enrol" className="btn btn-primary" disabled={busy || !privacyAck}>
+              <button type="submit" form="enrol" className="btn btn-primary" disabled={busy || !privacyAck || !assessmentType}>
                 {busy ? 'Starting…' : 'Start Assessment'}
               </button>
               <a className="btn btn-secondary" href={`mailto:${recruiterEmail}?subject=${encodeURIComponent('Candidate Assessment')}`}>

@@ -1,13 +1,16 @@
-export const CATEGORIES = [
-  'attention_to_detail',
-  'financial_accuracy',
-  'following_requirements',
-  'prioritisation',
-  'logical_reasoning',
-  'operational_judgement',
-] as const;
+export type AssessmentType = 'campaign_manager' | 'account_manager';
 
-export type Category = (typeof CATEGORIES)[number];
+export type Category =
+  | 'attention_to_detail'
+  | 'financial_accuracy'
+  | 'following_requirements'
+  | 'prioritisation'
+  | 'logical_reasoning'
+  | 'operational_judgement'
+  | 'commercial_accuracy'
+  | 'client_requirements'
+  | 'commercial_reasoning'
+  | 'client_judgement';
 
 export const CATEGORY_LABELS: Record<Category, string> = {
   attention_to_detail: 'Attention to Detail',
@@ -16,6 +19,24 @@ export const CATEGORY_LABELS: Record<Category, string> = {
   prioritisation: 'Prioritisation',
   logical_reasoning: 'Logical Reasoning',
   operational_judgement: 'Operational Judgement',
+  commercial_accuracy: 'Commercial Accuracy',
+  client_requirements: 'Client Requirements',
+  commercial_reasoning: 'Commercial Reasoning',
+  client_judgement: 'Client Judgement',
+};
+
+/** Short column headings for the recruiter dashboard. */
+export const CATEGORY_SHORT: Record<Category, string> = {
+  attention_to_detail: 'Detail',
+  financial_accuracy: 'Financial',
+  following_requirements: 'Requirements',
+  prioritisation: 'Priority',
+  logical_reasoning: 'Logic',
+  operational_judgement: 'Judgement',
+  commercial_accuracy: 'Commercial',
+  client_requirements: 'Brief',
+  commercial_reasoning: 'Reasoning',
+  client_judgement: 'Client',
 };
 
 /** Content shown above the question prompt. It stays visible while the candidate answers. */
@@ -61,7 +82,7 @@ export interface SubmittedAnswer {
   timedOut: boolean;
 }
 
-export type CategoryScores = Record<Category, number>;
+export type CategoryScores = Partial<Record<Category, number>>;
 
 export interface AssessmentRow {
   id: string;
@@ -69,6 +90,7 @@ export interface AssessmentRow {
   candidate_name: string;
   candidate_email: string;
   role: string;
+  assessment_type: AssessmentType;
   assessment_version: string;
   time_multiplier: number;
   status: 'invited' | 'in_progress' | 'completed';

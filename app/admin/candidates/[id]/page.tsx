@@ -6,11 +6,11 @@ import { LETTERS, QuestionBlocks } from '@/components/QuestionBlocks';
 import { TopBar } from '@/components/TopBar';
 import { requireAdminPage } from '@/lib/adminSession';
 import { closeExpiredAssessments } from '@/lib/assessment';
-import { QUESTION_TIMES } from '@/lib/questionBank';
+import { ASSESSMENTS } from '@/lib/questionBank';
 import { formatDate, formatDuration } from '@/lib/format';
 import { questionScore } from '@/lib/scoring';
 import { db } from '@/lib/supabase';
-import { CATEGORIES, CATEGORY_LABELS, type AssessmentRow, type Question } from '@/lib/types';
+import { CATEGORY_LABELS, type AssessmentRow, type Question } from '@/lib/types';
 
 export const dynamic = 'force-dynamic';
 
@@ -38,12 +38,13 @@ export default async function CandidatePage({ params }: { params: Promise<{ id: 
   const row = data as AssessmentRow;
   const questions = row.questions ?? [];
   const answers = new Map(row.answers.map((a) => [a.questionIndex, a]));
-  const totalSeconds = Math.round(QUESTION_TIMES.reduce((a, b) => a + b, 0) * Number(row.time_multiplier));
+  const def = ASSESSMENTS[row.assessment_type ?? 'campaign_manager'];
+  const totalSeconds = Math.round(def.times.reduce((a, b) => a + b, 0) * Number(row.time_multiplier));
   const done = row.status === 'completed';
 
   return (
     <>
-      <TopBar left={<Link href="/admin" className="header-link">← All Candidates</Link>} />
+      <TopBar left={<Link href={`/admin?type=${def.type}`} className="header-link">← All Candidates</Link>} />
       <main className="admin narrow">
         <div className="stack" style={{ gap: 8 }}>
           <h1 className="title-md">{row.candidate_name}</h1>
@@ -79,11 +80,11 @@ export default async function CandidatePage({ params }: { params: Promise<{ id: 
         {done && row.category_scores && (
           <section className="stack">
             <h2 className="h2">Category Scores</h2>
-            {CATEGORIES.map((c) => (
+            {def.categories.map((c) => (
               <div className="bar-row" key={c}>
                 <span>{CATEGORY_LABELS[c]}</span>
-                <div className="bar-track"><div className="bar-fill" style={{ width: `${row.category_scores![c]}%` }} /></div>
-                <strong>{row.category_scores![c]}%</strong>
+                <div className="bar-track"><div className="bar-fill" style={{ width: `${row.category_scores![c] ?? 0}%` }} /></div>
+                <strong>{row.category_scores![c] ?? 0}%</strong>
               </div>
             ))}
           </section>

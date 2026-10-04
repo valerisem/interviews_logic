@@ -1,19 +1,24 @@
 # Candidate Assessment — House of Marketers
 
-A short, timed work-skills assessment for Campaign Manager candidates: 6 questions, 145 seconds of question time, about 3 minutes overall.
+Short, timed work-skills assessments for **Campaign Manager** and **Account Manager** candidates: 6 questions each, 145 seconds of question time, about 3 minutes overall. The candidate picks the role they're interviewing for on the landing page, and that decides which assessment they take.
 
-It measures attention to detail, numerical accuracy, following campaign requirements, prioritisation, logical reasoning, operational judgement and working accurately under time pressure. It does **not** attempt to identify or diagnose ADHD, autism, dyslexia, neurodivergence, disability, health conditions or personality traits.
+- **Campaign Manager:** attention to detail, numerical accuracy, following campaign requirements, prioritisation, logical reasoning, operational judgement.
+- **Account Manager:** attention to detail, commercial accuracy, interpreting client requirements, prioritisation, commercial reasoning, client judgement.
+
+Both also measure working accurately under time pressure. It does **not** attempt to identify or diagnose ADHD, autism, dyslexia, neurodivergence, disability, health conditions or personality traits.
 
 Next.js (App Router) + Supabase. Runs on any Node host (Railway, Vercel, your own server) under your own domain.
 
 ## Candidate flow (one public link: the site root)
 
-1. **Landing:** name, email, role, and a required checkbox: *"I confirm that I have read and understood the Candidate Assessment Privacy Notice"* (links to `/privacy`). Also shows **Contact Recruiter** and the reasonable-adjustment wording. No timer runs here.
+1. **Landing:** name, email, the role they're interviewing for (Campaign Manager or Account Manager), and a required checkbox: *"I confirm that I have read and understood the Candidate Assessment Privacy Notice"* (links to `/privacy`). Also shows **Contact Recruiter** and the reasonable-adjustment wording. No timer runs here.
 2. **Start Assessment** saves the details and the privacy confirmation (with the notice's effective date), generates the candidate's questions and starts question 1. The address becomes `/a/<token>`, so a reload resumes the same attempt. Each email can take the assessment once.
 3. **Questions:** one per screen, each with its own visible timer. All the information needed stays visible. There is no going back and no right/wrong feedback. When a timer runs out, whatever is selected at that moment is recorded and the next question starts.
 4. **Completion:** *"Assessment completed. Thank you. Your responses have been submitted successfully and will be reviewed as part of your application."* No score is shown.
 
 Timers keep running if the candidate leaves the tab or closes the page. Questions whose time has passed are recorded as unanswered.
+
+### Campaign Manager (`lib/questions/campaignManager.ts`)
 
 | # | Category | Time | Format |
 |---|---|---|---|
@@ -24,7 +29,22 @@ Timers keep running if the candidate leaves the tab or closes the page. Question
 | 5 | Logical Reasoning | 25s | Campaign dependency rules, one objectively correct statement |
 | 6 | Operational Judgement | 30s | Realistic Campaign Manager situation, one clearly preferable response |
 
-Every question is generated per candidate (`lib/questionBank.ts`):
+### Account Manager (`lib/questions/accountManager.ts`)
+
+| # | Category | Time | Format |
+|---|---|---|---|
+| 1 | Attention to Detail | 15s | Two versions of a client campaign (budget, markets, launch, creators, usage rights, reporting); count the differences (1–3), never spelling tricks |
+| 2 | Commercial Accuracy | 20s | Total costs vs client budget: pick the variance, e.g. + £500 / − £500 / = £0 / + £1,000 |
+| 3 | Client Requirements | 25s | Client brief and proposed plan side by side; exactly one requirement is unmet (Germany creators, TikTok share, launch date or creator count) |
+| 4 | Prioritisation | 30s | Drag four account items into priority order; same weighted scoring |
+| 5 | Commercial Reasoning | 25s | Client changes the budget with the same scope; what happens to the amount remaining |
+| 6 | Client Judgement | 30s | Four client situations (underperformance, discount request, late delivery, new market); the strongest answer shows ownership without unnecessary concessions |
+
+Q2 is over, under or exact about a third of the time each. Q5 has the budget reduced in about 70% of versions and increased in the rest.
+
+### Campaign Manager variation
+
+Every Campaign Manager question is generated per candidate:
 
 - **Q1:** names, fees, dates and values vary, with 1, 2 or 3 small differences.
 - **Q2:** the figures vary; the outcome is MORE, LESS or EQUAL in roughly equal shares, with differences of £250–£1,000.
@@ -33,7 +53,7 @@ Every question is generated per candidate (`lib/questionBank.ts`):
 
 ## Scoring
 
-- Each question is scored 0–1, and each category has one question. Overall score = average × 100.
+- Each question is scored 0–1, and each category has one question (the categories differ by role). Overall score = average × 100.
 - **Prioritisation is weighted, not one rigid order.** 60% goes to ranking the high-risk item first (15% if it is second). 40% goes to how well the other three follow their relative urgency, where equally urgent items may go in either order. That part is cut to a quarter if the high-risk item isn't first. Examples: the ideal order scores 100, putting an internal update first scores about 25.
 - Completion time is stored separately and is not part of the score. Nobody is rejected automatically; a recruiter or hiring manager decides.
 
@@ -43,7 +63,7 @@ Candidates are asked to contact their recruiter before starting. In the dashboar
 
 ## Recruiter dashboard (`/admin`, password protected)
 
-- Shows the shared assessment link with a copy button.
+- Shows the shared assessment link with a copy button, and one tab per role (Campaign Manager / Account Manager), each with its own category columns.
 - For each candidate: name, email, role, date, overall score, the six category scores, time taken, extra time and tab leaves.
 - **Review** shows each question with the time used, the candidate's answer, the correct answer (the ideal order for Q4) and the result. It also shows the question exactly as the candidate saw it.
 

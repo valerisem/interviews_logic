@@ -7,35 +7,32 @@ import { requireAdminPage } from '@/lib/adminSession';
 import { closeExpiredAssessments } from '@/lib/assessment';
 import { formatDate, formatDuration } from '@/lib/format';
 import { db } from '@/lib/supabase';
-import { CATEGORIES, type AssessmentRow, type Category } from '@/lib/types';
+import { ASSESSMENTS, ASSESSMENT_TYPES, isAssessmentType } from '@/lib/questionBank';
+import { CATEGORY_SHORT, type AssessmentRow } from '@/lib/types';
 
 export const dynamic = 'force-dynamic';
 
-const SHORT_LABELS: Record<Category, string> = {
-  attention_to_detail: 'Detail',
-  financial_accuracy: 'Financial',
-  following_requirements: 'Requirements',
-  prioritisation: 'Priority',
-  logical_reasoning: 'Logic',
-  operational_judgement: 'Judgement',
-};
-
 type Row = Pick<
   AssessmentRow,
-  'id' | 'candidate_name' | 'candidate_email' | 'role' | 'status' | 'overall_score' | 'category_scores' | 'completion_time_seconds' | 'tab_leave_count' | 'started_at' | 'time_multiplier'
+  'id' | 'candidate_name' | 'candidate_email' | 'role' | 'assessment_type' | 'status' | 'overall_score' | 'category_scores' | 'completion_time_seconds' | 'tab_leave_count' | 'started_at' | 'time_multiplier'
 >;
 
-export default async function Dashboard() {
+export default async function Dashboard({ searchParams }: { searchParams: Promise<{ type?: string }> }) {
   await requireAdminPage();
   await closeExpiredAssessments();
+  const { type: requested } = await searchParams;
+  const type = isAssessmentType(requested) ? requested : 'campaign_manager';
+  const def = ASSESSMENTS[type];
 
   const { data, error } = await db()
     .from('candidate_assessments')
-    .select('id, candidate_name, candidate_email, role, status, overall_score, category_scores, completion_time_seconds, tab_leave_count, started_at, time_multiplier')
+    .select('id, candidate_name, candidate_email, role, assessment_type, status, overall_score, category_scores, completion_time_seconds, tab_leave_count, started_at, time_multiplier')
     .order('created_at', { ascending: false })
     .limit(500);
   if (error) throw error;
-  const rows = (data ?? []) as Row[];
+  const all = (data ?? []) as Row[];
+  const rows = all.filter((r) => (r.assessment_type ?? 'campaign_manager') === type);
+  const counts = Object.fromEntries(ASSESSMENT_TYPES.map((t) => [t, all.filter((r) => (r.assessment_type ?? 'campaign_manager') === t).length]));
   const base = (process.env.APP_BASE_URL ?? '').replace(/\/$/, '');
 
   return (
@@ -58,9 +55,17 @@ export default async function Dashboard() {
           </div>
         </div>
 
+        <nav className="tabs" aria-label="Role">
+          {ASSESSMENT_TYPES.map((t) => (
+            <Link key={t} href={`/admin?type=${t}`} className={`tab${t === type ? ' active' : ''}`} aria-current={t === type ? 'page' : undefined}>
+              {ASSESSMENTS[t].role} <span className="tab-count">{counts[t]}</span>
+            </Link>
+          ))}
+        </nav>
+
         <div className="table-wrap">
           {rows.length === 0 ? (
-            <p className="empty">No candidates yet. Share the assessment link to get started.</p>
+            <p className="empty">No {def.role} candidates yet. Share the assessment link to get started.</p>
           ) : (
             <table className="data">
               <thead>
@@ -68,7 +73,7 @@ export default async function Dashboard() {
                   <th>Candidate</th>
                   <th>Date</th>
                   <th>Score</th>
-                  {CATEGORIES.map((c) => <th key={c}>{SHORT_LABELS[c]}</th>)}
+                  {def.categories.map((c) => <th key={c}>{CATEGORY_SHORT[c]}</th>)}
                   <th>Time Taken</th>
                   <th>Extra Time</th>
                   <th>Tab Leaves</th>
@@ -84,8 +89,8 @@ export default async function Dashboard() {
                     </td>
                     <td className="num">{formatDate(r.started_at)}</td>
                     <td>{r.status === 'completed' ? <span className="score">{r.overall_score} / 100</span> : <span className="status">In Progress</span>}</td>
-                    {CATEGORIES.map((c) => (
-                      <td key={c} className="num">{r.category_scores ? `${r.category_scores[c]}%` : '—'}</td>
+                    {def.categories.map((c) => (
+                      <td key={c} className="num">{r.category_scores?.[c] !== undefined ? `${r.category_scores[c]}%` : '—'}</td>
                     ))}
                     <td className="num">{formatDuration(r.completion_time_seconds)}</td>
                     <td>{r.status === 'completed' ? extraTimeLabel(r.time_multiplier) : <ExtraTimeSelect id={r.id} value={Number(r.time_multiplier)} />}</td>

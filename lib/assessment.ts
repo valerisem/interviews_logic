@@ -1,7 +1,7 @@
 import 'server-only';
 import privacyNotice from '@/content/privacy-notice.json';
 import { db } from './supabase';
-import { ASSESSMENT_VERSION, generateAssessment, newSeed } from './questionBank';
+import { ASSESSMENTS, isAssessmentType, newSeed } from './questionBank';
 import { EXTRA_TIME_CHOICES } from './extraTime';
 import { scoreAssessment } from './scoring';
 import type { AssessmentRow, PublicQuestion, Question, SubmittedAnswer } from './types';
@@ -120,13 +120,13 @@ export async function candidateState(input: AssessmentRow): Promise<CandidateSta
 }
 
 /** Public enrolment: save the candidate's details and start the first question straight away. */
-export async function enrolAndStart(input: { name?: unknown; email?: unknown; role?: unknown; privacyAck?: unknown }) {
+export async function enrolAndStart(input: { name?: unknown; email?: unknown; assessmentType?: unknown; privacyAck?: unknown }) {
   const name = String(input.name ?? '').trim().slice(0, 120);
   const email = String(input.email ?? '').trim().toLowerCase().slice(0, 200);
-  const role = String(input.role ?? '').trim().slice(0, 120);
   if (!name) throw new AnswerError('Please enter your name.');
   if (!EMAIL_RE.test(email)) throw new AnswerError('Please enter a valid email address.');
-  if (!role) throw new AnswerError('Please enter the role you’re interviewing for.');
+  if (!isAssessmentType(input.assessmentType)) throw new AnswerError('Please choose the role you’re interviewing for.');
+  const assessment = ASSESSMENTS[input.assessmentType];
   if (input.privacyAck !== true) throw new AnswerError('Please confirm that you have read the Candidate Assessment Privacy Notice.');
 
   // One attempt per email, so the questions can't be previewed and retaken.
@@ -141,7 +141,7 @@ export async function enrolAndStart(input: { name?: unknown; email?: unknown; ro
   for (let attempt = 0; attempt < 5 && !questions.length; attempt++) {
     seed = newSeed();
     try {
-      questions = generateAssessment(seed);
+      questions = assessment.generate(seed);
     } catch {
       // Rare generator collision (e.g. duplicate option text): try another seed.
     }
@@ -155,8 +155,9 @@ export async function enrolAndStart(input: { name?: unknown; email?: unknown; ro
       token: newToken(),
       candidate_name: name,
       candidate_email: email,
-      role,
-      assessment_version: ASSESSMENT_VERSION,
+      role: assessment.role,
+      assessment_type: assessment.type,
+      assessment_version: assessment.version,
       status: 'in_progress',
       seed,
       questions,

@@ -1,4 +1,4 @@
-import { CATEGORIES, type CategoryScores, type Question, type SubmittedAnswer } from './types';
+import type { Category, CategoryScores, Question, SubmittedAnswer } from './types';
 
 /**
  * Prioritisation scoring (0–1), weighted rather than one rigid order:
@@ -39,14 +39,16 @@ export function questionScore(q: Question, answer: SubmittedAnswer | undefined):
 export function scoreAssessment(questions: Question[], answers: SubmittedAnswer[]) {
   const byIndex = new Map(answers.map((a) => [a.questionIndex, a]));
   const questionScores = questions.map((q, i) => questionScore(q, byIndex.get(i)));
-  const sums = Object.fromEntries(CATEGORIES.map((c) => [c, { total: 0, n: 0 }])) as Record<string, { total: number; n: number }>;
+  const sums = new Map<Category, { total: number; n: number }>();
   questions.forEach((q, i) => {
-    sums[q.category].total += questionScores[i];
-    sums[q.category].n += 1;
+    const s = sums.get(q.category) ?? { total: 0, n: 0 };
+    s.total += questionScores[i];
+    s.n += 1;
+    sums.set(q.category, s);
   });
-  const categoryScores = Object.fromEntries(
-    CATEGORIES.map((c) => [c, sums[c].n ? Math.round((sums[c].total / sums[c].n) * 100) : 0]),
-  ) as CategoryScores;
+  const categoryScores: CategoryScores = Object.fromEntries(
+    [...sums].map(([c, s]) => [c, Math.round((s.total / s.n) * 100)]),
+  );
   const overallScore = questions.length
     ? Math.round((questionScores.reduce((a, b) => a + b, 0) / questions.length) * 100)
     : 0;

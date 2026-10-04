@@ -1,19 +1,24 @@
 /*
  * Sanity check for the question bank and scoring. Run with `npm test`.
  */
-import { generateAssessment, QUESTION_TIMES } from '../lib/questionBank';
+import { ASSESSMENTS } from '../lib/questionBank';
 import { rankingScore, scoreAssessment } from '../lib/scoring';
 import type { Question } from '../lib/types';
 
 const RUNS = 5000;
 let failures = 0;
-const answerSpread: Record<string, Record<string, number>> = {};
-const contents = new Set<string>();
 
 function fail(msg: string) {
   failures++;
   if (failures <= 5) console.error(msg);
 }
+
+for (const def of Object.values(ASSESSMENTS)) {
+const generateAssessment = def.generate;
+const QUESTION_TIMES = def.times;
+console.log(`\n== ${def.role} (${def.version})`);
+const answerSpread: Record<string, Record<string, number>> = {};
+const contents = new Set<string>();
 
 for (let seed = 1; seed <= RUNS; seed++) {
   let qs: Question[];
@@ -25,13 +30,15 @@ for (let seed = 1; seed <= RUNS; seed++) {
   }
   if (qs.length !== 6) fail(`seed ${seed}: expected 6 questions`);
   qs.forEach((q, i) => {
+    if (q.category !== def.categories[i]) fail(`seed ${seed}: question ${i + 1} has category ${q.category}`);
     if (q.timeLimitSeconds !== QUESTION_TIMES[i]) fail(`seed ${seed}: wrong time on question ${i + 1}`);
     const optionIds = new Set(q.options.map((o) => o.id));
     if (optionIds.size !== q.options.length) fail(`${q.templateId}: duplicate ids`);
     if (!q.correct.every((id) => optionIds.has(id))) fail(`${q.templateId}: answer key not in options`);
     if (q.kind === 'single') {
       const text = q.options.find((o) => o.id === q.correct[0])!.text;
-      (answerSpread[`Q${i + 1}`] ??= {})[text.length > 20 ? 'C' : text] = ((answerSpread[`Q${i + 1}`] ?? {})[text.length > 20 ? 'C' : text] ?? 0) + 1;
+      const key = text.slice(0, 18);
+      (answerSpread[`Q${i + 1}`] ??= {})[key] = (answerSpread[`Q${i + 1}`][key] ?? 0) + 1;
     }
     contents.add(JSON.stringify(q.blocks));
   });
@@ -56,6 +63,10 @@ for (const [label, order, ok] of cases) {
   if (!ok(s)) fail(`ranking case "${label}" scored ${s}`);
 }
 
-console.log(`${RUNS} assessments generated, ${failures} failures, ${contents.size} distinct question contents`);
+console.log(`${RUNS} assessments generated, ${contents.size} distinct question contents`);
 console.log('correct-answer spread:', JSON.stringify(answerSpread));
+for (const k of Object.keys(answerSpread)) delete answerSpread[k];
+contents.clear();
+}
+console.log(`\n${failures} failures`);
 if (failures) process.exit(1);
