@@ -319,19 +319,13 @@ export function Assessment({ token: initialToken = '', initial, testMode = false
               <li>There are 6 questions, and the assessment takes around 3 minutes.</li>
               <li>Each question has its own timer. When it runs out, your current answer is saved and the next question starts.</li>
               <li>You can’t go back to a previous question or change an answer once you’ve moved on.</li>
-              <li>Please stay on this page until you finish. The timer keeps running if you switch tabs or windows, and switching is recorded.</li>
+              <li>
+                Please stay on this page until you finish. For assessment integrity, the system records when you switch away
+                from the assessment tab or window. This is not an automatic fail and is reviewed in context. The timer keeps
+                running while you are away.
+              </li>
               <li>You can take the assessment only once.</li>
             </ol>
-          </section>
-          <section className="rules" aria-labelledby="adjustments-title">
-            <h2 id="adjustments-title" className="rules-title">Reasonable Adjustments</h2>
-            <p style={{ fontSize: 15, lineHeight: 1.6 }}>
-              If you need any reasonable adjustment to take part in this assessment, please contact your recruiter before
-              starting or as soon as possible. Adjustments may include additional time, an alternative format or use of
-              assistive technology. You do not need to disclose a diagnosis; please simply tell us what adjustment would
-              help you participate. Adjustment information will be handled separately from assessment scoring and will not
-              disadvantage your application.
-            </p>
           </section>
           <form id="enrol" className="stack" style={{ gap: 16 }} onSubmit={start}>
             <label className="field">
@@ -369,6 +363,13 @@ export function Assessment({ token: initialToken = '', initial, testMode = false
                 {busy ? 'Starting…' : 'Start Assessment'}
               </button>
             </div>
+            <p className="footnote">
+              If you need any reasonable adjustment to take part in this assessment, please contact your recruiter before
+              starting or as soon as possible. Adjustments may include additional time, an alternative format or use of
+              assistive technology. You do not need to disclose a diagnosis; please simply tell us what adjustment would
+              help you participate. Adjustment information will be handled separately from assessment scoring and will not
+              disadvantage your application.
+            </p>
           </div>
         </main>
       </div>

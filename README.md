@@ -23,7 +23,7 @@ The app runs on **houseofmarketer.com**, next to a redirect to the main website:
 
 ## Candidate flow (`/form`)
 
-1. **Landing:** the rules (6 questions, about 3 minutes, a timer per question, no going back, stay on the page, one attempt). The candidate enters name, email and the role they're interviewing for (Campaign Manager or Account Manager), and ticks a required checkbox: *"I confirm that I have read and understood the Candidate Assessment Privacy Notice"* (links to `/form/privacy`). A **Reasonable Adjustments** box under the rules asks candidates to contact their recruiter before starting or as soon as possible (extra time, an alternative format or assistive technology), says no diagnosis is needed, and that adjustment information is kept separate from scoring and won't disadvantage them. No timer runs here.
+1. **Landing:** the rules (6 questions, about 3 minutes, a timer per question, no going back, stay on the page, one attempt). The candidate enters name, email and the role they're interviewing for (Campaign Manager or Account Manager), and ticks a required checkbox: *"I confirm that I have read and understood the Candidate Assessment Privacy Notice"* (links to `/form/privacy`). A small footnote under Start Assessment asks candidates to contact their recruiter before starting or as soon as possible (extra time, an alternative format or assistive technology), says no diagnosis is needed, and that adjustment information is kept separate from scoring and won't disadvantage them. No timer runs here.
 2. **Start Assessment** saves the details and the privacy confirmation (with the notice's effective date), generates the candidate's questions and starts question 1. The address becomes `/form/a/<token>`, so a reload resumes the same attempt. Each email can take the assessment once.
 3. **Questions:** one per screen, each with its own visible timer. All the information needed stays visible. There is no going back and no right/wrong feedback. When a timer runs out, whatever is selected at that moment is recorded and the next question starts.
 4. **Completion:** *"Assessment completed. Thank you. Your responses have been submitted successfully and will be reviewed as part of your application."* No score is shown.
@@ -91,7 +91,7 @@ While signed in to the dashboard, `/form` runs in **test mode** (shown in the he
 
 - Text selection, copy/cut/paste, right-click, drag and common Ctrl/⌘ shortcuts are disabled outside the form fields, and printing is blank.
 - One question per screen; no going back (enforced on the server); timers are kept on the server.
-- Leaving the tab or window is counted and shown to the recruiter, never penalised.
+- Leaving the tab or window (the page losing focus or being hidden) is counted and shown to the recruiter, never penalised automatically. Only the count is stored, not timestamps. Candidates are told about this in How It Works and in the privacy notice (sections 2 and 3).
 - Correct answers never reach the browser.
 
 Screenshots can't be blocked on a normal website, and the app doesn't claim to block them.
