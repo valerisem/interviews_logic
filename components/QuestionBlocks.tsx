@@ -37,6 +37,27 @@ export function QuestionBlocks({ blocks }: { blocks: Block[] }) {
                 {b.records.map((r, j) => <Record key={j} title={r.title} rows={r.rows} />)}
               </div>
             );
+          case 'table':
+            return (
+              <div className="card table-card" key={i}>
+                <table className="q-table">
+                  <thead>
+                    <tr>
+                      <th />
+                      {b.columns.map((c, j) => <th key={j} scope="col">{c}</th>)}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {b.rows.map(([label, ...values], j) => (
+                      <tr key={j}>
+                        <th scope="row">{label}</th>
+                        {values.map((v, k) => <td key={k}>{v}</td>)}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            );
         }
       })}
     </>

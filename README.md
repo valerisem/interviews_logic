@@ -36,7 +36,7 @@ Timers keep running if the candidate leaves the tab or closes the page. Question
 |---|---|---|---|
 | 1 | Attention to Detail | 15s | Two campaign records side by side, count the differences (1, 2 or 3) |
 | 2 | Financial Accuracy | 30s | Four cost lines vs client budget, answered with a row of buttons: £x MORE / £x LESS / EQUAL / a £2x decoy |
-| 3 | Following Requirements | 20s | Five creator rules + missing-information rule: APPROVE / REJECT / NEEDS REVIEW |
+| 3 | Following Requirements | 20s | Five campaign requirements and three creators side by side: which creator meets all of them (A, B, C or More than one) |
 | 4 | Prioritisation | 30s | Drag four items into priority order (mouse, touch, or arrow buttons) |
 | 5 | Logical Reasoning | 25s | Campaign dependency rules, one objectively correct statement |
 | 6 | Operational Judgement | 30s | Realistic Campaign Manager situation, one clearly preferable response |
@@ -60,7 +60,7 @@ Every Campaign Manager question is generated per candidate:
 
 - **Q1:** names, fees, dates and values vary, with 1, 2 or 3 small differences.
 - **Q2:** the figures vary; the outcome is MORE, LESS or EQUAL in roughly equal shares, with differences of £250–£1,000. The options always read £x MORE, £x LESS, EQUAL and a decoy of double the difference.
-- **Q3:** the outcome is APPROVE, REJECT or NEEDS REVIEW in roughly equal shares. Reject cases fail exactly one rule by a small margin; Needs Review cases have one field missing.
+- **Q3:** usually exactly one creator qualifies (A, B or C equally often); about a quarter of the time two do (More than one creator). Each creator who doesn't qualify misses a different requirement by a small margin, and passing values sometimes sit exactly on a threshold (e.g. 3.0%, £1,500).
 - **Q4–Q6:** drawn from four equivalent scenarios each. Options are shuffled where appropriate, and Q4's display order is randomised.
 
 ## Scoring

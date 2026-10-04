@@ -13,6 +13,25 @@ function fail(msg: string) {
   if (failures <= 5) console.error(msg);
 }
 
+/** Re-derive the Q3 answer from the table as shown, independently of the generator. */
+function checkThreeCreators(q: Question, seed: number) {
+  const table = q.blocks.find((b) => b.type === 'table');
+  if (!table || table.type !== 'table') return fail(`seed ${seed}: Q3 has no table`);
+  const n = (v: string) => Number(v.replace(/[^0-9.]/g, ''));
+  const value = (label: string, i: number) => table.rows.find((r) => r[0] === label)![i + 1];
+  const qualifies = table.columns.map((_, i) =>
+    n(value('Followers', i)) >= 50000 &&
+    n(value('Engagement', i)) >= 3 &&
+    n(value('Fee', i)) <= 1500 &&
+    value('Location', i) === 'UK' &&
+    n(value('UK Audience', i)) >= 45,
+  );
+  const count = qualifies.filter(Boolean).length;
+  const expected = count > 1 ? 'More than one creator' : count === 1 ? table.columns[qualifies.indexOf(true)] : null;
+  const actual = q.options.find((o) => o.id === q.correct[0])!.text;
+  if (expected !== actual) fail(`seed ${seed}: Q3 answer key says "${actual}" but the table gives "${expected}"`);
+}
+
 for (const def of Object.values(ASSESSMENTS)) {
 const generateAssessment = def.generate;
 const QUESTION_TIMES = def.times;
@@ -41,6 +60,7 @@ for (let seed = 1; seed <= RUNS; seed++) {
       (answerSpread[`Q${i + 1}`] ??= {})[key] = (answerSpread[`Q${i + 1}`][key] ?? 0) + 1;
     }
     contents.add(JSON.stringify(q.blocks));
+    if (q.templateId === 'Q3-three-creators') checkThreeCreators(q, seed);
   });
   const perfect = qs.map((q, i) => ({ questionIndex: i, selected: q.correct, answeredAt: '', timeTakenMs: 0, timedOut: false }));
   if (scoreAssessment(qs, perfect).overallScore !== 100) fail(`seed ${seed}: perfect answers did not score 100`);

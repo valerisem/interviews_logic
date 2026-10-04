@@ -7,7 +7,7 @@ import { addDays, dayMonth, money, num, ranking, randomDate, single, type Priori
  *
  *   1. Attention to Detail       15s  two campaign records, count the differences (1–3)
  *   2. Financial Accuracy        30s  costs vs client budget: £x MORE / £x LESS / EQUAL / £2x decoy
- *   3. Following Requirements    20s  apply creator rules: APPROVE / REJECT / NEEDS REVIEW
+ *   3. Applying Requirements     20s  three creators vs five requirements: which one qualifies (or more than one)
  *   4. Prioritisation            30s  rank four items; weighted scoring
  *   5. Logical Reasoning         25s  campaign dependencies, one objectively correct answer
  *   6. Operational Judgement     30s  realistic situation, one clearly preferable response
@@ -16,7 +16,7 @@ import { addDays, dayMonth, money, num, ranking, randomDate, single, type Priori
  * names, figures and scenarios, and the answer key is computed from those values.
  */
 
-export const CM_VERSION = 'CM-2026.3';
+export const CM_VERSION = 'CM-2026.4';
 export const CM_TIMES = [15, 30, 20, 30, 25, 30];
 
 // ---------------------------------------------------------------------------
@@ -143,68 +143,75 @@ function q2FinancialAccuracy(rng: Rng): Question {
 }
 
 // ---------------------------------------------------------------------------
-// 3. Following Campaign Requirements (20s)
+// 3. Applying Campaign Requirements (20s) — three creators, which one qualifies
 // ---------------------------------------------------------------------------
 
-function q3Requirements(rng: Rng): Question {
-  const outcome = rng.pick(['APPROVE', 'REJECT', 'NEEDS REVIEW'] as const);
-  const boundary = () => rng.chance(0.25);
+type Criterion = 'followers' | 'engagement' | 'fee' | 'location' | 'ukAudience';
+const CRITERIA: Criterion[] = ['followers', 'engagement', 'fee', 'location', 'ukAudience'];
 
-  const shown: Record<'followers' | 'engagement' | 'fee' | 'location' | 'ukAudience', string> = {
-    followers: num(boundary() ? 25000 : rng.int(26, 140) * 1000),
-    engagement: `${(boundary() ? 2.5 : rng.int(26, 62) / 10).toFixed(1)}%`,
-    fee: money(boundary() ? 1500 : rng.int(10, 29) * 50),
-    location: 'UK',
-    ukAudience: `${boundary() ? 40 : rng.int(42, 85)}%`,
-  };
-  const keys = Object.keys(shown) as (keyof typeof shown)[];
-
-  if (outcome === 'REJECT') {
-    // Fails exactly one criterion, by a small margin.
-    const k = rng.pick(keys);
-    if (k === 'followers') shown.followers = num(25000 - rng.int(2, 9) * 100);
-    if (k === 'engagement') shown.engagement = `${(2.5 - rng.int(1, 3) / 10).toFixed(1)}%`;
-    if (k === 'fee') shown.fee = money(1500 + rng.int(1, 4) * 25);
-    if (k === 'location') shown.location = rng.pick(['Ireland', 'France', 'Spain', 'Netherlands']);
-    if (k === 'ukAudience') shown.ukAudience = `${rng.int(34, 39)}%`;
-  } else if (outcome === 'NEEDS REVIEW') {
-    shown[rng.pick(keys)] = 'Not provided';
+/** A value that meets the requirement, sometimes exactly on the threshold. */
+function passing(rng: Rng, c: Criterion): string {
+  const edge = rng.chance(0.2);
+  switch (c) {
+    case 'followers': return num(edge ? 50000 : rng.int(52, 160) * 1000);
+    case 'engagement': return `${(edge ? 3 : rng.int(31, 52) / 10).toFixed(1)}%`;
+    case 'fee': return money(edge ? 1500 : rng.int(18, 29) * 50);
+    case 'location': return 'UK';
+    case 'ukAudience': return `${edge ? 45 : rng.int(46, 68)}%`;
   }
+}
+
+/** A value that just misses the requirement. */
+function failing(rng: Rng, c: Criterion): string {
+  switch (c) {
+    case 'followers': return num(rng.int(40, 49) * 1000);
+    case 'engagement': return `${(rng.int(24, 29) / 10).toFixed(1)}%`;
+    case 'fee': return money(rng.int(31, 36) * 50);
+    case 'location': return rng.pick(['Ireland', 'France', 'Spain', 'Netherlands']);
+    case 'ukAudience': return `${rng.int(38, 44)}%`;
+  }
+}
+
+function q3Requirements(rng: Rng): Question {
+  // Usually exactly one creator qualifies; about a quarter of the time two do.
+  const qualifying = rng.chance(0.25) ? 2 : 1;
+  const passes = rng.shuffle([0, 1, 2]).slice(0, qualifying);
+  // Each creator who doesn't qualify misses a different requirement, by a small margin.
+  const misses = rng.shuffle([...CRITERIA]);
+  const creators = [0, 1, 2].map((i) => {
+    const miss = passes.includes(i) ? null : misses.pop()!;
+    return Object.fromEntries(CRITERIA.map((c) => [c, c === miss ? failing(rng, c) : passing(rng, c)])) as Record<Criterion, string>;
+  });
+  const row = (label: string, c: Criterion) => [label, ...creators.map((cr) => cr[c])];
 
   return single(rng, {
-    templateId: 'Q3-requirements',
+    templateId: 'Q3-three-creators',
     category: 'following_requirements',
     timeLimitSeconds: CM_TIMES[2],
     blocks: [
       {
         type: 'list',
         title: 'Campaign Requirements',
-        items: [
-          'Minimum 25,000 followers',
-          'Engagement rate of at least 2.5%',
-          'Creator fee no higher than £1,500',
-          'Creator must be UK based',
-          'UK audience must be at least 40%',
-          'If any required information is missing, select NEEDS REVIEW',
-        ],
+        items: ['50,000+ followers', 'Engagement rate ≥ 3%', 'Fee ≤ £1,500', 'UK based', 'UK audience ≥ 45%'],
       },
       {
-        type: 'record',
-        title: 'Creator',
+        type: 'table',
+        columns: ['Creator A', 'Creator B', 'Creator C'],
         rows: [
-          ['Followers', shown.followers],
-          ['Engagement Rate', shown.engagement],
-          ['Fee', shown.fee],
-          ['Location', shown.location],
-          ['UK Audience', shown.ukAudience],
+          row('Followers', 'followers'),
+          row('Engagement', 'engagement'),
+          row('Fee', 'fee'),
+          row('Location', 'location'),
+          row('UK Audience', 'ukAudience'),
         ],
       },
     ],
-    prompt: 'What should happen with this creator?',
+    prompt: 'Which creator meets all campaign requirements?',
     options: [
-      { text: 'APPROVE', correct: outcome === 'APPROVE' },
-      { text: 'REJECT', correct: outcome === 'REJECT' },
-      { text: 'NEEDS REVIEW', correct: outcome === 'NEEDS REVIEW' },
+      { text: 'Creator A', correct: qualifying === 1 && passes[0] === 0 },
+      { text: 'Creator B', correct: qualifying === 1 && passes[0] === 1 },
+      { text: 'Creator C', correct: qualifying === 1 && passes[0] === 2 },
+      { text: 'More than one creator', correct: qualifying > 1 },
     ],
   });
 }

@@ -44,7 +44,9 @@ export type Block =
   | { type: 'text'; text: string }
   | { type: 'list'; title?: string; items: string[] }
   | { type: 'record'; title?: string; rows: [string, string][] }
-  | { type: 'columns'; records: { title: string; rows: [string, string][] }[] };
+  | { type: 'columns'; records: { title: string; rows: [string, string][] }[] }
+  /** A comparison grid: one header per column, each row a label followed by one value per column. */
+  | { type: 'table'; columns: string[]; rows: string[][] };
 
 export interface Option {
   id: string;
