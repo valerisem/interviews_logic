@@ -3,18 +3,18 @@ import type { Question } from '../types';
 import { addDays, dayMonth, money, num, ranking, randomDate, single, type PriorityScenario } from './shared';
 
 /*
- * Account Manager assessment: 6 timed questions, 145 seconds in total.
+ * Account Manager assessment: 6 timed questions, 165 seconds in total.
  *
  *   1. Attention to Detail        15s  two versions of a client campaign, count the differences (1–3)
- *   2. Commercial Accuracy        20s  variance between total costs and budget: +£x / −£x / £0
+ *   2. Commercial Accuracy        30s  variance between total costs and budget: +£x / −£x / £0
  *   3. Client Requirements        25s  brief vs proposed plan, find the one requirement it misses
  *   4. Prioritisation             30s  rank four account items; weighted scoring
- *   5. Commercial Reasoning       25s  effect of a budget change on the amount remaining
- *   6. Client Judgement           30s  client situation, one clearly strongest response
+ *   5. Commercial Reasoning       35s  effect of a budget change on the amount remaining
+ *   6. Scope Change               30s  add France on the same budget: which option fits
  */
 
-export const AM_VERSION = 'AM-2026.1';
-export const AM_TIMES = [15, 20, 25, 30, 25, 30];
+export const AM_VERSION = 'AM-2026.2';
+export const AM_TIMES = [15, 30, 25, 30, 35, 30];
 
 const MARKETS = ['UK', 'Germany', 'France', 'Spain', 'Italy', 'Netherlands', 'Ireland', 'Sweden'];
 const REPORTING = ['Weekly', 'Fortnightly', 'Monthly'];
@@ -70,7 +70,7 @@ function q1AttentionToDetail(rng: Rng): Question {
 }
 
 // ---------------------------------------------------------------------------
-// 2. Commercial Accuracy (20s) — direction and size of the variance
+// 2. Commercial Accuracy (30s) — direction and size of the variance
 // ---------------------------------------------------------------------------
 
 function signed(n: number): string {
@@ -241,7 +241,7 @@ function q4Prioritisation(rng: Rng): Question {
 }
 
 // ---------------------------------------------------------------------------
-// 5. Commercial Reasoning (25s)
+// 5. Commercial Reasoning (35s)
 // ---------------------------------------------------------------------------
 
 function q5CommercialReasoning(rng: Rng): Question {
@@ -289,103 +289,45 @@ function q5CommercialReasoning(rng: Rng): Question {
 }
 
 // ---------------------------------------------------------------------------
-// 6. Client Management Judgement (30s)
+// 6. Scope Change & Commercial Judgement (30s)
 // ---------------------------------------------------------------------------
 
-function q6ClientJudgement(rng: Rng): Question {
-  const weeks = rng.pick(['two', 'three']);
-  const variants: { id: string; situation: { type: 'text' | 'list'; text?: string; items?: string[] }[]; correct: string; wrong: string[] }[] = [
-    {
-      id: 'AM-Q6-underperformance',
-      situation: [
-        { type: 'text', text: 'A long-term client emails: “Performance is significantly below what we expected. We’re concerned about continuing investment if this doesn’t improve.”' },
-        { type: 'text', text: `The campaign still has ${weeks} weeks remaining. Current data shows:` },
-        {
-          type: 'list',
-          items: [
-            'Overall performance is below forecast.',
-            'Three creators are significantly outperforming the rest.',
-            'Additional content is still scheduled to go live.',
-            'The delivery team believes optimisation is possible.',
-          ],
-        },
-      ],
-      correct: 'Acknowledge the concern, review the strongest-performing content with the delivery team, agree an optimisation plan, communicate the actions to the client and set a clear time for the next performance update.',
-      wrong: [
-        'Explain that campaign results can never be guaranteed and wait until the campaign finishes before discussing performance.',
-        'Immediately offer additional deliverables free of charge to protect the relationship.',
-        'Forward the email to the Campaign Manager and wait for them to decide what to do.',
-      ],
-    },
-    {
-      id: 'AM-Q6-discount-request',
-      situation: [
-        { type: 'text', text: 'A client renewing a £120k annual retainer says a competitor has quoted 15% less and asks you to match it.' },
-        {
-          type: 'list',
-          items: [
-            'You do not yet know what the competitor’s quote includes.',
-            'The client has been happy with results this year.',
-            'The renewal decision is due in two weeks.',
-          ],
-        },
-      ],
-      correct: 'Find out what the competitor’s quote includes, prepare options that show value or adjust scope, and agree any pricing change internally before responding.',
-      wrong: [
-        'Agree to match the price immediately to secure the renewal.',
-        'Refuse to discuss price because the results speak for themselves.',
-        'Forward the request to Finance and wait for them to respond to the client.',
-      ],
-    },
-    {
-      id: 'AM-Q6-late-delivery',
-      situation: [
-        { type: 'text', text: 'A client emails, frustrated that a deliverable was three days late and that they heard about the delay from a creator rather than from the agency.' },
-        {
-          type: 'list',
-          items: [
-            'The delivery team has since resolved the delay.',
-            'The rest of the campaign is on schedule.',
-            'The client is considering expanding the account next quarter.',
-          ],
-        },
-      ],
-      correct: 'Acknowledge the issue, confirm the facts with the delivery team, explain what happened and what has changed to prevent it, and confirm the timeline for the remaining work.',
-      wrong: [
-        'Explain that the creator caused the delay, so it was outside the agency’s control.',
-        'Offer a full refund on the campaign immediately.',
-        'Wait to see whether the client raises it again before responding.',
-      ],
-    },
-    {
-      id: 'AM-Q6-new-market',
-      situation: [
-        { type: 'text', text: 'Midway through a UK campaign, the client asks to add France without changing the budget or the end date.' },
-        {
-          type: 'list',
-          items: [
-            'Creator fees for the UK are already agreed.',
-            'No French creators have been sourced yet.',
-            'The campaign ends in five weeks.',
-          ],
-        },
-      ],
-      correct: 'Confirm what they want to achieve in France, check feasibility and cost with the delivery team, and come back with options and their impact on budget and timeline.',
-      wrong: [
-        'Agree straight away to keep the client happy.',
-        'Tell the client it is impossible to add a market mid-campaign.',
-        'Quietly cut UK creators to fund France without telling the client.',
-      ],
-    },
-  ];
-  const v = rng.pick(variants);
+function q6ScopeChange(rng: Rng): Question {
+  // The figures vary, but the logic never does: the uncontracted UK budget covers exactly
+  // four UK creators, French creators cost a little less, so swapping the four slots fits.
+  const ukCost = rng.pick([1500, 2000, 2500]);
+  const frCost = ukCost - rng.pick([200, 250, 300]);
+  const budget = rng.pick([40000, 50000, 60000]);
+  const contracted = budget - 4 * ukCost;
+
   return single(rng, {
-    templateId: v.id,
+    templateId: 'AM-Q6-scope-change',
     category: 'client_judgement',
     timeLimitSeconds: AM_TIMES[5],
-    blocks: v.situation.map((b) => (b.type === 'list' ? { type: 'list' as const, items: b.items! } : { type: 'text' as const, text: b.text! })),
-    prompt: 'What is the strongest next step for the Account Manager?',
-    options: [{ text: v.correct, correct: true }, ...v.wrong.map((text) => ({ text }))],
+    blocks: [
+      { type: 'text', text: 'The client asks to add France midway through a UK campaign without increasing the budget or moving the end date.' },
+      {
+        type: 'list',
+        title: 'Current Position',
+        items: [
+          `Creator budget: ${money(budget)}`,
+          `UK creators already contracted: ${money(contracted)}`,
+          '4 additional UK creator slots were planned but have not yet been contracted',
+          `Planned cost per remaining UK creator: ${money(ukCost)}`,
+          `Typical cost per French creator: ${money(frCost)}`,
+          'Client wants at least 4 French creators',
+          'The client is open to reallocating creator slots between markets',
+          'Campaign ends in 5 weeks',
+        ],
+      },
+    ],
+    prompt: 'Which option best meets the client’s request while staying within the existing creator budget?',
+    options: [
+      { text: 'Keep all 4 remaining UK creators and add 4 French creators.' },
+      { text: 'Replace the 4 uncontracted UK creator slots with 4 French creators.', correct: true },
+      { text: 'Add 2 French creators and keep 2 of the planned UK creators.' },
+      { text: 'Renegotiate the fees of the UK creators who are already contracted.' },
+    ],
     shuffle: true,
   });
 }
@@ -400,6 +342,6 @@ export function generateAccountManager(seed: number): Question[] {
     q3ClientBrief(rng),
     q4Prioritisation(rng),
     q5CommercialReasoning(rng),
-    q6ClientJudgement(rng),
+    q6ScopeChange(rng),
   ];
 }

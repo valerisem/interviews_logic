@@ -1,6 +1,6 @@
 # Candidate Assessment — House of Marketers
 
-Short, timed work-skills assessments for **Campaign Manager** and **Account Manager** candidates: 6 questions each, 145–160 seconds of question time, about 3 minutes overall. The candidate picks the role they're interviewing for on the landing page, and that decides which assessment they take.
+Short, timed work-skills assessments for **Campaign Manager** and **Account Manager** candidates: 6 questions each, 160–165 seconds of question time, about 3 minutes overall. The candidate picks the role they're interviewing for on the landing page, and that decides which assessment they take.
 
 - **Campaign Manager:** attention to detail, numerical accuracy, following campaign requirements, prioritisation, logical reasoning, operational judgement.
 - **Account Manager:** attention to detail, commercial accuracy, interpreting client requirements, prioritisation, commercial reasoning, client judgement.
@@ -46,13 +46,13 @@ Timers keep running if the candidate leaves the tab or closes the page. Question
 | # | Category | Time | Format |
 |---|---|---|---|
 | 1 | Attention to Detail | 15s | Two versions of a client campaign (budget, markets, launch, creators, usage rights, reporting); count the differences (1–3), never spelling tricks |
-| 2 | Commercial Accuracy | 20s | Total costs vs client budget: pick the variance, e.g. + £500 / − £500 / = £0 / + £1,000 |
+| 2 | Commercial Accuracy | 30s | Total costs vs client budget: pick the variance, e.g. + £500 / − £500 / = £0 / + £1,000 |
 | 3 | Client Requirements | 25s | Client brief and proposed plan side by side; exactly one requirement is unmet (Germany creators, TikTok share, launch date or creator count) |
 | 4 | Prioritisation | 30s | Drag four account items into priority order; same weighted scoring |
-| 5 | Commercial Reasoning | 25s | Client changes the budget with the same scope; what happens to the amount remaining |
-| 6 | Client Judgement | 30s | Four client situations (underperformance, discount request, late delivery, new market); the strongest answer shows ownership without unnecessary concessions |
+| 5 | Commercial Reasoning | 35s | Client changes the budget with the same scope; what happens to the amount remaining |
+| 6 | Client Judgement | 30s | Scope change: the client adds France on the same budget and end date. Which option fits (replace the 4 uncontracted UK slots with 4 French creators)? Figures vary; options shuffled |
 
-Q2 is over, under or exact about a third of the time each. Q5 has the budget reduced in about 70% of versions and increased in the rest.
+Q2 is over, under or exact about a third of the time each. Q5 has the budget reduced in about 70% of versions and increased in the rest. In Q6 the uncontracted UK budget always covers exactly four UK creators, and French creators always cost £200–£300 less each.
 
 ### Campaign Manager variation
 
