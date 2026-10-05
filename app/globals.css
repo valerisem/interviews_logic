@@ -249,3 +249,4 @@ table.data .select-cell { width: 1%; min-width: 0; padding-right: 4px; }
 .checkbox { width: 16px; height: 16px; accent-color: var(--fuchsia); cursor: pointer; vertical-align: middle; }
 .bulk-bar { display: flex; align-items: center; justify-content: flex-end; gap: 16px; margin-bottom: -16px; font-size: 14px; font-weight: 600; color: var(--heading); }
 .btn-danger { background: var(--fuchsia); color: #fff; display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px; font-size: 14px; }
+.trap { position: absolute; left: -10000px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }

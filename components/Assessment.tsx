@@ -147,7 +147,18 @@ function RankingList({ items, order, onChange }: { items: Option[]; order: strin
 
 // ---------------------------------------------------------------------------
 
-export function Assessment({ token: initialToken = '', initial, testMode = false }: { token?: string; initial: View; testMode?: boolean }) {
+export function Assessment({
+  token: initialToken = '',
+  initial,
+  testMode = false,
+  formStamp = '',
+}: {
+  token?: string;
+  initial: View;
+  testMode?: boolean;
+  /** Signed time the form was served; part of the server's bot checks. */
+  formStamp?: string;
+}) {
   const [token, setToken] = useState(initialToken);
   const [state, setState] = useState<View>(initial);
   const [details, setDetails] = useState({ name: '', email: '' });
@@ -254,11 +265,18 @@ export function Assessment({ token: initialToken = '', initial, testMode = false
 
   async function start(e: React.FormEvent) {
     e.preventDefault();
+    const website = new FormData(e.currentTarget as HTMLFormElement).get('website') ?? '';
     if (!assessmentType) return setError('Please choose the role you’re interviewing for.');
     if (!privacyAck) return setError('Please confirm that you have read the Candidate Assessment Privacy Notice.');
     setBusy(true);
     setError('');
-    const { data, error: err } = await postJson<{ token: string; state: CandidateState }>('/api/start', { ...details, assessmentType, privacyAck });
+    const { data, error: err } = await postJson<{ token: string; state: CandidateState }>('/api/start', {
+      ...details,
+      assessmentType,
+      privacyAck,
+      formStamp,
+      website,
+    });
     setBusy(false);
     if (!data) return setError(err!);
     setToken(data.token);
@@ -328,6 +346,8 @@ export function Assessment({ token: initialToken = '', initial, testMode = false
             </ol>
           </section>
           <form id="enrol" className="stack" style={{ gap: 16 }} onSubmit={start}>
+            {/* Bot trap: hidden from people and screen readers; bots that fill every field get rejected. */}
+            <input type="text" name="website" className="trap" tabIndex={-1} autoComplete="off" aria-hidden="true" defaultValue="" />
             <label className="field">
               What’s your name?
               <input className="input" name="name" autoComplete="name" placeholder="Full name" required value={details.name} onChange={set('name')} />

@@ -92,6 +92,16 @@ Candidates are asked to contact their recruiter before starting. In the dashboar
 
 While signed in to the dashboard, `/form` runs in **test mode** (shown in the header): the one-attempt-per-email rule is skipped, so you can take either assessment as often as you like. Test attempts are saved like any other, with `-TEST` added to the assessment version, and are tagged **Test** on the dashboard. Candidates are never in test mode. Test attempts also have a **Pause** button next to the timer: the timer stops (even if you reload or leave the page) and Next Question is disabled until you resume. Pausing needs both a test attempt and your admin sign-in, so candidates can't pause. **Restart** (next to Pause) starts a fresh attempt straight away with the same name and email, and the completion screen offers **Retake Campaign Manager** / **Retake Account Manager**, so there's no need to fill in the form again.
 
+## Bot protection
+
+The public start form has three invisible checks (`lib/botChecks.ts`), so bots can't fill the database with junk:
+
+- a hidden trap field that people never see; if it's filled in, nothing is saved;
+- a signed timestamp issued with the page: starting within 3 seconds of loading it is rejected, and posting without loading the page fails;
+- at most 5 new assessments per internet connection per hour.
+
+Signed-in admins (Google or password) skip all three.
+
 ## Anti-copy measures
 
 - Text selection, copy/cut/paste, right-click, drag and common Ctrl/⌘ shortcuts are disabled outside the form fields, and printing is blank.
