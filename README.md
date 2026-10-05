@@ -19,6 +19,7 @@ The app runs on **houseofmarketer.com**, next to a redirect to the main website:
 | `/form/privacy` | Candidate Assessment Privacy Notice |
 | `/form/a/<token>` | A candidate's attempt, so a reload resumes it |
 | `/admin` | Admin dashboard (Google sign-in) |
+| `/` | Redirects to `/form` |
 | anything else | Redirects (302) to `REDIRECT_URL`, https://houseofmarketers.com |
 
 ## Candidate flow (`/form`)

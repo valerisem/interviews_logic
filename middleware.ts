@@ -6,6 +6,7 @@ import { ADMIN_COOKIE, isValidSession } from './lib/auth';
  *   /form/...   candidate assessment (and its privacy notice)
  *   /admin/...  admin dashboard (Google sign-in)
  *   /api/...    the app's own endpoints
+ *   /           → /form (the bare address opens the assessment)
  *   anything else → REDIRECT_URL (https://houseofmarketers.com)
  */
 const APP_PREFIXES = ['/form', '/admin', '/api/', '/_next/'];
@@ -18,6 +19,7 @@ function isAppPath(pathname: string): boolean {
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
+  if (pathname === '/') return NextResponse.redirect(new URL('/form', req.url), 307);
   if (!isAppPath(pathname)) {
     return NextResponse.redirect(process.env.REDIRECT_URL || 'https://houseofmarketers.com', 302);
   }
