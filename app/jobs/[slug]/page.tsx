@@ -60,7 +60,7 @@ export default async function JobPage({ params }: { params: Promise<{ slug: stri
 
   return (
     <>
-      <TopBar wide />
+      <TopBar wide="xl" />
       <main className="doc job">
         <header className="doc-head">
           <p className="eyebrow">We’re Hiring</p>

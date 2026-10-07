@@ -4,10 +4,10 @@ import { ThemeToggle } from './ThemeToggle';
  * Shared header: the logo always sits on the right, next to the theme switch.
  * `left` holds page-specific content (timer, back link); `right` sits before the switch.
  */
-export function TopBar({ left, right, wide, progress }: { left?: React.ReactNode; right?: React.ReactNode; wide?: boolean; progress?: number }) {
+export function TopBar({ left, right, wide, progress }: { left?: React.ReactNode; right?: React.ReactNode; wide?: boolean | 'xl'; progress?: number }) {
   return (
     <header className="topbar">
-      <div className={`topbar-inner${wide ? ' wide' : ''}${left ? ' split' : ''}`}>
+      <div className={`topbar-inner${wide === 'xl' ? ' xl' : wide ? ' wide' : ''}${left ? ' split' : ''}`}>
         {left}
         <div className="topbar-right">
           {right}
