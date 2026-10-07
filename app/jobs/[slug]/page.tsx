@@ -18,6 +18,14 @@ function Rich({ text, className }: { text: string; className?: string }) {
   );
 }
 
+const CONTENTS = [
+  ['about', 'About House of Marketers'],
+  ['own', 'What You Will Own'],
+  ['how', 'How We Work'],
+  ['looking-for', 'What We Are Looking For'],
+  ['success', 'What Success Looks Like'],
+];
+
 /** Line icons for the How We Work principles, in order. */
 const ICONS = [
   // Be proactive: lightning
@@ -61,60 +69,75 @@ export default async function JobPage({ params }: { params: Promise<{ slug: stri
           </h1>
         </header>
 
-        <div className="job-intro">
-          <section className="job-section">
-            <h2>About House of Marketers</h2>
-            {job.about.map((p) => <Rich key={p.slice(0, 24)} text={p} className="job-text" />)}
-          </section>
-          <dl className="job-details">
-            {job.details.map(([label, value]) => (
-              <div key={label}>
-                <dt>{label}</dt>
-                <dd>{value}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
+        <div className="doc-grid">
+          <nav className="doc-toc" aria-label="Contents">
+            <p className="doc-toc-title">Contents</p>
+            <ol>
+              {CONTENTS.map(([id, label]) => (
+                <li key={id}>
+                  <a href={`#${id}`}>{label}</a>
+                </li>
+              ))}
+            </ol>
+          </nav>
 
-        <section className="job-section">
-          <h2>What You Will Own</h2>
-          <div className="job-cards">
-            {job.own.map(([title, text]) => (
-              <article key={title} className="job-card">
-                <h3>{title}</h3>
-                <Rich text={text} />
-              </article>
-            ))}
+          <div className="job-body">
+          <div className="job-intro">
+            <section id="about" className="job-section">
+              <h2>About House of Marketers</h2>
+              {job.about.map((p) => <Rich key={p.slice(0, 24)} text={p} className="job-text" />)}
+            </section>
+            <dl className="job-details">
+              {job.details.map(([label, value]) => (
+                <div key={label}>
+                  <dt>{label}</dt>
+                  <dd>{value}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
-        </section>
 
-        <section className="job-section how">
-          <h2>How We Work</h2>
-          <div className="job-cards three">
-            {job.howWeWork.map(([title, text], i) => (
-              <article key={title} className={`value-card tint-${i % 3}`}>
-                <span className="value-icon" aria-hidden="true">
-                  <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                    {ICONS[i % ICONS.length]}
-                  </svg>
-                </span>
-                <h3>{title}</h3>
-                <Rich text={text} />
-              </article>
-            ))}
+          <section id="own" className="job-section">
+            <h2>What You Will Own</h2>
+            <div className="job-cards">
+              {job.own.map(([title, text], i) => (
+                <article key={title} className={`job-card tint-${i % 3}`}>
+                  <h3>{title}</h3>
+                  <Rich text={text} />
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section id="how" className="job-section how">
+            <h2>How We Work</h2>
+            <div className="job-cards three">
+              {job.howWeWork.map(([title, text], i) => (
+                <article key={title} className={`value-card tint-${i % 3}`}>
+                  <span className="value-icon" aria-hidden="true">
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      {ICONS[i % ICONS.length]}
+                    </svg>
+                  </span>
+                  <h3>{title}</h3>
+                  <Rich text={text} />
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <div className="job-lists">
+            <section id="looking-for" className="job-section">
+              <h2>What We Are Looking For</h2>
+              <ul className="job-list">{job.lookingFor.map((item) => <li key={item}>{item}</li>)}</ul>
+            </section>
+            <section id="success" className="job-section">
+              <h2>What Success Looks Like</h2>
+              <p className="job-text">{job.successIntro}</p>
+              <ul className="job-list">{job.success.map((item) => <li key={item}>{item}</li>)}</ul>
+            </section>
           </div>
-        </section>
-
-        <div className="job-lists">
-          <section className="job-section">
-            <h2>What We Are Looking For</h2>
-            <ul className="job-list">{job.lookingFor.map((item) => <li key={item}>{item}</li>)}</ul>
-          </section>
-          <section className="job-section">
-            <h2>What Success Looks Like</h2>
-            <p className="job-text">{job.successIntro}</p>
-            <ul className="job-list">{job.success.map((item) => <li key={item}>{item}</li>)}</ul>
-          </section>
+          </div>
         </div>
       </main>
     </>
