@@ -3,6 +3,37 @@ import { notFound } from 'next/navigation';
 import { TopBar } from '@/components/TopBar';
 import { JOB_SLUGS, getJob } from '@/lib/jobs';
 
+/** Paragraphs are separated by a blank line; **text** is highlighted in the brand colour. */
+function Rich({ text, className }: { text: string; className?: string }) {
+  return (
+    <>
+      {text.split('\n\n').map((para, i) => (
+        <p key={i} className={className}>
+          {para.split(/(\*\*[^*]+\*\*)/).map((part, j) =>
+            part.startsWith('**') ? <strong key={j} className="hl">{part.slice(2, -2)}</strong> : part,
+          )}
+        </p>
+      ))}
+    </>
+  );
+}
+
+/** Line icons for the How We Work principles, in order. */
+const ICONS = [
+  // Be proactive: lightning
+  <path key="a" d="M13 2 3 14h9l-1 8 10-12h-9l1-8z" />,
+  // Be intelligently curious: magnifying glass
+  <g key="b"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.6-4.6" /></g>,
+  // Take ownership: key
+  <g key="c"><circle cx="7.5" cy="15.5" r="5" /><path d="m11 12 10-10" /><path d="m16 7 3 3" /><path d="m19 4 2 2" /></g>,
+  // Think from first principles: layers
+  <g key="d"><path d="m12 2 10 5-10 5L2 7z" /><path d="m2 12 10 5 10-5" /><path d="m2 17 10 5 10-5" /></g>,
+  // Move fast: fast-forward
+  <g key="e"><path d="M13 19V5l9 7z" /><path d="M2 19V5l9 7z" /></g>,
+  // Use AI with judgement: sparkles
+  <g key="f"><path d="M10 3l1.8 5.2L17 10l-5.2 1.8L10 17l-1.8-5.2L3 10l5.2-1.8z" /><path d="M19 15l.7 2.3L22 18l-2.3.7L19 21l-.7-2.3L16 18l2.3-.7z" /></g>,
+];
+
 export function generateStaticParams() {
   return JOB_SLUGS.map((slug) => ({ slug }));
 }
@@ -33,7 +64,7 @@ export default async function JobPage({ params }: { params: Promise<{ slug: stri
         <div className="job-intro">
           <section className="job-section">
             <h2>About House of Marketers</h2>
-            {job.about.map((p) => <p key={p.slice(0, 24)} className="job-text">{p}</p>)}
+            {job.about.map((p) => <Rich key={p.slice(0, 24)} text={p} className="job-text" />)}
           </section>
           <dl className="job-details">
             {job.details.map(([label, value]) => (
@@ -51,20 +82,24 @@ export default async function JobPage({ params }: { params: Promise<{ slug: stri
             {job.own.map(([title, text]) => (
               <article key={title} className="job-card">
                 <h3>{title}</h3>
-                <p>{text}</p>
+                <Rich text={text} />
               </article>
             ))}
           </div>
         </section>
 
-        <section className="job-section">
+        <section className="job-section how">
           <h2>How We Work</h2>
           <div className="job-cards three">
             {job.howWeWork.map(([title, text], i) => (
-              <article key={title} className="job-card">
-                <span className="job-num">{i + 1}</span>
+              <article key={title} className={`value-card tint-${i % 3}`}>
+                <span className="value-icon" aria-hidden="true">
+                  <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    {ICONS[i % ICONS.length]}
+                  </svg>
+                </span>
                 <h3>{title}</h3>
-                <p>{text}</p>
+                <Rich text={text} />
               </article>
             ))}
           </div>

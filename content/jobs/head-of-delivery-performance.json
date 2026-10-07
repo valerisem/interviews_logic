@@ -3,29 +3,74 @@
   "title": "Head of Delivery",
   "titleAccent": "& Performance",
   "details": [
-    ["Location", "Remote"],
-    ["Working hours", "Significant overlap with UK working hours"],
-    ["Reports to", "CEO"]
+    [
+      "Location",
+      "Remote"
+    ],
+    [
+      "Working hours",
+      "Significant overlap with UK working hours"
+    ],
+    [
+      "Reports to",
+      "CEO"
+    ]
   ],
   "about": [
-    "House of Marketers was founded in 2020 by Inigo Rivero, one of TikTok UK's early employees, who saw the potential of creator marketing before it became a core channel for global brands. Since then, we have grown into a global influencer marketing agency working across markets, platforms and industries. Following a recent acquisition and investment into the business, we are now entering our next stage of growth. We are fast-moving, curious and highly entrepreneurial, and we use technology, data and AI to make better decisions, move faster and solve problems properly from the root.",
-    "As we scale, we are looking for someone to take full ownership of our Campaign Delivery function. You will lead the entire Campaign Delivery team, directly managing both Senior Campaign Managers and Campaign Managers, and will be responsible for how well the function performs across delivery quality, margins, capacity, team performance, and operational efficiency. We want someone who gets into the detail when needed, spots problems early and fixes them before they become firefighting or reach senior leadership."
+    "House of Marketers was founded in 2020 by Inigo Rivero, one of TikTok UK's early employees, who saw the potential of creator marketing before it became a core channel for global brands. Since then, we have grown into a **global influencer marketing agency** working across markets, platforms and industries.\n\nFollowing a recent acquisition and investment into the business, we are now **entering our next stage of growth**. We are fast-moving, curious and highly entrepreneurial, and we use technology, data and AI to make better decisions, move faster and solve problems properly from the root.",
+    "As we scale, we are looking for someone to take **full ownership of our Campaign Delivery function**. You will lead the entire Campaign Delivery team, directly managing both Senior Campaign Managers and Campaign Managers, and will be responsible for how well the function performs across delivery quality, margins, capacity, team performance, and operational efficiency.\n\nWe want someone who **gets into the detail when needed, spots problems early and fixes them** before they become firefighting or reach senior leadership."
   ],
   "own": [
-    ["Margin & Commercial Performance", "You will own campaign margin across Delivery. That means understanding where margin is being lost, challenging unnecessary costs, helping Senior Campaign Managers make better commercial decisions, and continuously looking for ways to improve profitability. Hitting the minimum is not the goal. We want our margins to be excellent."],
-    ["Campaign Performance", "You will own the overall quality and performance of campaign delivery. That includes timelines, budgets, campaign targets, quality standards and identifying risk early. Campaigns should not reach leadership when they are already on fire. Your job is to make sure risks are spotted early, decisions are made quickly, and issues are resolved before they become escalations."],
-    ["Team Leadership & Management", "You will directly manage the Campaign Delivery team, including both Senior Campaign Managers and Campaign Managers. You will set expectations, review performance, give feedback, support development, and hold the team accountable for campaign results, timelines, and commercial performance."],
-    ["Capacity & Work Allocation", "You will own capacity and work allocation across Campaign Delivery, using our capacity model alongside your own judgement to make smart resourcing decisions. You should understand that every resource has a cost, how that cost impacts campaign profitability, and how capacity, workload and allocation ultimately affect margins. You will be expected to understand and challenge the logic behind the model, spot when the data does not reflect reality, and continuously improve how capacity and resources are planned across the team."],
-    ["Delivery Strategy & Improvement", "You will work closely with the Head of Operations on strategic, operational, and automation projects that improve how Delivery works. That could mean changing a workflow, testing a new platform, automating repetitive work, improving how campaigns are allocated, or completely rethinking a process that no longer makes sense. We want someone who actively looks for better ways of working rather than waiting to be asked."],
-    ["Leadership Visibility", "You will make sure the CEO has the information he actually needs to understand how Delivery is performing. Not more dashboards, decks or reports for the sake of reporting. We want clear information, good judgement and useful conclusions: what is working, what is not, what is changing and where leadership attention is actually required. A major sign of success will be that the CEO no longer needs to get pulled into day-to-day campaign delivery."]
+    [
+      "Margin & Commercial Performance",
+      "You will own **campaign margin** across Delivery.\n\nThat means understanding where margin is being lost, challenging unnecessary costs, helping Senior Campaign Managers make better commercial decisions, and continuously looking for ways to improve profitability.\n\nHitting the minimum is not the goal. **We want our margins to be excellent.**"
+    ],
+    [
+      "Campaign Performance",
+      "You will own the **overall quality and performance of campaign delivery**. That includes timelines, budgets, campaign targets, quality standards and identifying risk early.\n\nCampaigns should not reach leadership when they are already on fire. Your job is to make sure **risks are spotted early, decisions are made quickly, and issues are resolved before they become escalations.**"
+    ],
+    [
+      "Team Leadership & Management",
+      "You will **directly manage the Campaign Delivery team**, including both Senior Campaign Managers and Campaign Managers.\n\nYou will set expectations, review performance, give feedback, support development, and **hold the team accountable** for campaign results, timelines, and commercial performance."
+    ],
+    [
+      "Capacity & Work Allocation",
+      "You will own **capacity and work allocation** across Campaign Delivery, using our capacity model alongside your own judgement to make smart resourcing decisions.\n\nYou should understand that **every resource has a cost**, how that cost impacts campaign profitability, and how capacity, workload and allocation ultimately affect margins.\n\nYou will be expected to understand and challenge the logic behind the model, **spot when the data does not reflect reality**, and continuously improve how capacity and resources are planned across the team."
+    ],
+    [
+      "Delivery Strategy & Improvement",
+      "You will work closely with the **Head of Operations** on strategic, operational, and automation projects that improve how Delivery works.\n\nThat could mean changing a workflow, testing a new platform, automating repetitive work, improving how campaigns are allocated, or completely rethinking a process that no longer makes sense.\n\nWe want someone who **actively looks for better ways of working** rather than waiting to be asked."
+    ],
+    [
+      "Leadership Visibility",
+      "You will make sure the CEO has the information he actually needs to understand how Delivery is performing.\n\nNot more dashboards, decks or reports for the sake of reporting. We want **clear information, good judgement and useful conclusions**: what is working, what is not, what is changing and where leadership attention is actually required.\n\nA major sign of success will be that **the CEO no longer needs to get pulled into day-to-day campaign delivery.**"
+    ]
   ],
   "howWeWork": [
-    ["Be proactive", "If something looks wrong, investigate it before somebody asks you to. Do not wait for a problem to become an escalation."],
-    ["Be intelligently curious", "Before asking someone else for the answer, check. Look at the data. Speak to the right people. Test your assumptions. Understand what is actually happening. Then bring a recommendation, not just a question."],
-    ["Take ownership", "We do not want problems passed from person to person or department to department. If you own something, you stay close to it until there is a solution."],
-    ["Think from first principles", "If the same problem keeps happening, we do not want another checklist or temporary fix. Understand why it is happening and fix the root cause."],
-    ["Move fast", "Our industry changes constantly. Technology changes constantly. The company changes quickly. You should be comfortable testing new ideas, trying new tools, changing direction, and making decisions without waiting for perfect information."],
-    ["Use AI with judgement", "We use AI heavily, but we do not want AI slop. AI should help you think, analyse, automate, and move faster. It should not result in endless generic documents, unnecessary documents, or reports nobody needs. Clear thinking comes first."]
+    [
+      "Be proactive",
+      "If something looks wrong, **investigate it before somebody asks you to.**\n\nDo not wait for a problem to become an escalation."
+    ],
+    [
+      "Be intelligently curious",
+      "Before asking someone else for the answer, **check.**\n\nLook at the data. Speak to the right people. Test your assumptions. Understand what is actually happening.\n\nThen **bring a recommendation, not just a question.**"
+    ],
+    [
+      "Take ownership",
+      "We do not want problems passed from person to person or department to department.\n\nIf you own something, **you stay close to it until there is a solution.**"
+    ],
+    [
+      "Think from first principles",
+      "If the same problem keeps happening, we do not want another checklist or temporary fix.\n\nUnderstand why it is happening and **fix the root cause.**"
+    ],
+    [
+      "Move fast",
+      "Our industry changes constantly. Technology changes constantly. The company changes quickly.\n\nYou should be comfortable **testing new ideas, trying new tools, changing direction**, and **making decisions without waiting for perfect information.**"
+    ],
+    [
+      "Use AI with judgement",
+      "We use AI heavily, but **we do not want AI slop.**\n\nAI should help you **think, analyse, automate, and move faster.** It should not result in endless generic documents, unnecessary documents, or reports nobody needs.\n\n**Clear thinking comes first.**"
+    ]
   ],
   "lookingFor": [
     "4+ years of agency-side influencer or creator marketing experience",

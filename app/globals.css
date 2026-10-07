@@ -269,7 +269,8 @@ table.data .select-cell { width: 1%; min-width: 0; padding-right: 4px; }
 .job-card { background: var(--surface); border-radius: var(--radius); padding: 22px 24px; display: flex; flex-direction: column; gap: 10px; }
 .job-card h3 { margin: 0; font-family: var(--display); font-weight: 700; font-size: 17px; color: var(--heading); }
 .job-card p { font-size: 15px; line-height: 1.7; }
-.job-num { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 8px; background: var(--fuchsia); color: #fff; font-family: var(--display); font-weight: 700; font-size: 13px; }
+.job-card p + p { margin-top: 10px; }
+.hl { font-weight: 700; color: var(--fuchsia); }
 .job-lists { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; align-items: start; }
 .job-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
 .job-list li { position: relative; padding-left: 26px; font-size: 15px; line-height: 1.6; }
@@ -281,3 +282,12 @@ table.data .select-cell { width: 1%; min-width: 0; padding-right: 4px; }
   .job-text { text-align: left; }
 }
 
+.job-section.how h2 { text-align: center; font-size: 30px; }
+.job-section.how .job-cards { margin-top: 8px; }
+.value-card { border-radius: 20px; padding: 32px 26px 30px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; }
+.value-card h3 { margin: 0; font-family: var(--display); font-weight: 700; font-size: 18px; color: var(--heading); }
+.value-card p { font-size: 15px; line-height: 1.65; }
+.value-card.tint-0 { background: color-mix(in srgb, #200888 7%, var(--bg)); }
+.value-card.tint-1 { background: color-mix(in srgb, #F0438F 8%, var(--bg)); }
+.value-card.tint-2 { background: var(--surface); }
+.value-icon { display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: var(--bg); color: var(--fuchsia); margin-bottom: 6px; box-shadow: 0 0 0 1px var(--border); }
