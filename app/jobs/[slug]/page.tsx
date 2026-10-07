@@ -28,6 +28,13 @@ export default async function JobPage({ params }: { params: Promise<{ slug: stri
           <h1 className="title-md">
             {job.title} <span className="accent">{job.titleAccent}</span>
           </h1>
+        </header>
+
+        <div className="job-intro">
+          <section className="job-section">
+            <h2>About House of Marketers</h2>
+            {job.about.map((p) => <p key={p.slice(0, 24)} className="job-text">{p}</p>)}
+          </section>
           <dl className="job-details">
             {job.details.map(([label, value]) => (
               <div key={label}>
@@ -36,12 +43,7 @@ export default async function JobPage({ params }: { params: Promise<{ slug: stri
               </div>
             ))}
           </dl>
-        </header>
-
-        <section className="job-section">
-          <h2>About House of Marketers</h2>
-          {job.about.map((p) => <p key={p.slice(0, 24)} className="job-text">{p}</p>)}
-        </section>
+        </div>
 
         <section className="job-section">
           <h2>What You Will Own</h2>
