@@ -4,6 +4,7 @@ import { db } from './supabase';
 import { ASSESSMENTS, isAssessmentType, newSeed } from './questionBank';
 import { EXTRA_TIME_CHOICES } from './extraTime';
 import { scoreAssessment } from './scoring';
+import { notifyCompleted } from './discord';
 import type { AssessmentRow, PublicQuestion, Question, SubmittedAnswer } from './types';
 
 const TABLE = 'candidate_assessments';
@@ -252,6 +253,8 @@ export async function submitAnswer(input: AssessmentRow, questionIndex: number, 
     .select('*')
     .maybeSingle();
   if (error) throw error;
+  // Finished by answering the last question (not abandoned and timed out later): tell the team on Discord.
+  if (last && data && !isTestAttempt(data as AssessmentRow)) void notifyCompleted(data as AssessmentRow);
   const fresh = (data as AssessmentRow | null) ?? (await getByToken(row.token))!;
   return candidateState(fresh);
 }

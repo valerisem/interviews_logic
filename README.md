@@ -93,6 +93,10 @@ Candidates are asked to contact their recruiter before starting. In the dashboar
 
 While signed in to the dashboard, `/form` runs in **test mode** (shown in the header): the one-attempt-per-email rule is skipped, so you can take either assessment as often as you like. Test attempts are saved like any other, with `-TEST` added to the assessment version, and are tagged **Test** on the dashboard. Candidates are never in test mode. Test attempts also have a **Pause** button next to the timer: the timer stops (even if you reload or leave the page) and Next Question is disabled until you resume. Pausing needs both a test attempt and your admin sign-in, so candidates can't pause. **Restart** (next to Pause) starts a fresh attempt straight away with the same name and email, and the completion screen offers **Retake Campaign Manager** / **Retake Account Manager**, so there's no need to fill in the form again.
 
+## Discord notifications
+
+When a candidate finishes an assessment (answers or times out on the last question while taking it), the company's Discord bot posts a summary to the hiring channel: name, email, role, overall and category scores, time taken, tab leaves, extra time and a **Review** link (admin sign-in required). Test attempts, and candidates who abandon partway (their remaining questions time out later), are not posted. Settings: `DISCORD_BOT_TOKEN` and `DISCORD_CHANNEL_ID`; if either is missing nothing is sent, and a Discord failure never affects the candidate.
+
 ## Bot protection
 
 The public start form has three invisible checks (`lib/botChecks.ts`), so bots can't fill the database with junk:
