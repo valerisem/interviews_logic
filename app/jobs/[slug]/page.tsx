@@ -100,8 +100,8 @@ export default async function JobPage({ params }: { params: Promise<{ slug: stri
           <section id="own" className="job-section">
             <h2>What You Will Own</h2>
             <div className="job-cards">
-              {job.own.map(([title, text], i) => (
-                <article key={title} className={`job-card tint-${i % 3}`}>
+              {job.own.map(([title, text]) => (
+                <article key={title} className="job-card">
                   <h3>{title}</h3>
                   <Rich text={text} />
                 </article>
@@ -113,7 +113,7 @@ export default async function JobPage({ params }: { params: Promise<{ slug: stri
             <h2>How We Work</h2>
             <div className="job-cards three">
               {job.howWeWork.map(([title, text], i) => (
-                <article key={title} className={`value-card tint-${i % 3}`}>
+                <article key={title} className="value-card">
                   <span className="value-icon" aria-hidden="true">
                     <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                       {ICONS[i % ICONS.length]}
