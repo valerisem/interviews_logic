@@ -333,37 +333,50 @@ table.data .select-cell { width: 1%; min-width: 0; padding-right: 4px; }
 .collab-close:hover { border-color: var(--fuchsia); color: var(--fuchsia); }
 .collab-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--fuchsia); }
 .collab-title { margin-top: 6px; padding-right: 48px; font-family: var(--display); font-size: clamp(22px, 3vw, 30px); line-height: 1.15; color: var(--heading); }
-.collab-stage { margin-top: 22px; display: grid; grid-template-columns: minmax(0,1fr) clamp(84px, 24vw, 240px) minmax(0,1fr); align-items: center; padding: 40px clamp(14px, 4vw, 48px); border-radius: 18px; border: 1px solid #ECECF1; background-color: #fff; background-image: radial-gradient(#e9e9f0 1px, transparent 1px); background-size: 22px 22px; }
-.collab-stage.right > :first-child { order: 3; }
-.collab-stage.right > :last-child { order: 1; }
-.collab-stage.right .collab-arrows { order: 2; transform: scaleX(-1); }
+.collab-body { margin-top: 22px; display: grid; grid-template-columns: minmax(0,1fr) 330px; border-radius: 18px; border: 1px solid var(--border); overflow: hidden; }
+.collab-zone { height: 18px; margin-bottom: 14px; font-size: 11.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.collab-together { padding: 26px 0 28px 28px; background-color: #fff; background-image: radial-gradient(#e9e9f0 1px, transparent 1px); background-size: 22px 22px; }
+.collab-together .collab-zone { color: var(--fuchsia); }
+.collab-side .collab-zone { color: #6b6b7b; }
+.collab-pair { display: grid; grid-template-columns: minmax(0,1fr) clamp(120px, 18vw, 200px); align-items: center; }
 .collab-arrows { width: 100%; height: auto; overflow: visible; animation: collab-rise 400ms 1300ms ease-out both; }
 .collab-dash { animation: collab-flow 900ms linear infinite; }
+.collab-line { margin-top: 26px; margin-right: 28px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+.collab-line section { position: relative; padding: 18px 20px 18px 22px; border-radius: 14px; background: #fff; border: 1px solid #ECECF1; box-shadow: 0 6px 18px rgba(45,27,105,.07); overflow: hidden; animation: collab-rise 420ms ease-out both; }
+.collab-line section::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, #F0438F, #8B5CF6); }
+.collab-line section:nth-child(1) { animation-delay: 1400ms; }
+.collab-line section:nth-child(2) { animation-delay: 1520ms; }
+.collab-line h3, .collab-owns h3 { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--fuchsia); }
+.collab-line h3 { color: #200888; }
+.collab-line p, .collab-owns p { margin-top: 8px; font-size: 14.5px; line-height: 1.55; color: #14102e; }
+.collab-side { padding: 26px 26px 28px; border-left: 1px solid var(--border); background: #F7F5FF; color: #14102e; }
+.collab-owns { margin-top: 18px; padding-top: 16px; border-top: 2px solid var(--c); animation: collab-rise 420ms 1100ms ease-out both; }
+.collab-owns h3 { color: #200888; }
 .collab-card { position: relative; min-height: 104px; padding: 18px 20px 18px 26px; border-radius: 18px; border: 1px solid #ECECF1; background: #fff; color: #0B0E1A; display: flex; flex-direction: column; justify-content: center; box-shadow: 0 14px 34px rgba(45,27,105,.2); will-change: transform; }
 .collab-card.future { border: 1.5px dashed; }
 .collab-card.me { box-shadow: 0 0 0 3px #E91E8C, 0 14px 34px rgba(45,27,105,.2); }
 .collab-card > i { position: absolute; left: 0; top: 12px; bottom: 12px; width: 6px; border-radius: 4px; }
 .collab-name { font-family: var(--display); font-size: clamp(15px, 2vw, 20px); font-weight: 800; line-height: 1.15; overflow-wrap: break-word; hyphens: auto; }
 .collab-role { margin-top: 5px; font-size: clamp(12px, 1.5vw, 14px); line-height: 1.25; color: #6B7280; word-break: break-word; }
-.collab-notes { margin-top: 22px; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
-.collab-notes section { padding: 18px 20px; border-radius: 14px; background: var(--surface); animation: collab-rise 420ms ease-out both; }
-.collab-notes section:nth-child(1) { animation-delay: 1400ms; }
-.collab-notes section:nth-child(2) { animation-delay: 1520ms; }
-.collab-notes section:nth-child(3) { animation-delay: 1640ms; }
-.collab-notes h3 { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--fuchsia); }
-.collab-notes p { margin-top: 8px; font-size: 14.5px; line-height: 1.55; }
 @keyframes collab-fade { from { opacity: 0; } }
 @keyframes collab-rise { from { opacity: 0; transform: translateY(10px); } }
 @keyframes collab-flow { to { stroke-dashoffset: -24; } }
 @media (max-width: 760px) {
-  .collab-panel { padding: 24px 18px; }
-  .collab-stage { padding: 28px 10px; grid-template-columns: minmax(0,1fr) 56px minmax(0,1fr); }
+  .collab-panel { padding: 24px 16px; }
+  /* One grid: the two cards and arrows in a row, then the shared notes, then what the role owns. */
+  .collab-body { grid-template-columns: minmax(0,1fr) 52px minmax(0,1fr); grid-template-areas: "hoo arrows person" "line line line" "owns owns owns"; padding: 22px 12px 0; background-color: #fff; background-image: radial-gradient(#e9e9f0 1px, transparent 1px); background-size: 22px 22px; align-items: center; }
+  .collab-together, .collab-pair, .collab-side { display: contents; }
+  .collab-zone { display: none; }
+  .collab-pair > .collab-card { grid-area: hoo; }
+  .collab-arrows { grid-area: arrows; }
+  .collab-side > .collab-card { grid-area: person; }
+  .collab-line { grid-area: line; margin: 22px 0 0; grid-template-columns: 1fr; }
+  .collab-owns { grid-area: owns; margin: 16px -12px 0; padding: 18px 20px 20px; border-top: 2px solid var(--c); background: #F7F5FF; }
   .collab-card { min-height: 84px; padding: 10px 10px 10px 16px; border-radius: 14px; }
+  .collab-card > i { width: 5px; top: 10px; bottom: 10px; }
   .collab-name { font-size: 14px; }
   .collab-role { font-size: 12px; }
-  .collab-card > i { width: 5px; top: 10px; bottom: 10px; }
-  .collab-notes { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .collab, .collab-panel, .collab-arrows, .collab-notes section, .collab-dash { animation: none; }
+  .collab, .collab-panel, .collab-arrows, .collab-line section, .collab-owns, .collab-dash { animation: none; }
 }

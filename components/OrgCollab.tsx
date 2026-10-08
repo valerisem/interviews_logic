@@ -5,15 +5,16 @@ import { createPortal } from 'react-dom';
 import type { OrgNode, OrgRoleInfo } from './OrgChart';
 
 /*
- * Opens when an org-chart card is clicked: the clicked card pops out of the chart towards the viewer,
- * the job's own card (e.g. Head of Operations) flies in from the side, and arrows take turns running
- * each way between them to show the working line. The role notes sit underneath.
+ * Opens when an org-chart card is clicked. The clicked card pops out of the chart towards the viewer into its
+ * own side panel with what that role owns; the job's own card (e.g. Head of Operations) flies in from the left.
+ * Between them, arrows take turns running each way, and the shared work and where the line sits sit
+ * under the arrows — the collaboration zone, kept apart from what the role owns on its own.
  */
 
 const PINK = '#F0438F', PUR = '#8B5CF6', NAVY = '#0B0E1A', GREY = '#6B7280';
 const CEO_GRAD = `linear-gradient(135deg, ${NAVY} 0%, ${PUR} 45%, ${PINK} 100%)`;
 
-// Partner card on the left, clicked card on the right (mirrored when the partner sits on the right).
+// Partner card on the left, clicked card on the right.
 const TOP = 'M 14 50 C 80 4, 160 4, 226 50';
 const BOTTOM = 'M 226 90 C 160 136, 80 136, 14 90';
 const CYCLE = '3.2s';
@@ -53,14 +54,12 @@ function Flow({ d, color, first }: { d: string; color: string; first: boolean })
   );
 }
 
-export function OrgCollab({ person, partner, info, from, side, onClose }: {
+export function OrgCollab({ person, partner, info, from, onClose }: {
   person: OrgNode;
   partner: OrgNode;
   info: OrgRoleInfo;
   /** Where the clicked card was on screen, so it can grow out of that spot. */
   from: DOMRect;
-  /** Which side the partner card flies in on. */
-  side: 'left' | 'right';
   onClose: () => void;
 }) {
   const personRef = useRef<HTMLDivElement>(null);
@@ -86,14 +85,14 @@ export function OrgCollab({ person, partner, info, from, side, onClose }: {
       ),
       q.animate(
         [
-          { transform: `translateX(${side === 'left' ? -70 : 70}vw) rotate(${side === 'left' ? -10 : 10}deg)`, opacity: 0 },
+          { transform: 'translateX(-70vw) rotate(-10deg)', opacity: 0 },
           { transform: 'none', opacity: 1 },
         ],
         { duration: 800, delay: 650, easing: 'cubic-bezier(.34,1.4,.64,1)', fill: 'backwards' },
       ),
     ];
     return () => anims.forEach((a) => a.cancel());
-  }, [from, side]);
+  }, [from]);
 
   useEffect(() => {
     const before = document.activeElement as HTMLElement | null;
@@ -118,30 +117,37 @@ export function OrgCollab({ person, partner, info, from, side, onClose }: {
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
         </button>
         <p className="collab-eyebrow">How they work together</p>
-        <h2 id="collab-title" className="collab-title">{info.title} <span className="accent">×</span> {partner.role}</h2>
+        <h2 id="collab-title" className="collab-title">{person.future ? person.name : person.role} <span className="accent">×</span> {partner.role}</h2>
 
-        <div className={`collab-stage ${side}`}>
-          <Card node={partner} me cardRef={partnerRef} />
-          <svg className="collab-arrows" viewBox="0 0 240 140" aria-hidden="true">
-            <Flow d={TOP} color={PINK} first />
-            <Flow d={BOTTOM} color={PUR} first={false} />
-          </svg>
-          <Card node={person} cardRef={personRef} />
-        </div>
-
-        <div className="collab-notes">
-          <section>
-            <h3>Owns</h3>
-            <p>{info.owns}</p>
-          </section>
-          <section>
-            <h3>Works with {partner.role} on</h3>
-            <p>{info.works}</p>
-          </section>
-          <section>
-            <h3>Where the line sits</h3>
-            <p>{info.line}</p>
-          </section>
+        <div className="collab-body">
+          <div className="collab-together">
+            <p className="collab-zone">Working together</p>
+            <div className="collab-pair">
+              <Card node={partner} me cardRef={partnerRef} />
+              <svg className="collab-arrows" viewBox="0 0 240 140" aria-hidden="true">
+                <Flow d={TOP} color={PINK} first />
+                <Flow d={BOTTOM} color={PUR} first={false} />
+              </svg>
+            </div>
+            <div className="collab-line">
+              <section>
+                <h3>Works with {partner.role} on</h3>
+                <p>{info.works}</p>
+              </section>
+              <section>
+                <h3>Where the line sits</h3>
+                <p>{info.line}</p>
+              </section>
+            </div>
+          </div>
+          <aside className="collab-side" style={{ '--c': person.color ?? GREY } as React.CSSProperties}>
+            <p className="collab-zone">Their own role</p>
+            <Card node={person} cardRef={personRef} />
+            <section className="collab-owns">
+              <h3>Owns</h3>
+              <p>{info.owns}</p>
+            </section>
+          </aside>
         </div>
       </div>
     </div>,

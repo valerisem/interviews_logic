@@ -280,9 +280,7 @@ export function OrgChart({ data, highlight, roles }: { data: OrgSnapshot; highli
       </p>
       {open && partner && roles?.[open.id] && (() => {
         const person = data.nodes.find((n) => n.id === open.id)!;
-        // The partner flies in on the side away from the clicked card's position on the chart.
-        const side = person.x + person.w / 2 >= partner.x + partner.w / 2 ? 'left' : 'right';
-        return <OrgCollab person={person} partner={partner} info={roles[open.id]} from={open.from} side={side} onClose={closeCollab} />;
+        return <OrgCollab person={person} partner={partner} info={roles[open.id]} from={open.from} onClose={closeCollab} />;
       })()}
     </div>
   );
