@@ -32,234 +32,82 @@
       "layout": "cards",
       "items": [
         {
-          "title": "Operational Performance, Control & Scalability",
+          "title": "Commercial Operations and Control",
           "blocks": [
-            "You build the **operating infrastructure that allows the company to grow profitably and with control.**",
-            "That means understanding how revenue, pipeline, campaigns, workload, people, costs, capacity and performance interact, and creating systems that allow leadership to **see when something is moving away from plan.**",
-            "You are not the person personally accountable for every commercial outcome inside each function.",
-            "For example, campaign margin remains the accountability of Delivery. The Delivery Director will ultimately own Delivery performance and margin across the function. Until that role is in place, Senior Campaign Managers are accountable for the performance and margin of the campaigns they oversee.",
-            "Your responsibility is to make sure there is an **additional layer of control** around that accountability.",
-            "That includes building the systems that show:",
+            "You build the **controls that help the business deliver against its commercial targets** and identify problems early.",
+            "Delivery remains accountable for campaign performance and margin. The Delivery Director will own this across the function, with Senior Campaign Managers accountable for their campaigns until that role is in place.",
+            "Operations owns the **infrastructure around that accountability.**",
+            "This includes",
             {
               "list": [
-                "whether margins are moving away from target",
-                "why that is happening",
-                "where creator costs, workload, delays or resourcing are affecting performance",
-                "which owner needs to act",
-                "whether corrective action actually happened",
-                "whether the same problem keeps repeating across campaigns or teams"
+                "automated margin and performance controls",
+                "visibility into creator costs, campaign delays, resourcing and other drivers affecting performance",
+                "clear targets and owners",
+                "escalation when results move away from plan",
+                "identifying recurring causes rather than repeatedly fixing individual cases"
               ]
             },
-            "The objective is not for Operations to firefight individual campaigns.",
-            "It is to **identify patterns, find the root cause and fix the infrastructure** that allowed the problem to happen repeatedly."
+            "The goal is to give the CEO an **additional layer of control without taking ownership away from Delivery.**"
           ]
         },
         {
-          "title": "Operational Forecasting, Prediction & Early Warning",
+          "title": "Forecasting, Capacity and Resource Planning",
           "blocks": [
-            "You own the **forward-looking operational view** of the business.",
-            "Using live information from pipeline, campaign management, workload, capacity, delivery activity and performance, you build models that help us understand **what is likely to happen next** rather than only reporting what has already happened.",
-            "This includes predicting:",
+            "You own the **operational models** used to understand **what the business is likely to need next.**",
+            "You combine live pipeline, campaign data, workload, timelines, historical delivery patterns and team capacity to predict",
             {
               "list": [
-                "future workload from pipeline",
-                "where capacity constraints are likely to appear",
-                "when additional resources may become necessary",
-                "campaigns moving toward margin or delivery risk",
-                "where targets are likely to be missed",
-                "inefficient resource allocation",
-                "operational bottlenecks before they become escalations"
+                "future workload",
+                "where capacity will become tight",
+                "when hiring may be required",
+                "how work should be allocated",
+                "where delivery risks are developing",
+                "what different pipeline scenarios mean for the team"
               ]
             },
-            "For example, if pipeline suggests a significant number of campaigns are likely to start next month, Operations should be able to combine that with campaign type, historical workload, existing capacity and delivery timelines to understand where pressure will appear and what needs to happen before it does.",
-            "The goal is to move from:",
-            {
-              "shift": [
-                "“What went wrong?”",
-                "“What is likely to go wrong, why, and what should we change now?”"
-              ]
-            }
+            "This should allow the business to **make resource decisions before teams become overloaded** or delivery is affected."
           ]
         },
         {
-          "title": "Systems, Automation & Technology",
+          "title": "Systems, Automation and Data",
           "blocks": [
-            "You own the **operational technology and automation roadmap** across the company.",
-            "Your job is to identify where the business is **losing time, money or visibility** and determine where technology can materially improve the way we operate.",
-            "This may include:",
+            "You own the **roadmap for operational systems, automation and AI.**",
+            "You identify where manual work, disconnected systems or poor data are **costing the business time or money**, then decide what should be fixed or built.",
+            "This includes areas such as margin controls, forecasting, target tracking, reporting, CRM and project management integrations, workflow automation and internal AI tools.",
+            "You manage the people responsible for building and maintaining this infrastructure.",
+            "Every significant project should have a **clear return** through time saved, cost reduced, additional capacity, better control or revenue enabled."
+          ]
+        },
+        {
+          "title": "People and Organisational Performance",
+          "blocks": [
+            "You own the **structure around how people are managed and held accountable.**",
+            "This includes",
             {
               "list": [
-                "automated performance and margin controls",
-                "capacity and workload modelling",
-                "pipeline-to-resource forecasting",
-                "CRM and project-management integrations",
-                "automated reporting",
-                "management dashboards",
-                "target tracking",
-                "workflow automation",
-                "AI-enabled internal tools",
-                "operational data infrastructure"
-              ]
-            },
-            "You are not expected to personally build every technical solution.",
-            "You are responsible for **identifying the business problem, deciding what should be built, prioritising the roadmap, managing the people responsible for execution and validating whether the solution actually works.**",
-            "Technology should create **measurable business value** through:",
-            "**time saved, cost reduced, capacity created, risk reduced, visibility improved or revenue enabled.**"
-          ]
-        },
-        {
-          "title": "Organisational Structure & Accountability",
-          "blocks": [
-            "You help **design how the company operates as it scales.**",
-            "That means continuously asking:",
-            {
-              "questions": [
-                "Who owns this?",
-                "Who is accountable for the result?",
-                "Where should this decision sit?",
-                "What should reach the CEO and what should not?",
-                "Where will the current structure break as we grow?"
-              ]
-            },
-            "You work with functional leaders to establish **clear ownership, targets and reporting structures.**",
-            "Where a function owns an outcome, Operations should not quietly take that accountability away from them.",
-            "Instead, you make sure the business has **enough visibility and control** to know whether the outcome is being achieved and **intervene at the system level** when it is not.",
-            "The purpose is to create a company where **accountability is clear** and the CEO does not need to personally chase individuals across multiple departments to understand what is happening."
-          ]
-        },
-        {
-          "title": "Cross-Functional Execution",
-          "blocks": [
-            "Many of the biggest operational problems **sit between functions** rather than inside one department.",
-            {
-              "questions": [
-                "Sales affects Delivery.",
-                "Delivery affects Finance.",
-                "Pipeline affects hiring.",
-                "Capacity affects margin.",
-                "People decisions affect productivity.",
-                "Systems affect everyone."
-              ]
-            },
-            "You own the **operational coordination** required when several functions need to work together.",
-            "That means making sure there is:",
-            {
-              "flow": [
-                "one clear outcome",
-                "clear owners",
-                "clear deadlines",
-                "reliable data",
-                "follow-through"
-              ]
-            },
-            "You **challenge leaders when commitments are not being delivered** and make sure unresolved cross-functional issues do not repeatedly land with the CEO."
-          ]
-        },
-        {
-          "title": "People Performance & Workforce Operations",
-          "blocks": [
-            "You oversee the **People Operations function** as part of the wider operating model.",
-            "The purpose of this function is not simply HR administration.",
-            "It is to make sure the business has **the right people, performing at the required level, with clear expectations and appropriate support.**",
-            "This includes infrastructure around:",
-            {
-              "list": [
-                "performance management",
-                "targets and accountability",
-                "onboarding",
-                "time to productivity",
-                "manager support and training",
-                "difficult performance conversations",
-                "team engagement",
+                "organisational structure and reporting lines",
+                "performance targets",
+                "manager accountability",
+                "onboarding and time to productivity",
+                "performance management and difficult conversations",
                 "workforce planning",
                 "contractor and employee structures",
-                "international workforce considerations",
-                "coordination with specialist HR and legal advisers where required"
+                "team engagement",
+                "coordination with specialist HR and legal support"
               ]
             },
-            "You manage the person responsible for the day-to-day People Operations function and **remain accountable for the quality of that function.**",
-            "Onboarding should not be measured by whether somebody completed documents.",
-            "It should be measured by **how quickly they become independently productive.**",
-            "Performance management should not simply explain what good performance looks like.",
-            "People should have **measurable expectations and accountability** for achieving them."
+            "You oversee the People Operations function and **remain accountable for its output.**",
+            "You also review **how the organisation needs to change as the company grows**, including when new management layers, roles or functions are required."
           ]
         },
         {
-          "title": "Capacity & Resource Infrastructure",
+          "title": "Cross-Functional Operations and CEO Support",
           "blocks": [
-            "You develop the systems used to understand **how much work the company can realistically handle** and where additional resources are genuinely required.",
-            "This means bringing together information such as:",
-            {
-              "list": [
-                "campaigns",
-                "workload",
-                "campaign complexity",
-                "timelines",
-                "creator volumes",
-                "historical execution patterns",
-                "pipeline",
-                "team availability",
-                "performance",
-                "resource cost"
-              ]
-            },
-            "The purpose is not to track people for the sake of tracking them.",
-            "The purpose is to make **better decisions around allocation, hiring, workload and cost.**",
-            "When somebody says a team is overloaded, leadership should be able to understand whether the problem is **genuinely capacity, poor allocation, inefficient processes, performance or something else.**"
-          ]
-        },
-        {
-          "title": "Strategic Operational Projects",
-          "blocks": [
-            "You lead important projects that **sit across the business** or do not naturally belong to one functional leader.",
-            "Examples may include:",
-            {
-              "list": [
-                "redesigning the organisational structure",
-                "building company-wide forecasting infrastructure",
-                "improving margin-control systems",
-                "implementing new operational technology",
-                "redesigning onboarding",
-                "improving capacity planning",
-                "reducing unnecessary external or internal cost",
-                "restructuring workflows",
-                "improving leadership reporting",
-                "solving recurring operational bottlenecks"
-              ]
-            },
-            "You take problems from:",
-            {
-              "shift": [
-                "“This keeps happening.”",
-                "“We understand the root cause, we changed the system, there is an owner, and we can measure whether the fix worked.”"
-              ]
-            }
-          ]
-        },
-        {
-          "title": "CEO Leverage",
-          "blocks": [
-            "A core purpose of this role is to **give the CEO time and headspace back.**",
-            "The CEO should not need to personally collect information from multiple people, investigate recurring operational problems or follow up on every cross-functional dependency.",
-            "You build the layer underneath the CEO that turns operational complexity into:",
-            {
-              "flow": [
-                "visibility",
-                "accountability",
-                "action"
-              ]
-            },
-            "When something genuinely requires CEO involvement, you should be able to bring:",
-            {
-              "questions": [
-                "What is happening.",
-                "Why it is happening.",
-                "What the impact is.",
-                "Who owns it.",
-                "What has already been done.",
-                "What decision is actually required from the CEO."
-              ]
-            }
+            "You own operational issues and projects that **sit across several teams** or do not naturally belong to one functional leader.",
+            "This can include company-wide process changes, new systems, vendor changes, restructuring workflows, improving reporting or solving recurring problems between Sales, Delivery, Finance, People and Technology.",
+            "Your role is to make sure there is **a clear owner, a decision is made and the work gets completed.**",
+            "You also make sure **the CEO does not need to personally investigate every operational issue.**",
+            "When something genuinely needs CEO involvement, you should already understand **what happened, why it happened, who owns it, what has been done and what decision is required.**"
           ]
         }
       ]
