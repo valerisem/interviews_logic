@@ -28,13 +28,13 @@
     },
     {
       "id": "own",
-      "title": "What You Own",
+      "title": "What the Role Owns",
       "layout": "cards",
       "items": [
         {
           "title": "Commercial Operations and Control",
           "blocks": [
-            "You build the **controls that help the business deliver against its commercial targets** and identify problems early.",
+            "The Head of Operations builds the **controls that help the business deliver against its commercial targets** and identify problems early.",
             "Delivery remains accountable for campaign performance and margin. The Delivery Director will own this across the function, with Senior Campaign Managers accountable for their campaigns until that role is in place.",
             "Operations owns the **infrastructure around that accountability.**",
             "This includes",
@@ -53,8 +53,8 @@
         {
           "title": "Forecasting, Capacity and Resource Planning",
           "blocks": [
-            "You own the **operational models** used to understand **what the business is likely to need next.**",
-            "You combine live pipeline, campaign data, workload, timelines, historical delivery patterns and team capacity to predict",
+            "The Head of Operations owns the **operational models** used to understand **what the business is likely to need next.**",
+            "The role combines live pipeline, campaign data, workload, timelines, historical delivery patterns and team capacity to predict",
             {
               "list": [
                 "future workload",
@@ -71,17 +71,17 @@
         {
           "title": "Systems, Automation and Data",
           "blocks": [
-            "You own the **roadmap for operational systems, automation and AI.**",
-            "You identify where manual work, disconnected systems or poor data are **costing the business time or money**, then decide what should be fixed or built.",
+            "The Head of Operations owns the **roadmap for operational systems, automation and AI.**",
+            "The role identifies where manual work, disconnected systems or poor data are **costing the business time or money**, then decides what should be fixed or built.",
             "This includes areas such as margin controls, forecasting, target tracking, reporting, CRM and project management integrations, workflow automation and internal AI tools.",
-            "You manage the people responsible for building and maintaining this infrastructure.",
+            "The Head of Operations manages the people responsible for building and maintaining this infrastructure.",
             "Every significant project should have a **clear return** through time saved, cost reduced, additional capacity, better control or revenue enabled."
           ]
         },
         {
           "title": "People and Organisational Performance",
           "blocks": [
-            "You own the **structure around how people are managed and held accountable.**",
+            "The Head of Operations owns the **structure around how people are managed and held accountable.**",
             "This includes",
             {
               "list": [
@@ -96,18 +96,18 @@
                 "coordination with specialist HR and legal support"
               ]
             },
-            "You oversee the People Operations function and **remain accountable for its output.**",
-            "You also review **how the organisation needs to change as the company grows**, including when new management layers, roles or functions are required."
+            "The Head of Operations oversees the People Operations function and **remains accountable for its output.**",
+            "The role also reviews **how the organisation needs to change as the company grows**, including when new management layers, roles or functions are required."
           ]
         },
         {
           "title": "Cross-Functional Operations and CEO Support",
           "blocks": [
-            "You own operational issues and projects that **sit across several teams** or do not naturally belong to one functional leader.",
+            "The Head of Operations owns operational issues and projects that **sit across several teams** or do not naturally belong to one functional leader.",
             "This can include company-wide process changes, new systems, vendor changes, restructuring workflows, improving reporting or solving recurring problems between Sales, Delivery, Finance, People and Technology.",
-            "Your role is to make sure there is **a clear owner, a decision is made and the work gets completed.**",
-            "You also make sure **the CEO does not need to personally investigate every operational issue.**",
-            "When something genuinely needs CEO involvement, you should already understand **what happened, why it happened, who owns it, what has been done and what decision is required.**"
+            "The role is to make sure there is **a clear owner, a decision is made and the work gets completed.**",
+            "The Head of Operations also makes sure **the CEO does not need to personally investigate every operational issue.**",
+            "When something genuinely needs CEO involvement, the Head of Operations should already understand **what happened, why it happened, who owns it, what has been done and what decision is required.**"
           ]
         }
       ]
@@ -129,8 +129,8 @@
           ]
         },
         "This currently includes Social Media until ownership moves under the appropriate senior Marketing function.",
-        "You set expectations for these functions, review performance and hold their owners accountable.",
-        "**Delegating execution does not remove your accountability** for the functions reporting into you."
+        "The Head of Operations sets expectations for these functions, reviews performance and holds their owners accountable.",
+        "**Delegating execution does not remove the Head of Operations’ accountability** for the functions reporting into the role."
       ],
       "half": true
     },
@@ -138,7 +138,7 @@
       "id": "success",
       "title": "What Success Looks Like",
       "blocks": [
-        "You are succeeding when:",
+        "The role is succeeding when:",
         {
           "list": [
             "**The business scales more effectively** with stronger use of people, technology, data and resources as the company grows.",
