@@ -5,8 +5,8 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 /*
  * Read-only, interactive copy of a saved Org Chart Whiteboard board (github.com/valerisem/org):
  * the same cards, pod boxes and reports-to arrows, drawn from a frozen snapshot of the board.
- * Drag to pan, use the buttons (or Ctrl/⌘ + scroll, or pinch) to zoom. Hover a card to see its
- * reporting lines.
+ * Opens zoomed in on the highlighted person and the people reporting to them. Drag to pan; scroll (with the
+ * pointer over the chart), pinch or the buttons to zoom. Hover a card to see its reporting lines.
  */
 
 export interface OrgNode {
@@ -86,12 +86,28 @@ export function OrgChart({ data, highlight }: { data: OrgSnapshot; highlight?: s
   }, []);
   const fit = useCallback(() => fitTo(bounds()), [fitTo, bounds]);
 
+  const neighbours = useCallback((id: string) => {
+    const set = new Set<string>();
+    for (const e of data.edges) if (e.from === id || e.to === id) { set.add(e.from); set.add(e.to); }
+    return set;
+  }, [data]);
+
+  const focusHighlight = useCallback(() => {
+    if (!highlight) return fit();
+    // The person and everyone who reports to them.
+    const ids = new Set([highlight, ...data.edges.filter((e) => e.to === highlight).map((e) => e.from)]);
+    const rs = data.nodes.filter((n) => ids.has(n.id));
+    const x0 = Math.min(...rs.map((r) => r.x)), y0 = Math.min(...rs.map((r) => r.y));
+    fitTo({ x: x0 - 60, y: y0 - 60, w: Math.max(...rs.map((r) => r.x + r.w)) - x0 + 120, h: Math.max(...rs.map((r) => r.y + r.h)) - y0 + 120 });
+  }, [highlight, neighbours, data, fit, fitTo]);
+
+  // Open on the highlighted person's team (or the whole chart if there is none).
   useEffect(() => {
-    fit();
-    const onResize = () => fit();
+    focusHighlight();
+    const onResize = () => focusHighlight();
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
-  }, [fit]);
+  }, [focusHighlight]);
 
   const zoomAt = useCallback((factor: number, mx?: number, my?: number) => {
     const el = areaRef.current;
@@ -104,12 +120,11 @@ export function OrgChart({ data, highlight }: { data: OrgSnapshot; highlight?: s
     });
   }, []);
 
-  // Ctrl/⌘ + scroll zooms; plain scroll keeps scrolling the page.
+  // Scrolling with the pointer over the chart zooms it.
   useEffect(() => {
     const el = areaRef.current;
     if (!el) return;
     const onWheel = (e: WheelEvent) => {
-      if (!e.ctrlKey && !e.metaKey) return;
       e.preventDefault();
       const r = el.getBoundingClientRect();
       zoomAt(Math.exp(-e.deltaY * 0.0015), e.clientX - r.left, e.clientY - r.top);
@@ -147,21 +162,9 @@ export function OrgChart({ data, highlight }: { data: OrgSnapshot; highlight?: s
   };
 
   const rect = (id: string) => data.nodes.find((n) => n.id === id);
-  const neighbours = (id: string) => {
-    const set = new Set<string>();
-    for (const e of data.edges) if (e.from === id || e.to === id) { set.add(e.from); set.add(e.to); }
-    return set;
-  };
   // While a card is hovered, its reporting lines stand out and everything else fades.
   const focus = hover;
   const related = focus ? neighbours(focus) : new Set<string>();
-
-  const focusHighlight = () => {
-    const ids = new Set([highlight!, ...neighbours(highlight!)]);
-    const rs = data.nodes.filter((n) => ids.has(n.id));
-    const x0 = Math.min(...rs.map((r) => r.x)), y0 = Math.min(...rs.map((r) => r.y));
-    fitTo({ x: x0 - 60, y: y0 - 60, w: Math.max(...rs.map((r) => r.x + r.w)) - x0 + 120, h: Math.max(...rs.map((r) => r.y + r.h)) - y0 + 120 });
-  };
 
   return (
     <div className="org">
@@ -232,7 +235,7 @@ export function OrgChart({ data, highlight }: { data: OrgSnapshot; highlight?: s
         <button type="button" onClick={() => zoomAt(1.25)} aria-label="Zoom in">+</button>
         <button type="button" onClick={() => zoomAt(0.8)} aria-label="Zoom out">−</button>
       </div>
-      <p className="org-hint">Drag to move around · Ctrl/⌘ + scroll or pinch to zoom · Hover a card to see its reporting lines</p>
+      <p className="org-hint">Drag to move around · Scroll or pinch to zoom · Hover a card to see its reporting lines</p>
     </div>
   );
 }

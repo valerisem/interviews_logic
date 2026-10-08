@@ -301,8 +301,7 @@ table.data .select-cell { width: 1%; min-width: 0; padding-right: 4px; }
 @media (max-width: 620px) { .job-list.two-col { columns: 1; } }
 
 /* ---------- Org chart (read-only copy of an Org Chart Whiteboard board) ---------- */
-.job-org { display: flex; flex-direction: column; gap: 16px; margin-bottom: 56px; }
-.job-org h2 { font-family: var(--display); font-weight: 700; font-size: 24px; letter-spacing: -0.02em; color: var(--heading); }
+.job-org { margin-bottom: 40px; }
 .org { position: relative; }
 .org-area { position: relative; height: 560px; overflow: hidden; border-radius: var(--radius); border: 1px solid var(--border); background-color: #fff; background-image: radial-gradient(#e9e9f0 1px, transparent 1px); cursor: grab; touch-action: none; user-select: none; }
 .org-area:active { cursor: grabbing; }

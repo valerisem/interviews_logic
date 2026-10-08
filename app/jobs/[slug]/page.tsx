@@ -153,19 +153,18 @@ export default async function JobPage({ params }: { params: Promise<{ slug: stri
     <>
       <TopBar wide="xl" />
       <main className="doc job">
+        {job.orgChart && ORG_CHARTS[job.slug] && (
+          <section className="job-org" aria-label={job.orgChart.title}>
+            <OrgChart data={ORG_CHARTS[job.slug]} highlight={job.orgChart.highlight} />
+          </section>
+        )}
+
         <header className="doc-head">
           <p className="eyebrow">{job.eyebrow ?? 'We’re Hiring'}</p>
           <h1 className="title-md">
             {job.title} <span className="accent">{job.titleAccent}</span>
           </h1>
         </header>
-
-        {job.orgChart && ORG_CHARTS[job.slug] && (
-          <section className="job-org" aria-label={job.orgChart.title}>
-            <h2>{job.orgChart.title}</h2>
-            <OrgChart data={ORG_CHARTS[job.slug]} highlight={job.orgChart.highlight} />
-          </section>
-        )}
 
         <div className="doc-grid">
           <nav className="doc-toc" aria-label="Contents">
