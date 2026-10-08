@@ -295,3 +295,24 @@ table.data .select-cell { width: 1%; min-width: 0; padding-right: 4px; }
 .job-list.two-col li { break-inside: avoid; margin-bottom: 10px; }
 .job-lists .job-list.two-col, .job-card .job-list.two-col { columns: 1; }
 @media (max-width: 620px) { .job-list.two-col { columns: 1; } }
+
+/* ---------- Org chart (read-only copy of an Org Chart Whiteboard board) ---------- */
+.job-org { display: flex; flex-direction: column; gap: 16px; margin-bottom: 56px; }
+.job-org h2 { font-family: var(--display); font-weight: 700; font-size: 24px; letter-spacing: -0.02em; color: var(--heading); }
+.org { position: relative; }
+.org-area { position: relative; height: 560px; overflow: hidden; border-radius: var(--radius); border: 1px solid var(--border); background-color: #fff; background-image: radial-gradient(#e9e9f0 1px, transparent 1px); cursor: grab; touch-action: none; user-select: none; }
+.org-area:active { cursor: grabbing; }
+.org-layer { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+.org-edges { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }
+.org-pod { position: absolute; border-radius: 22px; border: 1.5px dashed; }
+.org-pod span { position: absolute; top: 12px; left: 16px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+.org-card { position: absolute; background: #fff; display: flex; flex-direction: column; justify-content: center; color: #0B0E1A; transition: opacity 120ms; }
+.org-card > i { position: absolute; left: 0; top: 8px; bottom: 8px; border-radius: 4px; }
+.org-name { line-height: 1.16; word-break: break-word; color: #0B0E1A; font-family: var(--display); }
+.org-role { margin-top: 3px; line-height: 1.2; color: #6B7280; word-break: break-word; }
+.org-tag { position: absolute; top: -9px; right: 8px; font-size: 9.5px; font-weight: 700; color: #fff; padding: 2px 7px; border-radius: 20px; white-space: nowrap; }
+.org-controls { position: absolute; top: 12px; right: 12px; display: flex; gap: 6px; }
+.org-controls button { min-width: 36px; height: 36px; padding: 0 12px; border-radius: 10px; border: 1px solid #ECECF1; background: #fff; color: #200888; box-shadow: 0 2px 8px rgba(45,27,105,.08); font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; }
+.org-controls button:hover { border-color: #F0438F; color: #F0438F; }
+.org-hint { margin-top: 8px; font-size: 12.5px; color: var(--muted); }
+@media (max-width: 620px) { .org-area { height: 440px; } }

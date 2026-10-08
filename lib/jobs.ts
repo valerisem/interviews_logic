@@ -1,5 +1,7 @@
 import headOfDelivery from '@/content/jobs/head-of-delivery-performance.json';
 import headOfOperations from '@/content/jobs/head-of-operations.json';
+import headOfOperationsOrg from '@/content/jobs/org/head-of-operations.json';
+import type { OrgSnapshot } from '@/components/OrgChart';
 
 /*
  * Job descriptions published at /jobs/<slug>. To add one, add a JSON file in content/jobs
@@ -39,8 +41,15 @@ export interface Job {
   title: string;
   titleAccent: string;
   details: string[][];
+  /** An interactive org chart shown under the title (a frozen copy of a whiteboard board). */
+  orgChart?: { title: string; highlight?: string };
   sections: JobSection[];
 }
+
+/** Frozen org-chart snapshots, by job slug (content/jobs/org/<slug>.json). */
+export const ORG_CHARTS: Record<string, OrgSnapshot> = {
+  'head-of-operations': headOfOperationsOrg as OrgSnapshot,
+};
 
 const JOBS = [headOfDelivery, headOfOperations] as Job[];
 

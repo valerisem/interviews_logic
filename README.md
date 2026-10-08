@@ -19,6 +19,8 @@ The app runs on **houseofmarketer.com**, next to a redirect to the main website:
 | `/form/privacy` | Candidate Assessment Privacy Notice |
 | `/form/a/<token>` | A candidate's attempt, so a reload resumes it |
 | `/jobs/head-of-delivery-performance`, `/jobs/head-of-operations` | Public job descriptions, from `content/jobs/` (see `lib/jobs.ts`) |
+
+The Head of Operations page also shows an interactive org chart (pan, zoom, hover for reporting lines): a frozen copy of the Org Chart Whiteboard board *Reorg draft — 2026-10-02* (`content/jobs/org/head-of-operations.json`, drawn by `components/OrgChart.tsx`). Later edits to that board don't change the page until the copy is refreshed.
 | `/admin` | Admin dashboard (Google sign-in) |
 | `/` | Redirects to `/form` |
 | anything else | Redirects (302) to `REDIRECT_URL`, https://houseofmarketers.com |

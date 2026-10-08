@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Fragment } from 'react';
+import { OrgChart } from '@/components/OrgChart';
 import { TopBar } from '@/components/TopBar';
-import { JOB_SLUGS, getJob, jobSummary, type Job, type JobBlock, type JobSection } from '@/lib/jobs';
+import { JOB_SLUGS, ORG_CHARTS, getJob, jobSummary, type Job, type JobBlock, type JobSection } from '@/lib/jobs';
 
 export function generateStaticParams() {
   return JOB_SLUGS.map((slug) => ({ slug }));
@@ -158,6 +159,13 @@ export default async function JobPage({ params }: { params: Promise<{ slug: stri
             {job.title} <span className="accent">{job.titleAccent}</span>
           </h1>
         </header>
+
+        {job.orgChart && ORG_CHARTS[job.slug] && (
+          <section className="job-org" aria-label={job.orgChart.title}>
+            <h2>{job.orgChart.title}</h2>
+            <OrgChart data={ORG_CHARTS[job.slug]} highlight={job.orgChart.highlight} />
+          </section>
+        )}
 
         <div className="doc-grid">
           <nav className="doc-toc" aria-label="Contents">
