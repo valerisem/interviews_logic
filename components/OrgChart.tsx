@@ -67,6 +67,7 @@ export function OrgChart({ data, highlight }: { data: OrgSnapshot; highlight?: s
   const areaRef = useRef<HTMLDivElement>(null);
   const [view, setView] = useState({ k: 0.2, x: 0, y: 0 });
   const [hover, setHover] = useState<string | null>(null);
+  const [full, setFull] = useState(false);
   const drag = useRef<{ x: number; y: number; vx: number; vy: number } | null>(null);
   const pointers = useRef(new Map<number, { x: number; y: number }>());
   const pinch = useRef<number | null>(null);
@@ -133,6 +134,27 @@ export function OrgChart({ data, highlight }: { data: OrgSnapshot; highlight?: s
     return () => el.removeEventListener('wheel', onWheel);
   }, [zoomAt]);
 
+  // Full screen: the chart fills the window (Esc or the button closes it), keeping the same spot in view.
+  const toggleFull = () => {
+    const el = areaRef.current;
+    if (!el) return;
+    const before = { w: el.clientWidth, h: el.clientHeight };
+    setFull((f) => !f);
+    requestAnimationFrame(() => {
+      const after = { w: el.clientWidth, h: el.clientHeight };
+      setView((v) => ({ ...v, x: v.x + (after.w - before.w) / 2, y: v.y + (after.h - before.h) / 2 }));
+    });
+  };
+  useEffect(() => {
+    if (!full) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') toggleFull(); };
+    const overflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', onKey);
+    return () => { window.removeEventListener('keydown', onKey); document.body.style.overflow = overflow; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [full]);
+
   const onPointerDown = (e: React.PointerEvent) => {
     (e.target as Element).setPointerCapture?.(e.pointerId);
     pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
@@ -167,7 +189,7 @@ export function OrgChart({ data, highlight }: { data: OrgSnapshot; highlight?: s
   const related = focus ? neighbours(focus) : new Set<string>();
 
   return (
-    <div className="org">
+    <div className={`org${full ? ' full' : ''}`}>
       <div
         ref={areaRef}
         className="org-area"
@@ -234,6 +256,11 @@ export function OrgChart({ data, highlight }: { data: OrgSnapshot; highlight?: s
         <button type="button" onClick={fit}>Fit</button>
         <button type="button" onClick={() => zoomAt(1.25)} aria-label="Zoom in">+</button>
         <button type="button" onClick={() => zoomAt(0.8)} aria-label="Zoom out">−</button>
+        <button type="button" onClick={toggleFull} aria-label={full ? 'Exit full screen' : 'Full screen'} title={full ? 'Exit full screen (Esc)' : 'Full screen'}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            {full ? <path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" /> : <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" />}
+          </svg>
+        </button>
       </div>
       <p className="org-hint">Drag to move around · Scroll or pinch to zoom · Hover a card to see its reporting lines</p>
     </div>
