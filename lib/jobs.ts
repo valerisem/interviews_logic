@@ -34,6 +34,8 @@ export interface JobSection {
 
 export interface Job {
   slug: string;
+  /** Small label above the title; defaults to “We’re Hiring”. */
+  eyebrow?: string;
   title: string;
   titleAccent: string;
   details: string[][];

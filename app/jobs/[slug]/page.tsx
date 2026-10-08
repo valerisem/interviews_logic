@@ -153,7 +153,7 @@ export default async function JobPage({ params }: { params: Promise<{ slug: stri
       <TopBar wide="xl" />
       <main className="doc job">
         <header className="doc-head">
-          <p className="eyebrow">We’re Hiring</p>
+          <p className="eyebrow">{job.eyebrow ?? 'We’re Hiring'}</p>
           <h1 className="title-md">
             {job.title} <span className="accent">{job.titleAccent}</span>
           </h1>
