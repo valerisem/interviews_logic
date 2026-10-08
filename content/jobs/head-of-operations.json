@@ -24,13 +24,13 @@
     },
     {
       "id": "own",
-      "title": "What You Will Own",
+      "title": "What You Own",
       "layout": "cards",
       "items": [
         {
           "title": "Operational Performance, Control & Scalability",
           "blocks": [
-            "You will build the **operating infrastructure that allows the company to grow profitably and with control.**",
+            "You build the **operating infrastructure that allows the company to grow profitably and with control.**",
             "That means understanding how revenue, pipeline, campaigns, workload, people, costs, capacity and performance interact, and creating systems that allow leadership to **see when something is moving away from plan.**",
             "You are not the person personally accountable for every commercial outcome inside each function.",
             "For example, campaign margin remains the accountability of Delivery. The Delivery Director will ultimately own Delivery performance and margin across the function. Until that role is in place, Senior Campaign Managers are accountable for the performance and margin of the campaigns they oversee.",
@@ -53,8 +53,8 @@
         {
           "title": "Operational Forecasting, Prediction & Early Warning",
           "blocks": [
-            "You will own the **forward-looking operational view** of the business.",
-            "Using live information from pipeline, campaign management, workload, capacity, delivery activity and performance, you will build models that help us understand **what is likely to happen next** rather than only reporting what has already happened.",
+            "You own the **forward-looking operational view** of the business.",
+            "Using live information from pipeline, campaign management, workload, capacity, delivery activity and performance, you build models that help us understand **what is likely to happen next** rather than only reporting what has already happened.",
             "This includes predicting:",
             {
               "list": [
@@ -80,7 +80,7 @@
         {
           "title": "Systems, Automation & Technology",
           "blocks": [
-            "You will own the **operational technology and automation roadmap** across the company.",
+            "You own the **operational technology and automation roadmap** across the company.",
             "Your job is to identify where the business is **losing time, money or visibility** and determine where technology can materially improve the way we operate.",
             "This may include:",
             {
@@ -106,7 +106,7 @@
         {
           "title": "Organisational Structure & Accountability",
           "blocks": [
-            "You will help **design how the company operates as it scales.**",
+            "You help **design how the company operates as it scales.**",
             "That means continuously asking:",
             {
               "questions": [
@@ -117,9 +117,9 @@
                 "Where will the current structure break as we grow?"
               ]
             },
-            "You will work with functional leaders to establish **clear ownership, targets and reporting structures.**",
+            "You work with functional leaders to establish **clear ownership, targets and reporting structures.**",
             "Where a function owns an outcome, Operations should not quietly take that accountability away from them.",
-            "Instead, you will make sure the business has **enough visibility and control** to know whether the outcome is being achieved and **intervene at the system level** when it is not.",
+            "Instead, you make sure the business has **enough visibility and control** to know whether the outcome is being achieved and **intervene at the system level** when it is not.",
             "The purpose is to create a company where **accountability is clear** and the CEO does not need to personally chase individuals across multiple departments to understand what is happening."
           ]
         },
@@ -137,7 +137,7 @@
                 "Systems affect everyone."
               ]
             },
-            "You will own the **operational coordination** required when several functions need to work together.",
+            "You own the **operational coordination** required when several functions need to work together.",
             "That means making sure there is:",
             {
               "flow": [
@@ -148,13 +148,13 @@
                 "follow-through"
               ]
             },
-            "You will **challenge leaders when commitments are not being delivered** and make sure unresolved cross-functional issues do not repeatedly land with the CEO."
+            "You **challenge leaders when commitments are not being delivered** and make sure unresolved cross-functional issues do not repeatedly land with the CEO."
           ]
         },
         {
           "title": "People Performance & Workforce Operations",
           "blocks": [
-            "You will oversee the **People Operations function** as part of the wider operating model.",
+            "You oversee the **People Operations function** as part of the wider operating model.",
             "The purpose of this function is not simply HR administration.",
             "It is to make sure the business has **the right people, performing at the required level, with clear expectations and appropriate support.**",
             "This includes infrastructure around:",
@@ -173,7 +173,7 @@
                 "coordination with specialist HR and legal advisers where required"
               ]
             },
-            "You will manage the person responsible for the day-to-day People Operations function and **remain accountable for the quality of that function.**",
+            "You manage the person responsible for the day-to-day People Operations function and **remain accountable for the quality of that function.**",
             "Onboarding should not be measured by whether somebody completed documents.",
             "It should be measured by **how quickly they become independently productive.**",
             "Performance management should not simply explain what good performance looks like.",
@@ -183,7 +183,7 @@
         {
           "title": "Capacity & Resource Infrastructure",
           "blocks": [
-            "You will develop the systems used to understand **how much work the company can realistically handle** and where additional resources are genuinely required.",
+            "You develop the systems used to understand **how much work the company can realistically handle** and where additional resources are genuinely required.",
             "This means bringing together information such as:",
             {
               "list": [
@@ -207,7 +207,7 @@
         {
           "title": "Strategic Operational Projects",
           "blocks": [
-            "You will lead important projects that **sit across the business** or do not naturally belong to one functional leader.",
+            "You lead important projects that **sit across the business** or do not naturally belong to one functional leader.",
             "Examples may include:",
             {
               "list": [
@@ -223,7 +223,7 @@
                 "solving recurring operational bottlenecks"
               ]
             },
-            "You will take problems from:",
+            "You take problems from:",
             {
               "shift": [
                 "“This keeps happening.”",
@@ -237,7 +237,7 @@
           "blocks": [
             "A core purpose of this role is to **give the CEO time and headspace back.**",
             "The CEO should not need to personally collect information from multiple people, investigate recurring operational problems or follow up on every cross-functional dependency.",
-            "You will build the layer underneath the CEO that turns operational complexity into:",
+            "You build the layer underneath the CEO that turns operational complexity into:",
             {
               "flow": [
                 "visibility",
@@ -264,7 +264,7 @@
       "id": "functions",
       "title": "Functions Under Operations",
       "blocks": [
-        "The Head of Operations will oversee and build the **central operational functions** required as the company scales.",
+        "The Head of Operations oversees and builds the **central operational functions** required as the company scales.",
         "These may include:",
         {
           "list": [
@@ -277,7 +277,7 @@
           ]
         },
         "This currently includes Social Media until ownership moves under the appropriate senior Marketing function.",
-        "You will set expectations for these functions, review performance and hold their owners accountable.",
+        "You set expectations for these functions, review performance and hold their owners accountable.",
         "**Delegating execution does not remove your accountability** for the functions reporting into you."
       ],
       "half": true
