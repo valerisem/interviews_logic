@@ -10,9 +10,9 @@ import headOfOperations from '@/content/jobs/head-of-operations.json';
 export type JobBlock =
   | string
   | { list: string[] } // bullet list
-  | { questions: string[] } // short standalone lines, shown one per line
+  | { questions: string[] } // short standalone lines, shown as a list
   | { flow: string[] } // steps joined by arrows
-  | { shift: [string, string] }; // "from" quote → "to" quote
+  | { shift: [string, string] }; // "from" line, "to:", highlighted "to" line
 
 export interface JobItem {
   title: string;
@@ -22,8 +22,8 @@ export interface JobItem {
 export interface JobSection {
   id: string;
   title: string;
-  /** text (default) · cards: two-column cards · values: icon cards · numbered: full-width numbered cards */
-  layout?: 'text' | 'cards' | 'values' | 'numbered';
+  /** text (default) · cards: two-column cards · values: icon cards */
+  layout?: 'text' | 'cards' | 'values';
   /** 'details' shows the role details beside this section. */
   aside?: 'details';
   /** Two consecutive half sections sit side by side. */

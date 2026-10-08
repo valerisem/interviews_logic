@@ -24,7 +24,7 @@
     {
       "id": "own",
       "title": "What You Will Own",
-      "layout": "numbered",
+      "layout": "cards",
       "items": [
         {
           "title": "Operational Performance, Control & Scalability",
@@ -278,7 +278,8 @@
         "This currently includes Social Media until ownership moves under the appropriate senior Marketing function.",
         "You will set expectations for these functions, review performance and hold their owners accountable.",
         "**Delegating execution does not remove your accountability** for the functions reporting into you."
-      ]
+      ],
+      "half": true
     },
     {
       "id": "success",
@@ -296,7 +297,8 @@
           ]
         },
         "**The company becomes more controlled, more efficient and easier to operate as it grows.**"
-      ]
+      ],
+      "half": true
     }
   ]
 }

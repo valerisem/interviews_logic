@@ -45,31 +45,29 @@ function Blocks({ blocks, textClass }: { blocks: JobBlock[]; textClass?: string 
             </ul>
           );
         }
+        // Short lines, step sequences and from/to shifts use the same plain styles as everything else.
         if ('questions' in b) {
           return (
-            <ul key={i} className="job-lines">
+            <ul key={i} className="job-list">
               {b.questions.map((q) => <li key={q}>{q}</li>)}
             </ul>
           );
         }
         if ('flow' in b) {
           return (
-            <p key={i} className="job-flow">
-              {b.flow.map((step, j) => (
-                <Fragment key={step}>
-                  {j > 0 && <span className="arrow" aria-label="then">→</span>}
-                  <span className="step">{step}</span>
-                </Fragment>
-              ))}
+            <p key={i}>
+              <strong className="hl">{b.flow.join(' → ')}</strong>
             </p>
           );
         }
         return (
-          <div key={i} className="job-shift">
-            <p className="from">{b.shift[0]}</p>
-            <p className="to-label">to:</p>
-            <p className="to">{b.shift[1]}</p>
-          </div>
+          <Fragment key={i}>
+            <p>{b.shift[0]}</p>
+            <p>to:</p>
+            <p>
+              <strong className="hl">{b.shift[1]}</strong>
+            </p>
+          </Fragment>
         );
       })}
     </>
@@ -85,8 +83,6 @@ const ICONS = [
   <g key="e"><path d="M13 19V5l9 7z" /><path d="M2 19V5l9 7z" /></g>,
   <g key="f"><path d="M10 3l1.8 5.2L17 10l-5.2 1.8L10 17l-1.8-5.2L3 10l5.2-1.8z" /><path d="M19 15l.7 2.3L22 18l-2.3.7L19 21l-.7-2.3L16 18l2.3-.7z" /></g>,
 ];
-
-const itemId = (section: JobSection, i: number) => `${section.id}-${i + 1}`;
 
 function Section({ job, section }: { job: Job; section: JobSection }) {
   const body = (
@@ -121,19 +117,6 @@ function Section({ job, section }: { job: Job; section: JobSection }) {
         </div>
       )}
 
-      {section.layout === 'numbered' && (
-        <div className="job-numbered">
-          {section.items?.map((it, i) => (
-            <article key={it.title} id={itemId(section, i)} className="job-card numbered">
-              <div className="numbered-head">
-                <span className="job-num">{i + 1}</span>
-                <h3>{it.title}</h3>
-              </div>
-              <Blocks blocks={it.blocks} />
-            </article>
-          ))}
-        </div>
-      )}
     </section>
   );
 
@@ -183,15 +166,6 @@ export default async function JobPage({ params }: { params: Promise<{ slug: stri
               {job.sections.map((s) => (
                 <li key={s.id}>
                   <a href={`#${s.id}`}>{s.title}</a>
-                  {s.layout === 'numbered' && (
-                    <ol className="doc-toc-sub">
-                      {s.items?.map((it, i) => (
-                        <li key={it.title}>
-                          <a href={`#${itemId(s, i)}`}>{it.title}</a>
-                        </li>
-                      ))}
-                    </ol>
-                  )}
                 </li>
               ))}
             </ol>
