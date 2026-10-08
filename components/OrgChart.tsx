@@ -1,12 +1,14 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { OrgCollab } from './OrgCollab';
 
 /*
  * Read-only, interactive copy of a saved Org Chart Whiteboard board (github.com/valerisem/org):
  * the same cards, pod boxes and reports-to arrows, drawn from a frozen snapshot of the board.
  * Opens zoomed in on the highlighted person and the people reporting to them. Drag to pan; scroll (with the
- * pointer over the chart), pinch or the buttons to zoom. Hover a card to see its reporting lines.
+ * pointer over the chart), pinch or the buttons to zoom. Hover a card to see its reporting lines; click one that
+ * has role notes to see how it works with the highlighted person.
  */
 
 export interface OrgNode {
@@ -16,6 +18,8 @@ export interface OrgNode {
 export interface OrgEdge { id: string; from: string; to: string; type?: string; fromSide?: string; toSide?: string }
 export interface OrgContainer { id: string; x: number; y: number; w: number; h: number; color: string; bg?: string; label: string }
 export interface OrgSnapshot { nodes: OrgNode[]; edges: OrgEdge[]; containers: OrgContainer[] }
+/** What a role owns, what it works on with the highlighted person, and where the line between them sits. */
+export interface OrgRoleInfo { title: string; owns: string; works: string; line: string }
 
 const NAVY = '#0B0E1A', PINK = '#E91E8C', PUR = '#8B5CF6', GREY = '#6B7280', BORDER = '#ECECF1';
 const CEO_GRAD = `linear-gradient(135deg, ${NAVY} 0%, ${PUR} 45%, ${PINK} 100%)`;
@@ -63,7 +67,7 @@ function route(a: Rect, b: Rect, fromSide?: string, toSide?: string): string {
   return `M ${sx} ${sy} L ${mx} ${sy} L ${mx} ${ty} L ${tx} ${ty}`;
 }
 
-export function OrgChart({ data, highlight }: { data: OrgSnapshot; highlight?: string }) {
+export function OrgChart({ data, highlight, roles }: { data: OrgSnapshot; highlight?: string; roles?: Record<string, OrgRoleInfo> }) {
   const areaRef = useRef<HTMLDivElement>(null);
   const [view, setView] = useState({ k: 0.2, x: 0, y: 0 });
   const [hover, setHover] = useState<string | null>(null);
@@ -71,6 +75,10 @@ export function OrgChart({ data, highlight }: { data: OrgSnapshot; highlight?: s
   const drag = useRef<{ x: number; y: number; vx: number; vy: number } | null>(null);
   const pointers = useRef(new Map<number, { x: number; y: number }>());
   const pinch = useRef<number | null>(null);
+  const moved = useRef(false);
+  const [open, setOpen] = useState<{ id: string; from: DOMRect } | null>(null);
+  const closeCollab = useCallback(() => setOpen(null), []);
+  const partner = highlight ? data.nodes.find((n) => n.id === highlight) : undefined;
 
   const bounds = useCallback(() => {
     const rs: Rect[] = [...data.nodes, ...data.containers];
@@ -147,7 +155,7 @@ export function OrgChart({ data, highlight }: { data: OrgSnapshot; highlight?: s
   };
   useEffect(() => {
     if (!full) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') toggleFull(); };
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape' && !e.defaultPrevented) toggleFull(); };
     const overflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     window.addEventListener('keydown', onKey);
@@ -158,6 +166,7 @@ export function OrgChart({ data, highlight }: { data: OrgSnapshot; highlight?: s
   const onPointerDown = (e: React.PointerEvent) => {
     (e.target as Element).setPointerCapture?.(e.pointerId);
     pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pointers.current.size === 1) moved.current = false;
     if (pointers.current.size === 1) drag.current = { x: e.clientX, y: e.clientY, vx: view.x, vy: view.y };
     else { drag.current = null; pinch.current = null; }
   };
@@ -175,6 +184,7 @@ export function OrgChart({ data, highlight }: { data: OrgSnapshot; highlight?: s
       return;
     }
     const d = drag.current;
+    if (pointers.current.size > 1 || (d && Math.hypot(e.clientX - d.x, e.clientY - d.y) > 5)) moved.current = true;
     if (d) setView((v) => ({ ...v, x: d.vx + e.clientX - d.x, y: d.vy + e.clientY - d.y }));
   };
   const onPointerUp = (e: React.PointerEvent) => {
@@ -227,10 +237,12 @@ export function OrgChart({ data, highlight }: { data: OrgSnapshot; highlight?: s
             const isCeo = n.team === 'ceo', small = !!n.compact, col = n.color ?? GREY;
             const me = n.id === highlight;
             const dim = focus && n.id !== focus && !related.has(n.id);
+            const info = partner && n.id !== highlight ? roles?.[n.id] : undefined;
             return (
               <div
                 key={n.id}
-                className={`org-card${me ? ' me' : ''}`}
+                className={`org-card${me ? ' me' : ''}${info ? ' has-info' : ''}`}
+                onClick={info ? (e) => { if (!moved.current) setOpen({ id: n.id, from: e.currentTarget.getBoundingClientRect() }); } : undefined}
                 onPointerEnter={() => setHover(n.id)}
                 onPointerLeave={() => setHover((h) => (h === n.id ? null : h))}
                 style={{
@@ -262,7 +274,16 @@ export function OrgChart({ data, highlight }: { data: OrgSnapshot; highlight?: s
           </svg>
         </button>
       </div>
-      <p className="org-hint">Drag to move around · Scroll or pinch to zoom · Hover a card to see its reporting lines</p>
+      <p className="org-hint">
+        Drag to move around · Scroll or pinch to zoom · Hover a card to see its reporting lines
+        {partner && roles && Object.keys(roles).length > 0 && <> · Click a card to see how it works with the {partner.role}</>}
+      </p>
+      {open && partner && roles?.[open.id] && (() => {
+        const person = data.nodes.find((n) => n.id === open.id)!;
+        // The partner flies in on the side away from the clicked card's position on the chart.
+        const side = person.x + person.w / 2 >= partner.x + partner.w / 2 ? 'left' : 'right';
+        return <OrgCollab person={person} partner={partner} info={roles[open.id]} from={open.from} side={side} onClose={closeCollab} />;
+      })()}
     </div>
   );
 }

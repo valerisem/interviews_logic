@@ -323,3 +323,47 @@ table.data .select-cell { width: 1%; min-width: 0; padding-right: 4px; }
 .org.full .org-area { height: 100vh; height: 100dvh; border: 0; border-radius: 0; }
 .org.full .org-controls { top: 16px; right: 16px; }
 .org.full .org-hint { position: absolute; left: 16px; bottom: 12px; margin: 0; padding: 6px 12px; border-radius: 999px; background: rgba(255,255,255,.9); color: #6B7280; }
+.org-card.has-info { cursor: pointer; }
+.org-card.has-info:hover { border-color: #F0438F !important; }
+
+/* Org chart: click-a-card collaboration view */
+.collab { position: fixed; inset: 0; z-index: 200; display: flex; padding: 16px; overflow-x: hidden; overflow-y: auto; background: rgba(11,14,26,.55); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); animation: collab-fade 220ms ease-out both; }
+.collab-panel { position: relative; margin: auto; width: 100%; max-width: 980px; padding: 32px; border-radius: 22px; background: var(--bg); color: var(--text); box-shadow: 0 30px 80px rgba(11,14,26,.35); animation: collab-fade 220ms ease-out both; }
+.collab-close { position: absolute; top: 16px; right: 16px; display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); color: var(--heading); cursor: pointer; }
+.collab-close:hover { border-color: var(--fuchsia); color: var(--fuchsia); }
+.collab-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--fuchsia); }
+.collab-title { margin-top: 6px; padding-right: 48px; font-family: var(--display); font-size: clamp(22px, 3vw, 30px); line-height: 1.15; color: var(--heading); }
+.collab-stage { margin-top: 22px; display: grid; grid-template-columns: minmax(0,1fr) clamp(84px, 24vw, 240px) minmax(0,1fr); align-items: center; padding: 40px clamp(14px, 4vw, 48px); border-radius: 18px; border: 1px solid #ECECF1; background-color: #fff; background-image: radial-gradient(#e9e9f0 1px, transparent 1px); background-size: 22px 22px; }
+.collab-stage.right > :first-child { order: 3; }
+.collab-stage.right > :last-child { order: 1; }
+.collab-stage.right .collab-arrows { order: 2; transform: scaleX(-1); }
+.collab-arrows { width: 100%; height: auto; overflow: visible; animation: collab-rise 400ms 1300ms ease-out both; }
+.collab-dash { animation: collab-flow 900ms linear infinite; }
+.collab-card { position: relative; min-height: 104px; padding: 18px 20px 18px 26px; border-radius: 18px; border: 1px solid #ECECF1; background: #fff; color: #0B0E1A; display: flex; flex-direction: column; justify-content: center; box-shadow: 0 14px 34px rgba(45,27,105,.2); will-change: transform; }
+.collab-card.future { border: 1.5px dashed; }
+.collab-card.me { box-shadow: 0 0 0 3px #E91E8C, 0 14px 34px rgba(45,27,105,.2); }
+.collab-card > i { position: absolute; left: 0; top: 12px; bottom: 12px; width: 6px; border-radius: 4px; }
+.collab-name { font-family: var(--display); font-size: clamp(15px, 2vw, 20px); font-weight: 800; line-height: 1.15; overflow-wrap: break-word; hyphens: auto; }
+.collab-role { margin-top: 5px; font-size: clamp(12px, 1.5vw, 14px); line-height: 1.25; color: #6B7280; word-break: break-word; }
+.collab-notes { margin-top: 22px; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+.collab-notes section { padding: 18px 20px; border-radius: 14px; background: var(--surface); animation: collab-rise 420ms ease-out both; }
+.collab-notes section:nth-child(1) { animation-delay: 1400ms; }
+.collab-notes section:nth-child(2) { animation-delay: 1520ms; }
+.collab-notes section:nth-child(3) { animation-delay: 1640ms; }
+.collab-notes h3 { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--fuchsia); }
+.collab-notes p { margin-top: 8px; font-size: 14.5px; line-height: 1.55; }
+@keyframes collab-fade { from { opacity: 0; } }
+@keyframes collab-rise { from { opacity: 0; transform: translateY(10px); } }
+@keyframes collab-flow { to { stroke-dashoffset: -24; } }
+@media (max-width: 760px) {
+  .collab-panel { padding: 24px 18px; }
+  .collab-stage { padding: 28px 10px; grid-template-columns: minmax(0,1fr) 56px minmax(0,1fr); }
+  .collab-card { min-height: 84px; padding: 10px 10px 10px 16px; border-radius: 14px; }
+  .collab-name { font-size: 14px; }
+  .collab-role { font-size: 12px; }
+  .collab-card > i { width: 5px; top: 10px; bottom: 10px; }
+  .collab-notes { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .collab, .collab-panel, .collab-arrows, .collab-notes section, .collab-dash { animation: none; }
+}

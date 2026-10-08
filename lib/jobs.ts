@@ -1,7 +1,8 @@
 import headOfDelivery from '@/content/jobs/head-of-delivery-performance.json';
 import headOfOperations from '@/content/jobs/head-of-operations.json';
 import headOfOperationsOrg from '@/content/jobs/org/head-of-operations.json';
-import type { OrgSnapshot } from '@/components/OrgChart';
+import headOfOperationsRoles from '@/content/jobs/org/head-of-operations-roles.json';
+import type { OrgRoleInfo, OrgSnapshot } from '@/components/OrgChart';
 
 /*
  * Job descriptions published at /jobs/<slug>. To add one, add a JSON file in content/jobs
@@ -49,6 +50,28 @@ export interface Job {
 /** Frozen org-chart snapshots, by job slug (content/jobs/org/<slug>.json). */
 export const ORG_CHARTS: Record<string, OrgSnapshot> = {
   'head-of-operations': headOfOperationsOrg as OrgSnapshot,
+};
+
+interface RoleNotes {
+  byName: Record<string, string>;
+  byRole: Record<string, string>;
+  roles: Record<string, { owns: string; works: string; line: string }>;
+}
+
+/** How each card on the chart works with the job's person: matched by card name first, then by role. */
+function roleInfo(org: OrgSnapshot, notes: RoleNotes): Record<string, OrgRoleInfo> {
+  const out: Record<string, OrgRoleInfo> = {};
+  for (const n of org.nodes) {
+    const key = notes.byName[n.name] ?? notes.byRole[n.role];
+    const r = key ? notes.roles[key] : undefined;
+    if (r) out[n.id] = { title: key, ...r };
+  }
+  return out;
+}
+
+/** Click-to-open collaboration notes for the org-chart cards, by job slug. */
+export const ORG_ROLE_INFO: Record<string, Record<string, OrgRoleInfo>> = {
+  'head-of-operations': roleInfo(headOfOperationsOrg as OrgSnapshot, headOfOperationsRoles as RoleNotes),
 };
 
 const JOBS = [headOfDelivery, headOfOperations] as Job[];
