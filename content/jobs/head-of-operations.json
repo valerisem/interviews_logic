@@ -32,82 +32,75 @@
       "layout": "cards",
       "items": [
         {
-          "title": "Commercial Operations and Control",
+          "title": "Make the Business Work Better and More Profitably",
           "blocks": [
-            "The Head of Operations builds the **controls that help the business deliver against its commercial targets** and identify problems early.",
-            "Delivery remains accountable for campaign performance and margin. The Delivery Director will own this across the function, with Senior Campaign Managers accountable for their campaigns until that role is in place.",
-            "Operations owns the **infrastructure around that accountability.**",
-            "This includes",
+            "The role looks across the business and **improves how people, workload, costs and processes work together**. It builds **better controls around margin, capacity and resource use**, while also looking ahead at market changes, competitor moves and new opportunities that could improve how the business grows.",
             {
               "list": [
-                "automated margin and performance controls",
-                "visibility into creator costs, campaign delays, resourcing and other drivers affecting performance",
-                "clear targets and owners",
-                "escalation when results move away from plan",
-                "identifying recurring causes rather than repeatedly fixing individual cases"
+                "Margin control and improvement models",
+                "Capacity and resource planning",
+                "Better use of people and workload",
+                "Identifying unnecessary cost and wasted time",
+                "Finding recurring problems and fixing the root cause",
+                "Looking at competitors, market changes and new business opportunities",
+                "Testing different operating models to understand what would produce the best result"
               ]
-            },
-            "The goal is to give the CEO an **additional layer of control without taking ownership away from Delivery.**"
+            }
           ]
         },
         {
-          "title": "Forecasting, Capacity and Resource Planning",
+          "title": "Build Better Technology, Systems and Use of Data",
           "blocks": [
-            "The Head of Operations owns the **operational models** used to understand **what the business is likely to need next.**",
-            "The role combines live pipeline, campaign data, workload, timelines, historical delivery patterns and team capacity to predict",
+            "The role makes **technology useful to the business** rather than adding more tools and complexity. It builds infrastructure that **connects data, improves decisions and creates measurable value**.",
             {
               "list": [
-                "future workload",
-                "where capacity will become tight",
-                "when hiring may be required",
-                "how work should be allocated",
-                "where delivery risks are developing",
-                "what different pipeline scenarios mean for the team"
+                "Builds internal software and proprietary solutions where it makes sense",
+                "Uses open source and white-label technology to reduce cost",
+                "Connects data across CRM, project management, campaigns and people",
+                "Turns company data into useful insights and recommendations",
+                "Builds prediction, forecasting and decision models",
+                "Builds and improves capacity models",
+                "Automates repetitive work where it creates real value",
+                "Removes duplicated or unnecessary tools",
+                "Manages the people responsible for building and testing these systems"
               ]
-            },
-            "This should allow the business to **make resource decisions before teams become overloaded** or delivery is affected."
+            }
           ]
         },
         {
-          "title": "Systems, Automation and Data",
+          "title": "Make Sure the Right People Own and Manage Things",
           "blocks": [
-            "The Head of Operations owns the **roadmap for operational systems, automation and AI.**",
-            "The role identifies where manual work, disconnected systems or poor data are **costing the business time or money**, then decides what should be fixed or built.",
-            "This includes areas such as margin controls, forecasting, target tracking, reporting, CRM and project management integrations, workflow automation and internal AI tools.",
-            "The Head of Operations manages the people responsible for building and maintaining this infrastructure.",
-            "Every significant project should have a **clear return** through time saved, cost reduced, additional capacity, better control or revenue enabled."
-          ]
-        },
-        {
-          "title": "People and Organisational Performance",
-          "blocks": [
-            "The Head of Operations owns the **structure around how people are managed and held accountable.**",
-            "This includes",
+            "The role makes sure **every important area has a clear owner**, the right management structure and proper accountability. Where the business does not yet have the right senior owner, **Operations can temporarily provide that management layer**.",
             {
               "list": [
-                "organisational structure and reporting lines",
-                "performance targets",
-                "manager accountability",
-                "onboarding and time to productivity",
-                "performance management and difficult conversations",
-                "workforce planning",
-                "contractor and employee structures",
-                "team engagement",
-                "coordination with specialist HR and legal support"
+                "Oversees People Operations",
+                "Manages and holds the People Ops function accountable",
+                "Improves onboarding, performance management and manager accountability",
+                "Reviews reporting lines and organisational structure",
+                "Identifies gaps where nobody clearly owns something",
+                "Makes sure departments understand responsibilities and targets",
+                "Temporarily oversees functions such as Social Media until the right senior owner is in place",
+                "Manages operational partners and external providers"
               ]
-            },
-            "The Head of Operations oversees the People Operations function and **remains accountable for its output.**",
-            "The role also reviews **how the organisation needs to change as the company grows**, including when new management layers, roles or functions are required."
+            }
           ]
         },
         {
-          "title": "Cross-Functional Operations and CEO Support",
+          "title": "Take Operational Work Off the CEO’s Plate",
           "blocks": [
-            "The Head of Operations owns operational issues and projects that **sit across several teams** or do not naturally belong to one functional leader.",
-            "This can include company-wide process changes, new systems, vendor changes, restructuring workflows, improving reporting or solving recurring problems between Sales, Delivery, Finance, People and Technology.",
-            "The role is to make sure there is **a clear owner, a decision is made and the work gets completed.**",
-            "The Head of Operations also makes sure **the CEO does not need to personally investigate every operational issue.**",
-            "When something genuinely needs CEO involvement, the Head of Operations should already understand **what happened, why it happened, who owns it, what has been done and what decision is required.**"
+            "The role gives the CEO **clear visibility without requiring him to investigate every problem** or chase multiple people. It brings him the important information, recommended action and **only the decisions that genuinely require his involvement**.",
+            {
+              "list": [
+                "Builds simple leadership reporting",
+                "Creates early warning systems for important risks",
+                "Makes sure departments share the information they need",
+                "Follows up on cross-functional work",
+                "Investigates operational problems and identifies the root cause",
+                "Resolves issues at the right level before escalating them",
+                "Turns company priorities into clear owners, actions and deadlines",
+                "Gives the CEO more time for growth, clients, partnerships and bigger strategic decisions"
+              ]
+            }
           ]
         }
       ]
