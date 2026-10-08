@@ -18,7 +18,7 @@ The app runs on **houseofmarketer.com**, next to a redirect to the main website:
 | `/form` | Candidate assessment (the link you send candidates) |
 | `/form/privacy` | Candidate Assessment Privacy Notice |
 | `/form/a/<token>` | A candidate's attempt, so a reload resumes it |
-| `/jobs/head-of-delivery-performance` | Public job description (Head of Delivery & Performance), from `content/jobs/` |
+| `/jobs/head-of-delivery-performance`, `/jobs/head-of-operations` | Public job descriptions, from `content/jobs/` (see `lib/jobs.ts`) |
 | `/admin` | Admin dashboard (Google sign-in) |
 | `/` | Redirects to `/form` |
 | anything else | Redirects (302) to `REDIRECT_URL`, https://houseofmarketers.com |
