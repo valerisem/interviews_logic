@@ -1,5 +1,5 @@
 {
-  "_note": "Head of Operations ownership / accountability model, shown from the org chart's “Show Ownership Scheme” button. Steps run left to right; each is joined to the one before it (or to the step index in “from”). rel “both” = two-way (↔).",
+  "_note": "Head of Operations ownership / accountability model, shown from the org chart's “Show Ownership Scheme” button. Steps run left to right; each is joined to the one before it, or to the step index (or indexes) in “from” (-1: no incoming line). rel “both” = two-way (↔); “when” marks a conditional step.",
   "title": "Ownership / Accountability Model",
   "lanes": [
     {
@@ -11,10 +11,13 @@
       "title": "Head of Operations"
     },
     {
+      "id": "finance",
+      "title": "Finance / CFO"
+    },
+    {
       "id": "leaders",
       "title": "Functional Leaders",
       "members": [
-        "CFO",
         "Chief Sales Officer / Director of New Business",
         "Head of Delivery & Performance",
         "Client Director",
@@ -78,16 +81,21 @@
         "rel": "both"
       },
       {
+        "lane": "finance",
+        "who": "Finance / CFO",
+        "rel": "both"
+      },
+      {
         "lane": "leaders",
         "who": "Functional Leaders",
         "lines": [
-          "CFO",
           "Chief Sales Officer / Director of New Business",
           "Head of Delivery & Performance",
           "Client Director",
           "Head of Marketing + PR"
         ],
-        "rel": "both"
+        "rel": "both",
+        "from": 1
       },
       {
         "lane": "functions",
@@ -111,7 +119,7 @@
           "Client / Account team",
           "Marketing"
         ],
-        "from": 2
+        "from": 3
       }
     ],
     "message": [
@@ -154,9 +162,20 @@
             "OWNS"
           ],
           "lines": [
-            "Turns priorities into owners, targets, projects, reporting and follow-through"
+            "Turns priorities into owners / actions / operating plan"
           ],
           "via": "priorities"
+        },
+        {
+          "lane": "finance",
+          "who": "CFO / Finance",
+          "when": "IF investment, hiring or material spend is required",
+          "tags": [
+            "VALIDATES"
+          ],
+          "lines": [
+            "Validates budget, affordability and cash impact"
+          ]
         },
         {
           "lane": "leaders",
@@ -167,18 +186,11 @@
           "lines": [
             "Own delivery of the target inside their individual functions"
           ],
-          "via": "coordinates"
-        },
-        {
-          "lane": "teams",
-          "who": "Functional Teams",
-          "tags": [
-            "RUNS"
-          ],
-          "lines": [
-            "Execute the work"
-          ],
-          "via": "manage"
+          "via": "coordinates",
+          "from": [
+            1,
+            2
+          ]
         },
         {
           "lane": "hoo",
@@ -198,7 +210,7 @@
             "ESCALATE"
           ],
           "lines": [
-            "Receives recommendation + decision required"
+            "Only receives decisions requiring CEO input"
           ],
           "via": "only when required"
         }
@@ -210,50 +222,72 @@
       "steps": [
         {
           "lane": "leaders",
-          "who": "Head of Delivery & Performance",
+          "who": "Delivery",
           "tags": [
             "OWNS"
           ],
           "lines": [
-            "Delivery performance, campaign margin, quality, timelines and Delivery team performance"
+            "Campaign performance",
+            "Campaign margin",
+            "Creator spend",
+            "Timelines",
+            "Quality",
+            "Corrective action"
           ]
-        },
-        {
-          "lane": "teams",
-          "who": "Senior Campaign Managers / Delivery",
-          "tags": [
-            "RUNS"
-          ],
-          "lines": [
-            "Own individual campaign outcomes and corrective action"
-          ],
-          "via": "manages"
         },
         {
           "lane": "hoo",
           "who": "Head of Operations",
           "tags": [
-            "CONTROL",
-            "COLLAB"
+            "CONTROL"
           ],
           "lines": [
-            "Builds margin-control infrastructure",
-            "Creates early-warning systems",
-            "Connects pipeline, capacity and Delivery data",
-            "Identifies repeated causes of margin leakage",
-            "Challenges whether corrective action happened",
-            "Fixes structural problems rather than taking over individual campaigns"
+            "Early-warning systems",
+            "Projected margin risk",
+            "Patterns across campaigns",
+            "Root-cause analysis",
+            "Accountability / follow-through"
           ],
-          "rel": "both"
+          "via": "live campaign / delivery data"
         },
         {
-          "lane": "ceo",
-          "who": "CEO",
+          "lane": "finance",
+          "who": "Finance",
           "tags": [
-            "ESCALATE"
+            "OWNS"
           ],
-          "via": "important exception only"
+          "lines": [
+            "Actual revenue",
+            "Actual paid",
+            "Final financial margin",
+            "Accounting treatment",
+            "Financial reporting"
+          ],
+          "via": "connects with",
+          "rel": "both"
         }
+      ],
+      "sequences": [
+        [
+          "Live Delivery data",
+          "HoO identifies projected margin risk",
+          "Delivery owner takes action"
+        ],
+        [
+          "Finance actuals",
+          "Confirm what was actually earned / spent",
+          "Compare actual result against operational projection"
+        ],
+        [
+          "Repeated variance",
+          "HoO investigates why the operating model was wrong",
+          "System / process / control is improved"
+        ]
+      ],
+      "keyLines": [
+        "Operations sees where margin is heading.",
+        "Finance confirms where margin actually landed.",
+        "Delivery owns achieving it."
       ]
     },
     {
@@ -290,13 +324,32 @@
           "rel": "both"
         },
         {
+          "lane": "hoo",
+          "who": "Head of Operations",
+          "lines": [
+            "Identifies likely resource gap"
+          ]
+        },
+        {
+          "lane": "finance",
+          "who": "Finance / CFO",
+          "tags": [
+            "VALIDATES"
+          ],
+          "lines": [
+            "Cash impact",
+            "Affordability",
+            "Financial assumptions"
+          ]
+        },
+        {
           "lane": "leaders",
           "who": "Functional Leader",
           "tags": [
             "OWNS"
           ],
           "lines": [
-            "Decides how work should be managed inside the function"
+            "Confirms the operational need and how the resource will be used inside the function"
           ]
         },
         {
@@ -327,7 +380,7 @@
       "steps": [
         {
           "lane": "teams",
-          "who": "Business problem identified",
+          "who": "Business problem / opportunity",
           "kind": "input"
         },
         {
@@ -339,7 +392,7 @@
           "lines": [
             "Defines the problem",
             "Prioritises based on business value",
-            "Defines expected ROI / outcome"
+            "Defines required outcome"
           ]
         },
         {
@@ -357,15 +410,23 @@
           ]
         },
         {
-          "lane": "leaders",
-          "who": "Functional Leader / Team",
+          "lane": "finance",
+          "who": "Finance",
+          "when": "IF material investment is required",
           "tags": [
-            "COLLAB"
+            "VALIDATES"
           ],
           "lines": [
-            "Provides requirements and tests whether the solution works in reality"
-          ],
-          "rel": "both"
+            "Validates cost / budget / financial case"
+          ]
+        },
+        {
+          "lane": "teams",
+          "who": "Solution implemented",
+          "from": [
+            2,
+            3
+          ]
         },
         {
           "lane": "hoo",
@@ -373,14 +434,22 @@
           "tags": [
             "CONTROL"
           ],
-          "lead": "Measures",
+          "lead": "Measures operational result",
           "lines": [
             "Time saved",
-            "Cost reduced",
+            "Cost removed",
             "Capacity created",
-            "Visibility improved",
-            "Risk reduced",
-            "Revenue enabled"
+            "Performance improved"
+          ]
+        },
+        {
+          "lane": "finance",
+          "who": "Finance",
+          "tags": [
+            "VALIDATES"
+          ],
+          "lines": [
+            "Can validate actual financial saving where measurable"
           ]
         }
       ],
@@ -405,13 +474,15 @@
       "steps": [
         {
           "lane": "teams",
-          "who": "Functional Systems",
+          "who": "Operational Systems",
           "lines": [
             "CRM",
-            "Project Management",
-            "Campaign Data",
-            "People Data",
-            "Operational Tools"
+            "Monday / PM data",
+            "Pipeline",
+            "Campaign activity",
+            "Capacity",
+            "Performance",
+            "Workload"
           ],
           "kind": "input"
         },
@@ -422,124 +493,119 @@
             "OWNS"
           ],
           "lines": [
-            "Operational data structure",
-            "Connected sources of truth",
-            "Operational reporting",
-            "Prediction models",
-            "Early-warning signals",
-            "Data quality controls"
-          ],
-          "via": "live data"
+            "Operational data structure / controls / models"
+          ]
         },
         {
-          "lane": "leaders",
-          "who": "Functional Leaders",
+          "lane": "teams",
+          "who": "Financial Systems",
+          "lines": [
+            "Accounting system",
+            "Banking",
+            "Actual invoices",
+            "Actual payments",
+            "Payroll",
+            "Actual revenue",
+            "Actual costs"
+          ],
+          "kind": "input",
+          "from": -1
+        },
+        {
+          "lane": "finance",
+          "who": "Finance / CFO",
           "tags": [
             "OWNS"
           ],
           "lines": [
-            "Accuracy and performance inside their own function"
-          ],
-          "rel": "both"
-        },
-        {
-          "lane": "hoo",
-          "who": "Head of Operations",
-          "tags": [
-            "CONTROL"
-          ],
-          "lead": "Turns operational data into",
-          "lines": [
-            "Insights",
-            "Risks",
-            "Predictions",
-            "Recommendations",
-            "Actions"
+            "Official financial actuals / financial reporting"
           ]
         },
         {
           "lane": "ceo",
-          "who": "CEO",
+          "who": "Management Information",
           "lines": [
-            "Receives useful management information",
-            "NOT raw dashboards from five different teams"
+            "Operational reality + Financial actuals = Leadership view"
+          ],
+          "from": [
+            1,
+            3
           ]
         }
-      ]
+      ],
+      "divide": {
+        "title": "The boundary",
+        "quotes": false,
+        "sides": [
+          {
+            "who": "Head of Operations",
+            "quote": "Owns operational data infrastructure, connected systems, operational reporting, forecasts and management signals."
+          },
+          {
+            "who": "Finance",
+            "quote": "Owns official financial records, banking data, actual financial results and statutory / financial reporting."
+          }
+        ]
+      }
     },
     {
       "id": "people",
       "title": "People / Performance / Structure",
       "steps": [
         {
-          "lane": "hoo",
-          "who": "Head of Operations",
-          "tags": [
-            "OWNS"
-          ],
-          "lines": [
-            "Direction of People Operations",
-            "Organisation structure",
-            "Management gaps",
-            "Performance infrastructure",
-            "Workforce planning"
-          ]
-        },
-        {
-          "lane": "functions",
-          "who": "People Ops (HR)",
-          "tags": [
-            "RUNS"
-          ],
-          "lines": [
-            "Onboarding",
-            "Performance processes",
-            "Manager support",
-            "Employee / contractor administration",
-            "Team engagement",
-            "Difficult conversations",
-            "People issues"
-          ]
-        },
-        {
-          "lane": "leaders",
-          "who": "Functional Leaders",
-          "tags": [
-            "OWNS"
-          ],
-          "lines": [
-            "Performance of people inside their own teams"
-          ],
-          "rel": "both"
-        },
-        {
-          "lane": "functions",
-          "who": "Legal / Compliance Consultant",
-          "tags": [
-            "COLLAB"
-          ],
-          "lines": [
-            "Employment structures",
-            "Contractor structures",
-            "International arrangements",
-            "Legal requirements"
-          ],
-          "rel": "both"
+          "lane": "teams",
+          "who": "People / manager signal",
+          "kind": "input"
         },
         {
           "lane": "hoo",
-          "who": "Head of Operations",
+          "who": "People Ops (HR) + Head of Operations",
           "tags": [
-            "CONTROL"
+            "OWNS"
           ],
-          "lead": "Checks",
+          "lead": "Identify",
           "lines": [
-            "Are managers managing properly?",
-            "Are targets clear?",
-            "What motivates individual people?",
-            "Why is performance failing?",
-            "Is onboarding getting people productive fast enough?",
-            "Does the organisation need another management layer?"
+            "Performance issue",
+            "Capacity issue",
+            "New role",
+            "Structure change",
+            "Compensation change"
+          ]
+        },
+        {
+          "lane": "finance",
+          "who": "Finance",
+          "when": "IF there is a resource / compensation implication",
+          "tags": [
+            "VALIDATES"
+          ],
+          "lead": "Provides",
+          "lines": [
+            "Actual employment cost",
+            "Payroll impact",
+            "Budget impact",
+            "Affordability"
+          ]
+        },
+        {
+          "lane": "hoo",
+          "who": "Head of Operations + functional owner",
+          "lines": [
+            "Decide operating structure / requirement"
+          ],
+          "from": [
+            1,
+            2
+          ]
+        },
+        {
+          "lane": "ceo",
+          "who": "CEO",
+          "tags": [
+            "ESCALATE"
+          ],
+          "lines": [
+            "Only for major structural or senior hiring decisions"
           ]
         }
       ]
@@ -707,7 +773,7 @@
       "title": "Finance + Operations",
       "steps": [
         {
-          "lane": "leaders",
+          "lane": "finance",
           "who": "CFO",
           "tags": [
             "OWNS"
@@ -854,6 +920,24 @@
           ]
         }
       ]
+    }
+  ],
+  "roles": [
+    {
+      "who": "Functional Leader",
+      "text": "Owns the business outcome"
+    },
+    {
+      "who": "Head of Operations",
+      "text": "Owns operating controls, systems, prediction and cross-functional follow-through"
+    },
+    {
+      "who": "Finance / CFO",
+      "text": "Owns financial actuals, budgets, cash and financial reporting"
+    },
+    {
+      "who": "CEO",
+      "text": "Only receives decisions that genuinely require CEO judgement or approval"
     }
   ]
 }

@@ -23,8 +23,10 @@ export interface SchemeStep {
   rel?: 'both';
   /** 'input': data or a need coming into the flow rather than a person. */
   kind?: 'input';
-  /** Index of the step this one connects from (default: the step before). */
-  from?: number;
+  /** Step index (or indexes) this one connects from; default the step before, -1 for none. */
+  from?: number | number[];
+  /** Condition for a step that only happens sometimes, e.g. “IF material investment is required”. */
+  when?: string;
 }
 export type SchemeItem = SchemeStep | { phase: string };
 export interface SchemeFlow {
@@ -33,10 +35,16 @@ export interface SchemeFlow {
   steps: SchemeItem[];
   examples?: string[];
   note?: string;
-  divide?: { title: string; sides: { who: string; quote: string }[] };
+  /** Short hand-off chains shown under the diagram. */
+  sequences?: string[][];
+  /** The flow's key statements, shown as a highlighted band. */
+  keyLines?: string[];
+  divide?: { title: string; quotes?: boolean; sides: { who: string; quote: string }[] };
 }
 export interface OwnershipScheme {
   title: string;
+  /** Who owns what, shown above the labels. */
+  roles?: { who: string; text: string }[];
   lanes: { id: string; title: string; members?: string[] }[];
   labels: { key: string; text: string }[];
   overview: {
@@ -48,7 +56,7 @@ export interface OwnershipScheme {
 }
 
 const TAG_COLOURS: Record<string, string> = {
-  OWNS: '#200888', RUNS: '#0E9BD6', CONTROL: '#F0438F', COLLAB: '#8B5CF6', ESCALATE: '#D97706',
+  OWNS: '#200888', RUNS: '#0E9BD6', CONTROL: '#F0438F', COLLAB: '#8B5CF6', ESCALATE: '#D97706', VALIDATES: '#0F766E',
 };
 const tagColour = (tag: string) => TAG_COLOURS[tag.split(/[\s/]/)[0]] ?? '#6B7280';
 const isPhase = (s: SchemeItem): s is { phase: string } => 'phase' in s;
@@ -57,7 +65,7 @@ function Tag({ tag }: { tag: string }) {
   return <b className="sl-tag" style={{ background: tagColour(tag) }}>{tag}</b>;
 }
 
-interface Edge { d: string; kind: 'flow' | 'both' | 'escalate'; label?: { x: number; y: number; w: number; text: string }; delay: number }
+interface Edge { d: string; kind: 'flow' | 'both' | 'escalate' | 'cond'; label?: { x: number; y: number; w: number; text: string }; delay: number }
 
 function Swimlanes({ lanes, steps }: { lanes: OwnershipScheme['lanes']; steps: SchemeItem[] }) {
   const gridRef = useRef<HTMLDivElement>(null);
@@ -70,12 +78,13 @@ function Swimlanes({ lanes, steps }: { lanes: OwnershipScheme['lanes']; steps: S
     let order = 0;
     steps.forEach((s, i) => {
       if (isPhase(s)) return;
-      // Join to the step named in `from`, else the one before (nothing across a phase divider).
-      const j = s.from ?? i - 1;
+      // Join to the step(s) named in `from`, else the one before (nothing across a phase divider).
+      const sources = s.from === undefined ? [i - 1] : ([] as number[]).concat(s.from);
+      for (const j of sources) {
       const prev = steps[j];
-      if (j < 0 || !prev || isPhase(prev)) return;
+      if (j < 0 || !prev || isPhase(prev)) continue;
       const a = cardRefs.current[j], b = cardRefs.current[i];
-      if (!a || !b) return;
+      if (!a || !b) continue;
       const A = { x: a.offsetLeft, y: a.offsetTop, w: a.offsetWidth, h: a.offsetHeight };
       const B = { x: b.offsetLeft, y: b.offsetTop, w: b.offsetWidth, h: b.offsetHeight };
       const ty = B.y + Math.min(B.h / 2, 40);
@@ -92,8 +101,9 @@ function Swimlanes({ lanes, steps }: { lanes: OwnershipScheme['lanes']; steps: S
         d = `M ${cx} ${sy} L ${cx} ${ty} L ${tx} ${ty}`;
         if (s.via) label = { x: (cx + tx) / 2, y: ty - 12, w: tx - cx - 12, text: s.via };
       }
-      const kind = s.rel === 'both' ? 'both' : s.tags?.some((t) => t.startsWith('ESCALATE')) ? 'escalate' : 'flow';
+      const kind = s.rel === 'both' ? 'both' : s.when ? 'cond' : s.tags?.some((t) => t.startsWith('ESCALATE')) ? 'escalate' : 'flow';
       out.push({ d, kind, label, delay: 250 + order++ * 140 });
+      }
     });
     setEdges(out);
   }, [steps]);
@@ -113,7 +123,7 @@ function Swimlanes({ lanes, steps }: { lanes: OwnershipScheme['lanes']; steps: S
     <div className="sl-scroll">
       <div ref={gridRef} className="sl-grid" style={{ gridTemplateColumns: `var(--sl-label) ${cols}`, gridTemplateRows: `repeat(${lanes.length}, auto)` }}>
         {lanes.map((l, i) => (
-          <div key={`bg-${l.id}`} className={`sl-lane${l.id === 'hoo' ? ' hoo' : ''}`} style={{ gridRow: i + 1, gridColumn: '1 / -1' }} />
+          <div key={`bg-${l.id}`} className={`sl-lane ${l.id}`} style={{ gridRow: i + 1, gridColumn: '1 / -1' }} />
         ))}
         {lanes.map((l, i) => (
           <div key={`label-${l.id}`} className="sl-label" style={{ gridRow: i + 1, gridColumn: 1 }}>
@@ -137,6 +147,7 @@ function Swimlanes({ lanes, steps }: { lanes: OwnershipScheme['lanes']; steps: S
               className={`sl-step${s.kind === 'input' ? ' input' : ''}${s.lane === 'hoo' ? ' hoo' : ''}`}
               style={{ gridRow: laneIndex(s.lane) + 1, gridColumn: i + 2, borderTopColor: accent, animationDelay: `${n++ * 140}ms` }}
             >
+              {s.when && <div className="sl-when">{s.when}</div>}
               {s.tags && <div className="sl-tags">{s.tags.map((t) => <Tag key={t} tag={t} />)}</div>}
               <div className="sl-who">{s.who}</div>
               {s.lead && <div className="sl-lead">{s.lead}</div>}
@@ -148,7 +159,7 @@ function Swimlanes({ lanes, steps }: { lanes: OwnershipScheme['lanes']; steps: S
         })}
         <svg className="sl-edges" aria-hidden="true">
           <defs>
-            {(['flow', 'both', 'escalate'] as const).map((k) => (
+            {(['flow', 'both', 'escalate', 'cond'] as const).map((k) => (
               <marker key={k} id={`sl-arrow-${k}`} markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
                 <path d="M0,0 L9,4 L0,8 z" className={`sl-head ${k}`} />
               </marker>
@@ -160,7 +171,7 @@ function Swimlanes({ lanes, steps }: { lanes: OwnershipScheme['lanes']; steps: S
           ))}
         </svg>
         {edges.map((e, i) => e.label && (
-          <span key={`l${i}`} className="sl-via" style={{ left: e.label.x, top: e.label.y, maxWidth: Math.max(80, e.label.w), animationDelay: `${e.delay}ms` }}>
+          <span key={`l${i}`} className="sl-via" style={{ left: e.label.x, top: e.label.y, maxWidth: Math.max(150, e.label.w), animationDelay: `${e.delay}ms` }}>
             {e.label.text}
           </span>
         ))}
@@ -229,6 +240,11 @@ export function OwnershipSchemeView({ scheme, onClose }: { scheme: OwnershipSche
           </button>
         </header>
 
+        {scheme.roles && (
+          <ul className="scheme-roles">
+            {scheme.roles.map((r) => <li key={r.who}><b>{r.who}</b>{r.text}</li>)}
+          </ul>
+        )}
         <ul className="scheme-legend">
           {scheme.labels.map((l) => (
             <li key={l.key}><Tag tag={l.key} /> {l.text}</li>
@@ -256,6 +272,21 @@ export function OwnershipSchemeView({ scheme, onClose }: { scheme: OwnershipSche
           </h3>
           <Swimlanes lanes={scheme.lanes} steps={flow ? flow.steps : scheme.overview.steps} />
 
+          {flow?.keyLines && (
+            <section className="scheme-key">
+              {flow.keyLines.map((k) => <p key={k}>{k}</p>)}
+            </section>
+          )}
+          {flow?.sequences && (
+            <section className="scheme-extra">
+              <h4>Flow</h4>
+              <div className="scheme-seqs">
+                {flow.sequences.map((seq) => (
+                  <ol key={seq[0]} className="scheme-seq">{seq.map((x) => <li key={x}>{x}</li>)}</ol>
+                ))}
+              </div>
+            </section>
+          )}
           {flow?.examples && (
             <section className="scheme-extra">
               <h4>Examples</h4>
@@ -273,7 +304,7 @@ export function OwnershipSchemeView({ scheme, onClose }: { scheme: OwnershipSche
               <h4>{flow.divide.title}</h4>
               <div className="scheme-divide">
                 {flow.divide.sides.map((s) => (
-                  <blockquote key={s.who}><b>{s.who}</b>“{s.quote}”</blockquote>
+                  <blockquote key={s.who}><b>{s.who}</b>{flow.divide!.quotes === false ? s.quote : `“${s.quote}”`}</blockquote>
                 ))}
               </div>
             </section>
