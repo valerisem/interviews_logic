@@ -313,7 +313,6 @@ export function OwnershipSchemeView({ scheme, onClose }: { scheme: OwnershipSche
           {!flow && (
             <>
               <section className="scheme-extra">
-                <h4>The final message</h4>
                 <ol className="scheme-chain">{scheme.overview.message.map((m) => <li key={m}>{m}</li>)}</ol>
               </section>
               <section className="scheme-summary">
