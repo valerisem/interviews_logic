@@ -25,7 +25,7 @@
       "id": "functions",
       "title": "Functions Managed by Head of Operations",
       "members": [
-        "People Ops / Culture Manager",
+        "People Ops (HR)",
         "Technology Operations Associate",
         "Legal / Compliance Consultant",
         "Social Media Manager [TEMPORARY]",
@@ -93,7 +93,7 @@
         "lane": "functions",
         "who": "Functions Managed by Head of Operations",
         "lines": [
-          "People Ops / Culture Manager",
+          "People Ops (HR)",
           "Technology Operations Associate",
           "Legal / Compliance Consultant",
           "Social Media Manager [TEMPORARY]",
@@ -487,7 +487,7 @@
         },
         {
           "lane": "functions",
-          "who": "People Ops / Culture Manager",
+          "who": "People Ops (HR)",
           "tags": [
             "RUNS"
           ],

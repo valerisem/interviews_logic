@@ -10,7 +10,7 @@
     "Chief Executive Officer": "CEO",
     "Head of Operations": "Head of Operations",
     "Chief Financial Officer": "Chief Financial Officer",
-    "People Ops Manager": "People Ops / Culture Manager",
+    "People Ops Manager": "People Ops (HR)",
     "Head of PR": "Head of Marketing + PR",
     "Chief Sales Officer": "Chief Sales Officer",
     "Client Director": "Client Director",
@@ -38,7 +38,7 @@
       "works": "Connecting financial and operational data, resource and cost modelling, margin controls, forecasting, investment decisions and understanding the financial impact of operational changes.",
       "line": "Finance owns financial reporting and financial data. Operations owns the live operational data, systems and models used to understand what is happening before the financial result is final."
     },
-    "People Ops / Culture Manager": {
+    "People Ops (HR)": {
       "owns": "Day-to-day People Operations, onboarding, performance processes, manager support, team engagement and employee/contractor administration.",
       "works": "Performance and accountability, what motivates different people, manager effectiveness, workforce planning, organisational gaps, onboarding, employment structures and making sure international employee and contractor arrangements are properly supported.",
       "line": "People Ops runs the day-to-day function. Head of Operations manages the function, sets priorities and remains accountable for its performance, working with legal or employment specialists where needed."

@@ -354,7 +354,7 @@ table.data .select-cell { width: 1%; min-width: 0; padding-right: 4px; }
 .collab-side section:nth-of-type(2) { animation-delay: 1220ms; }
 .collab-side section + section { padding-top: 16px; border-top: 1px solid #E4DEFA; }
 .collab-side h4 { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--fuchsia); }
-.collab-side p { margin-top: 8px; font-size: 14.5px; line-height: 1.55; }
+.collab-side p { margin-top: 8px; font-size: 14.5px; line-height: 1.55; text-align: justify; hyphens: auto; }
 .collab-card { position: relative; min-height: 104px; padding: 18px 20px 18px 26px; border-radius: 18px; border: 1px solid #ECECF1; background: #fff; color: #0B0E1A; display: flex; flex-direction: column; justify-content: center; box-shadow: 0 14px 34px rgba(45,27,105,.2); will-change: transform; }
 .collab-card.future { border: 1.5px dashed; }
 .collab-card.me { box-shadow: 0 0 0 3px #E91E8C, 0 14px 34px rgba(45,27,105,.2); }
@@ -394,7 +394,8 @@ table.data .select-cell { width: 1%; min-width: 0; padding-right: 4px; }
 .scheme-legend { list-style: none; margin: 10px 0 0; padding: 0 28px; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 12.5px; color: var(--muted); }
 .scheme-legend li { display: flex; align-items: center; gap: 6px; }
 .sl-tag { display: inline-block; padding: 2px 7px; border-radius: 6px; color: #fff; font-size: 10px; font-weight: 800; letter-spacing: .06em; white-space: nowrap; }
-.scheme-tabs { display: flex; gap: 6px; margin-top: 12px; padding: 0 28px 10px; overflow-x: auto; border-bottom: 1px solid var(--border); scrollbar-width: thin; }
+.scheme-tabs { display: flex; gap: 6px; margin-top: 12px; padding: 0 28px 10px; overflow-x: auto; border-bottom: 1px solid var(--border); scrollbar-width: none; }
+.scheme-tabs::-webkit-scrollbar { display: none; }
 .scheme-tabs button { flex: none; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; max-width: 200px; padding: 6px 10px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); color: var(--heading); font: inherit; font-size: 12.5px; font-weight: 700; text-align: left; line-height: 1.25; cursor: pointer; }
 .scheme-tabs button small { font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 .scheme-tabs button:hover { border-color: var(--fuchsia); }
