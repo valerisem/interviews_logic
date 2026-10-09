@@ -2,7 +2,9 @@ import headOfDelivery from '@/content/jobs/head-of-delivery-performance.json';
 import headOfOperations from '@/content/jobs/head-of-operations.json';
 import headOfOperationsOrg from '@/content/jobs/org/head-of-operations.json';
 import headOfOperationsRoles from '@/content/jobs/org/head-of-operations-roles.json';
+import headOfOperationsOwnership from '@/content/jobs/org/head-of-operations-ownership.json';
 import type { OrgRoleInfo, OrgSnapshot } from '@/components/OrgChart';
+import type { OwnershipScheme } from '@/components/OwnershipScheme';
 
 /*
  * Job descriptions published at /jobs/<slug>. To add one, add a JSON file in content/jobs
@@ -72,6 +74,11 @@ function roleInfo(org: OrgSnapshot, notes: RoleNotes): Record<string, OrgRoleInf
 /** Click-to-open collaboration notes for the org-chart cards, by job slug. */
 export const ORG_ROLE_INFO: Record<string, Record<string, OrgRoleInfo>> = {
   'head-of-operations': roleInfo(headOfOperationsOrg as OrgSnapshot, headOfOperationsRoles as RoleNotes),
+};
+
+/** Ownership / accountability swimlanes opened from the org chart, by job slug. */
+export const ORG_SCHEMES: Record<string, OwnershipScheme> = {
+  'head-of-operations': headOfOperationsOwnership as OwnershipScheme,
 };
 
 const JOBS = [headOfDelivery, headOfOperations] as Job[];

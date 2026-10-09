@@ -1,0 +1,863 @@
+{
+  "_note": "Head of Operations ownership / accountability model, shown from the org chart's “Show Ownership Scheme” button. Steps run left to right; each is joined to the one before it (or to the step index in “from”). rel “both” = two-way (↔).",
+  "title": "Ownership / Accountability Model",
+  "lanes": [
+    {
+      "id": "ceo",
+      "title": "CEO"
+    },
+    {
+      "id": "hoo",
+      "title": "Head of Operations"
+    },
+    {
+      "id": "leaders",
+      "title": "Functional Leaders",
+      "members": [
+        "CFO",
+        "Chief Sales Officer / Director of New Business",
+        "Head of Delivery & Performance",
+        "Client Director",
+        "Head of Marketing + PR"
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Functions Managed by Head of Operations",
+      "members": [
+        "People Ops / Culture Manager",
+        "Technology Operations Associate",
+        "Legal / Compliance Consultant",
+        "Social Media Manager [TEMPORARY]",
+        "Operational partners / fulfilment / production / specialist providers"
+      ]
+    },
+    {
+      "id": "teams",
+      "title": "Functional Teams",
+      "members": [
+        "Finance",
+        "Sales / Partnerships",
+        "Delivery",
+        "Client / Account team",
+        "Marketing"
+      ]
+    }
+  ],
+  "labels": [
+    {
+      "key": "OWNS",
+      "text": "accountable for the final outcome"
+    },
+    {
+      "key": "RUNS",
+      "text": "executes the day-to-day work"
+    },
+    {
+      "key": "CONTROL",
+      "text": "provides visibility, systems, checks and early warning"
+    },
+    {
+      "key": "COLLAB",
+      "text": "works together but does not own the other function"
+    },
+    {
+      "key": "ESCALATE",
+      "text": "only reaches CEO when an actual CEO decision is required"
+    }
+  ],
+  "overview": {
+    "steps": [
+      {
+        "lane": "ceo",
+        "who": "CEO"
+      },
+      {
+        "lane": "hoo",
+        "who": "Head of Operations",
+        "rel": "both"
+      },
+      {
+        "lane": "leaders",
+        "who": "Functional Leaders",
+        "lines": [
+          "CFO",
+          "Chief Sales Officer / Director of New Business",
+          "Head of Delivery & Performance",
+          "Client Director",
+          "Head of Marketing + PR"
+        ],
+        "rel": "both"
+      },
+      {
+        "lane": "functions",
+        "who": "Functions Managed by Head of Operations",
+        "lines": [
+          "People Ops / Culture Manager",
+          "Technology Operations Associate",
+          "Legal / Compliance Consultant",
+          "Social Media Manager [TEMPORARY]",
+          "Operational partners / fulfilment / production / specialist providers"
+        ],
+        "from": 1
+      },
+      {
+        "lane": "teams",
+        "who": "Functional Teams",
+        "lines": [
+          "Finance",
+          "Sales / Partnerships",
+          "Delivery",
+          "Client / Account team",
+          "Marketing"
+        ],
+        "from": 2
+      }
+    ],
+    "message": [
+      "CEO",
+      "Head of Operations",
+      "Creates the control + system + management layer",
+      "Functional leaders still own their results",
+      "Teams execute"
+    ],
+    "principles": [
+      "Head of Operations should NOT sit between every manager and every junior employee.",
+      "Junior employees should NOT have direct Head of Operations collaboration lines unless there is a genuine exception."
+    ],
+    "summary": {
+      "lead": "Head of Operations does not take everybody's job. It makes sure:",
+      "steps": [
+        "The right person owns it",
+        "The data shows what is happening",
+        "Problems are found early",
+        "The root cause is fixed",
+        "Only real CEO decisions reach the CEO"
+      ]
+    }
+  },
+  "flows": [
+    {
+      "id": "priorities",
+      "title": "Company Priorities → Execution",
+      "steps": [
+        {
+          "lane": "ceo",
+          "who": "CEO",
+          "tags": [
+            "OWNS"
+          ],
+          "lines": [
+            "Sets company priorities and major strategic direction"
+          ]
+        },
+        {
+          "lane": "hoo",
+          "who": "Head of Operations",
+          "tags": [
+            "OWNS"
+          ],
+          "lines": [
+            "Turns priorities into owners, targets, projects, reporting and follow-through"
+          ],
+          "via": "priorities"
+        },
+        {
+          "lane": "leaders",
+          "who": "Functional Leaders",
+          "tags": [
+            "OWNS"
+          ],
+          "lines": [
+            "Own delivery of the target inside their individual functions"
+          ],
+          "via": "coordinates"
+        },
+        {
+          "lane": "teams",
+          "who": "Functional Teams",
+          "tags": [
+            "RUNS"
+          ],
+          "lines": [
+            "Execute the work"
+          ],
+          "via": "manage"
+        },
+        {
+          "lane": "hoo",
+          "who": "Head of Operations",
+          "tags": [
+            "CONTROL"
+          ],
+          "lines": [
+            "Tracks whether the overall plan is working and resolves cross-functional gaps"
+          ],
+          "via": "performance / blockers / data"
+        },
+        {
+          "lane": "ceo",
+          "who": "CEO",
+          "tags": [
+            "ESCALATE"
+          ],
+          "lines": [
+            "Receives recommendation + decision required"
+          ],
+          "via": "only when required"
+        }
+      ]
+    },
+    {
+      "id": "delivery",
+      "title": "Delivery Performance / Margin",
+      "steps": [
+        {
+          "lane": "leaders",
+          "who": "Head of Delivery & Performance",
+          "tags": [
+            "OWNS"
+          ],
+          "lines": [
+            "Delivery performance, campaign margin, quality, timelines and Delivery team performance"
+          ]
+        },
+        {
+          "lane": "teams",
+          "who": "Senior Campaign Managers / Delivery",
+          "tags": [
+            "RUNS"
+          ],
+          "lines": [
+            "Own individual campaign outcomes and corrective action"
+          ],
+          "via": "manages"
+        },
+        {
+          "lane": "hoo",
+          "who": "Head of Operations",
+          "tags": [
+            "CONTROL",
+            "COLLAB"
+          ],
+          "lines": [
+            "Builds margin-control infrastructure",
+            "Creates early-warning systems",
+            "Connects pipeline, capacity and Delivery data",
+            "Identifies repeated causes of margin leakage",
+            "Challenges whether corrective action happened",
+            "Fixes structural problems rather than taking over individual campaigns"
+          ],
+          "rel": "both"
+        },
+        {
+          "lane": "ceo",
+          "who": "CEO",
+          "tags": [
+            "ESCALATE"
+          ],
+          "via": "important exception only"
+        }
+      ]
+    },
+    {
+      "id": "capacity",
+      "title": "Capacity / Resource Planning",
+      "steps": [
+        {
+          "lane": "teams",
+          "who": "Sales Pipeline + Campaign Data + Historical Delivery Data",
+          "kind": "input"
+        },
+        {
+          "lane": "hoo",
+          "who": "Head of Operations",
+          "tags": [
+            "OWNS"
+          ],
+          "lines": [
+            "Capacity model",
+            "Resource forecasting",
+            "Prediction of future workload",
+            "Identification of future resource gaps"
+          ]
+        },
+        {
+          "lane": "leaders",
+          "who": "Head of Delivery / Client Leadership / Sales Leadership",
+          "tags": [
+            "COLLAB"
+          ],
+          "lines": [
+            "Validate assumptions and operational reality"
+          ],
+          "rel": "both"
+        },
+        {
+          "lane": "leaders",
+          "who": "Functional Leader",
+          "tags": [
+            "OWNS"
+          ],
+          "lines": [
+            "Decides how work should be managed inside the function"
+          ]
+        },
+        {
+          "lane": "hoo",
+          "who": "Head of Operations",
+          "tags": [
+            "CONTROL"
+          ],
+          "lines": [
+            "Checks whether the resource model continues to reflect reality"
+          ]
+        },
+        {
+          "lane": "ceo",
+          "who": "CEO",
+          "tags": [
+            "ESCALATE"
+          ],
+          "lines": [
+            "Only major hiring / structural decisions requiring CEO approval"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "technology",
+      "title": "Technology / Data / Automation",
+      "steps": [
+        {
+          "lane": "teams",
+          "who": "Business problem identified",
+          "kind": "input"
+        },
+        {
+          "lane": "hoo",
+          "who": "Head of Operations",
+          "tags": [
+            "OWNS"
+          ],
+          "lines": [
+            "Defines the problem",
+            "Prioritises based on business value",
+            "Defines expected ROI / outcome"
+          ]
+        },
+        {
+          "lane": "functions",
+          "who": "Technology Operations Associate",
+          "tags": [
+            "RUNS"
+          ],
+          "lines": [
+            "Researches",
+            "Builds",
+            "Integrates",
+            "Tests",
+            "Maintains"
+          ]
+        },
+        {
+          "lane": "leaders",
+          "who": "Functional Leader / Team",
+          "tags": [
+            "COLLAB"
+          ],
+          "lines": [
+            "Provides requirements and tests whether the solution works in reality"
+          ],
+          "rel": "both"
+        },
+        {
+          "lane": "hoo",
+          "who": "Head of Operations",
+          "tags": [
+            "CONTROL"
+          ],
+          "lead": "Measures",
+          "lines": [
+            "Time saved",
+            "Cost reduced",
+            "Capacity created",
+            "Visibility improved",
+            "Risk reduced",
+            "Revenue enabled"
+          ]
+        }
+      ],
+      "examples": [
+        "Internal software",
+        "Open-source solutions",
+        "White-label technology",
+        "CRM integrations",
+        "Project management integrations",
+        "Margin controls",
+        "Forecasting models",
+        "Capacity models",
+        "Prediction models",
+        "Automated reporting",
+        "AI tools",
+        "Removal of duplicated software"
+      ]
+    },
+    {
+      "id": "data",
+      "title": "Data Control / Management Information",
+      "steps": [
+        {
+          "lane": "teams",
+          "who": "Functional Systems",
+          "lines": [
+            "CRM",
+            "Project Management",
+            "Campaign Data",
+            "People Data",
+            "Operational Tools"
+          ],
+          "kind": "input"
+        },
+        {
+          "lane": "hoo",
+          "who": "Head of Operations",
+          "tags": [
+            "OWNS"
+          ],
+          "lines": [
+            "Operational data structure",
+            "Connected sources of truth",
+            "Operational reporting",
+            "Prediction models",
+            "Early-warning signals",
+            "Data quality controls"
+          ],
+          "via": "live data"
+        },
+        {
+          "lane": "leaders",
+          "who": "Functional Leaders",
+          "tags": [
+            "OWNS"
+          ],
+          "lines": [
+            "Accuracy and performance inside their own function"
+          ],
+          "rel": "both"
+        },
+        {
+          "lane": "hoo",
+          "who": "Head of Operations",
+          "tags": [
+            "CONTROL"
+          ],
+          "lead": "Turns operational data into",
+          "lines": [
+            "Insights",
+            "Risks",
+            "Predictions",
+            "Recommendations",
+            "Actions"
+          ]
+        },
+        {
+          "lane": "ceo",
+          "who": "CEO",
+          "lines": [
+            "Receives useful management information",
+            "NOT raw dashboards from five different teams"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "people",
+      "title": "People / Performance / Structure",
+      "steps": [
+        {
+          "lane": "hoo",
+          "who": "Head of Operations",
+          "tags": [
+            "OWNS"
+          ],
+          "lines": [
+            "Direction of People Operations",
+            "Organisation structure",
+            "Management gaps",
+            "Performance infrastructure",
+            "Workforce planning"
+          ]
+        },
+        {
+          "lane": "functions",
+          "who": "People Ops / Culture Manager",
+          "tags": [
+            "RUNS"
+          ],
+          "lines": [
+            "Onboarding",
+            "Performance processes",
+            "Manager support",
+            "Employee / contractor administration",
+            "Team engagement",
+            "Difficult conversations",
+            "People issues"
+          ]
+        },
+        {
+          "lane": "leaders",
+          "who": "Functional Leaders",
+          "tags": [
+            "OWNS"
+          ],
+          "lines": [
+            "Performance of people inside their own teams"
+          ],
+          "rel": "both"
+        },
+        {
+          "lane": "functions",
+          "who": "Legal / Compliance Consultant",
+          "tags": [
+            "COLLAB"
+          ],
+          "lines": [
+            "Employment structures",
+            "Contractor structures",
+            "International arrangements",
+            "Legal requirements"
+          ],
+          "rel": "both"
+        },
+        {
+          "lane": "hoo",
+          "who": "Head of Operations",
+          "tags": [
+            "CONTROL"
+          ],
+          "lead": "Checks",
+          "lines": [
+            "Are managers managing properly?",
+            "Are targets clear?",
+            "What motivates individual people?",
+            "Why is performance failing?",
+            "Is onboarding getting people productive fast enough?",
+            "Does the organisation need another management layer?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "legal",
+      "title": "Legal / Compliance",
+      "steps": [
+        {
+          "lane": "teams",
+          "who": "Business / Client / People requirement",
+          "kind": "input"
+        },
+        {
+          "lane": "hoo",
+          "who": "Head of Operations",
+          "tags": [
+            "OWNS"
+          ],
+          "lead": "Makes sure the requirement has",
+          "lines": [
+            "A clear owner",
+            "A process",
+            "The correct specialist",
+            "Follow-through"
+          ]
+        },
+        {
+          "lane": "functions",
+          "who": "Legal / Compliance Consultant",
+          "tags": [
+            "RUNS / ADVISES"
+          ],
+          "lines": [
+            "Provides specialist legal or compliance advice"
+          ]
+        },
+        {
+          "lane": "leaders",
+          "who": "Relevant Functional Leader",
+          "tags": [
+            "OWNS"
+          ],
+          "lines": [
+            "Implements requirements inside their function"
+          ],
+          "rel": "both"
+        },
+        {
+          "lane": "hoo",
+          "who": "Head of Operations",
+          "tags": [
+            "CONTROL"
+          ],
+          "lines": [
+            "Makes sure controls actually exist and are followed"
+          ]
+        }
+      ],
+      "examples": [
+        "Contractor vs employee structures",
+        "International employment",
+        "Client compliance requirements",
+        "Policies",
+        "Commercial agreements",
+        "Compliance partners",
+        "Platform requirements"
+      ]
+    },
+    {
+      "id": "sales",
+      "title": "Sales / Future Business",
+      "steps": [
+        {
+          "lane": "leaders",
+          "who": "Chief Sales Officer / Director of New Business",
+          "tags": [
+            "OWNS"
+          ],
+          "lines": [
+            "Revenue generation",
+            "Pipeline",
+            "Sales performance",
+            "New business"
+          ]
+        },
+        {
+          "lane": "hoo",
+          "who": "Head of Operations",
+          "tags": [
+            "COLLAB",
+            "CONTROL"
+          ],
+          "lines": [
+            "CRM infrastructure",
+            "Pipeline reporting",
+            "Forecasting",
+            "Lead-generation infrastructure",
+            "Automation",
+            "Market / competitor intelligence",
+            "What future pipeline means for Delivery, hiring and capacity"
+          ],
+          "rel": "both"
+        },
+        {
+          "lane": "hoo",
+          "who": "Head of Operations capacity / forecasting models"
+        },
+        {
+          "lane": "leaders",
+          "who": "Delivery / Client / People planning"
+        }
+      ]
+    },
+    {
+      "id": "client",
+      "title": "Client / Account Performance",
+      "steps": [
+        {
+          "lane": "leaders",
+          "who": "Client Director",
+          "tags": [
+            "OWNS"
+          ],
+          "lines": [
+            "Client strategy",
+            "Account growth",
+            "Renewals",
+            "Commercial performance",
+            "Account team"
+          ]
+        },
+        {
+          "lane": "teams",
+          "who": "Account Managers",
+          "tags": [
+            "RUNS"
+          ],
+          "lines": [
+            "Day-to-day client management"
+          ]
+        },
+        {
+          "lane": "hoo",
+          "who": "Head of Operations",
+          "tags": [
+            "COLLAB"
+          ],
+          "lines": [
+            "Account reporting",
+            "Forecasting",
+            "CRM structure",
+            "Targets",
+            "Recurring cross-functional issues",
+            "Processes that affect several accounts"
+          ],
+          "rel": "both",
+          "from": 0
+        }
+      ],
+      "note": "Head of Operations does NOT manage individual Account Managers."
+    },
+    {
+      "id": "finance",
+      "title": "Finance + Operations",
+      "steps": [
+        {
+          "lane": "leaders",
+          "who": "CFO",
+          "tags": [
+            "OWNS"
+          ],
+          "lines": [
+            "Financial reporting",
+            "Cash",
+            "Accounting",
+            "Budgeting",
+            "Banking",
+            "Finance team",
+            "Final financial data"
+          ]
+        },
+        {
+          "lane": "hoo",
+          "who": "Head of Operations",
+          "tags": [
+            "COLLAB"
+          ],
+          "lines": [
+            "Operational forecasting",
+            "Resource economics",
+            "Margin-control infrastructure",
+            "Cost visibility",
+            "Investment modelling",
+            "Connecting operational activity with expected financial impact"
+          ],
+          "rel": "both"
+        }
+      ],
+      "divide": {
+        "title": "Important divide",
+        "sides": [
+          {
+            "who": "CFO",
+            "quote": "What did the financial result become?"
+          },
+          {
+            "who": "Head of Operations",
+            "quote": "What is happening operationally right now, what is likely to happen next, and what can we change before the result is final?"
+          }
+        ]
+      }
+    },
+    {
+      "id": "social",
+      "title": "Social Media [Temporary Structure]",
+      "steps": [
+        {
+          "lane": "hoo",
+          "who": "Head of Operations",
+          "tags": [
+            "OWNS TEMPORARILY"
+          ],
+          "lines": [
+            "Targets",
+            "Performance expectations",
+            "Reporting",
+            "Management oversight"
+          ]
+        },
+        {
+          "lane": "functions",
+          "who": "Social Media Manager",
+          "tags": [
+            "RUNS"
+          ],
+          "lines": [
+            "Content",
+            "Publishing",
+            "Community",
+            "Social performance"
+          ]
+        },
+        {
+          "phase": "When Head of Marketing + PR exists"
+        },
+        {
+          "lane": "leaders",
+          "who": "Head of Marketing + PR",
+          "tags": [
+            "OWNS"
+          ]
+        },
+        {
+          "lane": "functions",
+          "who": "Social Media Manager",
+          "lines": [
+            "Head of Operations no longer manages the function directly"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "partners",
+      "title": "Operational Partners / Vendors",
+      "steps": [
+        {
+          "lane": "teams",
+          "who": "Business need",
+          "lines": [
+            "Fulfilment",
+            "Production",
+            "Logistics",
+            "Specialist platform",
+            "Compliance provider",
+            "External operational service"
+          ],
+          "kind": "input"
+        },
+        {
+          "lane": "hoo",
+          "who": "Head of Operations",
+          "tags": [
+            "OWNS SETUP"
+          ],
+          "lines": [
+            "Finds / evaluates options",
+            "Compares cost and capability",
+            "Negotiates operating setup",
+            "Creates clear internal ownership",
+            "Looks for better solutions"
+          ]
+        },
+        {
+          "lane": "teams",
+          "who": "Relevant Functional Team",
+          "tags": [
+            "RUNS"
+          ],
+          "lines": [
+            "Uses the partner day to day"
+          ]
+        },
+        {
+          "lane": "hoo",
+          "who": "Head of Operations",
+          "tags": [
+            "CONTROL"
+          ],
+          "lines": [
+            "Reviews whether the setup remains efficient and commercially sensible"
+          ]
+        }
+      ]
+    }
+  ]
+}

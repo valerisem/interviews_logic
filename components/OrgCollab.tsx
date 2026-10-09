@@ -67,6 +67,8 @@ export function OrgCollab({ person, partner, info, from, onClose }: {
   const closeRef = useRef<HTMLButtonElement>(null);
   // The highlighted person's own card: just their role, no partner or arrows.
   const solo = person.id === partner.id;
+  // A to-be-hired or category card's name is the role (its role field just says “To be hired”).
+  const roleName = person.future ? person.name : person.role;
 
   useLayoutEffect(() => {
     const p = personRef.current, q = partnerRef.current;
@@ -120,38 +122,36 @@ export function OrgCollab({ person, partner, info, from, onClose }: {
         </button>
         <p className="collab-eyebrow">{solo ? 'How the role works' : 'How they work together'}</p>
         <h2 id="collab-title" className="collab-title">
-          {solo ? partner.role : <>{person.future ? person.name : person.role} <span className="accent">×</span> {partner.role}</>}
+          {solo ? roleName : <>{roleName} <span className="accent">×</span> {partner.role}</>}
         </h2>
 
         <div className={`collab-body${solo ? ' solo' : ''}`}>
           <div className="collab-together">
             <p className="collab-zone">{solo ? 'Across the business' : 'Working together'}</p>
-            {!solo && (
-              <div className="collab-pair">
-                <Card node={partner} me cardRef={partnerRef} />
+            <div className="collab-pair">
+              {!solo && <Card node={partner} me cardRef={partnerRef} />}
+              {!solo && (
                 <svg className="collab-arrows" viewBox="0 0 240 140" aria-hidden="true">
                   <Flow d={TOP} color={PINK} first />
                   <Flow d={BOTTOM} color={PUR} first={false} />
                 </svg>
-              </div>
-            )}
-            <div className="collab-line">
-              <section>
-                <h3>{info.labels?.works ?? `Works with ${partner.role} on`}</h3>
-                <p>{info.works}</p>
-              </section>
-              <section>
-                <h3>Where the line sits</h3>
-                <p>{info.line}</p>
-              </section>
+              )}
+              <Card node={person} me={solo} cardRef={personRef} />
             </div>
+            <section className="collab-works">
+              <h3>{info.labels?.works ?? `Works with ${partner.role} on`}</h3>
+              <p>{info.works}</p>
+            </section>
           </div>
           <aside className="collab-side" style={{ '--c': person.color ?? GREY } as React.CSSProperties}>
-            <p className="collab-zone">{info.labels?.side ?? 'Their own role'}</p>
-            <Card node={person} me={solo} cardRef={personRef} />
-            <section className="collab-owns">
-              <h3>{info.labels?.owns ?? 'Owns'}</h3>
+            <h3 className="collab-side-title">{info.labels?.side ?? `${roleName} role`}</h3>
+            <section>
+              <h4>{info.labels?.owns ?? 'Owns'}</h4>
               <p>{info.owns}</p>
+            </section>
+            <section>
+              <h4>Where the line sits</h4>
+              <p>{info.line}</p>
             </section>
           </aside>
         </div>

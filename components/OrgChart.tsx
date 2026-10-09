@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { OrgCollab } from './OrgCollab';
+import { OwnershipSchemeView, type OwnershipScheme } from './OwnershipScheme';
 
 /*
  * Read-only, interactive copy of a saved Org Chart Whiteboard board (github.com/valerisem/org):
@@ -71,7 +72,9 @@ function route(a: Rect, b: Rect, fromSide?: string, toSide?: string): string {
   return `M ${sx} ${sy} L ${mx} ${sy} L ${mx} ${ty} L ${tx} ${ty}`;
 }
 
-export function OrgChart({ data, highlight, roles }: { data: OrgSnapshot; highlight?: string; roles?: Record<string, OrgRoleInfo> }) {
+export function OrgChart({ data, highlight, roles, scheme }: {
+  data: OrgSnapshot; highlight?: string; roles?: Record<string, OrgRoleInfo>; scheme?: OwnershipScheme;
+}) {
   const areaRef = useRef<HTMLDivElement>(null);
   const [view, setView] = useState({ k: 0.2, x: 0, y: 0 });
   const [hover, setHover] = useState<string | null>(null);
@@ -82,6 +85,8 @@ export function OrgChart({ data, highlight, roles }: { data: OrgSnapshot; highli
   const moved = useRef(false);
   const [open, setOpen] = useState<{ id: string; from: DOMRect } | null>(null);
   const closeCollab = useCallback(() => setOpen(null), []);
+  const [showScheme, setShowScheme] = useState(false);
+  const closeScheme = useCallback(() => setShowScheme(false), []);
   const partner = highlight ? data.nodes.find((n) => n.id === highlight) : undefined;
 
   const bounds = useCallback(() => {
@@ -271,6 +276,13 @@ export function OrgChart({ data, highlight, roles }: { data: OrgSnapshot; highli
           })}
         </div>
       </div>
+      {scheme && (
+        <button type="button" className="org-scheme-btn" onClick={() => setShowScheme(true)}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" /><path d="M8 4v4M15 10v4M11 16v4" /></svg>
+          Show Ownership Scheme
+        </button>
+      )}
+      {showScheme && scheme && <OwnershipSchemeView scheme={scheme} onClose={closeScheme} />}
       <div className="org-controls">
         {highlight && <button type="button" onClick={focusHighlight}>My Team</button>}
         <button type="button" onClick={fit}>Fit</button>

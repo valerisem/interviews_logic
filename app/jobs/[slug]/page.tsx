@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { Fragment } from 'react';
 import { OrgChart } from '@/components/OrgChart';
 import { TopBar } from '@/components/TopBar';
-import { JOB_SLUGS, ORG_CHARTS, ORG_ROLE_INFO, getJob, jobSummary, type Job, type JobBlock, type JobSection } from '@/lib/jobs';
+import { JOB_SLUGS, ORG_CHARTS, ORG_ROLE_INFO, ORG_SCHEMES, getJob, jobSummary, type Job, type JobBlock, type JobSection } from '@/lib/jobs';
 
 export function generateStaticParams() {
   return JOB_SLUGS.map((slug) => ({ slug }));
@@ -155,7 +155,7 @@ export default async function JobPage({ params }: { params: Promise<{ slug: stri
       <main className="doc job">
         {job.orgChart && ORG_CHARTS[job.slug] && (
           <section className="job-org" aria-label={job.orgChart.title}>
-            <OrgChart data={ORG_CHARTS[job.slug]} highlight={job.orgChart.highlight} roles={ORG_ROLE_INFO[job.slug]} />
+            <OrgChart data={ORG_CHARTS[job.slug]} highlight={job.orgChart.highlight} roles={ORG_ROLE_INFO[job.slug]} scheme={ORG_SCHEMES[job.slug]} />
           </section>
         )}
 
