@@ -1,127 +1,102 @@
 {
-  "_note": "Collaboration logic shown when a card on the Head of Operations org chart is clicked. Cards are matched by name first (for to-be-hired cards), then by role.",
+  "_note": "Collaboration logic shown when a card on the Head of Operations org chart is clicked. Only roles with a direct Head of Operations relationship have an entry; cards are matched by name first (to-be-hired and category cards), then by role. Optional labels override the panel headings.",
   "byName": {
     "Technology Operations Associate": "Technology Operations Associate",
     "Legal Consultant": "Legal Consultant",
-    "Social Media Manager": "Social Media Manager"
+    "Social Media Manager": "Social Media Manager",
+    "Operational Partners & Specialists": "Operational Partners & Specialists"
   },
   "byRole": {
     "Chief Executive Officer": "CEO",
+    "Head of Operations": "Head of Operations",
+    "Chief Financial Officer": "Chief Financial Officer",
     "People Ops Manager": "People Ops / Culture Manager",
     "Head of PR": "Head of Marketing + PR",
-    "Chief Financial Officer": "Chief Financial Officer",
-    "Payment Manager": "Payment Managers",
-    "Paid Marketing Director": "Paid Marketing Director",
     "Chief Sales Officer": "Chief Sales Officer",
     "Client Director": "Client Director",
-    "Account Manager": "Account Manager",
-    "Creative Strategist": "Creative Strategists",
-    "Director of New Partnerships": "Director of New Business",
     "Partnership Manager": "Client Director",
+    "Director of New Partnerships": "Director of New Business",
     "Head of Delivery Operations": "Head of Delivery and Performance",
-    "Senior Campaign Manager": "Senior Campaign Managers",
-    "Campaign Manager": "Campaign Manager"
+    "Senior Campaign Manager": "Senior Campaign Managers"
   },
   "roles": {
+    "CEO": {
+      "owns": "Company direction, major strategic decisions, senior leadership, investors and overall business performance.",
+      "works": "Company priorities, organisational structure, business-wide visibility, major operational decisions and removing issues that do not need CEO involvement.",
+      "line": "Operations removes operational complexity from the CEO and brings clear recommendations rather than raw problems."
+    },
+    "Head of Operations": {
+      "labels": {
+        "works": "Works across",
+        "side": "The role"
+      },
+      "owns": "How the business operates across people, systems, data and functions, with a focus on profitability, scalability and reducing unnecessary complexity.",
+      "works": "Operational performance and resource use, technology and data, organisational structure, People Operations, operational partners, compliance coordination and cross-functional company projects.",
+      "line": "Functional leaders own the results of their departments. Head of Operations builds the systems, controls and management infrastructure around them, fixes gaps between functions and takes operational complexity off the CEO’s plate."
+    },
+    "Chief Financial Officer": {
+      "owns": "Financial reporting, cash, budgeting, accounting, banking, financial planning and the Finance team.",
+      "works": "Connecting financial and operational data, resource and cost modelling, margin controls, forecasting, investment decisions and understanding the financial impact of operational changes.",
+      "line": "Finance owns financial reporting and financial data. Operations owns the live operational data, systems and models used to understand what is happening before the financial result is final."
+    },
     "People Ops / Culture Manager": {
-      "owns": "Day-to-day people operations, onboarding, performance processes, manager support, team engagement, contractor and employee administration.",
-      "works": "Performance systems, workforce planning, organisational gaps, onboarding effectiveness, capacity issues and improving how managers manage people.",
-      "line": "People Ops runs the function. Head of Operations sets the direction, manages the role and remains accountable for the function performing properly."
+      "owns": "Day-to-day People Operations, onboarding, performance processes, manager support, team engagement and employee/contractor administration.",
+      "works": "Performance and accountability, what motivates different people, manager effectiveness, workforce planning, organisational gaps, onboarding, employment structures and making sure international employee and contractor arrangements are properly supported.",
+      "line": "People Ops runs the day-to-day function. Head of Operations manages the function, sets priorities and remains accountable for its performance, working with legal or employment specialists where needed."
     },
     "Technology Operations Associate": {
       "owns": "Building, testing and maintaining internal systems, automations, integrations, data flows and operational tools.",
-      "works": "Capacity models, forecasting, margin controls, reporting, internal software, AI tools, open-source solutions and reducing manual work or software cost.",
-      "line": "Head of Operations decides which business problems matter and what should be prioritised. Technology Operations executes and helps find the best technical solution."
+      "works": "Building internal software, connected data, forecasting and prediction models, automation, margin and capacity controls, open-source solutions and reducing software or manual operating cost.",
+      "line": "Head of Operations defines the business problem, priorities and expected value. Technology Operations researches, builds, tests and maintains the technical solution."
     },
     "Legal Consultant": {
-      "owns": "Specialist legal advice on contracts, employment and contractor matters, policies, commercial agreements and other legal risks.",
-      "works": "Making sure company structures and processes are legally workable, especially across international teams and operational changes.",
-      "line": "Legal advises on risk and legal requirements. Head of Operations decides how that advice is implemented operationally across the business."
+      "owns": "Specialist advice on contracts, employment and contractor structures, commercial agreements, compliance requirements and legal risk.",
+      "works": "Making company processes legally workable, supporting international workforce structures, client compliance requirements, contracts with operational partners and identifying specialist support where needed.",
+      "line": "Legal provides the specialist advice. Head of Operations makes sure the correct controls, owners and processes are put in place across the business."
     },
     "Social Media Manager": {
       "owns": "Day-to-day company social channels, content execution, publishing, community activity and agreed social performance targets.",
       "works": "Targets, reporting, processes, tools, productivity and making sure Social supports wider company priorities.",
-      "line": "This sits under Head of Operations temporarily because there is currently no senior Marketing owner. It should move under Marketing once the right leadership layer exists."
+      "line": "Head of Operations manages the function temporarily while there is no senior Marketing owner. The function moves under Marketing once the appropriate leadership layer is in place."
     },
     "Head of Marketing + PR": {
       "owns": "Overall company marketing, brand positioning, PR, communications and marketing strategy.",
-      "works": "Marketing systems, reporting, resources, technology, processes and cross-functional projects that require Sales, Marketing or Operations to work together.",
+      "works": "Marketing systems, data and reporting, resources, technology, cross-functional projects and the transition of functions temporarily managed by Operations.",
       "line": "Marketing owns the strategy and results. Operations helps build the infrastructure and removes operational blockers."
     },
-    "Chief Financial Officer": {
-      "owns": "Financial reporting, cash, budgeting, accounting, banking, financial planning and the Finance team.",
-      "works": "Operational forecasting, cost visibility, resource economics, margin controls, investment modelling and making sure operational and financial data connect properly.",
-      "line": "Finance owns the financial numbers. Operations owns the live operating systems and data that help explain and influence what happens before those numbers become final."
-    },
-    "Head of Delivery / Delivery Director": {
-      "owns": "Campaign Delivery, campaign performance, quality, timelines, team performance and Delivery margin.",
-      "works": "Margin-control infrastructure, capacity models, resource planning, performance reporting, process improvement and identifying recurring delivery problems.",
-      "line": "Delivery owns the outcome. Operations builds the controls, systems and visibility that make it easier to achieve and hold people accountable for it."
-    },
-    "Chief Sales Officer / Partnerships Leadership": {
-      "owns": "New business, pipeline generation, sales performance, commercial relationships and Sales team targets.",
-      "works": "Pipeline forecasting, CRM infrastructure, reporting, lead flow, sales capacity, automation and understanding what future pipeline means for the rest of the company.",
-      "line": "Sales owns winning revenue. Operations makes sure the systems, data and downstream planning are ready to support it."
-    },
-    "Paid Marketing Director": {
-      "owns": "Paid Media strategy, performance, team delivery and client results within Paid Media.",
-      "works": "Systems, reporting, capacity, tooling, resource requirements and cross-functional operational improvements.",
-      "line": "Paid Media owns specialist performance. Operations supports the structure and infrastructure around it."
-    },
-    "Campaign Manager": {
-      "owns": "Day-to-day campaign execution, creators, timelines, deliverables and campaign hygiene.",
-      "works": "Processes, tools, automation, workload data, capacity models and recurring delivery problems.",
-      "line": "Campaign Manager owns execution. Operations improves the system they execute within."
-    },
-    "Account Manager": {
-      "owns": "Day-to-day client relationship, account performance, renewals, growth opportunities and commercial coordination.",
-      "works": "CRM structure, targets, reporting, forecasting, client processes and cross-functional issues affecting the account.",
-      "line": "Account Manager owns the client relationship. Operations builds the infrastructure around how accounts are managed and measured."
-    },
-    "Client Director": {
-      "owns": "Senior client relationships, strategic account growth, commercial performance and oversight of key accounts and Account Managers.",
-      "works": "Account targets, reporting, forecasting, processes, team structure and issues affecting several departments.",
-      "line": "Client Director owns client strategy and account performance. Operations supports the structure, data and accountability around it."
-    },
-    "Partnerships Director": {
-      "owns": "Winning new clients, developing commercial relationships and turning opportunities into revenue.",
-      "works": "CRM, pipeline reporting, forecasting, lead flow, automation and making sure future business can be supported operationally.",
-      "line": "Partnerships owns winning the business. Operations connects pipeline with the rest of the company."
+    "Chief Sales Officer": {
+      "owns": "Sales strategy, revenue targets, Sales leadership, pipeline performance and overall new business performance.",
+      "works": "Pipeline and forecasting data, CRM infrastructure, lead flow, sales capacity, automation and understanding what expected revenue means for Delivery, hiring and company resources.",
+      "line": "Chief Sales Officer owns revenue generation. Operations makes sure the business has the systems, information and capacity to support that growth."
     },
     "Director of New Business": {
       "owns": "New business strategy, major opportunities, lead generation channels and improving how the company wins new clients.",
-      "works": "Sales systems, lead generation infrastructure, pipeline data, forecasting, automation and testing new routes to market.",
+      "works": "Lead-generation infrastructure, pipeline data, CRM, forecasting, automation, new commercial channels and understanding what future business means operationally.",
       "line": "New Business owns generating and converting opportunities. Operations builds the infrastructure that helps it scale."
     },
-    "CEO": {
-      "owns": "Company direction, major strategic decisions, senior leadership, investors and overall business performance.",
-      "works": "Turning priorities into execution, company structure, major operational decisions, performance visibility and issues that genuinely need CEO involvement.",
-      "line": "Operations removes operational complexity from the CEO and brings clear recommendations rather than raw problems."
+    "Client Director": {
+      "owns": "Senior client relationships, strategic account growth, commercial performance and oversight of key accounts and Account Managers.",
+      "works": "Client and revenue forecasting, account targets, reporting infrastructure, team structure and recurring issues that require several departments to work together.",
+      "line": "Client Director owns client strategy and account performance. Operations supports the structure, data and accountability around it."
     },
-    "Payment Managers": {
-      "owns": "Day-to-day payments, payment processing, creator and supplier payments, reconciliations and related Finance administration.",
-      "works": "Payment workflows, automation, system improvements, handovers between teams and removing unnecessary manual work.",
-      "line": "Payment Managers own payment execution under Finance. Operations improves how the process works across the company."
-    },
-    "Creative Strategists": {
-      "owns": "Campaign creative strategy, concepts, briefs and creative recommendations that improve campaign performance.",
-      "works": "Workflow, capacity, tools, reporting and how Creative connects with Sales, Account Management and Delivery.",
-      "line": "Creative owns the creative thinking. Operations makes sure the function fits efficiently into the wider operating model."
+    "Head of Delivery and Performance": {
+      "owns": "Delivery performance, campaign margin, quality, timelines, capacity and performance of the Delivery team.",
+      "works": "Margin-control systems, capacity and forecasting models, resource planning, Delivery data, automation and identifying recurring problems that need a structural fix.",
+      "line": "Head of Delivery owns Delivery results. Head of Operations builds the company-level controls, data and infrastructure that help Delivery achieve those results and give leadership visibility."
     },
     "Senior Campaign Managers": {
       "owns": "Performance of the campaigns under their responsibility, including margin, timelines, quality, risk and Campaign Manager performance.",
       "works": "Margin controls, capacity, workload allocation, performance data, process improvements and recurring Delivery issues.",
-      "line": "Senior Campaign Managers own campaign outcomes. Operations provides the control, data and systems around that accountability."
+      "line": "Senior Campaign Managers own the results of their campaigns. Until a Head of Delivery is in place, Operations provides an additional layer of visibility and control around those results."
     },
-    "Head of Delivery and Performance": {
-      "owns": "The whole Delivery function, including campaign performance, margin, quality, timelines, capacity and performance of the Delivery team.",
-      "works": "Margin-control infrastructure, capacity modelling, forecasting, systems, resource planning and structural improvements across Delivery.",
-      "line": "Head of Delivery owns Delivery results. Operations builds the wider control and infrastructure that helps Delivery achieve them consistently."
-    },
-    "Chief Sales Officer": {
-      "owns": "Sales strategy, revenue targets, Sales leadership, pipeline performance and overall new business performance.",
-      "works": "Sales reporting, CRM, forecasting, lead infrastructure, capacity planning, automation and the operational impact of future revenue.",
-      "line": "Chief Sales Officer owns revenue generation. Operations makes sure the business has the systems, information and capacity to support that growth."
+    "Operational Partners & Specialists": {
+      "labels": {
+        "owns": "Includes",
+        "side": "What it covers"
+      },
+      "owns": "Fulfilment centres, production partners, logistics providers, specialist platforms, compliance providers and other external resources required to deliver campaigns.",
+      "works": "Finding the right partners, comparing cost and capability, negotiating better operating setups and making sure there is a clear internal owner and process.",
+      "line": "The relevant functional team uses the partner day to day. Operations owns the wider setup, efficiency and commercial structure where the relationship affects multiple teams or the operating model."
     }
   }
 }

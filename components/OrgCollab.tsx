@@ -65,10 +65,12 @@ export function OrgCollab({ person, partner, info, from, onClose }: {
   const personRef = useRef<HTMLDivElement>(null);
   const partnerRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
+  // The highlighted person's own card: just their role, no partner or arrows.
+  const solo = person.id === partner.id;
 
   useLayoutEffect(() => {
     const p = personRef.current, q = partnerRef.current;
-    if (!p || !q || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!p || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const t = p.getBoundingClientRect();
     const dx = from.left + from.width / 2 - (t.left + t.width / 2), dy = from.top + from.height / 2 - (t.top + t.height / 2);
     const s = Math.max(0.2, from.width / t.width);
@@ -83,7 +85,7 @@ export function OrgCollab({ person, partner, info, from, onClose }: {
         ],
         { duration: 1000, easing: 'cubic-bezier(.25,.8,.3,1)', fill: 'backwards' },
       ),
-      q.animate(
+      q?.animate(
         [
           { transform: 'translateX(-70vw) rotate(-10deg)', opacity: 0 },
           { transform: 'none', opacity: 1 },
@@ -91,7 +93,7 @@ export function OrgCollab({ person, partner, info, from, onClose }: {
         { duration: 800, delay: 650, easing: 'cubic-bezier(.34,1.4,.64,1)', fill: 'backwards' },
       ),
     ];
-    return () => anims.forEach((a) => a.cancel());
+    return () => anims.forEach((a) => a?.cancel());
   }, [from]);
 
   useEffect(() => {
@@ -116,22 +118,26 @@ export function OrgCollab({ person, partner, info, from, onClose }: {
         <button ref={closeRef} type="button" className="collab-close" onClick={onClose} aria-label="Close">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
         </button>
-        <p className="collab-eyebrow">How they work together</p>
-        <h2 id="collab-title" className="collab-title">{person.future ? person.name : person.role} <span className="accent">×</span> {partner.role}</h2>
+        <p className="collab-eyebrow">{solo ? 'How the role works' : 'How they work together'}</p>
+        <h2 id="collab-title" className="collab-title">
+          {solo ? partner.role : <>{person.future ? person.name : person.role} <span className="accent">×</span> {partner.role}</>}
+        </h2>
 
-        <div className="collab-body">
+        <div className={`collab-body${solo ? ' solo' : ''}`}>
           <div className="collab-together">
-            <p className="collab-zone">Working together</p>
-            <div className="collab-pair">
-              <Card node={partner} me cardRef={partnerRef} />
-              <svg className="collab-arrows" viewBox="0 0 240 140" aria-hidden="true">
-                <Flow d={TOP} color={PINK} first />
-                <Flow d={BOTTOM} color={PUR} first={false} />
-              </svg>
-            </div>
+            <p className="collab-zone">{solo ? 'Across the business' : 'Working together'}</p>
+            {!solo && (
+              <div className="collab-pair">
+                <Card node={partner} me cardRef={partnerRef} />
+                <svg className="collab-arrows" viewBox="0 0 240 140" aria-hidden="true">
+                  <Flow d={TOP} color={PINK} first />
+                  <Flow d={BOTTOM} color={PUR} first={false} />
+                </svg>
+              </div>
+            )}
             <div className="collab-line">
               <section>
-                <h3>Works with {partner.role} on</h3>
+                <h3>{info.labels?.works ?? `Works with ${partner.role} on`}</h3>
                 <p>{info.works}</p>
               </section>
               <section>
@@ -141,10 +147,10 @@ export function OrgCollab({ person, partner, info, from, onClose }: {
             </div>
           </div>
           <aside className="collab-side" style={{ '--c': person.color ?? GREY } as React.CSSProperties}>
-            <p className="collab-zone">Their own role</p>
-            <Card node={person} cardRef={personRef} />
+            <p className="collab-zone">{info.labels?.side ?? 'Their own role'}</p>
+            <Card node={person} me={solo} cardRef={personRef} />
             <section className="collab-owns">
-              <h3>Owns</h3>
+              <h3>{info.labels?.owns ?? 'Owns'}</h3>
               <p>{info.owns}</p>
             </section>
           </aside>

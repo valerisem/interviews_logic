@@ -55,7 +55,7 @@ export const ORG_CHARTS: Record<string, OrgSnapshot> = {
 interface RoleNotes {
   byName: Record<string, string>;
   byRole: Record<string, string>;
-  roles: Record<string, { owns: string; works: string; line: string }>;
+  roles: Record<string, Omit<OrgRoleInfo, 'title'>>;
 }
 
 /** How each card on the chart works with the job's person: matched by card name first, then by role. */

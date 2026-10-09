@@ -19,7 +19,11 @@ export interface OrgEdge { id: string; from: string; to: string; type?: string; 
 export interface OrgContainer { id: string; x: number; y: number; w: number; h: number; color: string; bg?: string; label: string }
 export interface OrgSnapshot { nodes: OrgNode[]; edges: OrgEdge[]; containers: OrgContainer[] }
 /** What a role owns, what it works on with the highlighted person, and where the line between them sits. */
-export interface OrgRoleInfo { title: string; owns: string; works: string; line: string }
+export interface OrgRoleInfo {
+  title: string; owns: string; works: string; line: string;
+  /** Optional headings: owns (default “Owns”), works (default “Works with <person> on”), side (default “Their own role”). */
+  labels?: { owns?: string; works?: string; side?: string };
+}
 
 const NAVY = '#0B0E1A', PINK = '#E91E8C', PUR = '#8B5CF6', GREY = '#6B7280', BORDER = '#ECECF1';
 const CEO_GRAD = `linear-gradient(135deg, ${NAVY} 0%, ${PUR} 45%, ${PINK} 100%)`;
@@ -227,9 +231,13 @@ export function OrgChart({ data, highlight, roles }: { data: OrgSnapshot; highli
               if (!a || !b) return null;
               const on = focus && (e.from === focus || e.to === focus);
               const dim = focus && !on;
+              // 'link' edges are a working relationship, not a reporting line: dashed, no arrowhead, and only
+              // drawn while one of its cards is hovered so it never reads as part of the reporting structure.
+              const link = e.type === 'link';
+              if (link && !on) return null;
               return (
-                <path key={e.id} d={route(a, b, e.fromSide, e.toSide)} fill="none" stroke={on ? PINK : NAVY} strokeWidth={on ? 3 : 2}
-                  opacity={dim ? 0.25 : 1} markerEnd={`url(#${on ? 'org-arrow-hl' : 'org-arrow'})`} />
+                <path key={e.id} d={route(a, b, e.fromSide, e.toSide)} fill="none" stroke={on ? PINK : link ? GREY : NAVY} strokeWidth={on ? 3 : 2}
+                  strokeDasharray={link ? '7 6' : undefined} opacity={dim ? 0.25 : 1} markerEnd={link ? undefined : `url(#${on ? 'org-arrow-hl' : 'org-arrow'})`} />
               );
             })}
           </svg>
@@ -237,7 +245,7 @@ export function OrgChart({ data, highlight, roles }: { data: OrgSnapshot; highli
             const isCeo = n.team === 'ceo', small = !!n.compact, col = n.color ?? GREY;
             const me = n.id === highlight;
             const dim = focus && n.id !== focus && !related.has(n.id);
-            const info = partner && n.id !== highlight ? roles?.[n.id] : undefined;
+            const info = partner ? roles?.[n.id] : undefined;
             return (
               <div
                 key={n.id}

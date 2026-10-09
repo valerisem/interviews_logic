@@ -343,6 +343,9 @@ table.data .select-cell { width: 1%; min-width: 0; padding-right: 4px; }
 .collab-dash { animation: collab-flow 900ms linear infinite; }
 .collab-line { margin-top: 26px; margin-right: 28px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
 .collab-line section { position: relative; padding: 18px 20px 18px 22px; border-radius: 14px; background: #fff; border: 1px solid #ECECF1; box-shadow: 0 6px 18px rgba(45,27,105,.07); overflow: hidden; animation: collab-rise 420ms ease-out both; }
+.collab-body.solo .collab-line { margin-top: 0; grid-template-columns: 1fr; }
+.collab-body.solo .collab-line section:nth-child(1) { animation-delay: 700ms; }
+.collab-body.solo .collab-line section:nth-child(2) { animation-delay: 820ms; }
 .collab-line section::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, #F0438F, #8B5CF6); }
 .collab-line section:nth-child(1) { animation-delay: 1400ms; }
 .collab-line section:nth-child(2) { animation-delay: 1520ms; }
@@ -372,6 +375,7 @@ table.data .select-cell { width: 1%; min-width: 0; padding-right: 4px; }
   .collab-side > .collab-card { grid-area: person; }
   .collab-line { grid-area: line; margin: 22px 0 0; grid-template-columns: 1fr; }
   .collab-owns { grid-area: owns; margin: 16px -12px 0; padding: 18px 20px 20px; border-top: 2px solid var(--c); background: #F7F5FF; }
+  .collab-body.solo { grid-template-areas: "person person person" "line line line" "owns owns owns"; }
   .collab-card { min-height: 84px; padding: 10px 10px 10px 16px; border-radius: 14px; }
   .collab-card > i { width: 5px; top: 10px; bottom: 10px; }
   .collab-name { font-size: 14px; }
