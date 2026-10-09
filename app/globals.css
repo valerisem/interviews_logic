@@ -369,7 +369,10 @@ table.data .select-cell { width: 1%; min-width: 0; padding-right: 4px; }
   .collab-body { grid-template-columns: 1fr; }
   .collab-together { padding: 20px 12px 24px; }
   .collab-zone { display: none; }
-  .collab-pair { grid-template-columns: minmax(0,1fr) 52px minmax(0,1fr); }
+  /* Cards stack on phones; the arrows turn to run up and down between them at a readable size. */
+  .collab-pair { grid-template-columns: 1fr; justify-items: stretch; }
+  .collab-arrows { width: 150px; justify-self: center; transform: rotate(90deg); margin: 30px 0; }
+  .collab-works { margin-top: 30px; }
   .collab-side { border-left: 0; border-top: 1px solid var(--border); padding: 20px 18px 24px; }
   .collab-card { min-height: 84px; padding: 10px 10px 10px 16px; border-radius: 14px; }
   .collab-card > i { width: 5px; top: 10px; bottom: 10px; }
@@ -459,8 +462,9 @@ table.data .select-cell { width: 1%; min-width: 0; padding-right: 4px; }
   .sl-grid { --sl-label: 86px; --sl-col: 160px; column-gap: 36px; }
   .sl-label { padding: 12px 8px; font-size: 9.5px; flex-direction: column; gap: 6px; }
   .scheme-divide { grid-template-columns: 1fr; }
-  .org-scheme-btn { top: auto; bottom: 12px; font-size: 12.5px; padding: 0 12px; }
-  .org.full .org-scheme-btn { top: auto; bottom: 56px; }
+  /* On phones the button gets its own row under the chart, so it never covers the chart or the hint. */
+  .org-scheme-btn { position: static; width: 100%; justify-content: center; height: 42px; margin-top: 10px; font-size: 14px; }
+  .org.full .org-scheme-btn { position: absolute; top: auto; bottom: 56px; left: 16px; width: auto; margin: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .sl-step, .sl-edge, .sl-edge.both, .sl-via, .scheme { animation: none; }
