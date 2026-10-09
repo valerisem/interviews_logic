@@ -23,7 +23,7 @@
         "The Head of Operations owns the **operating infrastructure** behind the business: the systems, controls, data, accountability structures and operational functions that allow teams to perform at a high level and leadership to **see problems before they become firefighting.**",
         "This is **not an administrative role, and it is not a Delivery role.**",
         "Functional leaders remain accountable for the performance of their areas. The Head of Operations creates the **additional layer of visibility, control and accountability** that makes sure those outcomes are actually being achieved.",
-        "The role reports directly to the CEO."
+        "The Head of Operations reports directly to the CEO."
       ]
     },
     {
@@ -34,7 +34,7 @@
         {
           "title": "Make the Business Work Better and More Profitably",
           "blocks": [
-            "The role looks across the business and **improves how people, workload, costs and processes work together**. It builds **better controls around margin, capacity and resource use**, while also looking ahead at market changes, competitor moves and new opportunities that could improve how the business grows.",
+            "The Head of Operations looks across the business and **improves how people, workload, costs and processes work together**. It builds **better controls around margin, capacity and resource use**, while also looking ahead at market changes, competitor moves and new opportunities that could improve how the business grows.",
             {
               "list": [
                 "Margin control and improvement models",
@@ -43,7 +43,9 @@
                 "Identifying unnecessary cost and wasted time",
                 "Finding recurring problems and fixing the root cause",
                 "Looking at competitors, market changes and new business opportunities",
-                "Testing different operating models to understand what would produce the best result"
+                "Testing different operating models to understand what would produce the best result",
+                "Builds and manages operational partnerships needed to deliver campaigns efficiently, including fulfilment, production and specialist providers",
+                "Compares external providers on cost, quality and capability and looks for better commercial arrangements where possible"
               ]
             }
           ]
@@ -51,12 +53,13 @@
         {
           "title": "Build Better Technology, Systems and Use of Data",
           "blocks": [
-            "The role makes **technology useful to the business** rather than adding more tools and complexity. It builds **proprietary systems, connected data and automation** that reduce cost, improve decisions, make the company easier to scale and create more value inside the business itself.",
+            "The Head of Operations makes **technology and data useful to the business** rather than adding more tools and complexity. It owns how operational data is **structured, connected, controlled and turned into decisions**, while building proprietary systems and automation that reduce cost, improve decisions and create more value inside the business itself.",
             {
               "list": [
                 "Builds internal software and proprietary solutions where it gives us an advantage",
                 "Uses open source and white-label technology to reduce cost and dependency on external tools",
                 "Connects data across CRM, project management, campaigns and people",
+                "Creates clear sources of truth and controls around data quality, ownership, access and consistency across operational systems",
                 "Turns company data into useful insights and recommendations",
                 "Builds prediction, forecasting and decision models",
                 "Builds and improves capacity models",
@@ -70,17 +73,16 @@
         {
           "title": "Make Sure the Right People Own and Manage Things",
           "blocks": [
-            "The role makes sure **every important area has a clear owner**, the right management structure and proper accountability. Where the business does not yet have the right senior owner, **Operations can temporarily provide that management layer**.",
+            "The Head of Operations makes sure **every important area has a clear owner**, the right management structure and proper accountability. It also helps managers understand **what drives their people, where performance issues are coming from** and how to manage different individuals effectively. Where the business does not yet have the right senior owner, **Operations can temporarily provide that management layer**.",
             {
               "list": [
-                "Oversees People Operations",
-                "Manages and holds the People Ops function accountable",
-                "Improves onboarding, performance management and manager accountability",
+                "Oversees People Operations, performance, onboarding and manager accountability",
+                "Helps managers understand individual motivation, performance blockers and how to get the best from their teams",
                 "Reviews reporting lines and organisational structure",
                 "Identifies gaps where nobody clearly owns something",
                 "Makes sure departments understand responsibilities and targets",
-                "Temporarily oversees functions such as Social Media until the right senior owner is in place",
-                "Manages operational partners and external providers"
+                "Oversees how we engage employees and contractors across markets, working with HR and legal specialists to keep structures compliant",
+                "Temporarily oversees functions where the right senior owner does not yet exist"
               ]
             }
           ]
@@ -88,7 +90,7 @@
         {
           "title": "Take Operational Work Off the CEO’s Plate",
           "blocks": [
-            "The role gives the CEO **clear visibility without requiring him to investigate every problem** or chase multiple people. It brings him the important information, recommended action and **only the decisions that genuinely require his involvement**.",
+            "The Head of Operations gives the CEO **clear visibility without requiring him to investigate every problem** or chase multiple people. It brings him the important information, recommended action and **only the decisions that genuinely require his involvement**.",
             {
               "list": [
                 "Builds simple leadership reporting",
@@ -98,6 +100,7 @@
                 "Investigates operational problems and identifies the root cause",
                 "Resolves issues at the right level before escalating them",
                 "Turns company priorities into clear owners, actions and deadlines",
+                "Makes sure important legal, compliance and client requirements have a clear owner, process and specialist support before they become CEO problems",
                 "Gives the CEO more time for growth, clients, partnerships and bigger strategic decisions"
               ]
             }
@@ -116,14 +119,14 @@
             "People Operations",
             "Technology / Systems Operations",
             "Central Operations / Administration",
-            "operational vendors and external specialists",
-            "legal / employment coordination",
+            "operational partnerships, fulfilment, production vendors and external specialists",
+            "legal, employment and compliance coordination",
             "selected functions temporarily sitting under Operations until the appropriate senior owner exists"
           ]
         },
         "This currently includes Social Media until ownership moves under the appropriate senior Marketing function.",
         "The Head of Operations sets expectations for these functions, reviews performance and holds their owners accountable.",
-        "**Delegating execution does not remove the Head of Operations’ accountability** for the functions reporting into the role."
+        "**Delegating execution does not remove the Head of Operations’ accountability** for the functions reporting into Operations."
       ],
       "half": true
     },
@@ -131,12 +134,12 @@
       "id": "success",
       "title": "What Success Looks Like",
       "blocks": [
-        "The role is succeeding when:",
+        "The Head of Operations is succeeding when:",
         {
           "list": [
-            "**The business scales more effectively** with stronger use of people, technology, data and resources as the company grows.",
+            "**The business scales more effectively** with stronger use of people, technology, data, external partners and appropriate operational controls as the company grows.",
             "**Performance is controlled earlier** with margin, capacity and operational risks visible before they become problems and clear owners accountable for action.",
-            "**Better data drives better decisions** across forecasting, hiring, workload, resource allocation and operational planning.",
+            "**Business data is controlled and actually useful** with reliable sources of truth supporting forecasting, hiring, workload, resource allocation and operational decisions.",
             "**Technology creates measurable value** through time saved, lower cost, additional capacity, stronger control or better visibility.",
             "**People perform with clearer accountability** through measurable targets, stronger management and faster time to productivity.",
             "**The CEO gets time back** because issues are resolved at the right level and leadership receives clear recommendations instead of raw problems."
