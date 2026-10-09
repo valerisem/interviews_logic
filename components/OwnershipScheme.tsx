@@ -42,7 +42,6 @@ export interface OwnershipScheme {
   overview: {
     steps: SchemeItem[];
     message: string[];
-    principles: string[];
     summary: { lead: string; steps: string[] };
   };
   flows: SchemeFlow[];
@@ -192,6 +191,24 @@ export function OwnershipSchemeView({ scheme, onClose }: { scheme: OwnershipSche
     };
   }, [onClose]);
 
+  // Arrow buttons for the tab row, shown only on a side that has more tabs to scroll to.
+  const tabsRef = useRef<HTMLElement>(null);
+  const [canScroll, setCanScroll] = useState({ left: false, right: false });
+  const updateScroll = useCallback(() => {
+    const el = tabsRef.current;
+    if (!el) return;
+    setCanScroll({ left: el.scrollLeft > 4, right: el.scrollLeft + el.clientWidth < el.scrollWidth - 4 });
+  }, []);
+  useEffect(() => {
+    updateScroll();
+    window.addEventListener('resize', updateScroll);
+    return () => window.removeEventListener('resize', updateScroll);
+  }, [updateScroll]);
+  const scrollTabs = (dir: number) => {
+    const el = tabsRef.current;
+    if (el) el.scrollBy({ left: dir * el.clientWidth * 0.7, behavior: 'smooth' });
+  };
+
   const go = (t: number) => {
     setTab(t);
     bodyRef.current?.scrollTo({ top: 0 });
@@ -218,7 +235,10 @@ export function OwnershipSchemeView({ scheme, onClose }: { scheme: OwnershipSche
           ))}
         </ul>
 
-        <nav className="scheme-tabs" role="tablist" aria-label="Flows">
+        <div className="scheme-tabs-wrap">
+        {canScroll.left && <button type="button" className="scheme-tabs-arrow left" onClick={() => scrollTabs(-1)} aria-label="Earlier flows"><span>‹</span></button>}
+        {canScroll.right && <button type="button" className="scheme-tabs-arrow right" onClick={() => scrollTabs(1)} aria-label="Later flows"><span>›</span></button>}
+        <nav ref={tabsRef} className="scheme-tabs" role="tablist" aria-label="Flows" onScroll={updateScroll}>
           <button id="scheme-tab--1" type="button" role="tab" aria-selected={tab === -1} className={tab === -1 ? 'on' : ''} onClick={() => go(-1)}>
             <small>Overview</small>The Model
           </button>
@@ -228,6 +248,7 @@ export function OwnershipSchemeView({ scheme, onClose }: { scheme: OwnershipSche
             </button>
           ))}
         </nav>
+        </div>
 
         <div ref={bodyRef} className="scheme-body" key={tab}>
           <h3 className="scheme-flow-title">
@@ -263,9 +284,6 @@ export function OwnershipSchemeView({ scheme, onClose }: { scheme: OwnershipSche
               <section className="scheme-extra">
                 <h4>The final message</h4>
                 <ol className="scheme-chain">{scheme.overview.message.map((m) => <li key={m}>{m}</li>)}</ol>
-              </section>
-              <section className="scheme-extra scheme-note">
-                {scheme.overview.principles.map((p) => <p key={p}>{p}</p>)}
               </section>
               <section className="scheme-summary">
                 <p>{scheme.overview.summary.lead}</p>

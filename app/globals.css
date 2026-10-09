@@ -452,7 +452,8 @@ table.data .select-cell { width: 1%; min-width: 0; padding-right: 4px; }
   .scheme-panel { border-radius: 0; overflow-y: auto; }
   .scheme-panel > * { flex-shrink: 0; }
   .scheme-body { flex: none; overflow: visible; }
-  .scheme-tabs { position: sticky; top: 0; z-index: 5; background: var(--bg); padding-top: 10px; margin-top: 2px; }
+  .scheme-tabs-wrap { position: sticky; top: 0; z-index: 5; background: var(--bg); padding-top: 10px; margin-top: 2px; }
+  .scheme-tabs-arrow { top: 22px; }
   .scheme-legend { font-size: 11.5px; }
   .scheme-head, .scheme-legend, .scheme-tabs, .scheme-body { padding-left: 16px; padding-right: 16px; }
   .sl-grid { --sl-label: 86px; --sl-col: 160px; column-gap: 36px; }
@@ -464,3 +465,13 @@ table.data .select-cell { width: 1%; min-width: 0; padding-right: 4px; }
 @media (prefers-reduced-motion: reduce) {
   .sl-step, .sl-edge, .sl-edge.both, .sl-via, .scheme { animation: none; }
 }
+.scheme-tabs-wrap { position: relative; }
+.scheme-tabs-arrow { position: absolute; top: 12px; bottom: 10px; z-index: 6; width: 44px; display: flex; align-items: center; justify-content: center; border: 0; padding: 0; font: inherit; font-size: 26px; font-weight: 700; color: #200888; cursor: pointer; opacity: 0; transition: opacity 150ms; }
+.scheme-tabs-arrow.left { left: 0; background: linear-gradient(90deg, var(--bg) 55%, transparent); justify-content: flex-start; padding-left: 10px; }
+.scheme-tabs-arrow.right { right: 0; background: linear-gradient(270deg, var(--bg) 55%, transparent); justify-content: flex-end; padding-right: 10px; }
+.scheme-tabs-wrap:hover .scheme-tabs-arrow, .scheme-tabs-arrow:focus-visible { opacity: 1; }
+.scheme-tabs-arrow:hover { color: #F0438F; }
+@media (hover: none) { .scheme-tabs-arrow { opacity: 1; } }
+.scheme-tabs-arrow { width: 72px; }
+.scheme-tabs-arrow span { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #200888; color: #fff; font-size: 24px; line-height: 1; padding-bottom: 3px; box-shadow: 0 4px 14px rgba(32,8,136,.3); }
+.scheme-tabs-arrow:hover span { background: #F0438F; }
