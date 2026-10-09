@@ -49,7 +49,6 @@ export interface OwnershipScheme {
   labels: { key: string; text: string }[];
   overview: {
     steps: SchemeItem[];
-    message: string[];
     summary: { lead: string; steps: string[] };
   };
   flows: SchemeFlow[];
@@ -312,9 +311,6 @@ export function OwnershipSchemeView({ scheme, onClose }: { scheme: OwnershipSche
 
           {!flow && (
             <>
-              <section className="scheme-extra">
-                <ol className="scheme-chain">{scheme.overview.message.map((m) => <li key={m}>{m}</li>)}</ol>
-              </section>
               <section className="scheme-summary">
                 <p>{scheme.overview.summary.lead}</p>
                 <ol className="scheme-chain light">{scheme.overview.summary.steps.map((m) => <li key={m}>{m}</li>)}</ol>
