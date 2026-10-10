@@ -43,6 +43,9 @@
           "accountable": [
             "CEO"
           ],
+          "responsible": [
+            "CEO"
+          ],
           "collaborates": [
             "Head of Operations",
             "CFO",
@@ -72,6 +75,9 @@
             ],
             "escalation": [
               "board"
+            ],
+            "responsible": [
+              "ceo"
             ]
           }
         },
@@ -79,6 +85,10 @@
           "task": "Turning company priorities into execution",
           "accountable": [
             "Head of Operations"
+          ],
+          "responsible": [
+            "Head of Operations",
+            "Relevant Functional Leader"
           ],
           "collaborates": [
             "All relevant functional leaders"
@@ -103,6 +113,10 @@
             ],
             "escalation": [
               "ceo"
+            ],
+            "responsible": [
+              "hoo",
+              "fl"
             ]
           }
         },
@@ -110,6 +124,10 @@
           "task": "Company organisational structure",
           "accountable": [
             "Head of Operations"
+          ],
+          "responsible": [
+            "Head of Operations",
+            "People Ops (HR)"
           ],
           "collaborates": [
             "CEO",
@@ -142,12 +160,19 @@
             ],
             "escalation": [
               "ceo"
+            ],
+            "responsible": [
+              "hoo",
+              "peopleops"
             ]
           }
         },
         {
           "task": "Leadership reporting and company visibility",
           "accountable": [
+            "Head of Operations"
+          ],
+          "responsible": [
             "Head of Operations"
           ],
           "collaborates": [
@@ -183,6 +208,9 @@
             ],
             "escalation": [
               "ceo"
+            ],
+            "responsible": [
+              "hoo"
             ]
           }
         }
@@ -195,6 +223,9 @@
         {
           "task": "Sales strategy and revenue targets",
           "accountable": [
+            "Chief Sales Officer"
+          ],
+          "responsible": [
             "Chief Sales Officer"
           ],
           "collaborates": [
@@ -228,6 +259,9 @@
             ],
             "escalation": [
               "ceo"
+            ],
+            "responsible": [
+              "cso"
             ]
           }
         },
@@ -235,6 +269,10 @@
           "task": "Lead generation",
           "accountable": [
             "Director of New Business / Partnerships Leadership"
+          ],
+          "responsible": [
+            "Director of New Business",
+            "Partnerships Directors"
           ],
           "collaborates": [
             "Partnerships Directors",
@@ -263,6 +301,10 @@
             ],
             "escalation": [
               "cso"
+            ],
+            "responsible": [
+              "dnb",
+              "pd"
             ]
           }
         },
@@ -270,6 +312,10 @@
           "task": "Pipeline management",
           "accountable": [
             "Chief Sales Officer"
+          ],
+          "responsible": [
+            "Director of New Business",
+            "Partnerships Directors"
           ],
           "collaborates": [
             "Director of New Business",
@@ -296,6 +342,10 @@
             ],
             "escalation": [
               "ceo"
+            ],
+            "responsible": [
+              "dnb",
+              "pd"
             ]
           }
         },
@@ -304,6 +354,10 @@
           "accountable": [
             "Head of Operations for system structure",
             "Chief Sales Officer for sales requirements and adoption"
+          ],
+          "responsible": [
+            "Head of Operations",
+            "Technology Operations"
           ],
           "collaborates": [
             "Technology Operations",
@@ -333,6 +387,10 @@
             ],
             "escalation": [
               "ceo"
+            ],
+            "responsible": [
+              "hoo",
+              "techops"
             ]
           }
         },
@@ -340,6 +398,10 @@
           "task": "Pricing and unusual commercial terms",
           "accountable": [
             "Sales owner for the deal"
+          ],
+          "responsible": [
+            "Director of New Business",
+            "Partnerships Directors"
           ],
           "collaborates": [
             "CFO",
@@ -370,6 +432,10 @@
             ],
             "escalation": [
               "ceo"
+            ],
+            "responsible": [
+              "dnb",
+              "pd"
             ]
           }
         }
@@ -431,6 +497,9 @@
           "accountable": [
             "Client Director"
           ],
+          "responsible": [
+            "Account Directors / Account Managers"
+          ],
           "collaborates": [
             "Account Managers",
             "Sales / Partnerships",
@@ -458,6 +527,9 @@
             "escalation": [
               "cso",
               "ceo"
+            ],
+            "responsible": [
+              "am"
             ]
           }
         },
@@ -465,6 +537,9 @@
           "task": "Client forecasting",
           "accountable": [
             "Client Director for forecast inputs"
+          ],
+          "responsible": [
+            "Account Directors / Account Managers"
           ],
           "collaborates": [
             "Account Managers",
@@ -495,6 +570,9 @@
             ],
             "escalation": [
               "ceo"
+            ],
+            "responsible": [
+              "am"
             ]
           }
         },
@@ -611,6 +689,9 @@
             "Senior Campaign Manager for campaigns under their responsibility"
           ],
           "currentLabel": "Current accountability until role is hired",
+          "responsible": [
+            "Campaign Managers"
+          ],
           "collaborates": [
             "Campaign Managers",
             "Client Leadership",
@@ -641,6 +722,9 @@
             ],
             "escalation": [
               "ceo"
+            ],
+            "responsible": [
+              "cm"
             ]
           }
         },
@@ -648,6 +732,10 @@
           "task": "Margin control infrastructure",
           "accountable": [
             "Head of Operations"
+          ],
+          "responsible": [
+            "Head of Operations",
+            "Technology Operations"
           ],
           "collaborates": [
             "Head of Delivery",
@@ -678,6 +766,10 @@
             ],
             "escalation": [
               "ceo"
+            ],
+            "responsible": [
+              "hoo",
+              "techops"
             ]
           }
         },
@@ -737,6 +829,9 @@
           "accountable": [
             "Senior Campaign Manager"
           ],
+          "responsible": [
+            "Campaign Managers"
+          ],
           "collaborates": [
             "Campaign Managers",
             "Client Leadership"
@@ -760,6 +855,9 @@
             ],
             "escalation": [
               "hod"
+            ],
+            "responsible": [
+              "cm"
             ]
           }
         },
@@ -767,6 +865,9 @@
           "task": "Creative strategy",
           "accountable": [
             "Creative functional owner / Creative Strategist for assigned work"
+          ],
+          "responsible": [
+            "Creative Strategists"
           ],
           "collaborates": [
             "Client Leadership",
@@ -796,6 +897,9 @@
             "escalation": [
               "creative",
               "cd"
+            ],
+            "responsible": [
+              "cstrat"
             ]
           }
         }
@@ -809,6 +913,10 @@
           "task": "Company capacity model and forecasting infrastructure",
           "accountable": [
             "Head of Operations"
+          ],
+          "responsible": [
+            "Head of Operations",
+            "Technology Operations"
           ],
           "collaborates": [
             "Head of Delivery",
@@ -839,6 +947,10 @@
             ],
             "escalation": [
               "ceo"
+            ],
+            "responsible": [
+              "hoo",
+              "techops"
             ]
           }
         },
@@ -846,6 +958,9 @@
           "task": "Delivery work allocation",
           "accountable": [
             "Head of Delivery & Performance"
+          ],
+          "responsible": [
+            "Senior Campaign Managers"
           ],
           "collaborates": [
             "Senior Campaign Managers",
@@ -870,6 +985,9 @@
             ],
             "escalation": [
               "ceo"
+            ],
+            "responsible": [
+              "scm"
             ]
           }
         },
@@ -877,6 +995,10 @@
           "task": "Hiring requirement identification",
           "accountable": [
             "Relevant Functional Leader"
+          ],
+          "responsible": [
+            "Relevant Functional Leader",
+            "People Ops (HR)"
           ],
           "collaborates": [
             "Head of Operations",
@@ -906,6 +1028,10 @@
             ],
             "escalation": [
               "ceo"
+            ],
+            "responsible": [
+              "fl",
+              "peopleops"
             ]
           }
         }
@@ -973,6 +1099,9 @@
           "accountable": [
             "CFO"
           ],
+          "responsible": [
+            "CFO"
+          ],
           "collaborates": [
             "CEO",
             "Head of Operations",
@@ -1000,6 +1129,9 @@
             ],
             "escalation": [
               "ceo"
+            ],
+            "responsible": [
+              "cfo"
             ]
           }
         },
@@ -1007,6 +1139,9 @@
           "task": "Client invoicing",
           "accountable": [
             "Finance"
+          ],
+          "responsible": [
+            "Accountants"
           ],
           "collaborates": [
             "Client Leadership / Sales when client intervention is required"
@@ -1033,6 +1168,9 @@
             "escalation": [
               "cd",
               "ceo"
+            ],
+            "responsible": [
+              "accountants"
             ]
           }
         },
@@ -1040,6 +1178,9 @@
           "task": "Late debtor chasing",
           "accountable": [
             "Finance"
+          ],
+          "responsible": [
+            "Accountants"
           ],
           "collaborates": [
             "Client Leadership where normal Finance chasing is unsuccessful"
@@ -1062,6 +1203,9 @@
             ],
             "escalation": [
               "ceo"
+            ],
+            "responsible": [
+              "accountants"
             ]
           }
         },
@@ -1069,6 +1213,9 @@
           "task": "Creator and supplier payments",
           "accountable": [
             "Payment Managers under CFO"
+          ],
+          "responsible": [
+            "Payment Managers"
           ],
           "collaborates": [
             "Campaign / Delivery teams for correct information"
@@ -1097,6 +1244,9 @@
             "manages2": [
               "cfo",
               "payments"
+            ],
+            "responsible": [
+              "payments"
             ]
           }
         },
@@ -1104,6 +1254,9 @@
           "task": "Financial data",
           "accountable": [
             "CFO"
+          ],
+          "responsible": [
+            "Accountants"
           ],
           "decision": [
             "CFO on official financial numbers"
@@ -1120,6 +1273,9 @@
             ],
             "decision": [
               "cfo"
+            ],
+            "responsible": [
+              "accountants"
             ]
           }
         }
@@ -1133,6 +1289,10 @@
           "task": "Operational data architecture",
           "accountable": [
             "Head of Operations"
+          ],
+          "responsible": [
+            "Head of Operations",
+            "Technology Operations"
           ],
           "collaborates": [
             "Technology Operations",
@@ -1151,12 +1311,19 @@
             ],
             "decision": [
               "hoo"
+            ],
+            "responsible": [
+              "hoo",
+              "techops"
             ]
           }
         },
         {
           "task": "Accuracy of functional data",
           "accountable": [
+            "Relevant Functional Leader"
+          ],
+          "responsible": [
             "Relevant Functional Leader"
           ],
           "examples": [
@@ -1176,6 +1343,9 @@
             ],
             "decision": [
               "fl"
+            ],
+            "responsible": [
+              "fl"
             ]
           }
         },
@@ -1183,6 +1353,10 @@
           "task": "Connecting company data",
           "accountable": [
             "Head of Operations"
+          ],
+          "responsible": [
+            "Head of Operations",
+            "Technology Operations"
           ],
           "collaborates": [
             "Technology Operations",
@@ -1211,6 +1385,10 @@
             ],
             "decision": [
               "hoo"
+            ],
+            "responsible": [
+              "hoo",
+              "techops"
             ]
           }
         },
@@ -1218,6 +1396,10 @@
           "task": "Prediction and forecasting models",
           "accountable": [
             "Head of Operations for operational models"
+          ],
+          "responsible": [
+            "Head of Operations",
+            "Technology Operations"
           ],
           "collaborates": [
             "Relevant Functional Leader",
@@ -1240,6 +1422,10 @@
             "decision": [
               "hoo",
               "fl"
+            ],
+            "responsible": [
+              "hoo",
+              "techops"
             ]
           }
         }
@@ -1252,6 +1438,9 @@
         {
           "task": "Technology and automation roadmap",
           "accountable": [
+            "Head of Operations"
+          ],
+          "responsible": [
             "Head of Operations"
           ],
           "collaborates": [
@@ -1275,6 +1464,9 @@
             "decision": [
               "hoo",
               "ceo"
+            ],
+            "responsible": [
+              "hoo"
             ]
           }
         },
@@ -1284,7 +1476,8 @@
             "Technology Operations for technical execution"
           ],
           "responsible": [
-            "Technology Operations"
+            "Technology Operations",
+            "Head of Operations"
           ],
           "manages": [
             "Head of Operations",
@@ -1313,7 +1506,8 @@
               "techops"
             ],
             "responsible": [
-              "techops"
+              "techops",
+              "hoo"
             ]
           }
         },
@@ -1321,6 +1515,10 @@
           "task": "Technology ROI and tool rationalisation",
           "accountable": [
             "Head of Operations"
+          ],
+          "responsible": [
+            "Head of Operations",
+            "Technology Operations"
           ],
           "collaborates": [
             "CFO",
@@ -1341,6 +1539,10 @@
             ],
             "decision": [
               "hoo"
+            ],
+            "responsible": [
+              "hoo",
+              "techops"
             ]
           }
         }
@@ -1387,6 +1589,9 @@
           "accountable": [
             "Functional Manager for their employees"
           ],
+          "responsible": [
+            "Relevant Functional Leader"
+          ],
           "collaborates": [
             "People Ops",
             "Head of Operations where structural or senior issues exist"
@@ -1405,12 +1610,18 @@
             ],
             "decision": [
               "fl"
+            ],
+            "responsible": [
+              "fl"
             ]
           }
         },
         {
           "task": "Manager capability and accountability",
           "accountable": [
+            "Relevant Functional Leader"
+          ],
+          "responsible": [
             "Relevant Functional Leader"
           ],
           "collaborates": [
@@ -1432,6 +1643,9 @@
             "decision": [
               "fl",
               "hoo"
+            ],
+            "responsible": [
+              "fl"
             ]
           }
         },
@@ -1439,6 +1653,9 @@
           "task": "Employee motivation and engagement",
           "accountable": [
             "Functional Managers for day-to-day management"
+          ],
+          "responsible": [
+            "Relevant Functional Leader"
           ],
           "collaborates": [
             "People Ops to understand patterns, motivation and team issues"
@@ -1455,6 +1672,9 @@
             ],
             "decision": [
               "fl"
+            ],
+            "responsible": [
+              "fl"
             ]
           }
         },
@@ -1463,6 +1683,10 @@
           "accountable": [
             "People Ops for company-wide onboarding infrastructure",
             "Functional Manager for role-specific onboarding and performance"
+          ],
+          "responsible": [
+            "People Ops (HR)",
+            "Relevant Functional Leader"
           ],
           "collaborates": [
             "Head of Operations",
@@ -1484,6 +1708,10 @@
             "decision": [
               "hoo",
               "fl"
+            ],
+            "responsible": [
+              "peopleops",
+              "fl"
             ]
           }
         },
@@ -1491,6 +1719,9 @@
           "task": "Employee vs contractor structure and international engagement",
           "accountable": [
             "Head of Operations for operational setup"
+          ],
+          "responsible": [
+            "People Ops (HR)"
           ],
           "collaborates": [
             "People Ops",
@@ -1514,6 +1745,9 @@
               "hoo",
               "legal",
               "ceo"
+            ],
+            "responsible": [
+              "peopleops"
             ]
           }
         }
@@ -1527,6 +1761,9 @@
           "task": "Legal advice",
           "accountable": [
             "Legal Consultant / Specialist"
+          ],
+          "responsible": [
+            "Legal / Compliance Specialist"
           ],
           "collaborates": [
             "Head of Operations",
@@ -1548,6 +1785,9 @@
               "fl",
               "legal",
               "ceo"
+            ],
+            "responsible": [
+              "legal"
             ]
           }
         },
@@ -1555,6 +1795,9 @@
           "task": "Compliance infrastructure",
           "accountable": [
             "Head of Operations for making sure controls and ownership exist"
+          ],
+          "responsible": [
+            "Head of Operations"
           ],
           "collaborates": [
             "Legal / Compliance provider",
@@ -1575,6 +1818,9 @@
             "decision": [
               "fl",
               "hoo"
+            ],
+            "responsible": [
+              "hoo"
             ]
           }
         },
@@ -1582,6 +1828,9 @@
           "task": "Client-specific compliance",
           "accountable": [
             "Client / Delivery functional owner"
+          ],
+          "responsible": [
+            "Campaign Managers"
           ],
           "collaborates": [
             "Head of Operations",
@@ -1607,6 +1856,9 @@
             ],
             "escalation": [
               "ceo"
+            ],
+            "responsible": [
+              "cm"
             ]
           }
         }
@@ -1620,6 +1872,9 @@
           "task": "Fulfilment / logistics / production partner strategy",
           "accountable": [
             "Head of Operations for overall setup and provider infrastructure"
+          ],
+          "responsible": [
+            "Head of Operations"
           ],
           "collaborates": [
             "Delivery",
@@ -1640,6 +1895,9 @@
             ],
             "decision": [
               "hoo"
+            ],
+            "responsible": [
+              "hoo"
             ]
           }
         },
@@ -1647,6 +1905,10 @@
           "task": "Day-to-day use of fulfilment / production partner",
           "accountable": [
             "Relevant Delivery / Campaign owner"
+          ],
+          "responsible": [
+            "Campaign Managers",
+            "Operational partner"
           ],
           "collaborates": [
             "Operational partner"
@@ -1663,12 +1925,19 @@
             ],
             "decision": [
               "fl"
+            ],
+            "responsible": [
+              "cm",
+              "partners"
             ]
           }
         },
         {
           "task": "Provider selection and commercial comparison",
           "accountable": [
+            "Head of Operations"
+          ],
+          "responsible": [
             "Head of Operations"
           ],
           "collaborates": [
@@ -1690,6 +1959,9 @@
             "decision": [
               "hoo",
               "ceo"
+            ],
+            "responsible": [
+              "hoo"
             ]
           }
         }
@@ -1703,6 +1975,9 @@
           "task": "Marketing strategy",
           "accountable": [
             "Head of Marketing + PR"
+          ],
+          "responsible": [
+            "Marketing / PR team"
           ],
           "collaborates": [
             "CEO",
@@ -1723,6 +1998,9 @@
             ],
             "decision": [
               "hom"
+            ],
+            "responsible": [
+              "mteam"
             ]
           }
         },
