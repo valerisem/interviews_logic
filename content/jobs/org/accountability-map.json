@@ -2011,7 +2011,8 @@
         "manager": "Client Leadership",
         "reports": [
           "Client Directors",
-          "Account Directors / Account Managers"
+          "Account Directors / Account Managers",
+          "Creative Strategists"
         ]
       },
       {
@@ -2081,7 +2082,8 @@
       "title": "Client Leadership",
       "roles": {
         "cd": "Client Directors",
-        "am": "AD / AM"
+        "am": "AD / AM",
+        "cstrat": "Strategists"
       }
     },
     {
@@ -2097,8 +2099,7 @@
       "id": "creative",
       "title": "Creative",
       "roles": {
-        "creative": "Creative lead",
-        "cstrat": "Strategists"
+        "creative": "Creative lead"
       }
     },
     {
