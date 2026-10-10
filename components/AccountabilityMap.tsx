@@ -191,7 +191,6 @@ export function AccountabilityMapView({ map, onClose }: { map: AccountabilityMap
       <div className="scheme-panel" role="dialog" aria-modal="true" aria-labelledby="sw-title" onClick={(e) => e.stopPropagation()}>
         <header className="scheme-head">
           <div>
-            <p className="collab-eyebrow">House of Marketers</p>
             <h2 id="sw-title" className="collab-title">{map.title}</h2>
           </div>
           <button ref={closeRef} type="button" className="collab-close" onClick={onClose} aria-label="Close">
