@@ -248,7 +248,7 @@ export function AccountabilityMapView({ map, onClose }: { map: AccountabilityMap
             <div className="sw-row sw-head">
               <div className="sw-task">Task</div>
               <div className="sw-lanes" ref={lanesRef}>
-                {map.lanes.map((l) => <div key={l.id} className="sw-lane-title">{l.id === 'board' && <Crown size={16} />}{l.title}</div>)}
+                {map.lanes.map((l) => <div key={l.id} className="sw-lane-title">{l.title}</div>)}
               </div>
             </div>
 
