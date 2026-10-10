@@ -1,0 +1,2297 @@
+{
+  "_note": "Company Accountability Map shown from the org chart's “Ownership Model” button. Each task lists who is accountable, who collaborates, any management chain, who makes the final decision and where it escalates.",
+  "title": "Company Accountability Map",
+  "key": [
+    {
+      "key": "accountable",
+      "label": "Accountable",
+      "text": "person ultimately responsible for the result"
+    },
+    {
+      "key": "collaborates",
+      "label": "Collaborates",
+      "text": "functions that need to contribute"
+    },
+    {
+      "key": "manages",
+      "label": "Manages",
+      "text": "direct management / reporting relationship"
+    },
+    {
+      "key": "final-decision",
+      "label": "Final decision",
+      "text": "person who can make the normal business decision"
+    },
+    {
+      "key": "escalation",
+      "label": "Escalation",
+      "text": "where it goes only when it exceeds normal authority"
+    }
+  ],
+  "sections": [
+    {
+      "id": "company-strategy-and-leadership",
+      "title": "Company Strategy and Leadership",
+      "tasks": [
+        {
+          "task": "Company strategy and annual priorities",
+          "accountable": [
+            "CEO"
+          ],
+          "collaborates": [
+            "Head of Operations",
+            "CFO",
+            "Chief Sales Officer",
+            "Head of Delivery & Performance",
+            "Head of Marketing + PR"
+          ],
+          "decision": [
+            "CEO"
+          ],
+          "escalation": [
+            "Board / Investors where shareholder or reserved-matter approval is required"
+          ],
+          "ids": {
+            "accountable": [
+              "ceo"
+            ],
+            "collaborates": [
+              "hoo",
+              "cfo",
+              "cso",
+              "hod",
+              "hom"
+            ],
+            "decision": [
+              "ceo"
+            ],
+            "escalation": [
+              "board"
+            ]
+          }
+        },
+        {
+          "task": "Turning company priorities into execution",
+          "accountable": [
+            "Head of Operations"
+          ],
+          "collaborates": [
+            "All relevant functional leaders"
+          ],
+          "decision": [
+            "Head of Operations on operating structure and execution",
+            "CEO where company strategy or major investment changes"
+          ],
+          "escalation": [
+            "CEO"
+          ],
+          "ids": {
+            "accountable": [
+              "hoo"
+            ],
+            "collaborates": [
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom"
+            ],
+            "decision": [
+              "hoo",
+              "ceo"
+            ],
+            "escalation": [
+              "ceo"
+            ]
+          }
+        },
+        {
+          "task": "Company organisational structure",
+          "accountable": [
+            "Head of Operations"
+          ],
+          "collaborates": [
+            "CEO",
+            "People Ops",
+            "Relevant functional leaders",
+            "CFO where cost modelling is required",
+            "Legal where employment structure is affected"
+          ],
+          "decision": [
+            "CEO for senior organisational changes",
+            "Head of Operations for operating design below that level"
+          ],
+          "escalation": [
+            "CEO"
+          ],
+          "ids": {
+            "accountable": [
+              "hoo"
+            ],
+            "collaborates": [
+              "ceo",
+              "peopleops",
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom",
+              "legal"
+            ],
+            "decision": [
+              "ceo",
+              "hoo"
+            ],
+            "escalation": [
+              "ceo"
+            ]
+          }
+        },
+        {
+          "task": "Leadership reporting and company visibility",
+          "accountable": [
+            "Head of Operations"
+          ],
+          "collaborates": [
+            "Finance",
+            "Sales",
+            "Client Leadership",
+            "Delivery",
+            "People",
+            "Marketing"
+          ],
+          "decision": [
+            "Head of Operations on operational reporting structure",
+            "CFO on official financial reporting"
+          ],
+          "escalation": [
+            "CEO when a business decision is required"
+          ],
+          "ids": {
+            "accountable": [
+              "hoo"
+            ],
+            "collaborates": [
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "peopleops",
+              "hom"
+            ],
+            "decision": [
+              "hoo",
+              "cfo"
+            ],
+            "escalation": [
+              "ceo"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "sales-and-new-business",
+      "title": "Sales and New Business",
+      "tasks": [
+        {
+          "task": "Sales strategy and revenue targets",
+          "accountable": [
+            "Chief Sales Officer"
+          ],
+          "collaborates": [
+            "CEO",
+            "Director of New Business",
+            "Partnerships Directors",
+            "CFO",
+            "Head of Operations"
+          ],
+          "decision": [
+            "Chief Sales Officer within agreed company strategy",
+            "CEO for major target or strategy changes"
+          ],
+          "escalation": [
+            "CEO"
+          ],
+          "ids": {
+            "accountable": [
+              "cso"
+            ],
+            "collaborates": [
+              "ceo",
+              "dnb",
+              "pd",
+              "cfo",
+              "hoo"
+            ],
+            "decision": [
+              "cso",
+              "ceo"
+            ],
+            "escalation": [
+              "ceo"
+            ]
+          }
+        },
+        {
+          "task": "Lead generation",
+          "accountable": [
+            "Director of New Business / Partnerships Leadership"
+          ],
+          "collaborates": [
+            "Partnerships Directors",
+            "Marketing",
+            "Head of Operations for systems, data and new lead infrastructure"
+          ],
+          "decision": [
+            "Director of New Business / Chief Sales Officer"
+          ],
+          "escalation": [
+            "Chief Sales Officer"
+          ],
+          "ids": {
+            "accountable": [
+              "dnb",
+              "pd"
+            ],
+            "collaborates": [
+              "pd",
+              "hom",
+              "hoo"
+            ],
+            "decision": [
+              "cso",
+              "dnb"
+            ],
+            "escalation": [
+              "cso"
+            ]
+          }
+        },
+        {
+          "task": "Pipeline management",
+          "accountable": [
+            "Chief Sales Officer"
+          ],
+          "collaborates": [
+            "Director of New Business",
+            "Partnerships Directors",
+            "Head of Operations"
+          ],
+          "decision": [
+            "Chief Sales Officer"
+          ],
+          "escalation": [
+            "CEO only for major commercial decisions"
+          ],
+          "ids": {
+            "accountable": [
+              "cso"
+            ],
+            "collaborates": [
+              "dnb",
+              "pd",
+              "hoo"
+            ],
+            "decision": [
+              "cso"
+            ],
+            "escalation": [
+              "ceo"
+            ]
+          }
+        },
+        {
+          "task": "CRM and sales infrastructure",
+          "accountable": [
+            "Head of Operations for system structure",
+            "Chief Sales Officer for sales requirements and adoption"
+          ],
+          "collaborates": [
+            "Technology Operations",
+            "Director of New Business",
+            "Client Leadership"
+          ],
+          "decision": [
+            "Head of Operations on system design",
+            "Chief Sales Officer on sales process requirements"
+          ],
+          "escalation": [
+            "CEO only if major investment is required"
+          ],
+          "ids": {
+            "accountable": [
+              "hoo",
+              "cso"
+            ],
+            "collaborates": [
+              "techops",
+              "dnb",
+              "cd"
+            ],
+            "decision": [
+              "hoo",
+              "cso"
+            ],
+            "escalation": [
+              "ceo"
+            ]
+          }
+        },
+        {
+          "task": "Pricing and unusual commercial terms",
+          "accountable": [
+            "Sales owner for the deal"
+          ],
+          "collaborates": [
+            "CFO",
+            "Client Leadership",
+            "Delivery where delivery economics are affected"
+          ],
+          "decision": [
+            "Sales leadership within agreed thresholds",
+            "CFO where financial thresholds are exceeded",
+            "CEO for material exceptions"
+          ],
+          "escalation": [
+            "CEO"
+          ],
+          "ids": {
+            "accountable": [
+              "cso"
+            ],
+            "collaborates": [
+              "cfo",
+              "cd",
+              "hod"
+            ],
+            "decision": [
+              "cso",
+              "cfo",
+              "ceo"
+            ],
+            "escalation": [
+              "ceo"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "client-management-and-account-growth",
+      "title": "Client Management and Account Growth",
+      "tasks": [
+        {
+          "task": "Client relationship",
+          "accountable": [
+            "Client Director"
+          ],
+          "manages": [
+            "Client Director",
+            "Account Director / Account Manager"
+          ],
+          "collaborates": [
+            "Delivery",
+            "Sales",
+            "Creative"
+          ],
+          "decision": [
+            "Client Director on client-management decisions"
+          ],
+          "escalation": [
+            "CEO only for major strategic client matters"
+          ],
+          "ids": {
+            "accountable": [
+              "cd"
+            ],
+            "collaborates": [
+              "hod",
+              "cso",
+              "creative"
+            ],
+            "decision": [
+              "cd"
+            ],
+            "escalation": [
+              "ceo"
+            ],
+            "manages": [
+              "cd",
+              "am"
+            ]
+          }
+        },
+        {
+          "task": "Account growth and renewals",
+          "accountable": [
+            "Client Director"
+          ],
+          "collaborates": [
+            "Account Managers",
+            "Sales / Partnerships",
+            "Delivery"
+          ],
+          "decision": [
+            "Client Director within agreed commercial limits"
+          ],
+          "escalation": [
+            "Chief Sales Officer / CEO for major commercial exceptions"
+          ],
+          "ids": {
+            "accountable": [
+              "cd"
+            ],
+            "collaborates": [
+              "am",
+              "pd",
+              "cso",
+              "hod"
+            ],
+            "decision": [
+              "cd"
+            ],
+            "escalation": [
+              "cso",
+              "ceo"
+            ]
+          }
+        },
+        {
+          "task": "Client forecasting",
+          "accountable": [
+            "Client Director for forecast inputs"
+          ],
+          "collaborates": [
+            "Account Managers",
+            "Head of Operations",
+            "CFO"
+          ],
+          "decision": [
+            "Client Director owns client expectation",
+            "Head of Operations owns operational use of forecast data",
+            "CFO owns financial forecast interpretation"
+          ],
+          "escalation": [
+            "CEO where material business impact exists"
+          ],
+          "ids": {
+            "accountable": [
+              "cd"
+            ],
+            "collaborates": [
+              "am",
+              "hoo",
+              "cfo"
+            ],
+            "decision": [
+              "cd",
+              "hoo",
+              "cfo"
+            ],
+            "escalation": [
+              "ceo"
+            ]
+          }
+        },
+        {
+          "task": "Day-to-day account management",
+          "accountable": [
+            "Account Manager"
+          ],
+          "manages": [
+            "Client Director",
+            "Account Manager"
+          ],
+          "collaborates": [
+            "Campaign Manager",
+            "Creative Strategist",
+            "Sales where required"
+          ],
+          "decision": [
+            "Account Manager within role authority",
+            "Client Director above agreed thresholds"
+          ],
+          "escalation": [
+            "Client Director"
+          ],
+          "ids": {
+            "accountable": [
+              "am"
+            ],
+            "collaborates": [
+              "cm",
+              "cstrat",
+              "cso"
+            ],
+            "decision": [
+              "am",
+              "cd"
+            ],
+            "escalation": [
+              "cd"
+            ],
+            "manages": [
+              "cd",
+              "am"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "campaign-delivery",
+      "title": "Campaign Delivery",
+      "tasks": [
+        {
+          "task": "Overall Delivery performance",
+          "accountable": [
+            "Head of Delivery & Performance"
+          ],
+          "manages": [
+            "Head of Delivery & Performance",
+            "Senior Campaign Managers",
+            "Campaign Managers"
+          ],
+          "collaborates": [
+            "Client Directors",
+            "Creative",
+            "Head of Operations"
+          ],
+          "decision": [
+            "Head of Delivery & Performance"
+          ],
+          "escalation": [
+            "CEO only for major business risk"
+          ],
+          "ids": {
+            "accountable": [
+              "hod"
+            ],
+            "collaborates": [
+              "cd",
+              "creative",
+              "hoo"
+            ],
+            "decision": [
+              "hod"
+            ],
+            "escalation": [
+              "ceo"
+            ],
+            "manages": [
+              "hod",
+              "scm",
+              "cm"
+            ]
+          }
+        },
+        {
+          "task": "Campaign margin",
+          "accountable": [
+            "Head of Delivery & Performance overall"
+          ],
+          "current": [
+            "Senior Campaign Manager for campaigns under their responsibility"
+          ],
+          "currentLabel": "Current accountability until role is hired",
+          "collaborates": [
+            "Campaign Managers",
+            "Client Leadership",
+            "Finance",
+            "Head of Operations for controls, models and visibility"
+          ],
+          "decision": [
+            "Delivery leadership on how Delivery achieves the target"
+          ],
+          "escalation": [
+            "CEO only when commercial or strategic intervention is required"
+          ],
+          "ids": {
+            "accountable": [
+              "hod"
+            ],
+            "current": [
+              "scm"
+            ],
+            "collaborates": [
+              "cm",
+              "cd",
+              "cfo",
+              "hoo"
+            ],
+            "decision": [
+              "hod"
+            ],
+            "escalation": [
+              "ceo"
+            ]
+          }
+        },
+        {
+          "task": "Margin control infrastructure",
+          "accountable": [
+            "Head of Operations"
+          ],
+          "collaborates": [
+            "Head of Delivery",
+            "Senior Campaign Managers",
+            "CFO",
+            "Technology Operations"
+          ],
+          "decision": [
+            "Head of Operations on control system and infrastructure",
+            "Delivery leadership on corrective Delivery action"
+          ],
+          "escalation": [
+            "CEO only if a wider business decision is required"
+          ],
+          "ids": {
+            "accountable": [
+              "hoo"
+            ],
+            "collaborates": [
+              "hod",
+              "scm",
+              "cfo",
+              "techops"
+            ],
+            "decision": [
+              "hoo",
+              "hod"
+            ],
+            "escalation": [
+              "ceo"
+            ]
+          }
+        },
+        {
+          "task": "Campaign execution",
+          "accountable": [
+            "Campaign Manager"
+          ],
+          "manages": [
+            "Senior Campaign Manager",
+            "Campaign Manager"
+          ],
+          "collaborates": [
+            "Account Manager",
+            "Creative Strategist",
+            "External partners where required"
+          ],
+          "decision": [
+            "Campaign Manager within campaign authority",
+            "Senior Campaign Manager for exceptions"
+          ],
+          "escalation": [
+            "Senior Campaign Manager → Head of Delivery"
+          ],
+          "ids": {
+            "accountable": [
+              "cm"
+            ],
+            "collaborates": [
+              "am",
+              "cstrat",
+              "partners"
+            ],
+            "decision": [
+              "cm",
+              "scm"
+            ],
+            "escalation": [
+              "scm",
+              "hod"
+            ],
+            "manages": [
+              "scm",
+              "cm"
+            ],
+            "escChain": true
+          }
+        },
+        {
+          "task": "Campaign quality, timelines and risk",
+          "accountable": [
+            "Senior Campaign Manager"
+          ],
+          "collaborates": [
+            "Campaign Managers",
+            "Client Leadership"
+          ],
+          "decision": [
+            "Senior Campaign Manager"
+          ],
+          "escalation": [
+            "Head of Delivery"
+          ],
+          "ids": {
+            "accountable": [
+              "scm"
+            ],
+            "collaborates": [
+              "cm",
+              "cd"
+            ],
+            "decision": [
+              "scm"
+            ],
+            "escalation": [
+              "hod"
+            ]
+          }
+        },
+        {
+          "task": "Creative strategy",
+          "accountable": [
+            "Creative functional owner / Creative Strategist for assigned work"
+          ],
+          "collaborates": [
+            "Client Leadership",
+            "Campaign Manager",
+            "Sales where required"
+          ],
+          "decision": [
+            "Creative leadership for creative approach",
+            "Client approval where contractually required"
+          ],
+          "escalation": [
+            "Creative functional leader / Client Director"
+          ],
+          "ids": {
+            "accountable": [
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom",
+              "cstrat"
+            ],
+            "collaborates": [
+              "cd",
+              "cm",
+              "cso"
+            ],
+            "decision": [
+              "creative"
+            ],
+            "escalation": [
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "capacity-and-resource-planning",
+      "title": "Capacity and Resource Planning",
+      "tasks": [
+        {
+          "task": "Company capacity model and forecasting infrastructure",
+          "accountable": [
+            "Head of Operations"
+          ],
+          "collaborates": [
+            "Head of Delivery",
+            "Client Leadership",
+            "Sales",
+            "People Ops",
+            "Technology Operations"
+          ],
+          "decision": [
+            "Head of Operations on model and methodology"
+          ],
+          "escalation": [
+            "CEO where major hiring or organisational investment is required"
+          ],
+          "ids": {
+            "accountable": [
+              "hoo"
+            ],
+            "collaborates": [
+              "hod",
+              "cd",
+              "cso",
+              "peopleops",
+              "techops"
+            ],
+            "decision": [
+              "hoo"
+            ],
+            "escalation": [
+              "ceo"
+            ]
+          }
+        },
+        {
+          "task": "Delivery work allocation",
+          "accountable": [
+            "Head of Delivery & Performance"
+          ],
+          "collaborates": [
+            "Senior Campaign Managers",
+            "Head of Operations for capacity data"
+          ],
+          "decision": [
+            "Head of Delivery"
+          ],
+          "escalation": [
+            "CEO only for major resource decisions"
+          ],
+          "ids": {
+            "accountable": [
+              "hod"
+            ],
+            "collaborates": [
+              "scm",
+              "hoo"
+            ],
+            "decision": [
+              "hod"
+            ],
+            "escalation": [
+              "ceo"
+            ]
+          }
+        },
+        {
+          "task": "Hiring requirement identification",
+          "accountable": [
+            "Relevant Functional Leader"
+          ],
+          "collaborates": [
+            "Head of Operations",
+            "People Ops",
+            "CFO for cost modelling"
+          ],
+          "decision": [
+            "Functional Leader recommends",
+            "CEO approves senior or material hires",
+            "Agreed lower-level approval process for normal hires"
+          ],
+          "escalation": [
+            "CEO where required"
+          ],
+          "ids": {
+            "accountable": [
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom"
+            ],
+            "collaborates": [
+              "hoo",
+              "peopleops",
+              "cfo"
+            ],
+            "decision": [
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom",
+              "ceo"
+            ],
+            "escalation": [
+              "ceo"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "finance",
+      "title": "Finance",
+      "tasks": [
+        {
+          "task": "Financial reporting",
+          "accountable": [
+            "CFO"
+          ],
+          "manages": [
+            "CFO",
+            "Finance Team / Payment Managers"
+          ],
+          "collaborates": [
+            "CEO",
+            "Head of Operations",
+            "Functional leaders where inputs are required"
+          ],
+          "decision": [
+            "CFO"
+          ],
+          "escalation": [
+            "CEO / Board where required"
+          ],
+          "ids": {
+            "accountable": [
+              "cfo"
+            ],
+            "collaborates": [
+              "ceo",
+              "hoo",
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom"
+            ],
+            "decision": [
+              "cfo"
+            ],
+            "escalation": [
+              "board",
+              "ceo"
+            ],
+            "manages": [
+              "cfo",
+              "finteam"
+            ]
+          }
+        },
+        {
+          "task": "Cash and financial planning",
+          "accountable": [
+            "CFO"
+          ],
+          "collaborates": [
+            "CEO",
+            "Head of Operations",
+            "Sales leadership"
+          ],
+          "decision": [
+            "CFO within authority",
+            "CEO for major capital decisions"
+          ],
+          "escalation": [
+            "CEO"
+          ],
+          "ids": {
+            "accountable": [
+              "cfo"
+            ],
+            "collaborates": [
+              "ceo",
+              "hoo",
+              "cso"
+            ],
+            "decision": [
+              "cfo",
+              "ceo"
+            ],
+            "escalation": [
+              "ceo"
+            ]
+          }
+        },
+        {
+          "task": "Client invoicing",
+          "accountable": [
+            "Finance"
+          ],
+          "collaborates": [
+            "Client Leadership / Sales when client intervention is required"
+          ],
+          "decision": [
+            "CFO / Finance process owner"
+          ],
+          "escalation": [
+            "Client Leadership only where relationship intervention is needed",
+            "CEO only for major exposure"
+          ],
+          "ids": {
+            "accountable": [
+              "cfo"
+            ],
+            "collaborates": [
+              "cd",
+              "cso"
+            ],
+            "decision": [
+              "finteam",
+              "cfo"
+            ],
+            "escalation": [
+              "cd",
+              "ceo"
+            ]
+          }
+        },
+        {
+          "task": "Late debtor chasing",
+          "accountable": [
+            "Finance"
+          ],
+          "collaborates": [
+            "Client Leadership where normal Finance chasing is unsuccessful"
+          ],
+          "decision": [
+            "CFO"
+          ],
+          "escalation": [
+            "CEO only for major debt / commercial decision"
+          ],
+          "ids": {
+            "accountable": [
+              "cfo"
+            ],
+            "collaborates": [
+              "cd",
+              "cfo"
+            ],
+            "decision": [
+              "cfo"
+            ],
+            "escalation": [
+              "ceo"
+            ]
+          }
+        },
+        {
+          "task": "Creator and supplier payments",
+          "accountable": [
+            "Payment Managers under CFO"
+          ],
+          "collaborates": [
+            "Campaign / Delivery teams for correct information"
+          ],
+          "decision": [
+            "Finance within agreed process"
+          ],
+          "escalation": [
+            "CFO"
+          ],
+          "ids": {
+            "accountable": [
+              "finteam",
+              "cfo"
+            ],
+            "collaborates": [
+              "scm",
+              "cm"
+            ],
+            "decision": [
+              "cfo"
+            ],
+            "escalation": [
+              "cfo"
+            ]
+          }
+        },
+        {
+          "task": "Financial data",
+          "accountable": [
+            "CFO"
+          ],
+          "decision": [
+            "CFO on official financial numbers"
+          ],
+          "collaborates": [
+            "Head of Operations where financial data feeds operational models"
+          ],
+          "ids": {
+            "accountable": [
+              "cfo"
+            ],
+            "collaborates": [
+              "hoo"
+            ],
+            "decision": [
+              "cfo"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "data-and-management-information",
+      "title": "Data and Management Information",
+      "tasks": [
+        {
+          "task": "Operational data architecture",
+          "accountable": [
+            "Head of Operations"
+          ],
+          "collaborates": [
+            "Technology Operations",
+            "All functional leaders"
+          ],
+          "decision": [
+            "Head of Operations"
+          ],
+          "ids": {
+            "accountable": [
+              "hoo"
+            ],
+            "collaborates": [
+              "techops",
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom"
+            ],
+            "decision": [
+              "hoo"
+            ]
+          }
+        },
+        {
+          "task": "Accuracy of functional data",
+          "accountable": [
+            "Relevant Functional Leader"
+          ],
+          "examples": [
+            "Sales owns pipeline inputs",
+            "Delivery owns campaign inputs",
+            "Client Leadership owns client forecast inputs",
+            "People Ops owns people data",
+            "Finance owns financial data",
+            "Marketing owns marketing data"
+          ],
+          "decision": [
+            "Relevant Functional Leader"
+          ],
+          "ids": {
+            "accountable": [
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom"
+            ],
+            "decision": [
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom"
+            ]
+          }
+        },
+        {
+          "task": "Connecting company data",
+          "accountable": [
+            "Head of Operations"
+          ],
+          "collaborates": [
+            "Technology Operations",
+            "Finance",
+            "Sales",
+            "Delivery",
+            "Client Leadership",
+            "People",
+            "Marketing"
+          ],
+          "decision": [
+            "Head of Operations on operational architecture"
+          ],
+          "ids": {
+            "accountable": [
+              "hoo"
+            ],
+            "collaborates": [
+              "techops",
+              "cfo",
+              "cso",
+              "hod",
+              "cd",
+              "peopleops",
+              "hom"
+            ],
+            "decision": [
+              "hoo"
+            ]
+          }
+        },
+        {
+          "task": "Prediction and forecasting models",
+          "accountable": [
+            "Head of Operations for operational models"
+          ],
+          "collaborates": [
+            "Relevant Functional Leader",
+            "Technology Operations",
+            "CFO where financial assumptions are involved"
+          ],
+          "decision": [
+            "Head of Operations on operational model",
+            "Functional Leader remains responsible for decisions within their function"
+          ],
+          "ids": {
+            "accountable": [
+              "hoo"
+            ],
+            "collaborates": [
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom",
+              "techops"
+            ],
+            "decision": [
+              "hoo",
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "technology-and-automation",
+      "title": "Technology and Automation",
+      "tasks": [
+        {
+          "task": "Technology and automation roadmap",
+          "accountable": [
+            "Head of Operations"
+          ],
+          "collaborates": [
+            "CEO",
+            "Functional leaders",
+            "Technology Operations Associate"
+          ],
+          "decision": [
+            "Head of Operations within budget and authority",
+            "CEO for major investment"
+          ],
+          "ids": {
+            "accountable": [
+              "hoo"
+            ],
+            "collaborates": [
+              "ceo",
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom",
+              "techops"
+            ],
+            "decision": [
+              "hoo",
+              "ceo"
+            ]
+          }
+        },
+        {
+          "task": "Internal software and automation builds",
+          "accountable": [
+            "Technology Operations for technical execution"
+          ],
+          "manages": [
+            "Head of Operations",
+            "Technology Operations"
+          ],
+          "collaborates": [
+            "Relevant functional team"
+          ],
+          "decision": [
+            "Head of Operations on priority and business requirements",
+            "Technology Operations on technical implementation"
+          ],
+          "ids": {
+            "accountable": [
+              "techops"
+            ],
+            "collaborates": [
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom"
+            ],
+            "decision": [
+              "hoo",
+              "techops"
+            ],
+            "manages": [
+              "hoo",
+              "techops"
+            ]
+          }
+        },
+        {
+          "task": "Technology ROI and tool rationalisation",
+          "accountable": [
+            "Head of Operations"
+          ],
+          "collaborates": [
+            "CFO",
+            "Technology Operations",
+            "Relevant tool owner"
+          ],
+          "decision": [
+            "Head of Operations within authority"
+          ],
+          "ids": {
+            "accountable": [
+              "hoo"
+            ],
+            "collaborates": [
+              "cfo",
+              "techops",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom"
+            ],
+            "decision": [
+              "hoo"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "people-and-organisational-performance",
+      "title": "People and Organisational Performance",
+      "tasks": [
+        {
+          "task": "People Operations",
+          "accountable": [
+            "Head of Operations"
+          ],
+          "manages": [
+            "Head of Operations",
+            "People Ops (HR)"
+          ],
+          "dayToDay": [
+            "People Ops (HR)"
+          ],
+          "decision": [
+            "Head of Operations on People Ops strategy and structure"
+          ],
+          "ids": {
+            "accountable": [
+              "hoo"
+            ],
+            "dayToDay": [
+              "peopleops"
+            ],
+            "decision": [
+              "hoo",
+              "peopleops"
+            ],
+            "manages": [
+              "hoo",
+              "peopleops"
+            ]
+          }
+        },
+        {
+          "task": "Performance management",
+          "accountable": [
+            "Functional Manager for their employees"
+          ],
+          "collaborates": [
+            "People Ops",
+            "Head of Operations where structural or senior issues exist"
+          ],
+          "decision": [
+            "Functional Manager within process",
+            "Senior Functional Leader for serious action"
+          ],
+          "ids": {
+            "accountable": [
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom"
+            ],
+            "collaborates": [
+              "peopleops",
+              "hoo"
+            ],
+            "decision": [
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom"
+            ]
+          }
+        },
+        {
+          "task": "Manager capability and accountability",
+          "accountable": [
+            "Relevant Functional Leader"
+          ],
+          "collaborates": [
+            "People Ops",
+            "Head of Operations"
+          ],
+          "decision": [
+            "Functional Leader",
+            "Head of Operations where company-wide management standards are involved"
+          ],
+          "ids": {
+            "accountable": [
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom"
+            ],
+            "collaborates": [
+              "peopleops",
+              "hoo"
+            ],
+            "decision": [
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom",
+              "hoo"
+            ]
+          }
+        },
+        {
+          "task": "Employee motivation and engagement",
+          "accountable": [
+            "Functional Managers for day-to-day management"
+          ],
+          "collaborates": [
+            "People Ops to understand patterns, motivation and team issues"
+          ],
+          "decision": [
+            "Relevant Functional Leader"
+          ],
+          "ids": {
+            "accountable": [
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom"
+            ],
+            "collaborates": [
+              "peopleops"
+            ],
+            "decision": [
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom"
+            ]
+          }
+        },
+        {
+          "task": "Onboarding",
+          "accountable": [
+            "People Ops for company-wide onboarding infrastructure",
+            "Functional Manager for role-specific onboarding and performance"
+          ],
+          "collaborates": [
+            "Head of Operations",
+            "Relevant team leaders"
+          ],
+          "decision": [
+            "Head of Operations on company-wide structure",
+            "Functional Leader on role-specific requirements"
+          ],
+          "ids": {
+            "accountable": [
+              "peopleops",
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom"
+            ],
+            "collaborates": [
+              "hoo",
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom"
+            ],
+            "decision": [
+              "hoo",
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom"
+            ]
+          }
+        },
+        {
+          "task": "Employee vs contractor structure and international engagement",
+          "accountable": [
+            "Head of Operations for operational setup"
+          ],
+          "collaborates": [
+            "People Ops",
+            "Legal specialist",
+            "CFO"
+          ],
+          "decision": [
+            "Head of Operations after specialist legal / tax advice",
+            "CEO where material structural decision is required"
+          ],
+          "ids": {
+            "accountable": [
+              "hoo"
+            ],
+            "collaborates": [
+              "peopleops",
+              "legal",
+              "cfo"
+            ],
+            "decision": [
+              "hoo",
+              "legal",
+              "ceo"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "legal-and-compliance",
+      "title": "Legal and Compliance",
+      "tasks": [
+        {
+          "task": "Legal advice",
+          "accountable": [
+            "Legal Consultant / Specialist"
+          ],
+          "collaborates": [
+            "Head of Operations",
+            "Relevant functional owner"
+          ],
+          "decision": [
+            "Relevant business owner based on legal advice",
+            "CEO for major legal risk"
+          ],
+          "ids": {
+            "accountable": [
+              "legal"
+            ],
+            "collaborates": [
+              "hoo",
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom"
+            ],
+            "decision": [
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom",
+              "legal",
+              "ceo"
+            ]
+          }
+        },
+        {
+          "task": "Compliance infrastructure",
+          "accountable": [
+            "Head of Operations for making sure controls and ownership exist"
+          ],
+          "collaborates": [
+            "Legal / Compliance provider",
+            "Relevant functional leader"
+          ],
+          "decision": [
+            "Relevant Functional Leader on functional execution",
+            "Head of Operations on company-wide control structure"
+          ],
+          "ids": {
+            "accountable": [
+              "hoo"
+            ],
+            "collaborates": [
+              "legal",
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom"
+            ],
+            "decision": [
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom",
+              "hoo"
+            ]
+          }
+        },
+        {
+          "task": "Client-specific compliance",
+          "accountable": [
+            "Client / Delivery functional owner"
+          ],
+          "collaborates": [
+            "Head of Operations",
+            "Legal / Compliance specialist"
+          ],
+          "decision": [
+            "Relevant Functional Leader within specialist requirements"
+          ],
+          "escalation": [
+            "CEO for major risk or commercial exception"
+          ],
+          "ids": {
+            "accountable": [
+              "cd",
+              "hod"
+            ],
+            "collaborates": [
+              "hoo",
+              "legal"
+            ],
+            "decision": [
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom"
+            ],
+            "escalation": [
+              "ceo"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "operational-partners-and-suppliers",
+      "title": "Operational Partners and Suppliers",
+      "tasks": [
+        {
+          "task": "Fulfilment / logistics / production partner strategy",
+          "accountable": [
+            "Head of Operations for overall setup and provider infrastructure"
+          ],
+          "collaborates": [
+            "Delivery",
+            "Client Leadership",
+            "Finance"
+          ],
+          "decision": [
+            "Head of Operations on provider structure within authority"
+          ],
+          "ids": {
+            "accountable": [
+              "hoo"
+            ],
+            "collaborates": [
+              "hod",
+              "cd",
+              "cfo"
+            ],
+            "decision": [
+              "hoo"
+            ]
+          }
+        },
+        {
+          "task": "Day-to-day use of fulfilment / production partner",
+          "accountable": [
+            "Relevant Delivery / Campaign owner"
+          ],
+          "collaborates": [
+            "Operational partner"
+          ],
+          "decision": [
+            "Functional owner"
+          ],
+          "ids": {
+            "accountable": [
+              "cm"
+            ],
+            "collaborates": [
+              "partners"
+            ],
+            "decision": [
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom"
+            ]
+          }
+        },
+        {
+          "task": "Provider selection and commercial comparison",
+          "accountable": [
+            "Head of Operations"
+          ],
+          "collaborates": [
+            "Relevant functional leader",
+            "CFO where significant cost is involved"
+          ],
+          "decision": [
+            "Head of Operations within authority",
+            "CEO for material commitments"
+          ],
+          "ids": {
+            "accountable": [
+              "hoo"
+            ],
+            "collaborates": [
+              "cfo",
+              "cso",
+              "cd",
+              "hod",
+              "creative",
+              "paid",
+              "hom"
+            ],
+            "decision": [
+              "hoo",
+              "ceo"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "marketing-and-company-brand",
+      "title": "Marketing and Company Brand",
+      "tasks": [
+        {
+          "task": "Marketing strategy",
+          "accountable": [
+            "Head of Marketing + PR"
+          ],
+          "collaborates": [
+            "CEO",
+            "Sales",
+            "Head of Operations"
+          ],
+          "decision": [
+            "Head of Marketing within company strategy"
+          ],
+          "ids": {
+            "accountable": [
+              "hom"
+            ],
+            "collaborates": [
+              "ceo",
+              "cso",
+              "hoo"
+            ],
+            "decision": [
+              "hom"
+            ]
+          }
+        },
+        {
+          "task": "Social Media",
+          "current": [
+            "Head of Operations temporarily"
+          ],
+          "currentLabel": "Current accountability",
+          "manages": [
+            "Head of Operations",
+            "Social Media Manager"
+          ],
+          "dayToDay": [
+            "Social Media Manager"
+          ],
+          "collaborates": [
+            "Marketing once senior Marketing leadership exists"
+          ],
+          "future": [
+            "Head of Marketing + PR",
+            "Social Media Manager"
+          ],
+          "decision": [
+            "Head of Operations temporarily",
+            "Head of Marketing once function transfers"
+          ],
+          "ids": {
+            "current": [
+              "hoo"
+            ],
+            "dayToDay": [
+              "smm"
+            ],
+            "collaborates": [
+              "hom"
+            ],
+            "decision": [
+              "hoo",
+              "hom"
+            ],
+            "manages": [
+              "hoo",
+              "smm"
+            ],
+            "future": [
+              "hom",
+              "smm"
+            ]
+          }
+        },
+        {
+          "task": "Paid Marketing",
+          "accountable": [
+            "Paid Marketing Director"
+          ],
+          "manages": [
+            "Paid Marketing Director",
+            "Performance Marketing Specialist"
+          ],
+          "collaborates": [
+            "Sales",
+            "Client Leadership",
+            "Marketing"
+          ],
+          "decision": [
+            "Paid Marketing Director within agreed budget"
+          ],
+          "ids": {
+            "accountable": [
+              "paid"
+            ],
+            "collaborates": [
+              "cso",
+              "cd",
+              "hom"
+            ],
+            "decision": [
+              "paid"
+            ],
+            "manages": [
+              "paid",
+              "pms"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "escalation": {
+    "title": "Escalation Structure",
+    "routes": [
+      {
+        "issue": "Individual contributor issue",
+        "route": "Direct Manager"
+      },
+      {
+        "issue": "Manager cannot resolve",
+        "route": "Functional Leader"
+      },
+      {
+        "issue": "Cross-functional / structural / repeating issue",
+        "route": "Head of Operations"
+      },
+      {
+        "issue": "Financial issue",
+        "route": "CFO"
+      },
+      {
+        "issue": "Legal / compliance issue",
+        "route": "Legal / Compliance Specialist + relevant Functional Leader"
+      },
+      {
+        "issue": "Major company decision",
+        "route": "CEO"
+      },
+      {
+        "issue": "Board / shareholder reserved matter",
+        "route": "CEO + Board / Investors"
+      }
+    ]
+  },
+  "management": {
+    "title": "Management Structure",
+    "groups": [
+      {
+        "manager": "CEO",
+        "reports": [
+          "Head of Operations",
+          "CFO",
+          "Chief Sales Officer",
+          "Head of Delivery & Performance",
+          "Head of Marketing + PR"
+        ]
+      },
+      {
+        "manager": "Head of Operations",
+        "reports": [
+          "People Ops (HR)",
+          "Technology Operations Associate",
+          "Social Media Manager temporarily",
+          "Central Operations / Admin roles when added"
+        ]
+      },
+      {
+        "manager": "CFO",
+        "reports": [
+          "Payment Managers / Finance Team"
+        ]
+      },
+      {
+        "manager": "Chief Sales Officer",
+        "reports": [
+          "Director of New Business",
+          "Partnerships Directors"
+        ]
+      },
+      {
+        "manager": "Client Leadership",
+        "reports": [
+          "Client Directors",
+          "Account Directors / Account Managers"
+        ]
+      },
+      {
+        "manager": "Head of Delivery & Performance",
+        "reports": [
+          "Senior Campaign Managers",
+          "Campaign Managers"
+        ]
+      },
+      {
+        "manager": "Paid Marketing Director",
+        "reports": [
+          "Performance Marketing Specialists"
+        ]
+      },
+      {
+        "manager": "Head of Marketing + PR",
+        "reports": [
+          "Marketing / PR team",
+          "Social Media Manager once transferred"
+        ]
+      }
+    ],
+    "edges": [
+      [
+        "ceo",
+        "hoo"
+      ],
+      [
+        "ceo",
+        "cfo"
+      ],
+      [
+        "ceo",
+        "cso"
+      ],
+      [
+        "ceo",
+        "hod"
+      ],
+      [
+        "ceo",
+        "hom"
+      ],
+      [
+        "hoo",
+        "peopleops"
+      ],
+      [
+        "hoo",
+        "techops"
+      ],
+      [
+        "hoo",
+        "smm"
+      ],
+      [
+        "hoo",
+        "admin"
+      ],
+      [
+        "cfo",
+        "finteam"
+      ],
+      [
+        "cso",
+        "dnb"
+      ],
+      [
+        "cso",
+        "pd"
+      ],
+      [
+        "cd",
+        "am"
+      ],
+      [
+        "hod",
+        "scm"
+      ],
+      [
+        "scm",
+        "cm"
+      ],
+      [
+        "paid",
+        "pms"
+      ],
+      [
+        "hom",
+        "mteam"
+      ]
+    ],
+    "future": [
+      [
+        "hom",
+        "smm"
+      ]
+    ]
+  },
+  "nodes": [
+    {
+      "id": "board",
+      "label": "Board / Investors",
+      "x": 800,
+      "y": 44,
+      "kind": "ext"
+    },
+    {
+      "id": "ceo",
+      "label": "CEO",
+      "x": 800,
+      "y": 150,
+      "kind": "top"
+    },
+    {
+      "id": "hoo",
+      "label": "Head of Operations",
+      "x": 110,
+      "y": 300,
+      "kind": "lead"
+    },
+    {
+      "id": "cfo",
+      "label": "CFO",
+      "x": 310,
+      "y": 300,
+      "kind": "lead"
+    },
+    {
+      "id": "cso",
+      "label": "Chief Sales Officer",
+      "x": 510,
+      "y": 300,
+      "kind": "lead"
+    },
+    {
+      "id": "cd",
+      "label": "Client Directors",
+      "x": 710,
+      "y": 300,
+      "kind": "lead"
+    },
+    {
+      "id": "hod",
+      "label": "Head of Delivery & Performance",
+      "x": 910,
+      "y": 300,
+      "kind": "lead"
+    },
+    {
+      "id": "creative",
+      "label": "Creative Leadership",
+      "x": 1110,
+      "y": 300,
+      "kind": "lead"
+    },
+    {
+      "id": "paid",
+      "label": "Paid Marketing Director",
+      "x": 1310,
+      "y": 300,
+      "kind": "lead"
+    },
+    {
+      "id": "hom",
+      "label": "Head of Marketing + PR",
+      "x": 1510,
+      "y": 300,
+      "kind": "lead"
+    },
+    {
+      "id": "peopleops",
+      "label": "People Ops (HR)",
+      "x": 95,
+      "y": 450,
+      "kind": "team"
+    },
+    {
+      "id": "techops",
+      "label": "Technology Operations",
+      "x": 95,
+      "y": 590,
+      "kind": "team"
+    },
+    {
+      "id": "finteam",
+      "label": "Finance Team / Payment Managers",
+      "x": 270,
+      "y": 450,
+      "kind": "team"
+    },
+    {
+      "id": "dnb",
+      "label": "Director of New Business",
+      "x": 430,
+      "y": 450,
+      "kind": "team"
+    },
+    {
+      "id": "pd",
+      "label": "Partnerships Directors",
+      "x": 590,
+      "y": 450,
+      "kind": "team"
+    },
+    {
+      "id": "am",
+      "label": "Account Directors / Account Managers",
+      "x": 750,
+      "y": 450,
+      "kind": "team"
+    },
+    {
+      "id": "scm",
+      "label": "Senior Campaign Managers",
+      "x": 910,
+      "y": 450,
+      "kind": "team"
+    },
+    {
+      "id": "cstrat",
+      "label": "Creative Strategists",
+      "x": 1110,
+      "y": 450,
+      "kind": "team"
+    },
+    {
+      "id": "pms",
+      "label": "Performance Marketing Specialists",
+      "x": 1310,
+      "y": 450,
+      "kind": "team"
+    },
+    {
+      "id": "mteam",
+      "label": "Marketing / PR team",
+      "x": 1510,
+      "y": 450,
+      "kind": "team"
+    },
+    {
+      "id": "legal",
+      "label": "Legal / Compliance Specialist",
+      "x": 255,
+      "y": 590,
+      "kind": "ext"
+    },
+    {
+      "id": "partners",
+      "label": "Operational Partners",
+      "x": 255,
+      "y": 730,
+      "kind": "ext"
+    },
+    {
+      "id": "cm",
+      "label": "Campaign Managers",
+      "x": 910,
+      "y": 590,
+      "kind": "team"
+    },
+    {
+      "id": "smm",
+      "label": "Social Media Manager",
+      "x": 95,
+      "y": 730,
+      "kind": "team"
+    },
+    {
+      "id": "admin",
+      "label": "Central Operations / Admin (when added)",
+      "x": 415,
+      "y": 730,
+      "kind": "future"
+    }
+  ]
+}

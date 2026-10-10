@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { OrgCollab } from './OrgCollab';
-import { CompanySchemeView, type CompanyScheme } from './CompanyScheme';
+import { AccountabilityMapView, type AccountabilityMap } from './AccountabilityMap';
 
 /*
  * Read-only, interactive copy of a saved Org Chart Whiteboard board (github.com/valerisem/org):
@@ -73,7 +73,7 @@ function route(a: Rect, b: Rect, fromSide?: string, toSide?: string): string {
 }
 
 export function OrgChart({ data, highlight, roles, scheme }: {
-  data: OrgSnapshot; highlight?: string; roles?: Record<string, OrgRoleInfo>; scheme?: CompanyScheme;
+  data: OrgSnapshot; highlight?: string; roles?: Record<string, OrgRoleInfo>; scheme?: AccountabilityMap;
 }) {
   const areaRef = useRef<HTMLDivElement>(null);
   const [view, setView] = useState({ k: 0.2, x: 0, y: 0 });
@@ -279,10 +279,10 @@ export function OrgChart({ data, highlight, roles, scheme }: {
       {scheme && (
         <button type="button" className="org-scheme-btn" onClick={() => setShowScheme(true)}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" /><path d="M8 4v4M15 10v4M11 16v4" /></svg>
-          Show Company Scheme
+          Ownership Model
         </button>
       )}
-      {showScheme && scheme && <CompanySchemeView scheme={scheme} onClose={closeScheme} />}
+      {showScheme && scheme && <AccountabilityMapView map={scheme} onClose={closeScheme} />}
       <div className="org-controls">
         {highlight && <button type="button" onClick={focusHighlight}>My Team</button>}
         <button type="button" onClick={fit}>Fit</button>
