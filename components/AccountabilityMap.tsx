@@ -7,7 +7,7 @@ import { createPortal } from 'react-dom';
  * Company Accountability Map, opened from the org chart's “Ownership Model” button: one page, one swimlane
  * chart. Every department is a lane (Board and CEO on the left), every task in the company is a row,
  * grouped by area. In each row, each department involved carries its letter: A accountable,
- * C collaborates, M manages, D final decision, E escalation. Arrows flow between the lanes: collaborators
+ * C collaborates, D final decision, E escalation. Arrows flow between the lanes: collaborators
  * into the accountable lane (purple), out to the final decision
  * (teal) and up to escalation (orange). Clicking a row shows its exact wording. The escalation and
  * management structures sit at the bottom of the same page.
@@ -41,7 +41,7 @@ export interface AccountabilityMap {
   veto?: { label: string; text: string };
 }
 
-const LETTERS: Letter[] = ['A', 'C', 'M', 'D', 'E'];
+const LETTERS: Letter[] = ['A', 'C', 'D', 'E'];
 
 /** The Board / Investors' crown: absolute right of veto and the final decision on everything. */
 function Crown({ size = 14 }: { size?: number }) {
@@ -79,8 +79,6 @@ function layout(t: MapTask, laneOf: Map<string, number>) {
   ids.accountable?.forEach((r) => mark(r, 'A'));
   ids.current?.forEach((r) => mark(r, 'A', true));
   ids.collaborates?.forEach((r) => mark(r, 'C'));
-  ids.manages?.forEach((r) => mark(r, 'M'));
-  ids.manages2?.forEach((r) => mark(r, 'M'));
   ids.decision?.forEach((r) => mark(r, 'D'));
   ids.escalation?.forEach((r) => mark(r, 'E'));
   cells.forEach((list) => list.forEach((c) => c.letters.sort((a, b) => LETTERS.indexOf(a) - LETTERS.indexOf(b))));
