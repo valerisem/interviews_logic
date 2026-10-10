@@ -90,13 +90,7 @@
               "hoo"
             ],
             "collaborates": [
-              "cfo",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom"
+              "fl"
             ],
             "decision": [
               "hoo",
@@ -133,13 +127,8 @@
             "collaborates": [
               "ceo",
               "peopleops",
+              "fl",
               "cfo",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom",
               "legal"
             ],
             "decision": [
@@ -707,11 +696,11 @@
               "scm",
               "hod"
             ],
+            "escChain": true,
             "manages": [
               "scm",
               "cm"
-            ],
-            "escChain": true
+            ]
           }
         },
         {
@@ -875,13 +864,7 @@
           ],
           "ids": {
             "accountable": [
-              "cfo",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom"
+              "fl"
             ],
             "collaborates": [
               "hoo",
@@ -889,13 +872,7 @@
               "cfo"
             ],
             "decision": [
-              "cfo",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom",
+              "fl",
               "ceo"
             ],
             "escalation": [
@@ -916,7 +893,7 @@
           ],
           "manages": [
             "CFO",
-            "Finance Team / Payment Managers"
+            "Accountants / Payment Managers"
           ],
           "collaborates": [
             "CEO",
@@ -936,12 +913,7 @@
             "collaborates": [
               "ceo",
               "hoo",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom"
+              "fl"
             ],
             "decision": [
               "cfo"
@@ -1139,13 +1111,7 @@
             ],
             "collaborates": [
               "techops",
-              "cfo",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom"
+              "fl"
             ],
             "decision": [
               "hoo"
@@ -1170,22 +1136,10 @@
           ],
           "ids": {
             "accountable": [
-              "cfo",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom"
+              "fl"
             ],
             "decision": [
-              "cfo",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom"
+              "fl"
             ]
           }
         },
@@ -1243,24 +1197,13 @@
               "hoo"
             ],
             "collaborates": [
-              "cfo",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom",
-              "techops"
+              "fl",
+              "techops",
+              "cfo"
             ],
             "decision": [
               "hoo",
-              "cfo",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom"
+              "fl"
             ]
           }
         }
@@ -1290,13 +1233,7 @@
             ],
             "collaborates": [
               "ceo",
-              "cfo",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom",
+              "fl",
               "techops"
             ],
             "decision": [
@@ -1326,13 +1263,7 @@
               "techops"
             ],
             "collaborates": [
-              "cfo",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom"
+              "fl"
             ],
             "decision": [
               "hoo",
@@ -1364,12 +1295,7 @@
             "collaborates": [
               "cfo",
               "techops",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom"
+              "fl"
             ],
             "decision": [
               "hoo"
@@ -1429,26 +1355,14 @@
           ],
           "ids": {
             "accountable": [
-              "cfo",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom"
+              "fl"
             ],
             "collaborates": [
               "peopleops",
               "hoo"
             ],
             "decision": [
-              "cfo",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom"
+              "fl"
             ]
           }
         },
@@ -1467,26 +1381,14 @@
           ],
           "ids": {
             "accountable": [
-              "cfo",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom"
+              "fl"
             ],
             "collaborates": [
               "peopleops",
               "hoo"
             ],
             "decision": [
-              "cfo",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom",
+              "fl",
               "hoo"
             ]
           }
@@ -1504,25 +1406,13 @@
           ],
           "ids": {
             "accountable": [
-              "cfo",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom"
+              "fl"
             ],
             "collaborates": [
               "peopleops"
             ],
             "decision": [
-              "cfo",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom"
+              "fl"
             ]
           }
         },
@@ -1543,33 +1433,15 @@
           "ids": {
             "accountable": [
               "peopleops",
-              "cfo",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom"
+              "fl"
             ],
             "collaborates": [
               "hoo",
-              "cfo",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom"
+              "fl"
             ],
             "decision": [
               "hoo",
-              "cfo",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom"
+              "fl"
             ]
           }
         },
@@ -1628,22 +1500,10 @@
             ],
             "collaborates": [
               "hoo",
-              "cfo",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom"
+              "fl"
             ],
             "decision": [
-              "cfo",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom",
+              "fl",
               "legal",
               "ceo"
             ]
@@ -1668,22 +1528,10 @@
             ],
             "collaborates": [
               "legal",
-              "cfo",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom"
+              "fl"
             ],
             "decision": [
-              "cfo",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom",
+              "fl",
               "hoo"
             ]
           }
@@ -1713,13 +1561,7 @@
               "legal"
             ],
             "decision": [
-              "cfo",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom"
+              "fl"
             ],
             "escalation": [
               "ceo"
@@ -1778,13 +1620,7 @@
               "partners"
             ],
             "decision": [
-              "cfo",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom"
+              "fl"
             ]
           }
         },
@@ -1806,13 +1642,8 @@
               "hoo"
             ],
             "collaborates": [
-              "cfo",
-              "cso",
-              "cd",
-              "hod",
-              "creative",
-              "paid",
-              "hom"
+              "fl",
+              "cfo"
             ],
             "decision": [
               "hoo",
@@ -1893,10 +1724,6 @@
             ],
             "manages": [
               "hoo",
-              "smm"
-            ],
-            "future": [
-              "hom",
               "smm"
             ]
           }
@@ -1996,8 +1823,8 @@
       {
         "manager": "CFO",
         "reports": [
-          "Payment Managers",
-          "Accountants / Finance Team"
+          "Accountants",
+          "Payment Managers"
         ]
       },
       {
@@ -2053,6 +1880,13 @@
       }
     },
     {
+      "id": "ops",
+      "title": "Operations",
+      "roles": {
+        "hoo": "Head of Ops"
+      }
+    },
+    {
       "id": "finance",
       "title": "Finance",
       "roles": {
@@ -2062,10 +1896,10 @@
       }
     },
     {
-      "id": "ops",
-      "title": "Operations",
+      "id": "leaders",
+      "title": "Functional Leader (own area)",
       "roles": {
-        "hoo": "Head of Ops"
+        "fl": "Own leader"
       }
     },
     {
@@ -2147,5 +1981,9 @@
         "partners": "Partners"
       }
     }
-  ]
+  ],
+  "veto": {
+    "label": "Board / Investors",
+    "text": "absolute right of veto and final decision; can overrule any decision"
+  }
 }

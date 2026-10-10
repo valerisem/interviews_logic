@@ -38,17 +38,28 @@ export interface AccountabilityMap {
   sections: { id: string; title: string; tasks: MapTask[] }[];
   escalation: { title: string; routes: { issue: string; route: string }[] };
   management: { title: string; groups: { manager: string; reports: string[] }[] };
+  veto?: { label: string; text: string };
 }
 
 const LETTERS: Letter[] = ['A', 'C', 'M', 'D', 'E'];
+
+/** The Board / Investors' crown: absolute right of veto and the final decision on everything. */
+function Crown({ size = 14 }: { size?: number }) {
+  return (
+    <svg className="sw-crown" width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M3 18 L2 7 L7.5 11 L12 4 L16.5 11 L22 7 L21 18 Z" />
+      <rect x="3" y="19.2" width="18" height="2.6" rx="1" />
+    </svg>
+  );
+}
 const LETTER_KEY: Record<Letter, string> = { A: 'accountable', C: 'collaborates', M: 'manages', D: 'final-decision', E: 'escalation' };
 // Colours come from the page's theme (see .scheme-panel in globals.css), so light and dark mode both match.
 const COLOUR: Record<Letter, string> = { A: 'var(--sw-A)', C: 'var(--sw-C)', M: 'var(--sw-M)', D: 'var(--sw-D)', E: 'var(--sw-E)' };
-const PILL_H = 40, PILL_GAP = 4, ARC_ROOM = 34;
+const PILL_H = 54, PILL_GAP = 4, ARC_ROOM = 34;
 const stackH = (n: number) => n * PILL_H + Math.max(0, n - 1) * PILL_GAP;
 
 interface Cell { role: string; letters: Letter[]; current?: boolean }
-interface Arc { from: number; to: number; type: Letter; dashed?: boolean }
+interface Arc { from: number; to: number; fromRole: string; toRole: string; type: Letter; dashed?: boolean }
 
 /** Which departments play which part in a task, and the arrows between them. */
 function layout(t: MapTask, laneOf: Map<string, number>) {
@@ -70,31 +81,31 @@ function layout(t: MapTask, laneOf: Map<string, number>) {
   ids.collaborates?.forEach((r) => mark(r, 'C'));
   ids.manages?.forEach((r) => mark(r, 'M'));
   ids.manages2?.forEach((r) => mark(r, 'M'));
-  ids.future?.forEach((r) => mark(r, 'M'));
   ids.decision?.forEach((r) => mark(r, 'D'));
   ids.escalation?.forEach((r) => mark(r, 'E'));
   cells.forEach((list) => list.forEach((c) => c.letters.sort((a, b) => LETTERS.indexOf(a) - LETTERS.indexOf(b))));
 
-  const lane = (r: string | null | undefined) => (r ? laneOf.get(r) : undefined);
-  const owner = lane((ids.accountable?.length ? ids.accountable : ids.current)?.[0]);
+  // Arrows join specific roles (not just departments), so they always point at the right person.
+  const owner = (ids.accountable?.length ? ids.accountable : ids.current)?.[0];
   const arcs: Arc[] = [];
-  const push = (from: number | undefined, to: number | undefined, type: Letter, dashed = false) => {
+  const push = (fromRole: string | null | undefined, toRole: string | null | undefined, type: Letter, dashed = false) => {
+    if (!fromRole || !toRole) return;
+    const from = laneOf.get(fromRole), to = laneOf.get(toRole);
     if (from === undefined || to === undefined || from === to) return;
-    if (!arcs.some((a) => a.from === from && a.to === to && a.type === type)) arcs.push({ from, to, type, dashed });
+    if (!arcs.some((a) => a.fromRole === fromRole && a.toRole === toRole && a.type === type)) arcs.push({ from, to, fromRole, toRole, type, dashed });
   };
-  ids.collaborates?.forEach((r) => push(lane(r), owner, 'C'));
-  const chain = (list: (string | null)[] | undefined, dashed: boolean) => {
+  ids.collaborates?.forEach((r) => push(r, owner, 'C'));
+  const chain = (list: (string | null)[] | undefined) => {
     const l = (list ?? []).filter(Boolean) as string[];
-    for (let i = 1; i < l.length; i++) push(lane(l[i - 1]), lane(l[i]), 'M', dashed);
+    for (let i = 1; i < l.length; i++) push(l[i - 1], l[i], 'M');
   };
-  chain(ids.manages, false);
-  chain(ids.manages2, false);
-  chain(ids.future, true);
-  ids.decision?.forEach((r) => push(owner, lane(r), 'D'));
+  chain(ids.manages);
+  chain(ids.manages2);
+  ids.decision?.forEach((r) => push(owner, r, 'D'));
   let from = owner;
   ids.escalation?.forEach((r) => {
-    push(from, lane(r), 'E');
-    if (ids.escChain) from = lane(r);
+    push(from, r, 'E');
+    if (ids.escChain) from = r;
   });
   return { cells, arcs };
 }
@@ -168,22 +179,33 @@ export function AccountabilityMapView({ map, onClose }: { map: AccountabilityMap
   }, [onClose]);
 
   const cx = (lane: number) => (lane + 0.5) * colW;
+  const boardLane = map.lanes.findIndex((l) => l.id === 'board');
   const span = colW * (map.lanes.length - 1);
   /*
    * Arrows run from label to label as arches: collaboration and management above the labels, final decision and
    * escalation below. The longer the hop, the higher the arch, so arrows into the same lane nest instead of
    * running along one line.
    */
-  const arcPath = (a: Arc, rowH: number, count: (lane: number) => number) => {
-    const mid = rowH / 2;
+  const arcPath = (a: Arc, rowH: number, cells: Map<number, Cell[]>) => {
+    const mid = rowH / 2, hw = (colW - 8) / 2;
     const x1 = cx(a.from), x2 = cx(a.to), dir = Math.sign(x2 - x1);
     const above = a.type === 'C' || a.type === 'M';
-    const edge = (lane: number) => (above ? mid - stackH(count(lane)) / 2 : mid + stackH(count(lane)) / 2);
-    const y1 = edge(a.from), y2 = edge(a.to);
     const h = ARC_ROOM * (0.3 + 0.62 * Math.abs(x2 - x1) / span);
-    const peak = above ? Math.min(y1, y2) - h : Math.max(y1, y2) + h;
-    const sx = x1 + dir * 10, ex = x2 - dir * 10;
-    return `M ${sx} ${y1} C ${sx} ${peak} ${ex} ${peak} ${ex} ${y2}`;
+    // Where a role's label sits in its department's stack: arrows join the top (or bottom) edge of the end label,
+    // and the side of a label in the middle of a stack, so they point at that exact role.
+    const spot = (lane: number, role: string) => {
+      const list = (cells.get(lane) ?? []).slice(0, 3);
+      const n = Math.max(1, list.length), i = Math.max(0, list.findIndex((c) => c.role === role));
+      const top = mid - stackH(n) / 2 + i * (PILL_H + PILL_GAP);
+      const end = above ? i === 0 : i === n - 1;
+      return { end, y: end ? (above ? top : top + PILL_H) : top + PILL_H / 2 };
+    };
+    const s0 = spot(a.from, a.fromRole), s1 = spot(a.to, a.toRole);
+    const peak = above ? Math.min(mid - stackH(3) / 2, s0.y, s1.y) - h : Math.max(mid + stackH(3) / 2, s0.y, s1.y) + h;
+    const sx = s0.end ? x1 + dir * 10 : x1 + dir * hw, ex = s1.end ? x2 - dir * 10 : x2 - dir * hw;
+    const c1 = s0.end ? `${sx} ${peak}` : `${sx + dir * 34} ${peak}`;
+    const c2 = s1.end ? `${ex} ${peak}` : `${ex - dir * 34} ${s1.y}`;
+    return `M ${sx} ${s0.y} C ${c1} ${c2} ${ex} ${s1.y}`;
   };
 
   return createPortal(
@@ -208,6 +230,7 @@ export function AccountabilityMapView({ map, onClose }: { map: AccountabilityMap
               </li>
             );
           })}
+          {map.veto && <li className="sw-veto-key"><Crown size={18} /><b>{map.veto.label}</b> {map.veto.text}</li>}
         </ul>
 
         <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true">
@@ -225,7 +248,7 @@ export function AccountabilityMapView({ map, onClose }: { map: AccountabilityMap
             <div className="sw-row sw-head">
               <div className="sw-task">Task</div>
               <div className="sw-lanes" ref={lanesRef}>
-                {map.lanes.map((l) => <div key={l.id} className="sw-lane-title">{l.title}</div>)}
+                {map.lanes.map((l) => <div key={l.id} className="sw-lane-title">{l.id === 'board' && <Crown size={16} />}{l.title}</div>)}
               </div>
             </div>
 
@@ -245,14 +268,20 @@ export function AccountabilityMapView({ map, onClose }: { map: AccountabilityMap
                           {map.lanes.map((l) => <div key={l.id} className="sw-lane" style={{ height: rowH }} />)}
                           <svg className="sw-arcs" width="100%" height={rowH} aria-hidden="true">
                             {arcs.map((a, i) => (
-                              <path key={i} d={arcPath(a, rowH, count)} className={`sw-arc t-${a.type}${a.dashed ? ' future' : ''}`} markerEnd={`url(#sw-head-${a.type})`} />
+                              <path key={i} d={arcPath(a, rowH, cells)} className={`sw-arc t-${a.type}${a.dashed ? ' future' : ''}`} markerEnd={`url(#sw-head-${a.type})`} />
                             ))}
                           </svg>
+                          {/* The Board can veto and overrule anything, so every row carries its crown. */}
+                          {!cells.has(boardLane) && (
+                            <div className="sw-cell" style={{ left: cx(boardLane), width: colW - 8 }}>
+                              <div className="sw-veto" title={map.veto?.text}><Crown size={18} /></div>
+                            </div>
+                          )}
                           {[...cells.entries()].map(([lane, list]) => (
                             <div key={lane} className="sw-cell" style={{ left: cx(lane), width: colW - 8 }}>
                               {list.slice(0, 3).map((c) => (
                                 <div key={c.role} className={`sw-pill${c.letters.includes('A') ? ' acc' : ''}${c.current ? ' current' : ''}`}>
-                                  <span className="sw-letters">{c.letters.map((l) => <i key={l} className={l} style={{ background: COLOUR[l] }}>{l}</i>)}</span>
+                                  <span className="sw-letters">{c.role === 'board' && <Crown size={16} />}{c.letters.map((l) => <i key={l} className={l} style={{ background: COLOUR[l] }}>{l}</i>)}</span>
                                   <span className="sw-role">{roleName.get(c.role)}</span>
                                 </div>
                               ))}
@@ -272,7 +301,7 @@ export function AccountabilityMapView({ map, onClose }: { map: AccountabilityMap
             <section>
               <h3>{map.escalation.title}</h3>
               <ol className="sw-ladder">
-                {map.escalation.routes.map((r) => <li key={r.issue}><span>{r.issue}</span><b>{r.route}</b></li>)}
+                {map.escalation.routes.map((r) => <li key={r.issue}><span>{r.issue}</span><b>{r.route.includes('Board') && <Crown size={15} />}{r.route}</b></li>)}
               </ol>
             </section>
             <section>
