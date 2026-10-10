@@ -412,10 +412,10 @@ table.data .select-cell { width: 1%; min-width: 0; padding-right: 4px; }
 .sw-lanes { position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; }
 .sw-lane-title { padding: 10px 4px; text-align: center; font-size: 12.5px; font-weight: 800; line-height: 1.25; color: var(--heading); border-left: 1px solid var(--border); display: flex; align-items: center; justify-content: center; }
 .sw-lane-title:nth-child(1), .sw-lane-title:nth-child(2) { background: var(--surface); }
-.sw-lane-title:nth-child(3) { background: var(--sel-tint); color: var(--fuchsia); }
+.sw-lane-title:nth-child(4) { background: var(--sel-tint); color: var(--fuchsia); }
 .sw-lane { border-left: 1px solid var(--border); }
 .sw-lane:nth-child(1), .sw-lane:nth-child(2) { background: color-mix(in srgb, var(--surface) 70%, transparent); }
-.sw-lane:nth-child(3) { background: color-mix(in srgb, var(--sel-tint) 70%, transparent); }
+.sw-lane:nth-child(4) { background: color-mix(in srgb, var(--sel-tint) 70%, transparent); }
 .sw-arcs { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; z-index: 1; }
 .sw-arc { fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-dasharray: 2 6; animation: sw-flow 1.1s linear infinite; }
 .sw-arc.t-C { stroke: var(--sw-C); } .sw-arc.t-M { stroke: var(--sw-M); stroke-dasharray: none; animation: none; } .sw-arc.t-M.future { stroke-dasharray: 6 5; opacity: .7; }

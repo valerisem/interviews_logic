@@ -2053,19 +2053,19 @@
       }
     },
     {
-      "id": "ops",
-      "title": "Operations",
-      "roles": {
-        "hoo": "Head of Ops"
-      }
-    },
-    {
       "id": "finance",
       "title": "Finance",
       "roles": {
         "cfo": "CFO",
         "payments": "Payment Mgrs",
         "accountants": "Accountants"
+      }
+    },
+    {
+      "id": "ops",
+      "title": "Operations",
+      "roles": {
+        "hoo": "Head of Ops"
       }
     },
     {
