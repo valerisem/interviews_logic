@@ -1,0 +1,1302 @@
+{
+  "_note": "Company-wide accountability canvas opened from the org chart. Lanes run top to bottom; each lane's first card sits in the leader column. Edge types: solid = direct accountability / reporting (arrow points to the manager), collab = collaboration, support = systems / data / operational support, escalate = escalation only when a senior decision is required.",
+  "title": "Company Accountability Model",
+  "legend": [
+    {
+      "type": "solid",
+      "text": "Direct accountability / reporting"
+    },
+    {
+      "type": "collab",
+      "text": "Collaboration"
+    },
+    {
+      "type": "support",
+      "text": "Systems / data / operational support"
+    },
+    {
+      "type": "escalate",
+      "text": "Escalation only when senior decision is required"
+    }
+  ],
+  "lanes": [
+    {
+      "id": "ceo",
+      "title": "CEO / Company Leadership",
+      "cards": [
+        {
+          "id": "ceo",
+          "title": "CEO",
+          "kind": "role",
+          "sections": [
+            {
+              "h": "Owns",
+              "items": [
+                "Company direction",
+                "Overall business performance",
+                "Investors / Board",
+                "Senior leadership",
+                "Major company decisions",
+                "Final decisions that cannot be resolved within functions"
+              ]
+            },
+            {
+              "h": "Direct accountability from",
+              "items": [
+                "Head of Operations",
+                "Chief Financial Officer",
+                "Chief Sales Officer",
+                "Head of Delivery & Performance",
+                "Head of Marketing + PR"
+              ]
+            }
+          ],
+          "wide": true
+        }
+      ]
+    },
+    {
+      "id": "ops",
+      "title": "Operations",
+      "cards": [
+        {
+          "id": "hoo",
+          "title": "Head of Operations",
+          "kind": "role",
+          "sections": [
+            {
+              "h": "Owns",
+              "items": [
+                "Operating model",
+                "Company-wide operational controls",
+                "Cross-functional coordination",
+                "Operational reporting",
+                "Operational data structure",
+                "Technology / automation roadmap",
+                "Capacity and resource modelling",
+                "Organisational structure",
+                "People Operations oversight",
+                "Operational partner infrastructure",
+                "Legal / compliance coordination",
+                "Root-cause operational improvement"
+              ]
+            }
+          ],
+          "wide": true
+        },
+        {
+          "id": "hoo-reports",
+          "title": "Direct reports / functions managed",
+          "kind": "info",
+          "sections": [
+            {
+              "items": [
+                "People Ops (HR)",
+                "Technology Operations Associate",
+                "Social Media Manager (temporary)",
+                "Operational / Admin support when added"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "hoo-specialists",
+          "title": "Specialist support",
+          "kind": "info",
+          "sections": [
+            {
+              "items": [
+                "Legal Consultant",
+                "Compliance providers",
+                "Operational partners"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "hoo-collab",
+          "title": "Collaborates directly with",
+          "kind": "info",
+          "sections": [
+            {
+              "items": [
+                "CEO",
+                "CFO",
+                "Chief Sales Officer",
+                "Director of New Business",
+                "Client Directors",
+                "Head of Delivery & Performance",
+                "Head of Marketing + PR"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "finance",
+      "title": "Finance",
+      "cards": [
+        {
+          "id": "cfo",
+          "title": "Chief Financial Officer",
+          "kind": "role",
+          "sections": [
+            {
+              "h": "Owns",
+              "items": [
+                "Financial reporting",
+                "Cash",
+                "Budgets",
+                "Accounting",
+                "Banking",
+                "Financial planning",
+                "Financial controls",
+                "Finance team"
+              ]
+            }
+          ],
+          "wide": true
+        },
+        {
+          "id": "payments",
+          "title": "Payment Managers",
+          "kind": "role",
+          "sections": [
+            {
+              "h": "Own",
+              "items": [
+                "Client / creator / supplier payment execution",
+                "Reconciliations",
+                "Payment administration"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fin-shared",
+          "title": "Shared areas",
+          "kind": "info",
+          "sections": [
+            {
+              "items": [
+                "Operational + financial data connection",
+                "Cost visibility",
+                "Resource economics",
+                "Investment modelling",
+                "Margin controls",
+                "Forecasting assumptions",
+                "Financial impact of operational decisions"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fin-boundary",
+          "title": "Boundary",
+          "kind": "info",
+          "sections": [
+            {
+              "items": [
+                "Finance owns financial data and final financial reporting",
+                "Operations owns live operational data, systems and operational models"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sales",
+      "title": "Sales / New Business",
+      "cards": [
+        {
+          "id": "cso",
+          "title": "Chief Sales Officer",
+          "kind": "role",
+          "sections": [
+            {
+              "h": "Owns",
+              "items": [
+                "Overall Sales strategy",
+                "Revenue targets",
+                "Sales team performance",
+                "Pipeline performance",
+                "New business performance"
+              ]
+            }
+          ],
+          "wide": true
+        },
+        {
+          "id": "dnb",
+          "title": "Director of New Business / Partnerships Directors",
+          "kind": "role",
+          "sections": [
+            {
+              "h": "Own",
+              "items": [
+                "New client acquisition",
+                "Commercial opportunities",
+                "Lead generation",
+                "Pipeline creation",
+                "Sales conversion",
+                "Commercial relationships"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sales-shared",
+          "title": "Shared areas",
+          "kind": "info",
+          "sections": [
+            {
+              "items": [
+                "CRM",
+                "Pipeline reporting",
+                "Lead infrastructure",
+                "Forecasting",
+                "Sales automation",
+                "Pipeline-to-capacity planning",
+                "New commercial channels"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sales-output",
+          "title": "Output to other functions",
+          "kind": "info",
+          "sections": [
+            {
+              "chain": [
+                "Client Leadership",
+                "Delivery",
+                "Operations forecasting"
+              ],
+              "text": "Pipeline / expected start dates"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "client",
+      "title": "Client / Account Leadership",
+      "cards": [
+        {
+          "id": "cd",
+          "title": "Client Directors",
+          "kind": "role",
+          "sections": [
+            {
+              "h": "Own",
+              "items": [
+                "Senior client relationships",
+                "Account strategy",
+                "Account growth",
+                "Renewals",
+                "Commercial account performance",
+                "Account team performance"
+              ]
+            },
+            {
+              "h": "Collaborates with",
+              "items": [
+                "Head of Operations",
+                "Sales",
+                "Delivery"
+              ]
+            }
+          ],
+          "wide": true
+        },
+        {
+          "id": "am",
+          "title": "Account Directors / Account Managers",
+          "kind": "role",
+          "sections": [
+            {
+              "h": "Own",
+              "items": [
+                "Day-to-day client relationships",
+                "Account execution",
+                "Growth opportunities",
+                "Client communication",
+                "Commercial coordination"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "client-shared",
+          "title": "Shared with Operations",
+          "kind": "info",
+          "sections": [
+            {
+              "items": [
+                "Revenue / client forecasting",
+                "Account targets",
+                "Reporting infrastructure",
+                "Team structure",
+                "Recurring cross-functional issues"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "delivery",
+      "title": "Delivery",
+      "cards": [
+        {
+          "id": "hod",
+          "title": "Head of Delivery & Performance",
+          "kind": "role",
+          "sections": [
+            {
+              "h": "Owns",
+              "items": [
+                "Delivery function",
+                "Campaign performance",
+                "Campaign margin",
+                "Quality",
+                "Timelines",
+                "Delivery capacity",
+                "Delivery team performance",
+                "Delivery standards"
+              ]
+            },
+            {
+              "h": "Collaborates with",
+              "items": [
+                "Head of Operations",
+                "Client Directors",
+                "Sales"
+              ]
+            }
+          ],
+          "wide": true
+        },
+        {
+          "id": "scm",
+          "title": "Senior Campaign Managers",
+          "kind": "role",
+          "sections": [
+            {
+              "h": "Own",
+              "items": [
+                "Campaign portfolio performance",
+                "Campaign margin",
+                "Quality",
+                "Timelines",
+                "Risk",
+                "Campaign Manager performance",
+                "Work allocation within their area"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "cm",
+          "title": "Campaign Managers",
+          "kind": "role",
+          "sections": [
+            {
+              "h": "Own",
+              "items": [
+                "Day-to-day campaign execution",
+                "Creators",
+                "Deliverables",
+                "Campaign timelines",
+                "Campaign hygiene"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "del-shared",
+          "title": "Shared with Operations",
+          "kind": "info",
+          "sections": [
+            {
+              "items": [
+                "Capacity models",
+                "Margin-control systems",
+                "Resource forecasting",
+                "Operational reporting",
+                "Automation",
+                "Recurring Delivery problems",
+                "Structural improvements"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "del-boundary",
+          "title": "Boundary",
+          "kind": "info",
+          "sections": [
+            {
+              "items": [
+                "Delivery owns Delivery outcomes",
+                "Operations owns company-level controls, systems and visibility around those outcomes"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "del-temp",
+          "title": "Temporary structure",
+          "kind": "info",
+          "sections": [
+            {
+              "text": "Until Head of Delivery is hired, Senior Campaign Managers may connect directly to Head of Operations"
+            },
+            {
+              "h": "After hire",
+              "chain": [
+                "Campaign Manager",
+                "Senior Campaign Manager",
+                "Head of Delivery",
+                "CEO"
+              ]
+            }
+          ],
+          "badge": "Temporary",
+          "wide": true
+        }
+      ]
+    },
+    {
+      "id": "creative",
+      "title": "Creative",
+      "cards": [
+        {
+          "id": "creative-lead",
+          "title": "Creative Leadership / Functional Owner",
+          "kind": "role",
+          "sections": [
+            {
+              "h": "Owns",
+              "items": [
+                "Creative strategy",
+                "Creative quality",
+                "Creative standards",
+                "Creative team performance"
+              ]
+            }
+          ],
+          "wide": true
+        },
+        {
+          "id": "creative",
+          "title": "Creative Strategists",
+          "kind": "role",
+          "sections": [
+            {
+              "h": "Own",
+              "items": [
+                "Campaign concepts",
+                "Briefs",
+                "Creative recommendations",
+                "Creative optimisation"
+              ]
+            },
+            {
+              "h": "Works with",
+              "items": [
+                "Delivery",
+                "Client Leadership",
+                "Sales where needed"
+              ]
+            }
+          ],
+          "wide": true
+        },
+        {
+          "id": "creative-ops",
+          "title": "Operations relationship",
+          "kind": "info",
+          "sections": [
+            {
+              "items": [
+                "Capacity",
+                "Workflow",
+                "Systems",
+                "Reporting",
+                "Tools",
+                "Structural problems"
+              ],
+              "text": "Only through senior functional owner for"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "paid",
+      "title": "Paid Media",
+      "cards": [
+        {
+          "id": "paid",
+          "title": "Paid Marketing Director",
+          "kind": "role",
+          "sections": [
+            {
+              "h": "Owns",
+              "items": [
+                "Paid Media strategy",
+                "Paid performance",
+                "Paid Media team",
+                "Client results within Paid Media"
+              ]
+            },
+            {
+              "h": "Collaborates with",
+              "items": [
+                "Client Leadership",
+                "Sales",
+                "Delivery when relevant"
+              ]
+            }
+          ],
+          "wide": true
+        },
+        {
+          "id": "pms",
+          "title": "Performance Marketing Specialists",
+          "kind": "role",
+          "sections": []
+        },
+        {
+          "id": "paid-ops",
+          "title": "Operations relationship",
+          "kind": "info",
+          "sections": [
+            {
+              "items": [
+                "Systems",
+                "Reporting",
+                "Capacity",
+                "Tooling",
+                "Resource requirements",
+                "Company-wide operational projects"
+              ],
+              "text": "Senior functional level only"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "people",
+      "title": "People",
+      "cards": [
+        {
+          "id": "peopleops",
+          "title": "People Ops (HR)",
+          "kind": "role",
+          "sections": [
+            {
+              "h": "Reports to",
+              "items": [
+                "Head of Operations"
+              ]
+            },
+            {
+              "h": "Owns",
+              "items": [
+                "Day-to-day People Operations",
+                "Onboarding",
+                "Performance processes",
+                "Manager support",
+                "Team engagement",
+                "Employee administration",
+                "Contractor administration",
+                "People records",
+                "People-related operational processes"
+              ]
+            },
+            {
+              "h": "Collaborates with",
+              "items": [
+                "All functional leaders"
+              ]
+            }
+          ],
+          "wide": true
+        },
+        {
+          "id": "people-hoo",
+          "title": "Works with Head of Operations on",
+          "kind": "info",
+          "sections": [
+            {
+              "items": [
+                "Performance and accountability",
+                "Manager effectiveness",
+                "Individual motivation / performance blockers",
+                "Workforce planning",
+                "Organisational gaps",
+                "Time to productivity",
+                "Employee vs contractor structures",
+                "International workforce setup",
+                "Legal / employment coordination"
+              ]
+            }
+          ],
+          "wide": true
+        },
+        {
+          "id": "people-leaders",
+          "title": "Functional leaders own",
+          "kind": "info",
+          "sections": [
+            {
+              "items": [
+                "Managing their own people",
+                "Performance within their teams",
+                "Day-to-day feedback",
+                "Role-specific expectations"
+              ]
+            },
+            {
+              "h": "People Ops supports",
+              "items": [
+                "Process",
+                "Documentation",
+                "Consistency",
+                "Manager guidance",
+                "Escalations"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tech",
+      "title": "Technology / Data",
+      "cards": [
+        {
+          "id": "techops",
+          "title": "Technology Operations Associate",
+          "kind": "role",
+          "sections": [
+            {
+              "h": "Reports to",
+              "items": [
+                "Head of Operations"
+              ]
+            },
+            {
+              "h": "Owns",
+              "items": [
+                "Technical execution",
+                "Internal systems",
+                "Automation builds",
+                "Integrations",
+                "Data pipelines",
+                "Testing",
+                "Maintenance",
+                "Operational tools"
+              ]
+            }
+          ],
+          "wide": true
+        },
+        {
+          "id": "tech-hoo",
+          "title": "Head of Operations owns",
+          "kind": "info",
+          "sections": [
+            {
+              "items": [
+                "Business priority",
+                "Problem definition",
+                "Expected business value",
+                "Roadmap",
+                "Validation of outcome"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "tech-builds",
+          "title": "Tech builds / supports",
+          "kind": "info",
+          "sections": [
+            {
+              "items": [
+                "Internal software",
+                "Open-source solutions",
+                "White-label solutions",
+                "Capacity models",
+                "Prediction models",
+                "Forecasting models",
+                "Margin controls",
+                "CRM integrations",
+                "Project-management integrations",
+                "Reporting systems",
+                "Automation",
+                "AI-enabled internal tools"
+              ]
+            }
+          ],
+          "wide": true
+        },
+        {
+          "id": "tech-data",
+          "title": "Data",
+          "kind": "info",
+          "sections": [
+            {
+              "h": "Inputs from",
+              "items": [
+                "Sales",
+                "Delivery",
+                "Client Leadership",
+                "People",
+                "Finance",
+                "Marketing"
+              ]
+            },
+            {
+              "h": "Outputs to",
+              "items": [
+                "Functional leaders",
+                "Head of Operations",
+                "CEO reporting when relevant"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "data",
+      "title": "Data Control / Management Information",
+      "cards": [
+        {
+          "id": "hoo-data",
+          "title": "Head of Operations",
+          "kind": "role",
+          "sections": [
+            {
+              "h": "Owns operational data structure",
+              "items": [
+                "Sources of truth",
+                "Data ownership rules",
+                "Data consistency",
+                "Operational reporting structure",
+                "Cross-system data connection",
+                "Management information",
+                "Prediction / early-warning infrastructure"
+              ]
+            }
+          ],
+          "wide": true
+        },
+        {
+          "id": "data-teams",
+          "title": "Functional teams own",
+          "kind": "info",
+          "sections": [
+            {
+              "items": [
+                "Accuracy of data produced inside their function"
+              ]
+            },
+            {
+              "h": "Examples",
+              "items": [
+                "Sales owns pipeline inputs",
+                "Delivery owns campaign inputs",
+                "Client Leadership owns client / forecast inputs",
+                "People Ops owns people inputs",
+                "Finance owns financial inputs"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "data-flow",
+          "title": "Flow",
+          "kind": "info",
+          "sections": [
+            {
+              "chain": [
+                "Functional systems",
+                "Operational data layer",
+                "Reporting / models / predictions",
+                "Functional leaders",
+                "CEO only where required"
+              ]
+            }
+          ],
+          "wide": true
+        }
+      ]
+    },
+    {
+      "id": "marketing",
+      "title": "Marketing / Social",
+      "cards": [
+        {
+          "id": "hom",
+          "title": "Head of Marketing + PR",
+          "kind": "role",
+          "sections": [
+            {
+              "h": "Owns",
+              "items": [
+                "Marketing strategy",
+                "Brand",
+                "PR",
+                "Communications",
+                "Marketing performance"
+              ]
+            }
+          ],
+          "badge": "Future hire",
+          "wide": true
+        },
+        {
+          "id": "smm",
+          "title": "Social Media Manager",
+          "kind": "role",
+          "sections": [
+            {
+              "h": "Temporarily reports to",
+              "items": [
+                "Head of Operations"
+              ]
+            },
+            {
+              "h": "Owns",
+              "items": [
+                "Social channels",
+                "Content execution",
+                "Publishing",
+                "Community",
+                "Social performance targets"
+              ]
+            },
+            {
+              "h": "Temporary HoO oversight",
+              "items": [
+                "Targets",
+                "Management",
+                "Reporting",
+                "Processes",
+                "Tools",
+                "Performance accountability"
+              ]
+            }
+          ],
+          "badge": "Temporary",
+          "wide": true
+        },
+        {
+          "id": "mkt-future",
+          "title": "Future structure",
+          "kind": "info",
+          "sections": [
+            {
+              "chain": [
+                "Social Media Manager",
+                "Head of Marketing + PR"
+              ]
+            },
+            {
+              "h": "Operations then collaborates with Marketing on",
+              "items": [
+                "Systems",
+                "Data",
+                "Reporting",
+                "Resources",
+                "Technology",
+                "Cross-functional projects"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "legal",
+      "title": "Legal / Compliance",
+      "cards": [
+        {
+          "id": "legal",
+          "title": "Legal Consultant / External Specialists",
+          "kind": "role",
+          "sections": [
+            {
+              "h": "Owns",
+              "items": [
+                "Specialist legal advice",
+                "Employment advice",
+                "Contractor advice",
+                "Commercial contracts",
+                "Legal risk advice",
+                "Compliance advice"
+              ]
+            },
+            {
+              "h": "Works with",
+              "items": [
+                "People Ops",
+                "Finance",
+                "Sales",
+                "Client Leadership",
+                "Delivery",
+                "Operational Partners"
+              ]
+            }
+          ],
+          "badge": "Specialist",
+          "wide": true
+        },
+        {
+          "id": "legal-hoo",
+          "title": "Head of Operations owns",
+          "kind": "info",
+          "sections": [
+            {
+              "items": [
+                "Making sure the requirement has an owner",
+                "Finding the right specialist",
+                "Turning advice into an operational process",
+                "Making sure controls are implemented",
+                "Making sure requirements do not fall between departments"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "legal-examples",
+          "title": "Examples",
+          "kind": "info",
+          "sections": [
+            {
+              "items": [
+                "Employee vs contractor structures",
+                "International engagement",
+                "Client compliance requirements",
+                "Commercial agreements",
+                "Operational partner contracts",
+                "Policies",
+                "Required external compliance solutions"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "partners",
+      "title": "Operational Partners",
+      "cards": [
+        {
+          "id": "partners",
+          "title": "Operational Partners",
+          "kind": "role",
+          "sections": [
+            {
+              "h": "Includes",
+              "items": [
+                "Fulfilment centres",
+                "Production companies",
+                "Logistics providers",
+                "Compliance providers",
+                "Specialist platforms",
+                "External operational vendors"
+              ]
+            }
+          ],
+          "badge": "External",
+          "wide": true
+        },
+        {
+          "id": "partners-hoo",
+          "title": "Head of Operations oversees",
+          "kind": "info",
+          "sections": [
+            {
+              "items": [
+                "Partner infrastructure",
+                "Provider selection where company-wide",
+                "Cost / quality / capability comparison",
+                "Commercial setup",
+                "Internal ownership",
+                "Scalability",
+                "Replacement of inefficient providers"
+              ]
+            },
+            {
+              "h": "Functional team owns",
+              "items": [
+                "Day-to-day use of the provider"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "partners-flow",
+          "title": "Flow",
+          "kind": "info",
+          "sections": [
+            {
+              "chain": [
+                "Business need",
+                "Functional owner + Head of Operations",
+                "Compare providers / solutions",
+                "Select setup",
+                "Assign internal owner",
+                "Functional team manages day to day",
+                "Operations reviews structure / cost / performance when required"
+              ]
+            }
+          ],
+          "wide": true
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "hoo",
+      "to": "ceo",
+      "type": "solid"
+    },
+    {
+      "from": "cfo",
+      "to": "ceo",
+      "type": "solid"
+    },
+    {
+      "from": "cso",
+      "to": "ceo",
+      "type": "solid"
+    },
+    {
+      "from": "hod",
+      "to": "ceo",
+      "type": "solid"
+    },
+    {
+      "from": "hom",
+      "to": "ceo",
+      "type": "solid"
+    },
+    {
+      "from": "peopleops",
+      "to": "hoo",
+      "type": "solid"
+    },
+    {
+      "from": "techops",
+      "to": "hoo",
+      "type": "solid"
+    },
+    {
+      "from": "smm",
+      "to": "hoo",
+      "type": "solid"
+    },
+    {
+      "from": "payments",
+      "to": "cfo",
+      "type": "solid"
+    },
+    {
+      "from": "dnb",
+      "to": "cso",
+      "type": "solid"
+    },
+    {
+      "from": "am",
+      "to": "cd",
+      "type": "solid"
+    },
+    {
+      "from": "scm",
+      "to": "hod",
+      "type": "solid"
+    },
+    {
+      "from": "cm",
+      "to": "scm",
+      "type": "solid"
+    },
+    {
+      "from": "creative",
+      "to": "creative-lead",
+      "type": "solid"
+    },
+    {
+      "from": "pms",
+      "to": "paid",
+      "type": "solid"
+    },
+    {
+      "from": "hoo",
+      "to": "cfo",
+      "type": "collab"
+    },
+    {
+      "from": "hoo",
+      "to": "cso",
+      "type": "collab"
+    },
+    {
+      "from": "hoo",
+      "to": "dnb",
+      "type": "collab"
+    },
+    {
+      "from": "hoo",
+      "to": "cd",
+      "type": "collab"
+    },
+    {
+      "from": "hoo",
+      "to": "hod",
+      "type": "collab"
+    },
+    {
+      "from": "hoo",
+      "to": "hom",
+      "type": "collab"
+    },
+    {
+      "from": "techops",
+      "to": "hoo-data",
+      "type": "support"
+    },
+    {
+      "from": "hoo",
+      "to": "legal",
+      "type": "support"
+    },
+    {
+      "from": "hoo",
+      "to": "partners",
+      "type": "support"
+    },
+    {
+      "from": "cd",
+      "to": "ceo",
+      "type": "escalate"
+    },
+    {
+      "from": "creative-lead",
+      "to": "ceo",
+      "type": "escalate"
+    },
+    {
+      "from": "paid",
+      "to": "ceo",
+      "type": "escalate"
+    }
+  ],
+  "flows": [
+    {
+      "title": "Company priority",
+      "chain": [
+        "CEO",
+        "Functional Leader",
+        "Manager",
+        "Team"
+      ]
+    },
+    {
+      "title": "Performance issue",
+      "chain": [
+        "Team data",
+        "Functional Manager",
+        "Functional Leader",
+        "Action"
+      ]
+    },
+    {
+      "title": "If recurring / structural",
+      "chain": [
+        "Functional Leader",
+        "Head of Operations",
+        "Root cause / system / structure change",
+        "Functional Leader owns implementation outcome"
+      ]
+    },
+    {
+      "title": "If financial",
+      "chain": [
+        "Functional Leader / Operations",
+        "CFO"
+      ],
+      "both": true
+    },
+    {
+      "title": "If legal / compliance",
+      "chain": [
+        "Functional Leader / Operations",
+        "Legal / Compliance specialist"
+      ],
+      "both": true
+    },
+    {
+      "title": "If CEO decision required",
+      "chain": [
+        "Functional Leader / Head of Operations / CFO",
+        "CEO"
+      ],
+      "escalate": true
+    }
+  ],
+  "summary": [
+    {
+      "who": "CEO",
+      "text": "Owns company direction + final senior decisions"
+    },
+    {
+      "who": "Functional Leaders",
+      "text": "Own results of their functions"
+    },
+    {
+      "who": "Managers",
+      "text": "Own team performance + execution"
+    },
+    {
+      "who": "Functional Teams",
+      "text": "Own the work + accuracy of their inputs"
+    },
+    {
+      "who": "Head of Operations",
+      "text": "Owns operating infrastructure + cross-functional control + systems + company-wide operational coordination"
+    },
+    {
+      "who": "Finance",
+      "text": "Owns financial control + financial reporting"
+    },
+    {
+      "who": "People Ops",
+      "text": "Owns day-to-day People Operations"
+    },
+    {
+      "who": "Technology Operations",
+      "text": "Owns technical execution"
+    },
+    {
+      "who": "Legal / Compliance",
+      "text": "Owns specialist advice"
+    },
+    {
+      "who": "CEO escalation",
+      "text": "Only when a true CEO decision is required"
+    }
+  ]
+}
