@@ -1,19 +1,19 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Fragment, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 /*
- * Company Accountability Map, opened from the org chart's “Ownership Model” button. The whole company sits
- * on one landscape map (Board and CEO at the top, functional leaders, then their teams). On its own the map
- * shows the management structure as flowing lines. Pick a task (or press Play to tour them all) and the map
- * animates who does what: the accountable role glows, collaborators flow in (purple), the management chain
- * runs down (blue), the final decision goes across (teal) and escalation climbs up (orange). The exact
- * wording for the task sits beside the map.
+ * Company Accountability Map, opened from the org chart's “Ownership Model” button: one page, one swimlane
+ * chart. Every department is a lane (Board and CEO on the left), every task in the company is a row,
+ * grouped by area. In each row, each department involved carries its letter: A accountable,
+ * C collaborates, M manages, D final decision, E escalation. Arrows flow between the lanes: collaborators
+ * into the accountable lane (purple), down the management chain (blue), out to the final decision
+ * (teal) and up to escalation (orange). Clicking a row shows its exact wording. The escalation and
+ * management structures sit at the bottom of the same page.
  */
 
-type Kind = 'top' | 'lead' | 'team' | 'ext' | 'future';
-export interface MapNode { id: string; label: string; x: number; y: number; kind: Kind }
+type Letter = 'A' | 'C' | 'M' | 'D' | 'E';
 export interface MapTask {
   task: string;
   accountable?: string[];
@@ -34,94 +34,119 @@ export interface MapTask {
 export interface AccountabilityMap {
   title: string;
   key: { key: string; label: string; text: string }[];
-  nodes: MapNode[];
+  lanes: { id: string; title: string; roles: Record<string, string> }[];
   sections: { id: string; title: string; tasks: MapTask[] }[];
   escalation: { title: string; routes: { issue: string; route: string }[] };
-  management: { title: string; groups: { manager: string; reports: string[] }[]; edges: [string, string][]; future: [string, string][] };
+  management: { title: string; groups: { manager: string; reports: string[] }[] };
 }
 
-type EdgeType = 'collab' | 'manages' | 'decision' | 'escalation' | 'future';
-interface Edge { from: string; to: string; type: EdgeType }
+const LETTERS: Letter[] = ['A', 'C', 'M', 'D', 'E'];
+const LETTER_KEY: Record<Letter, string> = { A: 'accountable', C: 'collaborates', M: 'manages', D: 'final-decision', E: 'escalation' };
+const COLOUR: Record<Letter, string> = { A: '#200888', C: '#8B5CF6', M: '#0E9BD6', D: '#0F766E', E: '#D97706' };
+const PILL_H = 36, PILL_GAP = 4, ARC_ROOM = 34;
+const stackH = (n: number) => n * PILL_H + Math.max(0, n - 1) * PILL_GAP;
 
-const W = 1610, H = 790;
-const SIZE: Record<Kind, [number, number]> = { top: [220, 70], lead: [184, 72], team: [156, 78], ext: [156, 78], future: [156, 78] };
-const COLOUR: Record<EdgeType, string> = { collab: '#8B5CF6', manages: '#0E9BD6', decision: '#0F766E', escalation: '#D97706', future: '#0E9BD6' };
-const DELAY: Record<EdgeType, number> = { collab: 0, manages: 350, future: 350, decision: 750, escalation: 1150 };
-const TOUR_MS = 6500;
+interface Cell { role: string; letters: Letter[]; current?: boolean }
+interface Arc { from: number; to: number; type: Letter; dashed?: boolean }
 
-/** A curved line between two boxes: down or up between rows, arcing over the row when side by side. */
-function curve(a: MapNode, b: MapNode) {
-  const [, ah] = SIZE[a.kind], [, bh] = SIZE[b.kind];
-  if (b.y > a.y + 20) {
-    const sy = a.y + ah / 2, ty = b.y - bh / 2, m = (ty - sy) / 2;
-    return `M ${a.x} ${sy} C ${a.x} ${sy + m} ${b.x} ${ty - m} ${b.x} ${ty}`;
-  }
-  if (b.y < a.y - 20) {
-    const sy = a.y - ah / 2, ty = b.y + bh / 2, m = (sy - ty) / 2;
-    return `M ${a.x} ${sy} C ${a.x} ${sy - m} ${b.x} ${ty + m} ${b.x} ${ty}`;
-  }
-  const sy = a.y - ah / 2, ty = b.y - bh / 2, lift = 46 + Math.abs(b.x - a.x) * 0.12;
-  return `M ${a.x} ${sy} C ${a.x} ${sy - lift} ${b.x} ${ty - lift} ${b.x} ${ty}`;
+/** Which departments play which part in a task, and the arrows between them. */
+function layout(t: MapTask, laneOf: Map<string, number>) {
+  const cells = new Map<number, Cell[]>();
+  const mark = (role: string | null | undefined, l: Letter, current = false) => {
+    if (!role) return;
+    const lane = laneOf.get(role);
+    if (lane === undefined) return;
+    const list = cells.get(lane) ?? [];
+    let c = list.find((x) => x.role === role);
+    if (!c) { c = { role, letters: [] }; list.push(c); }
+    if (!c.letters.includes(l)) c.letters.push(l);
+    if (current) c.current = true;
+    cells.set(lane, list);
+  };
+  const ids = t.ids;
+  ids.accountable?.forEach((r) => mark(r, 'A'));
+  ids.current?.forEach((r) => mark(r, 'A', true));
+  ids.collaborates?.forEach((r) => mark(r, 'C'));
+  ids.manages?.forEach((r) => mark(r, 'M'));
+  ids.future?.forEach((r) => mark(r, 'M'));
+  ids.decision?.forEach((r) => mark(r, 'D'));
+  ids.escalation?.forEach((r) => mark(r, 'E'));
+  cells.forEach((list) => list.forEach((c) => c.letters.sort((a, b) => LETTERS.indexOf(a) - LETTERS.indexOf(b))));
+
+  const lane = (r: string | null | undefined) => (r ? laneOf.get(r) : undefined);
+  const owner = lane((ids.accountable?.length ? ids.accountable : ids.current)?.[0]);
+  const arcs: Arc[] = [];
+  const push = (from: number | undefined, to: number | undefined, type: Letter, dashed = false) => {
+    if (from === undefined || to === undefined || from === to) return;
+    if (!arcs.some((a) => a.from === from && a.to === to && a.type === type)) arcs.push({ from, to, type, dashed });
+  };
+  ids.collaborates?.forEach((r) => push(lane(r), owner, 'C'));
+  const chain = (list: (string | null)[] | undefined, dashed: boolean) => {
+    const l = (list ?? []).filter(Boolean) as string[];
+    for (let i = 1; i < l.length; i++) push(lane(l[i - 1]), lane(l[i]), 'M', dashed);
+  };
+  chain(ids.manages, false);
+  chain(ids.future, true);
+  ids.decision?.forEach((r) => push(owner, lane(r), 'D'));
+  let from = owner;
+  ids.escalation?.forEach((r) => {
+    push(from, lane(r), 'E');
+    if (ids.escChain) from = lane(r);
+  });
+  return { cells, arcs };
 }
 
-function FlowEdge({ d, type, delay }: { d: string; type: EdgeType; delay: number }) {
-  const c = COLOUR[type];
-  const dashed = type !== 'manages';
+function Detail({ t }: { t: MapTask }) {
+  const rows: [string, string, string[] | undefined][] = [
+    ['accountable', 'Accountable', t.accountable],
+    ['current', t.currentLabel ?? 'Current accountability', t.current],
+    ['manages', 'Day-to-day owner', t.dayToDay],
+    ['manages', 'Manages', t.manages && [t.manages.join(' → ')]],
+    ['manages', 'Future structure', t.future && [t.future.join(' → ')]],
+    ['collaborates', 'Collaborates', t.collaborates],
+    ['final-decision', 'Final decision', t.decision],
+    ['escalation', 'Escalation', t.escalation],
+    ['examples', 'Examples', t.examples],
+  ];
   return (
-    <g className="amap-edge" style={{ animationDelay: `${delay}ms` }}>
-      <path d={d} fill="none" stroke={c} strokeOpacity={0.14} strokeWidth={9} strokeLinecap="round" />
-      <path d={d} fill="none" stroke={c} strokeWidth={type === 'future' ? 2 : 3} strokeLinecap="round"
-        className={dashed ? 'amap-dash' : undefined} strokeDasharray={dashed ? (type === 'future' ? '8 8' : '2 9') : undefined}
-        markerEnd={`url(#amap-arrow-${type})`} opacity={type === 'future' ? 0.7 : 1} />
-      {type !== 'future' && [0, 0.55].map((lag) => (
-        <circle key={lag} r={type === 'manages' ? 4.5 : 5.5} fill={c} opacity={0}>
-          <animateMotion dur="2.4s" begin={`${delay / 1000 + lag}s`} repeatCount="indefinite" path={d} />
-          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="2.4s" begin={`${delay / 1000 + lag}s`} repeatCount="indefinite" />
-        </circle>
+    <div className="sw-detail">
+      {rows.filter(([, , v]) => v?.length).map(([cls, label, v]) => (
+        <div key={label} className={`sw-field ${cls}`}>
+          <h5>{label}</h5>
+          <ul>{v!.map((x) => <li key={x}>{x}</li>)}</ul>
+        </div>
       ))}
-    </g>
-  );
-}
-
-const ROLE_BADGE: Record<string, [string, string]> = {
-  accountable: ['Accountable', '#200888'], current: ['Current accountability', '#B45309'], dayToDay: ['Day-to-day owner', '#0E9BD6'],
-  decision: ['Final decision', '#0F766E'], escalation: ['Escalation', '#D97706'], collaborates: ['Collaborates', '#8B5CF6'], manages: ['Manages', '#0E9BD6'],
-};
-
-function Field({ cls, label, items }: { cls: string; label: string; items: string[] }) {
-  return (
-    <div className={`amap-field ${cls}`}>
-      <h5>{label}</h5>
-      <ul>{items.map((t) => <li key={t}>{t}</li>)}</ul>
     </div>
   );
 }
 
 export function AccountabilityMapView({ map, onClose }: { map: AccountabilityMap; onClose: () => void }) {
   const closeRef = useRef<HTMLButtonElement>(null);
-  const all = useMemo(() => map.sections.flatMap((s) => s.tasks.map((t) => ({ t, area: s.title }))), [map]);
-  // -1: whole company (management structure); -2: escalation structure; otherwise a task index.
-  const [sel, setSel] = useState(-1);
-  const [playing, setPlaying] = useState(false);
-  const byId = useMemo(() => new Map(map.nodes.map((n) => [n.id, n])), [map]);
+  const lanesRef = useRef<HTMLDivElement>(null);
+  const [colW, setColW] = useState(96);
+  const [open, setOpen] = useState<string | null>(null);
 
-  const pick = useCallback((i: number) => { setPlaying(false); setSel(i); }, []);
-  const step = (dir: number) => { setPlaying(false); setSel((s) => (s < 0 ? (dir > 0 ? 0 : all.length - 1) : (s + dir + all.length) % all.length)); };
+  const laneOf = useMemo(() => {
+    const m = new Map<string, number>();
+    map.lanes.forEach((l, i) => Object.keys(l.roles).forEach((r) => m.set(r, i)));
+    return m;
+  }, [map]);
+  const roleName = useMemo(() => {
+    const m = new Map<string, string>();
+    map.lanes.forEach((l) => Object.entries(l.roles).forEach(([r, n]) => m.set(r, n)));
+    return m;
+  }, [map]);
 
-  useEffect(() => {
-    if (!playing) return;
-    const t = setInterval(() => setSel((s) => (s < 0 ? 0 : (s + 1) % all.length)), TOUR_MS);
-    return () => clearInterval(t);
-  }, [playing, all.length]);
-
-  // When the map is wider than the screen (phones), slide it so the accountable role is in view.
-  const stageRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const stage = stageRef.current, main = stage?.querySelector('.amap-node.main') as SVGGElement | null;
-    if (!stage || stage.scrollWidth <= stage.clientWidth) return;
-    const left = main ? main.getBoundingClientRect().left - stage.getBoundingClientRect().left + stage.scrollLeft - stage.clientWidth / 2 + 60 : 0;
-    stage.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
-  }, [sel]);
+  // Lane width, so arrows can be drawn between lane centres.
+  useLayoutEffect(() => {
+    const el = lanesRef.current;
+    if (!el) return;
+    const measure = () => setColW(el.clientWidth / map.lanes.length);
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [map.lanes.length]);
 
   useEffect(() => {
     const before = document.activeElement as HTMLElement | null;
@@ -139,179 +164,124 @@ export function AccountabilityMapView({ map, onClose }: { map: AccountabilityMap
     };
   }, [onClose]);
 
-  const cur = sel >= 0 ? all[sel] : null;
-
-  // Which boxes play which part, and the lines between them.
-  const { roles, edges } = useMemo(() => {
-    const roles = new Map<string, string[]>();
-    const add = (id: string | null | undefined, r: string) => {
-      if (!id) return;
-      const list = roles.get(id) ?? [];
-      if (!list.includes(r)) list.push(r);
-      roles.set(id, list);
-    };
-    const edges: Edge[] = [];
-    if (!cur) {
-      if (sel === -1) {
-        map.management.edges.forEach(([a, b]) => edges.push({ from: a, to: b, type: 'manages' }));
-        map.management.future.forEach(([a, b]) => edges.push({ from: a, to: b, type: 'future' }));
-      } else {
-        ['hoo', 'cfo', 'legal', 'ceo', 'board'].forEach((id) => add(id, 'escalation'));
-      }
-      return { roles, edges };
-    }
-    const ids = cur.t.ids;
-    const acc = ids.accountable?.length ? ids.accountable : ids.current ?? [];
-    const lead = acc[0];
-    ids.accountable?.forEach((id) => add(id, 'accountable'));
-    ids.current?.forEach((id) => add(id, 'current'));
-    ids.dayToDay?.forEach((id) => add(id, 'dayToDay'));
-    ids.collaborates?.forEach((id) => {
-      if (acc.includes(id)) return;
-      add(id, 'collaborates');
-      if (lead) edges.push({ from: id, to: lead, type: 'collab' });
-    });
-    const chain = (list: (string | null)[] | undefined, type: EdgeType) => {
-      const l = (list ?? []).filter(Boolean) as string[];
-      l.forEach((id) => add(id, 'manages'));
-      for (let i = 1; i < l.length; i++) edges.push({ from: l[i - 1], to: l[i], type });
-    };
-    chain(ids.manages, 'manages');
-    chain(ids.future, 'future');
-    ids.decision?.forEach((id) => {
-      add(id, 'decision');
-      if (lead && id !== lead) edges.push({ from: lead, to: id, type: 'decision' });
-    });
-    let from = lead;
-    ids.escalation?.forEach((id) => {
-      add(id, 'escalation');
-      if (from && id !== from) edges.push({ from, to: id, type: 'escalation' });
-      if (ids.escChain) from = id;
-    });
-    return { roles, edges };
-  }, [cur, sel, map]);
-
-  const active = (id: string) => roles.has(id) || edges.some((e) => e.from === id || e.to === id);
-  const dimOthers = sel !== -1;
+  const cx = (lane: number) => (lane + 0.5) * colW;
+  const span = colW * (map.lanes.length - 1);
+  /*
+   * Arrows run from label to label as arches: collaboration and management above the labels, final decision and
+   * escalation below. The longer the hop, the higher the arch, so arrows into the same lane nest instead of
+   * running along one line.
+   */
+  const arcPath = (a: Arc, rowH: number, count: (lane: number) => number) => {
+    const mid = rowH / 2;
+    const x1 = cx(a.from), x2 = cx(a.to), dir = Math.sign(x2 - x1);
+    const above = a.type === 'C' || a.type === 'M';
+    const edge = (lane: number) => (above ? mid - stackH(count(lane)) / 2 : mid + stackH(count(lane)) / 2);
+    const y1 = edge(a.from), y2 = edge(a.to);
+    const h = ARC_ROOM * (0.3 + 0.62 * Math.abs(x2 - x1) / span);
+    const peak = above ? Math.min(y1, y2) - h : Math.max(y1, y2) + h;
+    const sx = x1 + dir * 10, ex = x2 - dir * 10;
+    return `M ${sx} ${y1} C ${sx} ${peak} ${ex} ${peak} ${ex} ${y2}`;
+  };
 
   return createPortal(
     <div className="scheme" onClick={onClose}>
-      <div className="scheme-panel" role="dialog" aria-modal="true" aria-labelledby="amap-title" onClick={(e) => e.stopPropagation()}>
+      <div className="scheme-panel" role="dialog" aria-modal="true" aria-labelledby="sw-title" onClick={(e) => e.stopPropagation()}>
         <header className="scheme-head">
           <div>
             <p className="collab-eyebrow">House of Marketers</p>
-            <h2 id="amap-title" className="collab-title">{map.title}</h2>
+            <h2 id="sw-title" className="collab-title">{map.title}</h2>
           </div>
           <button ref={closeRef} type="button" className="collab-close" onClick={onClose} aria-label="Close">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
           </button>
         </header>
-        <ul className="amap-key">
-          {map.key.map((k) => <li key={k.key} className={`k-${k.key}`}><i /><b>{k.label}</b> {k.text}</li>)}
+        <ul className="sw-key">
+          {LETTERS.map((l) => {
+            const k = map.key.find((x) => x.key === LETTER_KEY[l]);
+            return (
+              <li key={l}>
+                <i style={{ background: COLOUR[l] }}>{l}</i>
+                <svg width="30" height="10" aria-hidden="true"><path d="M2 5 H24" stroke={COLOUR[l]} strokeWidth="3" strokeDasharray={l === 'M' ? undefined : '2 5'} strokeLinecap="round" /><path d="M23 1 L29 5 L23 9 z" fill={COLOUR[l]} /></svg>
+                <b style={{ color: COLOUR[l] }}>{k?.label}</b> {k?.text}
+              </li>
+            );
+          })}
         </ul>
 
-        <div className="amap">
-          <aside className="amap-list">
-            <div className="amap-controls">
-              <button type="button" onClick={() => step(-1)} aria-label="Previous task">‹</button>
-              <button type="button" className="play" onClick={() => { if (!playing && sel < 0) setSel(0); setPlaying((p) => !p); }}>
-                {playing ? '❚❚ Pause' : '▶ Play all'}
-              </button>
-              <button type="button" onClick={() => step(1)} aria-label="Next task">›</button>
-            </div>
-            <div className="amap-scroll" hidden>
-              <button id="amap-task--1" type="button" className={`amap-item whole${sel === -1 ? ' on' : ''}`} onClick={() => pick(-1)}>Whole company · {map.management.title}</button>
-              <button id="amap-task--2" type="button" className={`amap-item whole${sel === -2 ? ' on' : ''}`} onClick={() => pick(-2)}>{map.escalation.title}</button>
-              {map.sections.map((s) => (
-                <div key={s.id}>
-                  <h4>{s.title}</h4>
-                  {s.tasks.map((t) => {
-                    const i = all.findIndex((x) => x.t === t);
-                    return <button key={t.task} id={`amap-task-${i}`} type="button" className={`amap-item${sel === i ? ' on' : ''}`} onClick={() => pick(i)}>{t.task}</button>;
-                  })}
-                </div>
-              ))}
-            </div>
-            <select className="amap-select" value={sel} onChange={(e) => pick(Number(e.target.value))} aria-label="Choose a task">
-              <option value={-1}>Whole company · {map.management.title}</option>
-              <option value={-2}>{map.escalation.title}</option>
-              {map.sections.map((s) => (
-                <optgroup key={s.id} label={s.title}>
-                  {s.tasks.map((t) => <option key={t.task} value={all.findIndex((x) => x.t === t)}>{t.task}</option>)}
-                </optgroup>
-              ))}
-            </select>
-          </aside>
+        <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true">
+          <defs>
+            {LETTERS.map((l) => (
+              <marker key={l} id={`sw-head-${l}`} markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+                <path d="M0,0 L8,4 L0,8 z" fill={COLOUR[l]} />
+              </marker>
+            ))}
+          </defs>
+        </svg>
 
-          <div ref={stageRef} className="amap-stage">
-            <svg viewBox={`-10 0 ${W} ${H}`} className="amap-svg" role="img" aria-label="Company accountability map" key={sel}>
-              <defs>
-                {(Object.keys(COLOUR) as EdgeType[]).map((t) => (
-                  <marker key={t} id={`amap-arrow-${t}`} markerWidth="14" markerHeight="14" refX="11" refY="6" orient="auto" markerUnits="userSpaceOnUse">
-                    <path d="M0,0 L12,6 L0,12 z" fill={COLOUR[t]} />
-                  </marker>
-                ))}
-              </defs>
-              {edges.map((e, i) => {
-                const a = byId.get(e.from), b = byId.get(e.to);
-                return a && b ? <FlowEdge key={i} d={curve(a, b)} type={e.type} delay={DELAY[e.type] + (i % 6) * 60} /> : null;
-              })}
-              {map.nodes.map((n) => {
-                const [w, h] = SIZE[n.kind];
-                const r = roles.get(n.id) ?? [];
-                const main = r.includes('accountable') || r.includes('current');
-                const on = active(n.id);
-                return (
-                  <g key={n.id} transform={`translate(${n.x - w / 2} ${n.y - h / 2})`}
-                    className={`amap-node ${n.kind}${main ? ' main' : ''}${dimOthers && !on ? ' dim' : ''}`}>
-                    {main && <rect className="amap-pulse" x={-7} y={-7} width={w + 14} height={h + 14} rx={20} />}
-                    <rect className="amap-box" width={w} height={h} rx={14}
-                      style={r.length && !main ? { stroke: ROLE_BADGE[r[0]][1], strokeWidth: 3.5 } : undefined} />
-                    <foreignObject width={w} height={h}>
-                      <div className="amap-label">{n.label}</div>
-                    </foreignObject>
-                    {r.length > 0 && (
-                      <foreignObject x={-50} y={-26} width={w + 100} height={24}>
-                        <div className="amap-badges">
-                          {r.slice(0, 2).map((x) => <span key={x} style={{ background: ROLE_BADGE[x][1] }}>{ROLE_BADGE[x][0]}</span>)}
+        <div className="sw-body">
+          <div className="sw-chart">
+            <div className="sw-row sw-head">
+              <div className="sw-task">Task</div>
+              <div className="sw-lanes" ref={lanesRef}>
+                {map.lanes.map((l) => <div key={l.id} className="sw-lane-title">{l.title}</div>)}
+              </div>
+            </div>
+
+            {map.sections.map((s) => (
+              <Fragment key={s.id}>
+                <div className="sw-area"><span>{s.title}</span></div>
+                {s.tasks.map((t) => {
+                  const { cells, arcs } = layout(t, laneOf);
+                  const isOpen = open === t.task;
+                  const count = (lane: number) => Math.min(3, cells.get(lane)?.length ?? 1);
+                  const rowH = Math.max(...[...cells.keys()].map(count), 1) * (PILL_H + PILL_GAP) + ARC_ROOM * 2 + 8;
+                  return (
+                    <Fragment key={t.task}>
+                      <div className={`sw-row${isOpen ? ' open' : ''}`} onClick={() => setOpen(isOpen ? null : t.task)}>
+                        <div className="sw-task"><span>{t.task}</span><em>{isOpen ? '−' : '+'}</em></div>
+                        <div className="sw-lanes">
+                          {map.lanes.map((l) => <div key={l.id} className="sw-lane" style={{ height: rowH }} />)}
+                          <svg className="sw-arcs" width="100%" height={rowH} aria-hidden="true">
+                            {arcs.map((a, i) => (
+                              <path key={i} d={arcPath(a, rowH, count)} className={`sw-arc t-${a.type}${a.dashed ? ' future' : ''}`} markerEnd={`url(#sw-head-${a.type})`} />
+                            ))}
+                          </svg>
+                          {[...cells.entries()].map(([lane, list]) => (
+                            <div key={lane} className="sw-cell" style={{ left: cx(lane), width: colW - 8 }}>
+                              {list.slice(0, 3).map((c) => (
+                                <div key={c.role} className={`sw-pill${c.letters.includes('A') ? ' acc' : ''}${c.current ? ' current' : ''}`}>
+                                  <span className="sw-letters">{c.letters.map((l) => <i key={l} style={{ background: COLOUR[l] }}>{l}</i>)}</span>
+                                  <span className="sw-role">{roleName.get(c.role)}</span>
+                                </div>
+                              ))}
+                            </div>
+                          ))}
                         </div>
-                      </foreignObject>
-                    )}
-                  </g>
-                );
-              })}
-            </svg>
+                      </div>
+                      {isOpen && <Detail t={t} />}
+                    </Fragment>
+                  );
+                })}
+              </Fragment>
+            ))}
           </div>
 
-          <aside className="amap-detail" key={`d${sel}`}>
-            {cur ? (
-              <>
-                <p className="amap-area">{cur.area}</p>
-                <h3>{cur.t.task}</h3>
-                {cur.t.accountable && <Field cls="accountable" label="Accountable" items={cur.t.accountable} />}
-                {cur.t.current && <Field cls="current" label={cur.t.currentLabel ?? 'Current accountability'} items={cur.t.current} />}
-                {cur.t.dayToDay && <Field cls="manages" label="Day-to-day owner" items={cur.t.dayToDay} />}
-                {cur.t.manages && <Field cls="manages" label="Manages" items={[cur.t.manages.join(' → ')]} />}
-                {cur.t.future && <Field cls="manages" label="Future structure" items={[cur.t.future.join(' → ')]} />}
-                {cur.t.collaborates && <Field cls="collaborates" label="Collaborates" items={cur.t.collaborates} />}
-                {cur.t.decision && <Field cls="final-decision" label="Final decision" items={cur.t.decision} />}
-                {cur.t.escalation && <Field cls="escalation" label="Escalation" items={cur.t.escalation} />}
-                {cur.t.examples && <Field cls="examples" label="Examples" items={cur.t.examples} />}
-              </>
-            ) : sel === -1 ? (
-              <>
-                <p className="amap-area">Whole company</p>
-                <h3>{map.management.title}</h3>
-                {map.management.groups.map((g) => <Field key={g.manager} cls="manages" label={g.manager} items={g.reports} />)}
-              </>
-            ) : (
-              <>
-                <p className="amap-area">Whole company</p>
-                <h3>{map.escalation.title}</h3>
-                {map.escalation.routes.map((r) => <Field key={r.issue} cls="escalation" label={r.issue} items={[`→ ${r.route}`]} />)}
-              </>
-            )}
-          </aside>
+          <div className="sw-structures">
+            <section>
+              <h3>{map.escalation.title}</h3>
+              <ol className="sw-ladder">
+                {map.escalation.routes.map((r) => <li key={r.issue}><span>{r.issue}</span><b>{r.route}</b></li>)}
+              </ol>
+            </section>
+            <section>
+              <h3>{map.management.title}</h3>
+              <div className="sw-groups">
+                {map.management.groups.map((g) => (
+                  <div key={g.manager}><b>{g.manager}</b><ul>{g.reports.map((r) => <li key={r}>{r}</li>)}</ul></div>
+                ))}
+              </div>
+            </section>
+          </div>
         </div>
       </div>
     </div>,

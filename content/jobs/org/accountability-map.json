@@ -764,13 +764,7 @@
           ],
           "ids": {
             "accountable": [
-              "cfo",
-              "cso",
-              "cd",
-              "hod",
               "creative",
-              "paid",
-              "hom",
               "cstrat"
             ],
             "collaborates": [
@@ -782,13 +776,8 @@
               "creative"
             ],
             "escalation": [
-              "cfo",
-              "cso",
-              "cd",
-              "hod",
               "creative",
-              "paid",
-              "hom"
+              "cd"
             ]
           }
         }
@@ -2039,259 +2028,117 @@
           "Social Media Manager once transferred"
         ]
       }
-    ],
-    "edges": [
-      [
-        "ceo",
-        "hoo"
-      ],
-      [
-        "ceo",
-        "cfo"
-      ],
-      [
-        "ceo",
-        "cso"
-      ],
-      [
-        "ceo",
-        "hod"
-      ],
-      [
-        "ceo",
-        "hom"
-      ],
-      [
-        "hoo",
-        "peopleops"
-      ],
-      [
-        "hoo",
-        "techops"
-      ],
-      [
-        "hoo",
-        "smm"
-      ],
-      [
-        "hoo",
-        "admin"
-      ],
-      [
-        "cfo",
-        "finteam"
-      ],
-      [
-        "cso",
-        "dnb"
-      ],
-      [
-        "cso",
-        "pd"
-      ],
-      [
-        "cd",
-        "am"
-      ],
-      [
-        "hod",
-        "scm"
-      ],
-      [
-        "scm",
-        "cm"
-      ],
-      [
-        "paid",
-        "pms"
-      ],
-      [
-        "hom",
-        "mteam"
-      ]
-    ],
-    "future": [
-      [
-        "hom",
-        "smm"
-      ]
     ]
   },
-  "nodes": [
+  "lanes": [
     {
       "id": "board",
-      "label": "Board / Investors",
-      "x": 800,
-      "y": 44,
-      "kind": "ext"
+      "title": "Board / Investors",
+      "roles": {
+        "board": "Board"
+      }
     },
     {
       "id": "ceo",
-      "label": "CEO",
-      "x": 800,
-      "y": 150,
-      "kind": "top"
+      "title": "CEO",
+      "roles": {
+        "ceo": "CEO"
+      }
     },
     {
-      "id": "hoo",
-      "label": "Head of Operations",
-      "x": 110,
-      "y": 300,
-      "kind": "lead"
+      "id": "ops",
+      "title": "Operations",
+      "roles": {
+        "hoo": "Head of Ops",
+        "admin": "Admin"
+      }
     },
     {
-      "id": "cfo",
-      "label": "CFO",
-      "x": 310,
-      "y": 300,
-      "kind": "lead"
+      "id": "finance",
+      "title": "Finance",
+      "roles": {
+        "cfo": "CFO",
+        "finteam": "Finance team"
+      }
     },
     {
-      "id": "cso",
-      "label": "Chief Sales Officer",
-      "x": 510,
-      "y": 300,
-      "kind": "lead"
+      "id": "sales",
+      "title": "Sales / New Business",
+      "roles": {
+        "cso": "CSO",
+        "dnb": "New Business",
+        "pd": "Partnerships"
+      }
     },
     {
-      "id": "cd",
-      "label": "Client Directors",
-      "x": 710,
-      "y": 300,
-      "kind": "lead"
+      "id": "client",
+      "title": "Client Leadership",
+      "roles": {
+        "cd": "Client Directors",
+        "am": "AD / AM"
+      }
     },
     {
-      "id": "hod",
-      "label": "Head of Delivery & Performance",
-      "x": 910,
-      "y": 300,
-      "kind": "lead"
+      "id": "delivery",
+      "title": "Delivery",
+      "roles": {
+        "hod": "Head of Delivery",
+        "scm": "Senior CMs",
+        "cm": "Campaign Mgrs"
+      }
     },
     {
       "id": "creative",
-      "label": "Creative Leadership",
-      "x": 1110,
-      "y": 300,
-      "kind": "lead"
+      "title": "Creative",
+      "roles": {
+        "creative": "Creative lead",
+        "cstrat": "Strategists"
+      }
     },
     {
       "id": "paid",
-      "label": "Paid Marketing Director",
-      "x": 1310,
-      "y": 300,
-      "kind": "lead"
+      "title": "Paid Media",
+      "roles": {
+        "paid": "Paid Director",
+        "pms": "Specialists"
+      }
     },
     {
-      "id": "hom",
-      "label": "Head of Marketing + PR",
-      "x": 1510,
-      "y": 300,
-      "kind": "lead"
+      "id": "marketing",
+      "title": "Marketing / PR",
+      "roles": {
+        "hom": "Head of Mktg",
+        "mteam": "Mktg team",
+        "smm": "Social Media"
+      }
     },
     {
-      "id": "peopleops",
-      "label": "People Ops (HR)",
-      "x": 95,
-      "y": 450,
-      "kind": "team"
+      "id": "people",
+      "title": "People Ops (HR)",
+      "roles": {
+        "peopleops": "People Ops"
+      }
     },
     {
-      "id": "techops",
-      "label": "Technology Operations",
-      "x": 95,
-      "y": 590,
-      "kind": "team"
-    },
-    {
-      "id": "finteam",
-      "label": "Finance Team / Payment Managers",
-      "x": 270,
-      "y": 450,
-      "kind": "team"
-    },
-    {
-      "id": "dnb",
-      "label": "Director of New Business",
-      "x": 430,
-      "y": 450,
-      "kind": "team"
-    },
-    {
-      "id": "pd",
-      "label": "Partnerships Directors",
-      "x": 590,
-      "y": 450,
-      "kind": "team"
-    },
-    {
-      "id": "am",
-      "label": "Account Directors / Account Managers",
-      "x": 750,
-      "y": 450,
-      "kind": "team"
-    },
-    {
-      "id": "scm",
-      "label": "Senior Campaign Managers",
-      "x": 910,
-      "y": 450,
-      "kind": "team"
-    },
-    {
-      "id": "cstrat",
-      "label": "Creative Strategists",
-      "x": 1110,
-      "y": 450,
-      "kind": "team"
-    },
-    {
-      "id": "pms",
-      "label": "Performance Marketing Specialists",
-      "x": 1310,
-      "y": 450,
-      "kind": "team"
-    },
-    {
-      "id": "mteam",
-      "label": "Marketing / PR team",
-      "x": 1510,
-      "y": 450,
-      "kind": "team"
+      "id": "tech",
+      "title": "Technology Ops",
+      "roles": {
+        "techops": "Tech Ops"
+      }
     },
     {
       "id": "legal",
-      "label": "Legal / Compliance Specialist",
-      "x": 255,
-      "y": 590,
-      "kind": "ext"
+      "title": "Legal / Compliance",
+      "roles": {
+        "legal": "Legal"
+      }
     },
     {
       "id": "partners",
-      "label": "Operational Partners",
-      "x": 255,
-      "y": 730,
-      "kind": "ext"
-    },
-    {
-      "id": "cm",
-      "label": "Campaign Managers",
-      "x": 910,
-      "y": 590,
-      "kind": "team"
-    },
-    {
-      "id": "smm",
-      "label": "Social Media Manager",
-      "x": 95,
-      "y": 730,
-      "kind": "team"
-    },
-    {
-      "id": "admin",
-      "label": "Central Operations / Admin (when added)",
-      "x": 415,
-      "y": 730,
-      "kind": "future"
+      "title": "Operational Partners",
+      "roles": {
+        "partners": "Partners"
+      }
     }
   ]
 }
