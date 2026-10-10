@@ -42,8 +42,9 @@ export interface AccountabilityMap {
 
 const LETTERS: Letter[] = ['A', 'C', 'M', 'D', 'E'];
 const LETTER_KEY: Record<Letter, string> = { A: 'accountable', C: 'collaborates', M: 'manages', D: 'final-decision', E: 'escalation' };
-const COLOUR: Record<Letter, string> = { A: '#200888', C: '#8B5CF6', M: '#0E9BD6', D: '#0F766E', E: '#D97706' };
-const PILL_H = 36, PILL_GAP = 4, ARC_ROOM = 34;
+// Colours come from the page's theme (see .scheme-panel in globals.css), so light and dark mode both match.
+const COLOUR: Record<Letter, string> = { A: 'var(--sw-A)', C: 'var(--sw-C)', M: 'var(--sw-M)', D: 'var(--sw-D)', E: 'var(--sw-E)' };
+const PILL_H = 40, PILL_GAP = 4, ARC_ROOM = 34;
 const stackH = (n: number) => n * PILL_H + Math.max(0, n - 1) * PILL_GAP;
 
 interface Cell { role: string; letters: Letter[]; current?: boolean }
@@ -202,9 +203,9 @@ export function AccountabilityMapView({ map, onClose }: { map: AccountabilityMap
             const k = map.key.find((x) => x.key === LETTER_KEY[l]);
             return (
               <li key={l}>
-                <i style={{ background: COLOUR[l] }}>{l}</i>
-                <svg width="30" height="10" aria-hidden="true"><path d="M2 5 H24" stroke={COLOUR[l]} strokeWidth="3" strokeDasharray={l === 'M' ? undefined : '2 5'} strokeLinecap="round" /><path d="M23 1 L29 5 L23 9 z" fill={COLOUR[l]} /></svg>
-                <b style={{ color: COLOUR[l] }}>{k?.label}</b> {k?.text}
+                <i className={l} style={{ background: COLOUR[l] }}>{l}</i>
+                <svg width="30" height="10" aria-hidden="true"><path d="M2 5 H24" style={{ stroke: COLOUR[l] }} strokeWidth="3" strokeDasharray={l === 'M' ? undefined : '2 5'} strokeLinecap="round" fill="none" /><path d="M23 1 L29 5 L23 9 z" style={{ fill: COLOUR[l] }} /></svg>
+                <b className={l} style={l === 'A' ? undefined : { color: COLOUR[l] }}>{k?.label}</b> {k?.text}
               </li>
             );
           })}
@@ -214,7 +215,7 @@ export function AccountabilityMapView({ map, onClose }: { map: AccountabilityMap
           <defs>
             {LETTERS.map((l) => (
               <marker key={l} id={`sw-head-${l}`} markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse">
-                <path d="M0,0 L8,4 L0,8 z" fill={COLOUR[l]} />
+                <path d="M0,0 L8,4 L0,8 z" style={{ fill: COLOUR[l] }} />
               </marker>
             ))}
           </defs>
@@ -252,7 +253,7 @@ export function AccountabilityMapView({ map, onClose }: { map: AccountabilityMap
                             <div key={lane} className="sw-cell" style={{ left: cx(lane), width: colW - 8 }}>
                               {list.slice(0, 3).map((c) => (
                                 <div key={c.role} className={`sw-pill${c.letters.includes('A') ? ' acc' : ''}${c.current ? ' current' : ''}`}>
-                                  <span className="sw-letters">{c.letters.map((l) => <i key={l} style={{ background: COLOUR[l] }}>{l}</i>)}</span>
+                                  <span className="sw-letters">{c.letters.map((l) => <i key={l} className={l} style={{ background: COLOUR[l] }}>{l}</i>)}</span>
                                   <span className="sw-role">{roleName.get(c.role)}</span>
                                 </div>
                               ))}
