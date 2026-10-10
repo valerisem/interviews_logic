@@ -8,7 +8,7 @@ import { createPortal } from 'react-dom';
  * chart. Every department is a lane (Board and CEO on the left), every task in the company is a row,
  * grouped by area. In each row, each department involved carries its letter: A accountable,
  * C collaborates, M manages, D final decision, E escalation. Arrows flow between the lanes: collaborators
- * into the accountable lane (purple), down the management chain (blue), out to the final decision
+ * into the accountable lane (purple), out to the final decision
  * (teal) and up to escalation (orange). Clicking a row shows its exact wording. The escalation and
  * management structures sit at the bottom of the same page.
  */
@@ -95,12 +95,6 @@ function layout(t: MapTask, laneOf: Map<string, number>) {
     if (!arcs.some((a) => a.fromRole === fromRole && a.toRole === toRole && a.type === type)) arcs.push({ from, to, fromRole, toRole, type, dashed });
   };
   ids.collaborates?.forEach((r) => push(r, owner, 'C'));
-  const chain = (list: (string | null)[] | undefined) => {
-    const l = (list ?? []).filter(Boolean) as string[];
-    for (let i = 1; i < l.length; i++) push(l[i - 1], l[i], 'M');
-  };
-  chain(ids.manages);
-  chain(ids.manages2);
   ids.decision?.forEach((r) => push(owner, r, 'D'));
   let from = owner;
   ids.escalation?.forEach((r) => {
