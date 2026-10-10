@@ -28,7 +28,7 @@ export interface MapTask {
   examples?: string[];
   ids: {
     accountable?: string[]; current?: string[]; dayToDay?: string[]; collaborates?: string[];
-    decision?: string[]; escalation?: string[]; manages?: (string | null)[]; future?: (string | null)[]; escChain?: boolean;
+    decision?: string[]; escalation?: string[]; manages?: (string | null)[]; manages2?: (string | null)[]; future?: (string | null)[]; escChain?: boolean;
   };
 }
 export interface AccountabilityMap {
@@ -68,6 +68,7 @@ function layout(t: MapTask, laneOf: Map<string, number>) {
   ids.current?.forEach((r) => mark(r, 'A', true));
   ids.collaborates?.forEach((r) => mark(r, 'C'));
   ids.manages?.forEach((r) => mark(r, 'M'));
+  ids.manages2?.forEach((r) => mark(r, 'M'));
   ids.future?.forEach((r) => mark(r, 'M'));
   ids.decision?.forEach((r) => mark(r, 'D'));
   ids.escalation?.forEach((r) => mark(r, 'E'));
@@ -86,6 +87,7 @@ function layout(t: MapTask, laneOf: Map<string, number>) {
     for (let i = 1; i < l.length; i++) push(lane(l[i - 1]), lane(l[i]), 'M', dashed);
   };
   chain(ids.manages, false);
+  chain(ids.manages2, false);
   chain(ids.future, true);
   ids.decision?.forEach((r) => push(owner, lane(r), 'D'));
   let from = owner;

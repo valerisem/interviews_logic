@@ -936,7 +936,6 @@
             "collaborates": [
               "ceo",
               "hoo",
-              "cfo",
               "cso",
               "cd",
               "hod",
@@ -953,7 +952,11 @@
             ],
             "manages": [
               "cfo",
-              "finteam"
+              "accountants"
+            ],
+            "manages2": [
+              "cfo",
+              "payments"
             ]
           }
         },
@@ -1009,15 +1012,15 @@
           ],
           "ids": {
             "accountable": [
-              "cfo"
+              "accountants"
             ],
             "collaborates": [
               "cd",
               "cso"
             ],
             "decision": [
-              "finteam",
-              "cfo"
+              "cfo",
+              "accountants"
             ],
             "escalation": [
               "cd",
@@ -1041,11 +1044,10 @@
           ],
           "ids": {
             "accountable": [
-              "cfo"
+              "accountants"
             ],
             "collaborates": [
-              "cd",
-              "cfo"
+              "cd"
             ],
             "decision": [
               "cfo"
@@ -1071,18 +1073,22 @@
           ],
           "ids": {
             "accountable": [
-              "finteam",
-              "cfo"
+              "payments"
             ],
             "collaborates": [
               "scm",
               "cm"
             ],
             "decision": [
-              "cfo"
+              "accountants",
+              "payments"
             ],
             "escalation": [
               "cfo"
+            ],
+            "manages2": [
+              "cfo",
+              "payments"
             ]
           }
         },
@@ -1984,14 +1990,14 @@
         "reports": [
           "People Ops (HR)",
           "Technology Operations Associate",
-          "Social Media Manager temporarily",
-          "Central Operations / Admin roles when added"
+          "Social Media Manager temporarily"
         ]
       },
       {
         "manager": "CFO",
         "reports": [
-          "Payment Managers / Finance Team"
+          "Payment Managers",
+          "Accountants / Finance Team"
         ]
       },
       {
@@ -2049,8 +2055,7 @@
       "id": "ops",
       "title": "Operations",
       "roles": {
-        "hoo": "Head of Ops",
-        "admin": "Admin"
+        "hoo": "Head of Ops"
       }
     },
     {
@@ -2058,7 +2063,8 @@
       "title": "Finance",
       "roles": {
         "cfo": "CFO",
-        "finteam": "Finance team"
+        "payments": "Payment Mgrs",
+        "accountants": "Accountants"
       }
     },
     {
