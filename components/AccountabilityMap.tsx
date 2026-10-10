@@ -7,19 +7,19 @@ import { createPortal } from 'react-dom';
  * Company Accountability Map, opened from the org chart's “Ownership Model” button: one page, one swimlane
  * chart. Every department is a lane (Board and CEO on the left), every task in the company is a row,
  * grouped by area. In each row, each department involved carries its letter: A accountable,
- * C collaborates, D final decision, E escalation. Arrows flow between the lanes: collaborators
+ * R responsible (does the work), C collaborates, D final decision, E escalation. Arrows flow between the lanes: collaborators
  * into the accountable lane (purple), out to the final decision
  * (teal) and up to escalation (orange). Clicking a row shows its exact wording. The escalation and
  * management structures sit at the bottom of the same page.
  */
 
-type Letter = 'A' | 'C' | 'M' | 'D' | 'E';
+type Letter = 'A' | 'R' | 'C' | 'M' | 'D' | 'E';
 export interface MapTask {
   task: string;
   accountable?: string[];
   current?: string[];
   currentLabel?: string;
-  dayToDay?: string[];
+  responsible?: string[];
   manages?: string[];
   future?: string[];
   collaborates?: string[];
@@ -27,7 +27,7 @@ export interface MapTask {
   escalation?: string[];
   examples?: string[];
   ids: {
-    accountable?: string[]; current?: string[]; dayToDay?: string[]; collaborates?: string[];
+    accountable?: string[]; current?: string[]; responsible?: string[]; collaborates?: string[];
     decision?: string[]; escalation?: string[]; manages?: (string | null)[]; manages2?: (string | null)[]; future?: (string | null)[]; escChain?: boolean;
   };
 }
@@ -41,7 +41,7 @@ export interface AccountabilityMap {
   veto?: { label: string; text: string };
 }
 
-const LETTERS: Letter[] = ['A', 'C', 'D', 'E'];
+const LETTERS: Letter[] = ['A', 'R', 'C', 'D', 'E'];
 
 /** The Board / Investors' crown: absolute right of veto and the final decision on everything. */
 function Crown({ size = 14 }: { size?: number }) {
@@ -52,9 +52,9 @@ function Crown({ size = 14 }: { size?: number }) {
     </svg>
   );
 }
-const LETTER_KEY: Record<Letter, string> = { A: 'accountable', C: 'collaborates', M: 'manages', D: 'final-decision', E: 'escalation' };
+const LETTER_KEY: Record<Letter, string> = { A: 'accountable', R: 'responsible', C: 'collaborates', M: 'manages', D: 'final-decision', E: 'escalation' };
 // Colours come from the page's theme (see .scheme-panel in globals.css), so light and dark mode both match.
-const COLOUR: Record<Letter, string> = { A: 'var(--sw-A)', C: 'var(--sw-C)', M: 'var(--sw-M)', D: 'var(--sw-D)', E: 'var(--sw-E)' };
+const COLOUR: Record<Letter, string> = { A: 'var(--sw-A)', R: 'var(--sw-R)', C: 'var(--sw-C)', M: 'var(--sw-M)', D: 'var(--sw-D)', E: 'var(--sw-E)' };
 const PILL_H = 54, PILL_GAP = 4, ARC_ROOM = 34;
 const stackH = (n: number) => n * PILL_H + Math.max(0, n - 1) * PILL_GAP;
 
@@ -78,6 +78,7 @@ function layout(t: MapTask, laneOf: Map<string, number>) {
   const ids = t.ids;
   ids.accountable?.forEach((r) => mark(r, 'A'));
   ids.current?.forEach((r) => mark(r, 'A', true));
+  ids.responsible?.forEach((r) => mark(r, 'R'));
   ids.collaborates?.forEach((r) => mark(r, 'C'));
   ids.decision?.forEach((r) => mark(r, 'D'));
   ids.escalation?.forEach((r) => mark(r, 'E'));
@@ -106,7 +107,7 @@ function Detail({ t }: { t: MapTask }) {
   const rows: [string, string, string[] | undefined][] = [
     ['accountable', 'Accountable', t.accountable],
     ['current', t.currentLabel ?? 'Current accountability', t.current],
-    ['manages', 'Day-to-day owner', t.dayToDay],
+    ['responsible', 'Responsible', t.responsible],
     ['manages', 'Manages', t.manages && [t.manages.join(' → ')]],
     ['manages', 'Future structure', t.future && [t.future.join(' → ')]],
     ['collaborates', 'Collaborates', t.collaborates],
@@ -217,7 +218,7 @@ export function AccountabilityMapView({ map, onClose }: { map: AccountabilityMap
             return (
               <li key={l}>
                 <i className={l} style={{ background: COLOUR[l] }}>{l}</i>
-                <svg width="30" height="10" aria-hidden="true"><path d="M2 5 H24" style={{ stroke: COLOUR[l] }} strokeWidth="3" strokeDasharray={l === 'M' ? undefined : '2 5'} strokeLinecap="round" fill="none" /><path d="M23 1 L29 5 L23 9 z" style={{ fill: COLOUR[l] }} /></svg>
+                {l !== 'R' && <svg width="30" height="10" aria-hidden="true"><path d="M2 5 H24" style={{ stroke: COLOUR[l] }} strokeWidth="3" strokeDasharray={l === 'M' ? undefined : '2 5'} strokeLinecap="round" fill="none" /><path d="M23 1 L29 5 L23 9 z" style={{ fill: COLOUR[l] }} /></svg>}
                 <b className={l} style={l === 'A' ? undefined : { color: COLOUR[l] }}>{k?.label}</b> {k?.text}
               </li>
             );

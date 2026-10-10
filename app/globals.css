@@ -392,8 +392,8 @@ table.data .select-cell { width: 1%; min-width: 0; padding-right: 4px; }
 .scheme-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding: 18px 22px 0; }
 .scheme-head .collab-close { position: static; flex: none; }
 /* The five accountability colours: navy (the page's button colour), the org chart's purple, blue and green, and the page's pink. */
-.scheme-panel { --sw-A: var(--btn-bg); --sw-A-ink: var(--btn-text); --sw-C: #8B5CF6; --sw-M: #0E9BD6; --sw-D: #0F7A3D; --sw-E: var(--fuchsia); }
-:root[data-theme='dark'] .scheme-panel { --sw-C: #A78BFA; --sw-M: #38BDF8; --sw-D: #34C27A; }
+.scheme-panel { --sw-A: var(--btn-bg); --sw-A-ink: var(--btn-text); --sw-R: #0E9BD6; --sw-C: #8B5CF6; --sw-M: #0E9BD6; --sw-D: #0F7A3D; --sw-E: var(--fuchsia); }
+:root[data-theme='dark'] .scheme-panel { --sw-R: #38BDF8; --sw-C: #A78BFA; --sw-M: #38BDF8; --sw-D: #34C27A; }
 .sw-key { list-style: none; margin: 10px 0 0; padding: 0 22px 12px; display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 13.5px; color: var(--muted); border-bottom: 1px solid var(--border); }
 .sw-key li { display: flex; align-items: center; gap: 7px; }
 .sw-key i, .sw-letters i { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 5px; color: #fff; font-style: normal; font-size: 11.5px; font-weight: 800; }
@@ -431,7 +431,7 @@ table.data .select-cell { width: 1%; min-width: 0; padding-right: 4px; }
 .sw-area span { font-family: var(--display); font-size: 19px; font-weight: 700; color: var(--heading); }
 .sw-detail { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px 24px; padding: 14px 16px 18px 220px; background: var(--sel-tint); border-bottom: 1px solid var(--border); }
 .sw-field { padding-left: 10px; border-left: 4px solid var(--c, var(--border)); }
-.sw-field.accountable { --c: var(--heading); } .sw-field.current { --c: var(--heading); } .sw-field.manages { --c: var(--sw-M); } .sw-field.collaborates { --c: var(--sw-C); } .sw-field.final-decision { --c: var(--sw-D); } .sw-field.escalation { --c: var(--sw-E); } .sw-field.examples { --c: var(--muted); }
+.sw-field.accountable { --c: var(--heading); } .sw-field.current { --c: var(--heading); } .sw-field.manages { --c: var(--sw-M); } .sw-field.responsible { --c: var(--sw-R); } .sw-field.collaborates { --c: var(--sw-C); } .sw-field.final-decision { --c: var(--sw-D); } .sw-field.escalation { --c: var(--sw-E); } .sw-field.examples { --c: var(--muted); }
 .sw-field h5 { margin: 0 0 4px; font-size: 11.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--c); }
 .sw-field ul { list-style: none; margin: 0; padding: 0; font-size: 14.5px; line-height: 1.45; color: var(--text); }
 .sw-structures { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.6fr); gap: 24px; padding: 30px 22px 32px; min-width: 1560px; }

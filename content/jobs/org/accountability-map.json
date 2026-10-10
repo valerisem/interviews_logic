@@ -8,6 +8,11 @@
       "text": "person ultimately responsible for the result"
     },
     {
+      "key": "responsible",
+      "label": "Responsible",
+      "text": "person who does the work"
+    },
+    {
       "key": "collaborates",
       "label": "Collaborates",
       "text": "functions that need to contribute"
@@ -379,6 +384,9 @@
           "accountable": [
             "Client Director"
           ],
+          "responsible": [
+            "Account Director / Account Manager"
+          ],
           "manages": [
             "Client Director",
             "Account Director / Account Manager"
@@ -411,6 +419,9 @@
             ],
             "manages": [
               "cd",
+              "am"
+            ],
+            "responsible": [
               "am"
             ]
           }
@@ -492,6 +503,9 @@
           "accountable": [
             "Account Manager"
           ],
+          "responsible": [
+            "Account Manager"
+          ],
           "manages": [
             "Client Director",
             "Account Manager"
@@ -527,6 +541,9 @@
             "manages": [
               "cd",
               "am"
+            ],
+            "responsible": [
+              "am"
             ]
           }
         }
@@ -540,6 +557,9 @@
           "task": "Overall Delivery performance",
           "accountable": [
             "Head of Delivery & Performance"
+          ],
+          "responsible": [
+            "Campaign Managers"
           ],
           "manages": [
             "Head of Delivery & Performance",
@@ -575,6 +595,9 @@
             "manages": [
               "hod",
               "scm",
+              "cm"
+            ],
+            "responsible": [
               "cm"
             ]
           }
@@ -663,6 +686,9 @@
           "accountable": [
             "Campaign Manager"
           ],
+          "responsible": [
+            "Campaign Manager"
+          ],
           "manages": [
             "Senior Campaign Manager",
             "Campaign Manager"
@@ -699,6 +725,9 @@
             "escChain": true,
             "manages": [
               "scm",
+              "cm"
+            ],
+            "responsible": [
               "cm"
             ]
           }
@@ -891,6 +920,9 @@
           "accountable": [
             "CFO"
           ],
+          "responsible": [
+            "Accountants / Payment Managers"
+          ],
           "manages": [
             "CFO",
             "Accountants / Payment Managers"
@@ -928,6 +960,10 @@
             ],
             "manages2": [
               "cfo",
+              "payments"
+            ],
+            "responsible": [
+              "accountants",
               "payments"
             ]
           }
@@ -1247,6 +1283,9 @@
           "accountable": [
             "Technology Operations for technical execution"
           ],
+          "responsible": [
+            "Technology Operations"
+          ],
           "manages": [
             "Head of Operations",
             "Technology Operations"
@@ -1271,6 +1310,9 @@
             ],
             "manages": [
               "hoo",
+              "techops"
+            ],
+            "responsible": [
               "techops"
             ]
           }
@@ -1313,11 +1355,11 @@
           "accountable": [
             "Head of Operations"
           ],
-          "manages": [
-            "Head of Operations",
+          "responsible": [
             "People Ops (HR)"
           ],
-          "dayToDay": [
+          "manages": [
+            "Head of Operations",
             "People Ops (HR)"
           ],
           "decision": [
@@ -1327,15 +1369,15 @@
             "accountable": [
               "hoo"
             ],
-            "dayToDay": [
-              "peopleops"
-            ],
             "decision": [
               "hoo",
               "peopleops"
             ],
             "manages": [
               "hoo",
+              "peopleops"
+            ],
+            "responsible": [
               "peopleops"
             ]
           }
@@ -1690,11 +1732,11 @@
             "Head of Operations temporarily"
           ],
           "currentLabel": "Current accountability",
-          "manages": [
-            "Head of Operations",
+          "responsible": [
             "Social Media Manager"
           ],
-          "dayToDay": [
+          "manages": [
+            "Head of Operations",
             "Social Media Manager"
           ],
           "collaborates": [
@@ -1712,9 +1754,6 @@
             "current": [
               "hoo"
             ],
-            "dayToDay": [
-              "smm"
-            ],
             "collaborates": [
               "hom"
             ],
@@ -1725,6 +1764,9 @@
             "manages": [
               "hoo",
               "smm"
+            ],
+            "responsible": [
+              "smm"
             ]
           }
         },
@@ -1732,6 +1774,9 @@
           "task": "Paid Marketing",
           "accountable": [
             "Paid Marketing Director"
+          ],
+          "responsible": [
+            "Performance Marketing Specialist"
           ],
           "manages": [
             "Paid Marketing Director",
@@ -1759,6 +1804,9 @@
             ],
             "manages": [
               "paid",
+              "pms"
+            ],
+            "responsible": [
               "pms"
             ]
           }
