@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 import { ADMIN_COOKIE, SESSION_HOURS, createSessionValue } from '@/lib/auth';
 import { OAUTH_COOKIE, checkClaims, exchangeCode } from '@/lib/google';
 import { isAdminEmail } from '@/lib/admins';
+import { NEXT_COOKIE, safeNext } from '@/lib/returnPath';
 
 /** Google sends the recruiter back here. Only listed admins (team members or ADMIN_EXTRA_EMAILS) get a session. */
 export async function GET(req: Request) {
@@ -24,8 +25,10 @@ export async function GET(req: Request) {
 
     if (!(await isAdminEmail(result.email))) return fail('not_allowed');
 
-    const res = NextResponse.redirect(appUrl('/admin', req.url), 303);
+    const next = safeNext(decodeURIComponent(req.headers.get('cookie')?.match(new RegExp(`${NEXT_COOKIE}=([^;]+)`))?.[1] ?? ''));
+    const res = NextResponse.redirect(appUrl(next, req.url), 303);
     res.cookies.delete({ name: OAUTH_COOKIE, path: '/api/auth/google' });
+    res.cookies.delete({ name: NEXT_COOKIE, path: '/api/auth/google' });
     res.cookies.set(ADMIN_COOKIE, await createSessionValue(result.email), {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',

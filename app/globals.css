@@ -504,6 +504,9 @@ table.data .select-cell { width: 1%; min-width: 0; padding-right: 4px; }
 .cr-values .cr-kicker { color: #fff; text-align: right; }
 .cr-value-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px 40px; margin-top: 56px; }
 .cr-value-list h3 { position: relative; font-family: var(--display); font-size: clamp(28px, 2.8vw, 38px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 700; color: #fff; }
+.cr-value-list article { display: grid; grid-template-columns: 104px minmax(0, 1fr); column-gap: 14px; align-items: center; }
+.cr-value-art { width: 104px; height: 85px; color: #fff; }
+.cr-value-list article p { grid-column: 1 / -1; }
 .cr-value-list p { margin-top: 14px; font-size: 16px; line-height: 1.65; color: rgba(255,255,255,.92); }
 /* Tags: straight labels next to the year or value they belong to */
 .cr-tag { display: inline-block; flex: none; font-family: var(--font); font-size: 15px; font-weight: 700; letter-spacing: 0; line-height: 1; padding: 8px 12px; border-radius: 9px; white-space: nowrap; }
@@ -541,6 +544,13 @@ table.data .select-cell { width: 1%; min-width: 0; padding-right: 4px; }
 .cr-benefit.pink { background: #FFE0EC; color: #4a1530; } .cr-benefit.pink h3 { color: #C21F6A; } .cr-benefit.pink .cr-bicon { background: #fff; color: #F0438F; }
 .cr-benefit.grey { background: var(--surface); color: var(--text); } .cr-benefit.grey h3 { color: var(--heading); } .cr-benefit.grey .cr-bicon { background: var(--bg); color: #F0438F; }
 .cr-photo { display: block; width: 100%; height: calc(100% - 18px); object-fit: cover; border-radius: 18px; }
+/* Remote First: rows of the places our team works from, sliding past like a ticker */
+.cr-places { margin: 14px -30px 0; display: flex; flex-direction: column; gap: 8px; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.cr-places-row { display: flex; gap: 8px; width: max-content; animation: cr-ticker 38s linear infinite; }
+.cr-places-row.back { animation-direction: reverse; }
+.cr-places-row span { flex: none; padding: 7px 13px; border-radius: 10px; border: 1px solid rgba(255,255,255,.28); font-size: 13.5px; font-weight: 600; color: #fff; white-space: nowrap; }
+@keyframes cr-ticker { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .cr-places-row { animation: none; } }
 .cr-benefits-phone { display: none; flex-direction: column; gap: 16px; }
 .cr-benefits-phone .cr-photo { height: 280px; }
 .cr-swipe { display: flex; gap: 12px; margin: 0 -16px; padding: 0 16px 4px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 16px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }

@@ -44,22 +44,29 @@ export const PEOPLE: { name: string; role?: string; photo: string }[] = [
   { name: 'Sarineh Garapetian', role: 'Account Manager', photo: '/team/sarineh.png' },
 ];
 
+/** Where our team members work from (countries in the team directory). */
+export const TEAM_COUNTRIES = [
+  'United Kingdom', 'South Africa', 'Brazil', 'Philippines', 'Slovenia', 'Argentina', 'Italy', 'Spain',
+  'France', 'Romania', 'Peru', 'Kenya', 'Pakistan', 'North Macedonia', 'Cyprus', 'India',
+  'Colombia', 'Egypt', 'Serbia', 'Portugal', 'South Korea', 'Nigeria', 'Ukraine', 'Mexico',
+];
+
 export type BenefitTone = 'navy' | 'fuchsia' | 'pink' | 'grey';
-export type BenefitIcon = 'laptop' | 'stairs' | 'calendar' | 'gift' | 'heart';
+export type BenefitIcon = 'globe' | 'laptop' | 'stairs' | 'calendar' | 'gift' | 'heart';
 /**
  * Benefits as a collage: cards and photos of different sizes and colours, placed on a 12-column grid.
  * `area` is the CSS grid-area (row start / column start / row end / column end); one row is 10px.
  */
-export const BENEFITS: ({ area: string } & ({ title: string; text: string; tone: BenefitTone; icon?: BenefitIcon } | { photo: string; alt: string }))[] = [
+export const BENEFITS: ({ area: string } & ({ title: string; text: string; tone: BenefitTone; icon?: BenefitIcon; tags?: string[] } | { photo: string; alt: string }))[] = [
   { area: '7 / 2 / 37 / 5', photo: '/careers/team.jpg', alt: 'Members of the House of Marketers team' },
-  { area: '38 / 1 / 55 / 5', title: 'Work From Anywhere', text: 'Enjoy the flexibility of remote work while collaborating with talented people from around the world.', tone: 'pink' },
+  { area: '38 / 1 / 55 / 5', title: 'Healthcare Benefits', text: 'Eligible UK team members receive healthcare benefits to support their health and wellbeing.', tone: 'pink' },
   { area: '56 / 2 / 88 / 5', title: 'Tech & Equipment', text: 'Our UK-based team members receive company-provided MacBooks to help them do their best work.', tone: 'navy', icon: 'laptop' },
   { area: '1 / 5 / 35 / 8', title: 'Coaching & Career Development', text: 'Grow your skills, receive ongoing coaching, and explore opportunities to advance your career.', tone: 'fuchsia', icon: 'stairs' },
   { area: '36 / 5 / 69 / 8', title: 'Industry Events & Conferences', text: 'Get opportunities to attend industry-leading events, conferences, and networking experiences.', tone: 'grey', icon: 'calendar' },
   { area: '70 / 5 / 99 / 8', title: 'Referral Bonus', text: 'Recommend great talent to join our team and earn up to £1,000 for a successful referral.', tone: 'pink', icon: 'gift' },
-  { area: '10 / 8 / 43 / 11', title: 'Healthcare Benefits', text: 'Eligible UK team members receive healthcare benefits to support their health and wellbeing.', tone: 'navy', icon: 'heart' },
-  { area: '44 / 8 / 61 / 13', title: 'Time Off & Leave', text: 'Take time to recharge, travel, and enjoy life outside work with our time-off and leave benefits.', tone: 'fuchsia' },
-  { area: '62 / 8 / 92 / 11', photo: '/careers/team2.jpg', alt: 'Members of the House of Marketers team' },
+  { area: '10 / 8 / 57 / 11', title: 'Remote First', text: 'Enjoy the flexibility of remote work while collaborating with talented people from around the world.', tone: 'navy', icon: 'globe', tags: TEAM_COUNTRIES },
+  { area: '58 / 8 / 75 / 13', title: 'Time Off & Leave', text: 'Take time to recharge, travel, and enjoy life outside work with our time-off and leave benefits.', tone: 'fuchsia' },
+  { area: '76 / 8 / 106 / 11', photo: '/careers/team2.jpg', alt: 'Members of the House of Marketers team' },
 ];
 
 /** Org-chart cards that open a job page, matched by the card's role. */
@@ -88,7 +95,8 @@ export async function careerRoles(): Promise<{ roles: CareerRole[]; saved: boole
   }
   const roles = JOB_SLUGS.map((slug) => {
     const job = getJob(slug) as Job;
-    const location = job.details.find(([k]) => k === 'Location')?.[1];
+    // Every role is remote unless its job description says otherwise.
+    const location = job.details.find(([k]) => k === 'Location')?.[1] ?? 'Remote';
     return { slug, title: `${job.title} ${job.titleAccent}`, location, open: !closed.has(slug) };
   });
   return { roles, saved };
