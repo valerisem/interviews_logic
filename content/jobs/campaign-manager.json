@@ -1,0 +1,212 @@
+{
+  "slug": "campaign-manager",
+  "title": "Campaign",
+  "titleAccent": "Manager",
+  "details": [
+    [
+      "Location",
+      "Remote"
+    ],
+    [
+      "Pod",
+      "Aligned to one pod"
+    ],
+    [
+      "Reports to",
+      "Delivery Director"
+    ],
+    [
+      "Takes direction from",
+      "Pod AD / AM"
+    ],
+    [
+      "Remuneration",
+      "Competitive"
+    ],
+    [
+      "Bonus",
+      "Based on delivery KPIs and team outcomes"
+    ],
+    [
+      "Growth path",
+      "Senior CM"
+    ]
+  ],
+  "sections": [
+    {
+      "id": "about",
+      "title": "About the Role",
+      "aside": "details",
+      "blocks": [
+        "At House of Marketers, we help global brands grow through **high-performing influencer marketing campaigns** across multiple markets and platforms. As we continue to scale, our **pod-based structure** keeps account ownership, delivery, and commercial growth close together — and this role is one of its four core seats.",
+        "The Campaign Manager **executes best-in-class influencer campaigns end-to-end** — the person who makes the work ship. You own the coordination of multiple campaigns from setup through execution: balancing structure, communication, and problem-solving so **timelines are hit and nothing falls through the cracks.**",
+        "You are managed by the Delivery Director (who owns your capacity, quality, and growth) and take your campaign priorities from the pod you’re aligned to. We’re looking for someone **organised, proactive, and excited by ownership** — who solves problems before they escalate."
+      ]
+    },
+    {
+      "id": "own",
+      "title": "What the Role Owns",
+      "layout": "cards",
+      "items": [
+        {
+          "title": "Campaign Execution & Delivery",
+          "blocks": [
+            {
+              "list": [
+                "Set up and manage campaigns in the project-management system with precision and timeliness",
+                "Coordinate day-to-day influencer communication (availability, deliverables, reminders)",
+                "Run quality assurance of influencer lists, briefs, contracts, and content",
+                "Ensure campaign timelines, usage rights, and deliverables are met"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Coordination & Communication",
+          "blocks": [
+            {
+              "list": [
+                "Take day-to-day campaign direction from the pod’s Account Manager / Account Director",
+                "Support prep for client calls, flag key updates, and document action points",
+                "Communicate with influencers professionally and on time"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Workflow Ownership & Accountability",
+          "blocks": [
+            {
+              "list": [
+                "Keep the project-management system 100% up to date for full delivery visibility",
+                "Use established systems for capacity tracking, margin visibility, and outreach updates",
+                "Follow SOPs for consistent, error-free delivery",
+                "Escalate early: client / campaign risk → Account Manager; capacity, quality, or people issues → Delivery Director"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Learning & Development",
+          "blocks": [
+            {
+              "list": [
+                "Attend coaching and QA sessions and campaign debriefs run by Delivery",
+                "Complete structured onboarding and development milestones toward Senior CM"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Where the Role Sits",
+      "half": true,
+      "blocks": [
+        "The Campaign Manager sits in **one pod** and works under two lines:",
+        {
+          "list": [
+            "**Reports to (solid line): Delivery Director** — your manager for capacity, quality, coaching, and career",
+            "**Takes direction from (dotted line): the pod’s Account Director / Account Manager** — for campaign priorities and client work"
+          ]
+        },
+        "**You deliver the work; the pod decides what matters and Delivery sets how it is done.**"
+      ]
+    },
+    {
+      "id": "boundaries",
+      "title": "What the Role Does Not Own",
+      "half": true,
+      "blocks": [
+        {
+          "list": [
+            "The client relationship — owned by the Account Manager",
+            "What’s most important / campaign priority — set by the pod (Account Director / Account Manager)",
+            "Your own capacity allocation and quality standards — owned by the Delivery Director",
+            "Retention, upsell, and commercial decisions — owned by the pod"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "how",
+      "title": "How We Work",
+      "layout": "values",
+      "items": [
+        {
+          "title": "Be proactive",
+          "blocks": [
+            "If something looks wrong, **investigate it before somebody asks you to.**\n\nDo not wait for a problem to become an escalation."
+          ]
+        },
+        {
+          "title": "Be intelligently curious",
+          "blocks": [
+            "Before asking someone else for the answer, **check.**\n\nLook at the data. Speak to the right people. Test your assumptions. Understand what is actually happening.\n\nThen **bring a recommendation, not just a question.**"
+          ]
+        },
+        {
+          "title": "Take ownership",
+          "blocks": [
+            "We do not want problems passed from person to person or department to department.\n\nIf you own something, **you stay close to it until there is a solution.**"
+          ]
+        },
+        {
+          "title": "Think from first principles",
+          "blocks": [
+            "If the same problem keeps happening, we do not want another checklist or temporary fix.\n\nUnderstand why it is happening and **fix the root cause.**"
+          ]
+        },
+        {
+          "title": "Move fast",
+          "blocks": [
+            "Our industry changes constantly. Technology changes constantly. The company changes quickly.\n\nYou should be comfortable **testing new ideas, trying new tools, changing direction**, and **making decisions without waiting for perfect information.**"
+          ]
+        },
+        {
+          "title": "Use AI with judgement",
+          "blocks": [
+            "We use AI heavily, but **we do not want AI slop.**\n\nAI should help you **think, analyse, automate, and move faster.** It should not result in endless generic documents, unnecessary documents, or reports nobody needs.\n\n**Clear thinking comes first.**"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "looking-for",
+      "title": "What We Are Looking For",
+      "half": true,
+      "blocks": [
+        {
+          "list": [
+            "Experience in digital marketing, influencer marketing, project coordination, creator economy, or agency delivery",
+            "Experience managing paid and non-paid influencer activations (PR gifting, seeding, ambassador programs) is a strong advantage",
+            "A systems thinker — comfortable with tech tools and structured workflows",
+            "Strong multitasking skills, with excellent attention to detail",
+            "Confident communicator in English, both written and spoken",
+            "A positive attitude and hunger to learn, improve, and contribute",
+            "AI fluency and operational system knowledge/comfort"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "success",
+      "title": "What Success Looks Like",
+      "half": true,
+      "blocks": [
+        "You are doing this role well when:",
+        {
+          "list": [
+            "Campaigns are delivered on time",
+            "The project-management system is 100% accurate and up to date",
+            "Campaign errors and escalations are minimal",
+            "You show initiative in solving campaign blockers before they escalate",
+            "Feedback from clients, teammates, and influencers is positive",
+            "You progress steadily toward Senior CM"
+          ]
+        }
+      ]
+    }
+  ]
+}
