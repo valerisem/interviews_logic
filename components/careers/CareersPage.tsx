@@ -30,6 +30,25 @@ const ICONS: Record<BenefitIcon, React.ReactNode> = {
   heart: <path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" />,
 };
 
+type BenefitItem = (typeof BENEFITS)[number];
+type Card = Extract<BenefitItem, { title: string }>;
+const cards = BENEFITS.filter((b): b is Card => 'title' in b);
+const photos = BENEFITS.filter((b): b is Extract<BenefitItem, { photo: string }> => 'photo' in b);
+
+function BenefitCard({ b, style }: { b: Card; style?: React.CSSProperties }) {
+  return (
+    <article className={`cr-benefit ${b.tone}`} style={style}>
+      {b.icon && (
+        <span className="cr-bicon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">{ICONS[b.icon]}</svg>
+        </span>
+      )}
+      <h3>{b.title}</h3>
+      <p>{b.text}</p>
+    </article>
+  );
+}
+
 export function CareersPage({ roles, admin, saved }: { roles: CareerRole[]; admin?: boolean; saved?: boolean }) {
   const shown = admin ? roles : roles.filter((r) => r.open);
   const org = ORG_CHARTS['head-of-operations'];
@@ -124,16 +143,23 @@ export function CareersPage({ roles, admin, saved }: { roles: CareerRole[]; admi
               // eslint-disable-next-line @next/next/no-img-element
               <img key={b.photo} className="cr-photo" src={b.photo} alt={b.alt} loading="lazy" style={{ gridArea: b.area }} />
             ) : (
-              <article key={b.title} className={`cr-benefit ${b.tone}`} style={{ gridArea: b.area }}>
-                {b.icon && (
-                  <span className="cr-bicon" aria-hidden="true">
-                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">{ICONS[b.icon]}</svg>
-                  </span>
-                )}
-                <h3>{b.title}</h3>
-                <p>{b.text}</p>
-              </article>
+              <BenefitCard key={b.title} b={b} style={{ gridArea: b.area }} />
             ),
+          )}
+        </div>
+        {/* Phones: a team photo, the benefits as a row you swipe through, then the other team photo. */}
+        <div className="cr-benefits-phone">
+          {photos[0] && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img className="cr-photo" src={photos[0].photo} alt={photos[0].alt} loading="lazy" />
+          )}
+          <div className="cr-swipe" aria-label="Benefits, swipe for more">
+            {cards.map((b) => <BenefitCard key={b.title} b={b} />)}
+          </div>
+          <p className="cr-swipe-hint" aria-hidden="true">Swipe for more →</p>
+          {photos[1] && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img className="cr-photo" src={photos[1].photo} alt={photos[1].alt} loading="lazy" />
           )}
         </div>
       </section>

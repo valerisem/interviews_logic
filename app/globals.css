@@ -542,6 +542,12 @@ table.data .select-cell { width: 1%; min-width: 0; padding-right: 4px; }
 .cr-benefit.pink { background: #FFE0EC; color: #4a1530; } .cr-benefit.pink h3 { color: #C21F6A; } .cr-benefit.pink .cr-bicon { background: #fff; color: #F0438F; }
 .cr-benefit.grey { background: var(--surface); color: var(--text); } .cr-benefit.grey h3 { color: var(--heading); } .cr-benefit.grey .cr-bicon { background: var(--bg); color: #F0438F; }
 .cr-photo { display: block; width: 100%; height: calc(100% - 18px); object-fit: cover; border-radius: 18px; }
+.cr-benefits-phone { display: none; flex-direction: column; gap: 16px; }
+.cr-benefits-phone .cr-photo { height: 280px; }
+.cr-swipe { display: flex; gap: 12px; margin: 0 -16px; padding: 0 16px 4px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 16px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.cr-swipe::-webkit-scrollbar { display: none; }
+.cr-swipe .cr-benefit { flex: 0 0 82%; margin: 0; min-height: 280px; scroll-snap-align: start; }
+.cr-swipe-hint { margin-top: -6px; font-size: 13px; font-weight: 700; color: var(--muted); text-align: right; }
 
 /* Sounds good? and the open roles */
 .cr-cta { max-width: 980px; margin: 0 auto; padding: 56px 16px 8px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 22px; }
@@ -576,9 +582,8 @@ table.data .select-cell { width: 1%; min-width: 0; padding-right: 4px; }
   .cr-values { padding: 56px 16px 64px 0; }
   .cr-values .cr-kicker { text-align: left; }
   .cr-value-list { grid-template-columns: 1fr; gap: 36px; }
-  .cr-benefits { grid-template-columns: 1fr; grid-auto-rows: auto; }
-  .cr-benefits > * { grid-area: auto !important; }
-  .cr-photo { height: 300px; margin-bottom: 18px; }
+  .cr-benefits { display: none; }
+  .cr-benefits-phone { display: flex; }
   .cr-section { padding: 64px 16px; }
   .cr-hero { padding: 64px 16px 48px; }
   .cr-person { width: 210px; height: 260px; }
