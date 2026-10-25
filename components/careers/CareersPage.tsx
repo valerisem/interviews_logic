@@ -23,13 +23,11 @@ function Inline({ text }: { text: string }) {
 }
 
 const ICONS: Record<BenefitIcon, React.ReactNode> = {
-  globe: <g><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z" /></g>,
-  trophy: <g><path d="M8 4h8v5a4 4 0 0 1-8 0z" /><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8 20h8M9.5 17h5" /></g>,
+  laptop: <g><rect x="4" y="5" width="16" height="11" rx="1.5" /><path d="M2 19h20" /></g>,
   stairs: <g><path d="M4 20h5v-5h5v-5h5V5" /><path d="m15 5h4v4" /></g>,
-  chat: <g><path d="M4 5h16v10H9l-5 4z" /><path d="M8 9h8M8 12h5" /></g>,
-  spark: <g><path d="M10 3l1.8 5.2L17 10l-5.2 1.8L10 17l-1.8-5.2L3 10l5.2-1.8z" /><path d="M19 15l.7 2.3L22 18l-2.3.7L19 21l-.7-2.3L16 18l2.3-.7z" /></g>,
-  target: <g><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="5" /><circle cx="12" cy="12" r="1.5" /></g>,
-  brands: <g><rect x="3" y="7" width="18" height="13" rx="2" /><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18" /></g>,
+  calendar: <g><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M3 10h18M8 3v4M16 3v4" /><path d="m9.5 15 2 2 3.5-4" /></g>,
+  gift: <g><rect x="3" y="8" width="18" height="5" rx="1" /><path d="M5 13v8h14v-8M12 8v13" /><path d="M12 8c-1.5-3-5-3.5-5-1.5S10 8 12 8zM12 8c1.5-3 5-3.5 5-1.5S14 8 12 8z" /></g>,
+  heart: <path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" />,
 };
 
 export function CareersPage({ roles, admin, saved }: { roles: CareerRole[]; admin?: boolean; saved?: boolean }) {
