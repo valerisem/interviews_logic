@@ -12,23 +12,23 @@ export const ABOUT = [
   'What unites us is a shared ambition to **push boundaries, challenge the ordinary, and set new standards** for the industry. We believe great work comes from exceptional people, and we give them the opportunity to **make a real impact every day.**',
 ];
 
-/** Our history: the big word, its sticker, and the line under it. */
-export const HISTORY: { big: string; tag: string; text: string }[] = [
-  { big: '2020', tag: 'Founded', text: 'Founded by Inigo Rivero, one of TikTok UK’s early employees, who saw the potential of creator marketing before it became a core channel for global brands.' },
-  { big: 'Global', tag: 'Growth', text: 'We grew into a global influencer marketing agency, working across markets, platforms and industries.' },
-  { big: 'Today', tag: 'Investment', text: 'Following an acquisition and investment into the business, we are entering our next stage of growth.' },
+/** Our history: the year, a short label and what happened. */
+export const HISTORY: { year: string; label: string; text: string }[] = [
+  { year: '2020', label: 'Founded', text: 'House of Marketers was founded by **Inigo Rivero, TikTok’s first employee in the UK**, who saw the potential of creator marketing before it became a core channel for global brands.' },
+  { year: '2023', label: 'Scale', text: 'More than **500 influencer campaigns delivered** and **over 10,000 influencers** worked with, for some of the biggest brands on the market.' },
+  { year: '2026', label: 'Acquired', text: 'House of Marketers was **acquired by Ethos Partners**, a large conglomerate, and is **growing fast** as we enter our next stage of growth.' },
 ];
 
 export const VALUES_HEADLINE = 'If something looks wrong, we fix it before anyone asks.';
 
-/** How we work, written as company values. */
-export const VALUES: { title: string; tag: string; text: string }[] = [
-  { title: 'Proactivity', tag: 'Mindset', text: 'We spot problems before anyone asks. If something looks off, we investigate it straight away instead of waiting for it to become an escalation.' },
-  { title: 'Intelligent curiosity', tag: 'Thinking', text: 'We check before we ask. We look at the data, speak to the right people and test our assumptions, then bring a recommendation, not just a question.' },
-  { title: 'Ownership', tag: 'Accountability', text: 'When something is ours, we stay close to it until it is solved. Problems are never passed from person to person or team to team.' },
-  { title: 'First principles', tag: 'Root cause', text: 'When the same problem keeps happening, we do not add another checklist. We understand why it happens and fix the cause.' },
-  { title: 'Speed', tag: 'Pace', text: 'Our industry, our technology and our company change fast. We test new ideas, try new tools, change direction and decide without waiting for perfect information.' },
-  { title: 'AI with judgement', tag: 'Craft', text: 'We use AI heavily to think, analyse, automate and move faster, never to produce generic documents nobody needs. Clear thinking comes first.' },
+/** How we work, written as company values (in the same order as the icons on the job pages). */
+export const VALUES: { title: string; text: string }[] = [
+  { title: 'Proactivity', text: 'We spot problems before anyone asks. If something looks off, we investigate it straight away instead of waiting for it to become an escalation.' },
+  { title: 'Intelligent curiosity', text: 'We check before we ask. We look at the data, speak to the right people and test our assumptions, then bring a recommendation, not just a question.' },
+  { title: 'Ownership', text: 'When something is ours, we stay close to it until it is solved. Problems are never passed from person to person or team to team.' },
+  { title: 'First principles', text: 'When the same problem keeps happening, we do not add another checklist. We understand why it happens and fix the cause.' },
+  { title: 'Speed', text: 'Our industry, our technology and our company change fast. We test new ideas, try new tools, change direction and decide without waiting for perfect information.' },
+  { title: 'AI with judgement', text: 'We use AI heavily to think, analyse, automate and move faster, never to produce generic documents nobody needs. Clear thinking comes first.' },
 ];
 
 /** A few of our people (photos in public/team). */
@@ -45,24 +45,24 @@ export const PEOPLE: { name: string; role?: string; photo: string }[] = [
   { name: 'Sarineh Garapetian', role: 'Account Manager', photo: '/team/sarineh.png' },
 ];
 
-export type BenefitTone = 'indigo' | 'pink' | 'lavender' | 'fuchsia' | 'navy' | 'surface';
 export type BenefitIcon = 'globe' | 'trophy' | 'stairs' | 'chat' | 'spark' | 'target' | 'brands';
-/** Benefits, laid out in three staggered columns; `photo` tiles hold team pictures. */
-export const BENEFITS: ({ title: string; text: string; tone: BenefitTone; icon: BenefitIcon } | { photo: string })[][] = [
+type Benefit = { title: string; text: string; icon: BenefitIcon; tint?: boolean };
+/** Benefits, laid out in three staggered columns, with team photos between them. */
+export const BENEFITS: (Benefit | { photo: string; alt: string })[][] = [
   [
-    { photo: 'Team photo' },
-    { title: 'Work remotely', text: 'Work from wherever you do your best work, as part of a team spread across markets.', tone: 'lavender', icon: 'globe' },
-    { title: 'Clear growth paths', text: 'Structured onboarding, development milestones and a clear path to your next role.', tone: 'fuchsia', icon: 'stairs' },
+    { photo: '/careers/team.jpg', alt: 'Members of the House of Marketers team' },
+    { title: 'Work remotely', text: 'Work from wherever you do your best work, as part of a team spread across markets.', icon: 'globe', tint: true },
+    { title: 'Clear growth paths', text: 'Structured onboarding, development milestones and a clear path to your next role.', icon: 'stairs' },
   ],
   [
-    { title: 'Performance bonus', text: 'Bonuses tied to clear KPIs and team outcomes, so great work is recognised.', tone: 'indigo', icon: 'trophy' },
-    { title: 'Coaching and feedback', text: 'Regular coaching, QA sessions and debriefs that help you keep getting better.', tone: 'pink', icon: 'chat' },
-    { title: 'Global brands', text: 'Campaigns for global brands across markets, platforms and industries.', tone: 'navy', icon: 'brands' },
+    { title: 'Performance bonus', text: 'Bonuses tied to clear KPIs and team outcomes, so great work is recognised.', icon: 'trophy' },
+    { title: 'Coaching and feedback', text: 'Regular coaching, QA sessions and debriefs that help you keep getting better.', icon: 'chat', tint: true },
+    { title: 'Global brands', text: 'Campaigns for global brands across markets, platforms and industries.', icon: 'brands' },
   ],
   [
-    { title: 'AI-first tools', text: 'We use AI and modern tooling heavily, so your time goes on thinking, not repetitive work.', tone: 'surface', icon: 'spark' },
-    { title: 'Real ownership', text: 'You own your work, make real decisions and see the impact you have every day.', tone: 'indigo', icon: 'target' },
-    { photo: 'Team photo' },
+    { title: 'AI-first tools', text: 'We use AI and modern tooling heavily, so your time goes on thinking, not repetitive work.', icon: 'spark', tint: true },
+    { title: 'Real ownership', text: 'You own your work, make real decisions and see the impact you have every day.', icon: 'target' },
+    { photo: '/careers/office.jpg', alt: 'The House of Marketers office' },
   ],
 ];
 
