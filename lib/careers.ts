@@ -12,16 +12,16 @@ export const ABOUT = [
   'What unites us is a shared ambition to **push boundaries, challenge the ordinary, and set new standards** for the industry. We believe great work comes from exceptional people, and we give them the opportunity to **make a real impact every day.**',
 ];
 
-/** Our history: the year, a short label and what happened. */
-export const HISTORY: { year: string; label: string; text: string }[] = [
-  { year: '2020', label: 'Founded', text: 'House of Marketers was founded by **Inigo Rivero, TikTok’s first employee in the UK**, who saw the potential of creator marketing before it became a core channel for global brands.' },
-  { year: '2023', label: 'Scale', text: 'More than **500 influencer campaigns delivered** and **over 10,000 influencers** worked with, for some of the biggest brands on the market.' },
-  { year: '2026', label: 'Acquired', text: 'House of Marketers was **acquired by Ethos Partners**, a large conglomerate, and is **growing fast** as we enter our next stage of growth.' },
+/** Our history: the big year and the line under it. */
+export const HISTORY: { big: string; text: string }[] = [
+  { big: '2020', text: 'House of Marketers was founded by Inigo Rivero, TikTok’s first employee in the UK, who saw the potential of creator marketing before it became a core channel for global brands.' },
+  { big: '2023', text: 'More than 500 influencer campaigns delivered and over 10,000 influencers worked with, for some of the biggest brands on the market.' },
+  { big: '2026', text: 'House of Marketers was acquired by Ethos Partners, a large conglomerate, and is growing fast as we enter our next stage of growth.' },
 ];
 
 export const VALUES_HEADLINE = 'If something looks wrong, we fix it before anyone asks.';
 
-/** How we work, written as company values (in the same order as the icons on the job pages). */
+/** How we work, written as company values. */
 export const VALUES: { title: string; text: string }[] = [
   { title: 'Proactivity', text: 'We spot problems before anyone asks. If something looks off, we investigate it straight away instead of waiting for it to become an escalation.' },
   { title: 'Intelligent curiosity', text: 'We check before we ask. We look at the data, speak to the right people and test our assumptions, then bring a recommendation, not just a question.' },
@@ -45,25 +45,22 @@ export const PEOPLE: { name: string; role?: string; photo: string }[] = [
   { name: 'Sarineh Garapetian', role: 'Account Manager', photo: '/team/sarineh.png' },
 ];
 
+export type BenefitTone = 'navy' | 'fuchsia' | 'blush' | 'lilac' | 'peach' | 'butter' | 'raspberry';
 export type BenefitIcon = 'globe' | 'trophy' | 'stairs' | 'chat' | 'spark' | 'target' | 'brands';
-type Benefit = { title: string; text: string; icon: BenefitIcon; tint?: boolean };
-/** Benefits, laid out in three staggered columns, with team photos between them. */
-export const BENEFITS: (Benefit | { photo: string; alt: string })[][] = [
-  [
-    { photo: '/careers/team.jpg', alt: 'Members of the House of Marketers team' },
-    { title: 'Work remotely', text: 'Work from wherever you do your best work, as part of a team spread across markets.', icon: 'globe', tint: true },
-    { title: 'Clear growth paths', text: 'Structured onboarding, development milestones and a clear path to your next role.', icon: 'stairs' },
-  ],
-  [
-    { title: 'Performance bonus', text: 'Bonuses tied to clear KPIs and team outcomes, so great work is recognised.', icon: 'trophy' },
-    { title: 'Coaching and feedback', text: 'Regular coaching, QA sessions and debriefs that help you keep getting better.', icon: 'chat', tint: true },
-    { title: 'Global brands', text: 'Campaigns for global brands across markets, platforms and industries.', icon: 'brands' },
-  ],
-  [
-    { title: 'AI-first tools', text: 'We use AI and modern tooling heavily, so your time goes on thinking, not repetitive work.', icon: 'spark', tint: true },
-    { title: 'Real ownership', text: 'You own your work, make real decisions and see the impact you have every day.', icon: 'target' },
-    { photo: '/careers/office.jpg', alt: 'The House of Marketers office' },
-  ],
+/**
+ * Benefits as a collage: cards and photos of different sizes and colours, placed on a 12-column grid.
+ * `area` is the CSS grid-area (row start / column start / row end / column end); one row is 10px.
+ */
+export const BENEFITS: ({ area: string } & ({ title: string; text: string; tone: BenefitTone; icon?: BenefitIcon } | { photo: string; alt: string }))[] = [
+  { area: '7 / 2 / 37 / 5', photo: '/careers/team.jpg', alt: 'Members of the House of Marketers team' },
+  { area: '38 / 1 / 55 / 5', title: 'Work remotely', text: 'Work from wherever you do your best work, as part of a team spread across markets.', tone: 'butter' },
+  { area: '56 / 2 / 83 / 5', title: 'Clear growth paths', text: 'Structured onboarding, development milestones and a clear path to your next role.', tone: 'peach', icon: 'stairs' },
+  { area: '1 / 5 / 29 / 8', title: 'Performance bonus', text: 'Bonuses tied to clear KPIs and team outcomes, so great work is recognised.', tone: 'navy', icon: 'trophy' },
+  { area: '30 / 5 / 58 / 8', title: 'Coaching and feedback', text: 'Regular coaching, QA sessions and debriefs that help you keep getting better.', tone: 'blush', icon: 'chat' },
+  { area: '59 / 5 / 87 / 8', title: 'Global brands', text: 'Campaigns for global brands across markets, platforms and industries.', tone: 'fuchsia', icon: 'brands' },
+  { area: '10 / 8 / 34 / 11', title: 'AI-first tools', text: 'We use AI and modern tooling heavily, so your time goes on thinking, not repetitive work.', tone: 'lilac', icon: 'spark' },
+  { area: '35 / 8 / 52 / 13', title: 'Real ownership', text: 'You own your work, make real decisions and see the impact you have every day.', tone: 'raspberry' },
+  { area: '53 / 8 / 83 / 11', photo: '/careers/office.jpg', alt: 'The House of Marketers office' },
 ];
 
 /** Which team each published role sits in, for the open roles list. */
