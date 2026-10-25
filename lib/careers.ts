@@ -30,18 +30,18 @@ export const VALUES: { title: string; text: string }[] = [
   { title: 'AI with judgement', text: 'We use AI heavily to think, analyse, automate and move faster, never to produce generic documents nobody needs. Clear thinking comes first.' },
 ];
 
-/** A few of our people (photos in public/team). */
-export const PEOPLE: { name: string; role?: string; photo: string }[] = [
-  { name: 'Valeriia Mukhai', role: 'Client Director', photo: '/team/valeriia.png' },
-  { name: 'Ritchie Boubouli', role: 'Director of New Partnerships', photo: '/team/ritchie.png' },
+/** A few of our people. Quotes are taken from each person’s own “About me” in the team directory. */
+export const PEOPLE: { name: string; role?: string; photo: string; quote?: string }[] = [
+  { name: 'Valeriia Mukhai', role: 'Client Director', photo: '/team/valeriia.png', quote: 'Clear expectations and mutual respect are non-negotiable for me. I value long-term thinking, trust built over time, and communication that doesn’t require reading between the lines.' },
+  { name: 'Ritchie Boubouli', role: 'Director of New Partnerships', photo: '/team/ritchie.png', quote: 'Conversations are my favourite starting point — especially when they lead somewhere unexpected. I enjoy meeting new people, exchanging ideas, and seeing where opportunities naturally grow.' },
   { name: 'Emily King', role: 'Account Director', photo: '/team/emily.png' },
-  { name: 'Carrick Klopper', role: 'Partnership Manager', photo: '/team/carrick.png' },
-  { name: 'Lucia Lopez Moreno', role: 'Account Director', photo: '/team/lucia.png' },
+  { name: 'Carrick Klopper', role: 'Partnership Manager', photo: '/team/carrick.png', quote: 'Conversations, people, and connections are what make work interesting for me. I enjoy seeing where a good discussion can lead and how different sides can fit together.' },
+  { name: 'Lucia Lopez Moreno', role: 'Account Director', photo: '/team/lucia.png', quote: 'I am originally from Galicia, Spain, but I’ve called London home for the past six years. Outside of work, you’ll usually find me hiking (mountains or coastline, I’m not picky), or catching a gig somewhere in east London.' },
   { name: 'Emma-Leigh Pedder', role: 'Account Manager', photo: '/team/emma.png' },
   { name: 'Blake', photo: '/team/blake.png' },
-  { name: 'Maggie Parrott', role: 'Account Manager', photo: '/team/maggie.png' },
-  { name: 'Levi Hoang', role: 'Account Manager', photo: '/team/levi.png' },
-  { name: 'Sarineh Garapetian', role: 'Account Manager', photo: '/team/sarineh.png' },
+  { name: 'Maggie Parrott', role: 'Account Manager', photo: '/team/maggie.png', quote: 'Currently balancing life between two very demanding cats and an ever-growing list of hobbies that change with the seasons. Right now that includes ceramics, gardening, baking questionable amounts of bread, and training for a 10k swimming marathon — apparently all at once.' },
+  { name: 'Levi Hoang', role: 'Account Manager', photo: '/team/levi.png', quote: 'Been around long enough to know that influencer work is never as simple as it looks from the outside. I enjoy keeping things moving, handling whatever comes up, and helping newer people find their feet.' },
+  { name: 'Sarineh Garapetian', role: 'Account Manager', photo: '/team/sarineh.png', quote: 'I’m American Armenian, and currently live in Paris. I am always ready to talk film and TV, travels, pop culture, and memes!' },
 ];
 
 /** Where our team members work from (countries in the team directory). */
@@ -65,7 +65,7 @@ export const BENEFITS: ({ area: string } & ({ title: string; text: string; tone:
   { area: '36 / 5 / 69 / 8', title: 'Industry Events & Conferences', text: 'Get opportunities to attend industry-leading events, conferences, and networking experiences.', tone: 'grey', icon: 'calendar' },
   { area: '70 / 5 / 99 / 8', title: 'Referral Bonus', text: 'Recommend great talent to join our team and earn up to £1,000 for a successful referral.', tone: 'pink', icon: 'gift' },
   { area: '10 / 8 / 57 / 11', title: 'Remote First', text: 'Enjoy the flexibility of remote work while collaborating with talented people from around the world.', tone: 'navy', icon: 'globe', tags: TEAM_COUNTRIES },
-  { area: '58 / 8 / 75 / 13', title: 'Time Off & Leave', text: 'Take time to recharge, travel, and enjoy life outside work with our time-off and leave benefits.', tone: 'fuchsia' },
+  { area: '58 / 8 / 75 / 13', title: 'Time Off', text: 'Take time to recharge, travel, and enjoy life outside work with our time-off and leave benefits.', tone: 'fuchsia' },
   { area: '76 / 8 / 106 / 11', photo: '/careers/team2.jpg', alt: 'Members of the House of Marketers team' },
 ];
 
