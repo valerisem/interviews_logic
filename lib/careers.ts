@@ -30,18 +30,18 @@ export const VALUES: { title: string; text: string }[] = [
   { title: 'AI with judgement', text: 'We use AI heavily to think, analyse, automate and move faster, never to produce generic documents nobody needs. Clear thinking comes first.' },
 ];
 
-/** A few of our people. Quotes are taken from each person’s own “About me” in the team directory. */
-export const PEOPLE: { name: string; role?: string; photo: string; quote?: string }[] = [
-  { name: 'Valeriia Mukhai', role: 'Client Director', photo: '/team/valeriia.png', quote: 'Clear expectations and mutual respect are non-negotiable for me. I value long-term thinking, trust built over time, and communication that doesn’t require reading between the lines.' },
-  { name: 'Ritchie Boubouli', role: 'Director of New Partnerships', photo: '/team/ritchie.png', quote: 'Conversations are my favourite starting point — especially when they lead somewhere unexpected. I enjoy meeting new people, exchanging ideas, and seeing where opportunities naturally grow.' },
-  { name: 'Emily King', role: 'Account Director', photo: '/team/emily.png' },
-  { name: 'Carrick Klopper', role: 'Partnership Manager', photo: '/team/carrick.png', quote: 'Conversations, people, and connections are what make work interesting for me. I enjoy seeing where a good discussion can lead and how different sides can fit together.' },
-  { name: 'Lucia Lopez Moreno', role: 'Account Director', photo: '/team/lucia.png', quote: 'I am originally from Galicia, Spain, but I’ve called London home for the past six years. Outside of work, you’ll usually find me hiking (mountains or coastline, I’m not picky), or catching a gig somewhere in east London.' },
-  { name: 'Emma-Leigh Pedder', role: 'Account Manager', photo: '/team/emma.png' },
-  { name: 'Blake', photo: '/team/blake.png' },
-  { name: 'Maggie Parrott', role: 'Account Manager', photo: '/team/maggie.png', quote: 'Currently balancing life between two very demanding cats and an ever-growing list of hobbies that change with the seasons. Right now that includes ceramics, gardening, baking questionable amounts of bread, and training for a 10k swimming marathon — apparently all at once.' },
-  { name: 'Levi Hoang', role: 'Account Manager', photo: '/team/levi.png', quote: 'Been around long enough to know that influencer work is never as simple as it looks from the outside. I enjoy keeping things moving, handling whatever comes up, and helping newer people find their feet.' },
-  { name: 'Sarineh Garapetian', role: 'Account Manager', photo: '/team/sarineh.png', quote: 'I’m American Armenian, and currently live in Paris. I am always ready to talk film and TV, travels, pop culture, and memes!' },
+/** A few of our people (photos in public/team, LinkedIn links from the team directory). */
+export const PEOPLE: { name: string; role: string; photo: string; linkedin?: string; focus?: string }[] = [
+  { name: 'Inigo Rivero', role: 'Chief Executive Officer', photo: '/team/inigo.jpg', linkedin: 'https://www.linkedin.com/in/inigorivero' },
+  { name: 'Valeria Semibratnya', role: 'Head of Operations', photo: '/team/valeria.jpg', linkedin: 'https://www.linkedin.com/in/valeria-semibratnya/' },
+  { name: 'Valeriia Mukhai', role: 'Client Director', photo: '/team/valeriia.jpg', linkedin: 'https://www.linkedin.com/in/valeriia-mukhai-115007190/', focus: '78% center' },
+  { name: 'Ritchie Boubouli', role: 'Director of New Partnerships', photo: '/team/ritchie.jpg', linkedin: 'https://www.linkedin.com/in/ritchie-boubouli-42997713/' },
+  { name: 'Chris Wilson', role: 'Paid Marketing Director', photo: '/team/chris.jpg', linkedin: 'https://www.linkedin.com/in/its-chris-wilson/' },
+  { name: 'Emily King', role: 'Account Director', photo: '/team/emily.jpg' },
+  { name: 'Carrick Klopper', role: 'Partnership Manager', photo: '/team/carrick.jpg', linkedin: 'https://www.linkedin.com/in/carrick-klopper-5572742a/' },
+  { name: 'Nazeera Gaffoor', role: 'Creative Strategist', photo: '/team/nazeera.jpg', focus: 'center 20%' },
+  { name: 'Maggie Parrott', role: 'Account Manager', photo: '/team/maggie.jpg', linkedin: 'https://www.linkedin.com/in/maggieparrott', focus: 'center 20%' },
+  { name: 'Levi Hoang', role: 'Account Manager', photo: '/team/levi.jpg', linkedin: 'https://www.linkedin.com/in/levi-hoang-6819431a9/' },
 ];
 
 /** Where our team members work from (countries in the team directory). */
