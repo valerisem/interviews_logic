@@ -495,18 +495,23 @@ table.data .select-cell { width: 1%; min-width: 0; padding-right: 4px; }
 .cr-about > div { display: flex; flex-direction: column; gap: 18px; font-size: 21px; line-height: 1.6; color: var(--text); }
 
 /* History & values: a white history panel on a dark band (after the reference) */
-.cr-story { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.25fr); background: var(--cr-navy); color: #fff; padding: 32px 0 0 32px; }
-:root[data-theme='dark'] .cr-story { background: var(--surface); }
+.cr-story { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.25fr); background: var(--fuchsia); color: #fff; padding: 32px 0 0 32px; }
 .cr-history { background: var(--bg); color: var(--text); border-radius: 96px 0 0 0; padding: 88px 64px 96px; display: flex; flex-direction: column; gap: 72px; }
 .cr-kicker { font-size: 13px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--fuchsia); }
 .cr-year p { margin-top: 18px; font-size: 16px; line-height: 1.6; color: var(--muted); max-width: 420px; }
 .cr-big { position: relative; display: inline-block; font-family: var(--display); font-weight: 700; font-size: clamp(72px, 9vw, 132px); line-height: 0.9; letter-spacing: -0.05em; color: var(--heading); }
 .cr-values { padding: 88px 56px 96px; display: flex; flex-direction: column; gap: 28px; }
-.cr-values .cr-kicker { color: #ffb3d4; text-align: right; }
+.cr-values .cr-kicker { color: #fff; text-align: right; }
 .cr-values h2 { font-family: var(--display); font-size: clamp(40px, 5.4vw, 80px); line-height: 1.04; letter-spacing: -0.045em; font-weight: 700; color: #fff; }
 .cr-value-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px 40px; margin-top: 40px; }
 .cr-value-list h3 { position: relative; font-family: var(--display); font-size: clamp(28px, 2.8vw, 38px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 700; color: #fff; }
-.cr-value-list p { margin-top: 14px; font-size: 16px; line-height: 1.65; color: rgba(255,255,255,.78); }
+.cr-value-list p { margin-top: 14px; font-size: 16px; line-height: 1.65; color: rgba(255,255,255,.92); }
+/* Tags: straight labels next to the year or value they belong to */
+.cr-tag { display: inline-block; flex: none; font-family: var(--font); font-size: 15px; font-weight: 700; letter-spacing: 0; line-height: 1; padding: 8px 12px; border-radius: 9px; white-space: nowrap; }
+.cr-big .cr-tag { position: absolute; left: calc(100% - 0.36em); top: 44%; transform: translate(-50%, -50%); box-shadow: 0 6px 16px rgba(11,14,26,.16); }
+.cr-tag.fuchsia { background: #F0438F; color: #fff; }
+.cr-tag.navy { background: var(--cr-navy); color: #fff; }
+.cr-tag.pink { background: #FFE0EC; color: #C21F6A; }
 
 /* People: a moving row of team cards */
 .cr-people { max-width: none; padding-left: 0; padding-right: 0; }
@@ -526,15 +531,12 @@ table.data .select-cell { width: 1%; min-width: 0; padding-right: 4px; }
 .cr-benefit { margin-bottom: 18px; border-radius: 18px; padding: 30px 30px 32px; display: flex; flex-direction: column; gap: 10px; overflow: hidden; }
 .cr-benefit h3 { margin-top: auto; font-family: var(--display); font-size: 25px; line-height: 1.15; letter-spacing: -0.02em; font-weight: 700; }
 .cr-benefit p { font-size: 15.5px; line-height: 1.6; }
-.cr-bicon { width: 54px; height: 54px; border-radius: 14px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+.cr-bicon { flex: none; width: 54px; height: 54px; border-radius: 14px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 20px; }
 .cr-benefit.navy { background: var(--cr-navy); color: #fff; } .cr-benefit.navy h3 { color: #ff8fc0; } .cr-benefit.navy .cr-bicon { background: rgba(255,255,255,.1); color: #ff8fc0; }
 :root[data-theme='dark'] .cr-benefit.navy { background: #1d2236; }
 .cr-benefit.fuchsia { background: #F0438F; color: #fff; } .cr-benefit.fuchsia .cr-bicon { background: rgba(255,255,255,.2); color: #fff; }
-.cr-benefit.raspberry { background: #A3124F; color: #fff; } .cr-benefit.raspberry h3 { color: #ffd1e4; }
-.cr-benefit.blush { background: #FFE0EC; color: #4a1530; } .cr-benefit.blush .cr-bicon { background: #fff; color: #F0438F; }
-.cr-benefit.lilac { background: #E9E2FF; color: #2b1d55; } .cr-benefit.lilac .cr-bicon { background: #fff; color: #7c4dff; }
-.cr-benefit.peach { background: #FFD8C2; color: #5a2a12; } .cr-benefit.peach .cr-bicon { background: #fff; color: #e2611f; }
-.cr-benefit.butter { background: #FFF0B8; color: #4d3b00; }
+.cr-benefit.pink { background: #FFE0EC; color: #4a1530; } .cr-benefit.pink h3 { color: #C21F6A; } .cr-benefit.pink .cr-bicon { background: #fff; color: #F0438F; }
+.cr-benefit.grey { background: var(--surface); color: var(--text); } .cr-benefit.grey h3 { color: var(--heading); } .cr-benefit.grey .cr-bicon { background: var(--bg); color: #F0438F; }
 .cr-photo { display: block; width: 100%; height: calc(100% - 18px); object-fit: cover; border-radius: 18px; }
 
 /* Sounds good? and the open roles */

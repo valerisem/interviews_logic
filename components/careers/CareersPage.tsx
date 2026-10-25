@@ -86,7 +86,10 @@ export function CareersPage({ roles, admin, saved }: { roles: CareerRole[]; admi
           <p className="cr-kicker">Our History</p>
           {HISTORY.map((h) => (
             <div key={h.big} className="cr-year">
-              <div className="cr-big">{h.big}</div>
+              <div className="cr-big">
+                {h.big}
+                <span className={`cr-tag ${h.tone}`}>{h.tag}</span>
+              </div>
               <p>{h.text}</p>
             </div>
           ))}
