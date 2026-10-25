@@ -1,0 +1,189 @@
+{
+  "slug": "account-manager",
+  "title": "Account",
+  "titleAccent": "Manager",
+  "details": [
+    [
+      "Location",
+      "Remote"
+    ],
+    [
+      "Reports to",
+      "Account Director"
+    ]
+  ],
+  "sections": [
+    {
+      "id": "about",
+      "title": "About the Role",
+      "aside": "details",
+      "blocks": [
+        "At House of Marketers, we help global brands grow through **high-performing influencer marketing campaigns** across multiple markets and platforms. As we continue to scale, our **pod-based structure** keeps account ownership, delivery, and commercial growth close together — and this role is one of its four core seats.",
+        "The Account Manager **owns the day-to-day relationship for a portfolio of existing client accounts** and keeps their campaigns moving. Sitting between the client and the pod’s delivery team, you are **the client’s trusted daily partner**.",
+        "You drive **retention, renewals, and upsell** within your portfolio, brief the Campaign Managers on what your accounts need, and flag risk early to the Account Director. You own the relationship and the account — within the frame the Account Director sets for the pod."
+      ]
+    },
+    {
+      "id": "own",
+      "title": "What the Role Owns",
+      "layout": "cards",
+      "items": [
+        {
+          "title": "Client Relationship & Day-to-Day Ownership",
+          "blocks": [
+            {
+              "list": [
+                "Own the day-to-day relationship, communication, and satisfaction for a portfolio of accounts",
+                "Be the client’s trusted daily point of contact following handover from the sales process",
+                "Lead routine client calls, campaign reviews, and performance conversations for your accounts"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Retention & Growth (Your Portfolio)",
+          "blocks": [
+            {
+              "list": [
+                "Own retention and renewals across your own accounts",
+                "Identify and drive upsell and expansion opportunities within your portfolio",
+                "Keep your accounts engaged, satisfied, and seeing value"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Campaign Coordination",
+          "blocks": [
+            {
+              "list": [
+                "Brief and direct the Campaign Managers on the priorities of your accounts, within the Account Director’s frame",
+                "Keep campaigns on track — deadlines met, communication proactive and clear",
+                "Identify account and delivery risk early and propose solutions; escalate to the Account Director when it exceeds your accounts"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Reporting & Hygiene",
+          "blocks": [
+            {
+              "list": [
+                "Maintain accurate CRM records and account reporting across your portfolio",
+                "Keep the Account Director informed on account health, risk, and opportunity"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Where the Role Sits",
+      "half": true,
+      "blocks": [
+        "The Account Manager sits in **one pod**:",
+        {
+          "list": [
+            "**Reports to: Account Director**",
+            "**Manages: no direct reports**",
+            "**Directs (dotted line): the pod’s Campaign Managers**, on the priorities of your own accounts"
+          ]
+        },
+        "**You own the relationship and the account, within the frame the Account Director sets.**"
+      ]
+    },
+    {
+      "id": "boundaries",
+      "title": "What the Role Does Not Own",
+      "half": true,
+      "blocks": [
+        {
+          "list": [
+            "Pod-wide prioritisation and arbitration when accounts compete for capacity — owned by the Account Director",
+            "Managing people — Account Managers are managed by the Account Director; Campaign Managers by Delivery (Head of Delivery & Performance)",
+            "Campaign execution and delivery admin — owned by the Campaign Managers",
+            "Net-new business — owned by the Director of Partnerships (Pod Lead)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "how",
+      "title": "How We Work",
+      "layout": "values",
+      "items": [
+        {
+          "title": "Be proactive",
+          "blocks": [
+            "If something looks wrong, **investigate it before somebody asks you to.**\n\nDo not wait for a problem to become an escalation."
+          ]
+        },
+        {
+          "title": "Be intelligently curious",
+          "blocks": [
+            "Before asking someone else for the answer, **check.**\n\nLook at the data. Speak to the right people. Test your assumptions. Understand what is actually happening.\n\nThen **bring a recommendation, not just a question.**"
+          ]
+        },
+        {
+          "title": "Take ownership",
+          "blocks": [
+            "We do not want problems passed from person to person or department to department.\n\nIf you own something, **you stay close to it until there is a solution.**"
+          ]
+        },
+        {
+          "title": "Think from first principles",
+          "blocks": [
+            "If the same problem keeps happening, we do not want another checklist or temporary fix.\n\nUnderstand why it is happening and **fix the root cause.**"
+          ]
+        },
+        {
+          "title": "Move fast",
+          "blocks": [
+            "Our industry changes constantly. Technology changes constantly. The company changes quickly.\n\nYou should be comfortable **testing new ideas, trying new tools, changing direction**, and **making decisions without waiting for perfect information.**"
+          ]
+        },
+        {
+          "title": "Use AI with judgement",
+          "blocks": [
+            "We use AI heavily, but **we do not want AI slop.**\n\nAI should help you **think, analyse, automate, and move faster.** It should not result in endless generic documents, unnecessary documents, or reports nobody needs.\n\n**Clear thinking comes first.**"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "looking-for",
+      "title": "What We Are Looking For",
+      "half": true,
+      "blocks": [
+        {
+          "list": [
+            "Minimum 2 years in account management, client services, sales, partnerships, or a similar commercially-focused role",
+            "Fluent English, with strong communication and client-facing skills",
+            "Able to manage multiple clients, priorities, and projects in a fast-paced environment",
+            "Commercial mindset — confident identifying growth opportunities and building long-term relationships",
+            "Experience in influencer, digital, social, or agency environments is a strong advantage",
+            "AI fluency and operational system knowledge/comfort"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "success",
+      "title": "What Success Looks Like",
+      "half": true,
+      "blocks": [
+        "You are doing this role well when:",
+        {
+          "list": [
+            "Retention and renewals are strong across your portfolio",
+            "Upsell and expansion revenue grows within your accounts",
+            "Clients on your accounts are satisfied",
+            "Issues are flagged early, before they escalate",
+            "CRM records and account reporting are accurate and up to date"
+          ]
+        }
+      ]
+    }
+  ]
+}

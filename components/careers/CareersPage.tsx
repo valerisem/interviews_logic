@@ -205,7 +205,7 @@ export function CareersPage({ roles, admin, saved }: { roles: CareerRole[]; admi
       <section className="cr-section cr-roles" id="roles">
         <div className="cr-head">
           <h2>Open <span className="accent">roles</span></h2>
-          {admin && !saved && <p className="cr-warn">Opening and closing roles needs the job_openings table in the database. Every role shows as open until it exists.</p>}
+          {admin && !saved && <p className="cr-warn">Could not read the roles table, so every role shows as open and the switches may not save.</p>}
         </div>
         {shown.length === 0 ? (
           <p className="cr-empty">There are no open roles right now. Check back soon.</p>

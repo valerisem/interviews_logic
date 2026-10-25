@@ -1,3 +1,5 @@
+import accountDirector from '@/content/jobs/account-director.json';
+import accountManager from '@/content/jobs/account-manager.json';
 import campaignManager from '@/content/jobs/campaign-manager.json';
 import headOfDelivery from '@/content/jobs/head-of-delivery-performance.json';
 import headOfOperations from '@/content/jobs/head-of-operations.json';
@@ -82,7 +84,7 @@ export const ORG_SCHEMES: Record<string, AccountabilityMap> = {
   'head-of-operations': accountabilityMap as unknown as AccountabilityMap,
 };
 
-const JOBS = [headOfDelivery, headOfOperations, campaignManager] as Job[];
+const JOBS = [headOfDelivery, headOfOperations, accountDirector, accountManager, campaignManager] as Job[];
 
 export function getJob(slug: string): Job | undefined {
   return JOBS.find((j) => j.slug === slug);

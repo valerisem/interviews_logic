@@ -1,0 +1,215 @@
+{
+  "slug": "account-director",
+  "title": "Account",
+  "titleAccent": "Director",
+  "details": [
+    [
+      "Location",
+      "Remote"
+    ],
+    [
+      "Reports to",
+      "Director of Partnerships (Pod Lead)"
+    ]
+  ],
+  "sections": [
+    {
+      "id": "about",
+      "title": "About the Role",
+      "aside": "details",
+      "blocks": [
+        "At House of Marketers, we help global brands grow through **high-performing influencer marketing campaigns** across multiple markets and platforms. As we continue to scale, our **pod-based structure** keeps account ownership, delivery, and commercial growth close together — and this role is one of its four core seats.",
+        "The Account Director is **the single accountable owner of every campaign outcome in the pod**. You lead the pod’s Account Managers, act as the senior client partner on the most important accounts, and are the one person answerable when a campaign’s success is in question.",
+        "You translate the commercial commitments made by the Director of Partnerships into deliverable campaign plans, set and arbitrate the priorities the Campaign Managers work to, and secure the delivery capacity the pod needs from Delivery. **You own outcomes, not the delivery headcount** — Delivery owns the people; you own the result."
+      ]
+    },
+    {
+      "id": "own",
+      "title": "What the Role Owns",
+      "layout": "cards",
+      "items": [
+        {
+          "title": "End-to-End Campaign Ownership",
+          "blocks": [
+            {
+              "list": [
+                "Own the outcome of every campaign in the pod — from post-sale handover to results and renewal",
+                "Be the single accountable owner whenever a campaign’s timeline, scope, quality, or client satisfaction is at risk",
+                "Arbitrate campaign priorities across the pod when accounts compete for the same delivery capacity"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Account Manager Leadership",
+          "blocks": [
+            {
+              "list": [
+                "Line-manage, coach, and develop the pod’s Account Managers",
+                "Balance account load across the Account Managers and set the standard for client management in the pod"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Senior Client Partnership",
+          "blocks": [
+            {
+              "list": [
+                "Act as senior point of contact for the pod’s largest, most complex, and most at-risk accounts",
+                "Lead QBRs, strategic reviews, renewal negotiations, and executive-level client conversations"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Delivery Bridge & Capacity",
+          "blocks": [
+            {
+              "list": [
+                "Own the handover from the commercial process into deliverable campaign plans",
+                "Negotiate Campaign Manager capacity and quality for the pod’s accounts with the Head of Delivery & Performance",
+                "Coordinate with the Creative Strategists to ensure strategy is commercially sound and deliverable"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Commercial & Margin Health",
+          "blocks": [
+            {
+              "list": [
+                "Own pod-level retention, delivery margin, and account profitability",
+                "Lead retention and growth on the pod’s key accounts; flag scope creep and under-resourced accounts early",
+                "Feed accurate pod forecasting and account health to the Director of Partnerships"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Escalation Ownership",
+          "blocks": [
+            {
+              "list": [
+                "Serve as the pod’s senior escalation point for client and campaign issues — resolve, or escalate with a recommendation",
+                "Hold the tie-break on competing account priorities within the pod"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Where the Role Sits",
+      "half": true,
+      "blocks": [
+        "The Account Director sits in **one pod** and works across these lines:",
+        {
+          "list": [
+            "**Reports to: Director of Partnerships (Pod Lead)**",
+            "**Manages (solid line): the pod’s Account Managers**",
+            "**Coordinates (does not line-manage): the pod’s Creative Strategists**",
+            "**Directs (dotted line): the pod’s Campaign Managers**, on campaign priorities",
+            "**Negotiates capacity with: the Head of Delivery & Performance**"
+          ]
+        },
+        "**Delivery owns the people; you own the result.**"
+      ]
+    },
+    {
+      "id": "boundaries",
+      "title": "What the Role Does Not Own",
+      "half": true,
+      "blocks": [
+        {
+          "list": [
+            "Who the Campaign Managers are — their hiring, capacity, quality, and line-management — owned by Delivery (Head of Delivery & Performance)",
+            "Net-new business and the pod’s new-revenue target — owned by the Director of Partnerships (Pod Lead)",
+            "Day-to-day management of individual accounts — owned by the Account Managers",
+            "Creative and campaign strategy craft — owned by the Creative Strategists (you coordinate, you don’t create)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "how",
+      "title": "How We Work",
+      "layout": "values",
+      "items": [
+        {
+          "title": "Be proactive",
+          "blocks": [
+            "If something looks wrong, **investigate it before somebody asks you to.**\n\nDo not wait for a problem to become an escalation."
+          ]
+        },
+        {
+          "title": "Be intelligently curious",
+          "blocks": [
+            "Before asking someone else for the answer, **check.**\n\nLook at the data. Speak to the right people. Test your assumptions. Understand what is actually happening.\n\nThen **bring a recommendation, not just a question.**"
+          ]
+        },
+        {
+          "title": "Take ownership",
+          "blocks": [
+            "We do not want problems passed from person to person or department to department.\n\nIf you own something, **you stay close to it until there is a solution.**"
+          ]
+        },
+        {
+          "title": "Think from first principles",
+          "blocks": [
+            "If the same problem keeps happening, we do not want another checklist or temporary fix.\n\nUnderstand why it is happening and **fix the root cause.**"
+          ]
+        },
+        {
+          "title": "Move fast",
+          "blocks": [
+            "Our industry changes constantly. Technology changes constantly. The company changes quickly.\n\nYou should be comfortable **testing new ideas, trying new tools, changing direction**, and **making decisions without waiting for perfect information.**"
+          ]
+        },
+        {
+          "title": "Use AI with judgement",
+          "blocks": [
+            "We use AI heavily, but **we do not want AI slop.**\n\nAI should help you **think, analyse, automate, and move faster.** It should not result in endless generic documents, unnecessary documents, or reports nobody needs.\n\n**Clear thinking comes first.**"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "looking-for",
+      "title": "What We Are Looking For",
+      "half": true,
+      "blocks": [
+        {
+          "list": [
+            "5+ years in account management, client services, or delivery leadership in influencer, digital, social, or agency environments, including managing people and owning commercial outcomes",
+            "Proven end-to-end ownership of client portfolios — retention, growth, and delivery",
+            "Able to hold commercial accountability and delivery quality at the same time, and make the call when priorities conflict",
+            "Strong leader and coach; credible in senior client rooms",
+            "Fluent English, with excellent communication",
+            "Comfortable operating in a matrix — influencing Delivery for resource without managing the delivery line",
+            "AI fluency and operational system knowledge/comfort"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "success",
+      "title": "What Success Looks Like",
+      "half": true,
+      "blocks": [
+        "You are doing this role well when:",
+        {
+          "list": [
+            "The pod delivers on time, on scope, and on margin",
+            "Pod-level retention and net revenue keep growing",
+            "Clients across the pod’s accounts are satisfied",
+            "Account Managers perform, develop, and carry a balanced load",
+            "Fewer campaigns escalate to the Pod Lead or CEO",
+            "Pod forecasting and account-health reporting are accurate"
+          ]
+        }
+      ]
+    }
+  ]
+}

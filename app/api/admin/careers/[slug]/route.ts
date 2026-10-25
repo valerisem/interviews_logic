@@ -12,10 +12,10 @@ export async function PATCH(req: Request, ctx: { params: Promise<{ slug: string 
   const body = await req.json().catch(() => ({}));
   if (typeof body.open !== 'boolean') return NextResponse.json({ error: 'Expected { open: boolean }' }, { status: 400 });
   try {
-    await setRoleOpen(slug, body.open, email);
+    await setRoleOpen(slug, body.open);
     return NextResponse.json({ ok: true });
   } catch (e) {
     console.error(e);
-    return NextResponse.json({ error: 'Could not save. Is the job_openings table set up?' }, { status: 500 });
+    return NextResponse.json({ error: 'Could not save. Does this role have a row in the roles table with this job_slug?' }, { status: 500 });
   }
 }

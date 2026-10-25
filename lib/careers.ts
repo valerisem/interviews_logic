@@ -74,23 +74,25 @@ export const ROLE_PAGES: Record<string, string> = {
   'Head of Operations': 'head-of-operations',
   'Head of Delivery Operations': 'head-of-delivery-performance',
   'Campaign Manager': 'campaign-manager',
+  'Account Director': 'account-director',
+  'Account Manager': 'account-manager',
 };
 
 export interface CareerRole { slug: string; title: string; location?: string; open: boolean }
 
 /**
- * Every published job and whether it is open. A job is open unless an admin has closed it
- * (a row in job_openings). If the table cannot be read, every job shows as open and `saved` is false.
+ * Every published job and whether it is open. Open / closed lives on the job's row in the roles table
+ * (roles.job_slug → roles.careers_open). If the table cannot be read, every job shows as open and `saved` is false.
  */
 export async function careerRoles(): Promise<{ roles: CareerRole[]; saved: boolean }> {
   let closed = new Set<string>();
   let saved = true;
   try {
-    const { data, error } = await db().from('job_openings').select('slug, is_open');
+    const { data, error } = await db().from('roles').select('job_slug, careers_open').not('job_slug', 'is', null);
     if (error) throw error;
-    closed = new Set((data ?? []).filter((r) => r.is_open === false).map((r) => r.slug as string));
+    closed = new Set((data ?? []).filter((r) => r.careers_open === false).map((r) => r.job_slug as string));
   } catch (e) {
-    console.error('job_openings unavailable', e);
+    console.error('roles unavailable', e);
     saved = false;
   }
   const roles = JOB_SLUGS.map((slug) => {
@@ -102,9 +104,9 @@ export async function careerRoles(): Promise<{ roles: CareerRole[]; saved: boole
   return { roles, saved };
 }
 
-export async function setRoleOpen(slug: string, open: boolean, email: string): Promise<void> {
-  const { error } = await db()
-    .from('job_openings')
-    .upsert({ slug, is_open: open, updated_at: new Date().toISOString(), updated_by: email }, { onConflict: 'slug' });
+/** Open or close a role on the careers page (its row in the roles table). */
+export async function setRoleOpen(slug: string, open: boolean): Promise<void> {
+  const { data, error } = await db().from('roles').update({ careers_open: open }).eq('job_slug', slug).select('id');
   if (error) throw error;
+  if (!data?.length) throw new Error(`No row in roles has job_slug ${slug}`);
 }
