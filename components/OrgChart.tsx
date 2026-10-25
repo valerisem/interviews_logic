@@ -72,8 +72,10 @@ function route(a: Rect, b: Rect, fromSide?: string, toSide?: string): string {
   return `M ${sx} ${sy} L ${mx} ${sy} L ${mx} ${ty} L ${tx} ${ty}`;
 }
 
-export function OrgChart({ data, highlight, roles, scheme }: {
+export function OrgChart({ data, highlight, roles, scheme, links }: {
   data: OrgSnapshot; highlight?: string; roles?: Record<string, OrgRoleInfo>; scheme?: AccountabilityMap;
+  /** Cards that open a page when clicked (card id → address), e.g. a role's job description. */
+  links?: Record<string, string>;
 }) {
   const areaRef = useRef<HTMLDivElement>(null);
   const [view, setView] = useState({ k: 0.2, x: 0, y: 0 });
@@ -251,11 +253,13 @@ export function OrgChart({ data, highlight, roles, scheme }: {
             const me = n.id === highlight;
             const dim = focus && n.id !== focus && !related.has(n.id);
             const info = partner ? roles?.[n.id] : undefined;
+            const href = links?.[n.id];
             return (
               <div
                 key={n.id}
-                className={`org-card${me ? ' me' : ''}${info ? ' has-info' : ''}`}
-                onClick={info ? (e) => { if (!moved.current) setOpen({ id: n.id, from: e.currentTarget.getBoundingClientRect() }); } : undefined}
+                className={`org-card${me ? ' me' : ''}${info || href ? ' has-info' : ''}${href ? ' has-link' : ''}`}
+                onClick={href ? () => { if (!moved.current) window.location.href = href; } : info ? (e) => { if (!moved.current) setOpen({ id: n.id, from: e.currentTarget.getBoundingClientRect() }); } : undefined}
+                title={href ? 'Open this role’s job page' : undefined}
                 onPointerEnter={() => setHover(n.id)}
                 onPointerLeave={() => setHover((h) => (h === n.id ? null : h))}
                 style={{
@@ -271,6 +275,7 @@ export function OrgChart({ data, highlight, roles, scheme }: {
                 {n.future && <b className="org-tag" style={{ background: col }}>{n.tag || 'Future hire'}</b>}
                 <div className="org-name" style={{ fontSize: isCeo ? 17 : small ? 12.5 : 14.5, fontWeight: isCeo ? 800 : 700 }}>{n.name}</div>
                 <div className="org-role" style={{ fontSize: small ? 11 : 11.5 }}>{n.role}</div>
+                {href && <span className="org-link">View role →</span>}
               </div>
             );
           })}

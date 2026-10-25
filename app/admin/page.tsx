@@ -44,6 +44,7 @@ export default async function Dashboard({ searchParams }: { searchParams: Promis
         wide
         right={
           <span className="row" style={{ gap: 16, flexWrap: 'nowrap' }}>
+          <Link href="/admin/careers" className="header-link">Careers</Link>
           <a href="/form" target="_blank" rel="noopener" className="header-btn">Take Test</a>
           <span className="muted" style={{ fontSize: 14 }}>{email}</span>
           <form method="post" action="/api/admin/logout">
