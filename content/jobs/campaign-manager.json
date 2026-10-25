@@ -13,7 +13,7 @@
     ],
     [
       "Reports to",
-      "Delivery Director"
+      "Senior Campaign Manager"
     ],
     [
       "Takes direction from",
@@ -40,7 +40,7 @@
       "blocks": [
         "At House of Marketers, we help global brands grow through **high-performing influencer marketing campaigns** across multiple markets and platforms. As we continue to scale, our **pod-based structure** keeps account ownership, delivery, and commercial growth close together — and this role is one of its four core seats.",
         "The Campaign Manager **executes best-in-class influencer campaigns end-to-end** — the person who makes the work ship. You own the coordination of multiple campaigns from setup through execution: balancing structure, communication, and problem-solving so **timelines are hit and nothing falls through the cracks.**",
-        "You are managed by the Delivery Director (who owns your capacity, quality, and growth) and take your campaign priorities from the pod you’re aligned to. We’re looking for someone **organised, proactive, and excited by ownership** — who solves problems before they escalate."
+        "You are managed by a Senior Campaign Manager within Campaign Delivery, led by the Head of Delivery & Performance, and take your campaign priorities from the pod you’re aligned to. We’re looking for someone **organised, proactive, and excited by ownership** — who solves problems before they escalate."
       ]
     },
     {
@@ -81,7 +81,7 @@
                 "Keep the project-management system 100% up to date for full delivery visibility",
                 "Use established systems for capacity tracking, margin visibility, and outreach updates",
                 "Follow SOPs for consistent, error-free delivery",
-                "Escalate early: client / campaign risk → Account Manager; capacity, quality, or people issues → Delivery Director"
+                "Escalate early: client / campaign risk → Account Manager; capacity, quality, or people issues → Senior Campaign Manager"
               ]
             }
           ]
@@ -107,7 +107,8 @@
         "The Campaign Manager sits in **one pod** and works under two lines:",
         {
           "list": [
-            "**Reports to (solid line): Delivery Director** — your manager for capacity, quality, coaching, and career",
+            "**Reports to (solid line): Senior Campaign Manager** — your manager for quality, coaching, and career",
+            "**Within Campaign Delivery: Head of Delivery & Performance → Senior Campaign Managers → Campaign Managers** — Delivery owns capacity and work allocation",
             "**Takes direction from (dotted line): the pod’s Account Director / Account Manager** — for campaign priorities and client work"
           ]
         },
@@ -123,7 +124,7 @@
           "list": [
             "The client relationship — owned by the Account Manager",
             "What’s most important / campaign priority — set by the pod (Account Director / Account Manager)",
-            "Your own capacity allocation and quality standards — owned by the Delivery Director",
+            "Your own capacity allocation and quality standards — owned by Delivery (Head of Delivery & Performance)",
             "Retention, upsell, and commercial decisions — owned by the pod"
           ]
         }
