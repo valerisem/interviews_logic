@@ -502,8 +502,7 @@ table.data .select-cell { width: 1%; min-width: 0; padding-right: 4px; }
 .cr-big { position: relative; display: inline-block; font-family: var(--display); font-weight: 700; font-size: clamp(72px, 9vw, 132px); line-height: 0.9; letter-spacing: -0.05em; color: var(--heading); }
 .cr-values { padding: 88px 56px 96px; display: flex; flex-direction: column; gap: 28px; }
 .cr-values .cr-kicker { color: #fff; text-align: right; }
-.cr-values h2 { font-family: var(--display); font-size: clamp(40px, 5.4vw, 80px); line-height: 1.04; letter-spacing: -0.045em; font-weight: 700; color: #fff; }
-.cr-value-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px 40px; margin-top: 40px; }
+.cr-value-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px 40px; margin-top: 56px; }
 .cr-value-list h3 { position: relative; font-family: var(--display); font-size: clamp(28px, 2.8vw, 38px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 700; color: #fff; }
 .cr-value-list p { margin-top: 14px; font-size: 16px; line-height: 1.65; color: rgba(255,255,255,.92); }
 /* Tags: straight labels next to the year or value they belong to */

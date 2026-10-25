@@ -20,8 +20,6 @@ export const HISTORY: { big: string; tag: string; tone: TagTone; text: string }[
   { big: '2026', tag: 'Scaling', tone: 'pink', text: 'House of Marketers was acquired by Ethos Partners, a large conglomerate, and is growing fast as we enter our next stage of growth.' },
 ];
 
-export const VALUES_HEADLINE = 'If something looks wrong, we fix it before anyone asks.';
-
 /** How we work, written as company values. */
 export const VALUES: { title: string; text: string }[] = [
   { title: 'Proactivity', text: 'We spot problems before anyone asks. If something looks off, we investigate it straight away instead of waiting for it to become an escalation.' },
@@ -64,13 +62,6 @@ export const BENEFITS: ({ area: string } & ({ title: string; text: string; tone:
   { area: '62 / 8 / 92 / 11', photo: '/careers/team2.jpg', alt: 'Members of the House of Marketers team' },
 ];
 
-/** Which team each published role sits in, for the open roles list. */
-const TEAMS: Record<string, string> = {
-  'head-of-operations': 'Operations',
-  'head-of-delivery-performance': 'Campaign Delivery',
-  'campaign-manager': 'Campaign Delivery',
-};
-
 /** Org-chart cards that open a job page, matched by the card's role. */
 export const ROLE_PAGES: Record<string, string> = {
   'Head of Operations': 'head-of-operations',
@@ -78,7 +69,7 @@ export const ROLE_PAGES: Record<string, string> = {
   'Campaign Manager': 'campaign-manager',
 };
 
-export interface CareerRole { slug: string; title: string; team?: string; location?: string; open: boolean }
+export interface CareerRole { slug: string; title: string; location?: string; open: boolean }
 
 /**
  * Every published job and whether it is open. A job is open unless an admin has closed it
@@ -98,7 +89,7 @@ export async function careerRoles(): Promise<{ roles: CareerRole[]; saved: boole
   const roles = JOB_SLUGS.map((slug) => {
     const job = getJob(slug) as Job;
     const location = job.details.find(([k]) => k === 'Location')?.[1];
-    return { slug, title: `${job.title} ${job.titleAccent}`, team: TEAMS[slug], location, open: !closed.has(slug) };
+    return { slug, title: `${job.title} ${job.titleAccent}`, location, open: !closed.has(slug) };
   });
   return { roles, saved };
 }

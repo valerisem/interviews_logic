@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Fragment } from 'react';
 import { OrgChart } from '@/components/OrgChart';
-import { ABOUT, BENEFITS, HISTORY, PEOPLE, ROLE_PAGES, VALUES, VALUES_HEADLINE, type BenefitIcon, type CareerRole } from '@/lib/careers';
+import { ABOUT, BENEFITS, HISTORY, PEOPLE, ROLE_PAGES, VALUES, type BenefitIcon, type CareerRole } from '@/lib/careers';
 import { ORG_CHARTS } from '@/lib/jobs';
 import { PeopleMarquee } from './PeopleMarquee';
 import { RoleToggle } from './RoleToggle';
@@ -113,7 +113,6 @@ export function CareersPage({ roles, admin, saved }: { roles: CareerRole[]; admi
         </div>
         <div className="cr-values">
           <p className="cr-kicker">Our Values</p>
-          <h2>{VALUES_HEADLINE}</h2>
           <div className="cr-value-list">
             {VALUES.map((v) => (
               <article key={v.title}>
@@ -183,7 +182,6 @@ export function CareersPage({ roles, admin, saved }: { roles: CareerRole[]; admi
                 <Link href={`/jobs/${r.slug}`} className="cr-role">
                   <span className="cr-role-title">{r.title}</span>
                   <span className="cr-role-meta">
-                    {r.team && <span>{r.team}</span>}
                     {r.location && <span>{r.location}</span>}
                   </span>
                   <span className="cr-role-go">View role →</span>
