@@ -37,9 +37,9 @@ export const PEOPLE: { name: string; role: string; photo: string; linkedin?: str
   { name: 'Valeriia Mukhai', role: 'Client Director', photo: '/team/valeriia.png', linkedin: 'https://www.linkedin.com/in/valeriia-mukhai-115007190/' },
   { name: 'Ritchie Boubouli', role: 'New Partnerships Director', photo: '/team/ritchie.png', linkedin: 'https://www.linkedin.com/in/ritchie-boubouli-42997713/' },
   { name: 'Chris Wilson', role: 'Paid Marketing Director', photo: '/team/chris.png', linkedin: 'https://www.linkedin.com/in/its-chris-wilson/' },
-  { name: 'Emily King', role: 'Account Director', photo: '/team/emily.png' },
+  { name: 'Emily King', role: 'Account Director', photo: '/team/emily.png', linkedin: 'https://uk.linkedin.com/in/emily-king-ab6a35228' },
   { name: 'Carrick Klopper', role: 'Partnership Manager', photo: '/team/carrick.png', linkedin: 'https://www.linkedin.com/in/carrick-klopper-5572742a/' },
-  { name: 'Nazeera Gaffoor', role: 'Creative Strategist', photo: '/team/nazeera.png' },
+  { name: 'Nazeera Gaffoor', role: 'Creative Strategist', photo: '/team/nazeera.png', linkedin: 'https://za.linkedin.com/in/nazeera-gaffoor-28503b279' },
   { name: 'Maggie Parrott', role: 'Account Manager', photo: '/team/maggie.png', linkedin: 'https://www.linkedin.com/in/maggieparrott' },
   { name: 'Levi Hoang', role: 'Account Manager', photo: '/team/levi.png', linkedin: 'https://www.linkedin.com/in/levi-hoang-6819431a9/' },
 ];
