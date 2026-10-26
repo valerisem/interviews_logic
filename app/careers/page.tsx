@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { CareersPage } from '@/components/careers/CareersPage';
 import { TopBar } from '@/components/TopBar';
 import { adminEmail } from '@/lib/adminSession';
-import { careerRoles } from '@/lib/careers';
+import { careerPeople, careerRoles } from '@/lib/careers';
 
 export const dynamic = 'force-dynamic';
 
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 /** One careers page: everyone sees it; a signed-in admin also gets the org chart and the open / closed switches. */
 export default async function Careers() {
   const email = await adminEmail();
-  const { roles, saved } = await careerRoles();
+  const [{ roles, saved }, people] = await Promise.all([careerRoles(), careerPeople()]);
   return (
     <>
       <TopBar
@@ -34,7 +34,7 @@ export default async function Careers() {
           )
         }
       />
-      <CareersPage roles={roles} admin={!!email} saved={saved} />
+      <CareersPage roles={roles} people={people} admin={!!email} saved={saved} />
     </>
   );
 }

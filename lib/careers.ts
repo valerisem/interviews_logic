@@ -30,7 +30,7 @@ export const VALUES: { title: string; text: string }[] = [
   { title: 'AI with judgement', text: 'We use AI heavily to think, analyse, automate and move faster, never to produce generic documents nobody needs. Clear thinking comes first.' },
 ];
 
-/** A few of our people (photos in public/team, LinkedIn links from the team directory). */
+/** A few of our people (photos in public/team). Each `linkedin` here is only a fallback; see careerPeople(). */
 export const PEOPLE: { name: string; role: string; photo: string; linkedin?: string }[] = [
   { name: 'Inigo Rivero', role: 'Chief Executive Officer', photo: '/team/inigo.png', linkedin: 'https://www.linkedin.com/in/inigorivero' },
   { name: 'Valeria Semibratnya', role: 'Head of Operations', photo: '/team/valeria.png', linkedin: 'https://www.linkedin.com/in/valeria-semibratnya/' },
@@ -79,6 +79,29 @@ export const ROLE_PAGES: Record<string, string> = {
 };
 
 export interface CareerRole { slug: string; title: string; location?: string; open: boolean }
+
+export type CareerPerson = (typeof PEOPLE)[number];
+
+/**
+ * The people row with each person's LinkedIn link read live from the team table (matched by full name),
+ * so a link updated in Supabase shows on the next page load. Falls back to the links above if the table
+ * cannot be read.
+ */
+export async function careerPeople(): Promise<CareerPerson[]> {
+  try {
+    const { data, error } = await db().from('team').select('full_name, linkedin_link').is('left_date', null).in('full_name', PEOPLE.map((p) => p.name));
+    if (error) throw error;
+    const links = new Map((data ?? []).map((r) => [r.full_name as string, (r.linkedin_link as string | null)?.trim() || '']));
+    return PEOPLE.map((p) => {
+      if (!links.has(p.name)) return p;
+      const raw = links.get(p.name)!;
+      return { ...p, linkedin: raw ? (/^https?:\/\//i.test(raw) ? raw : `https://${raw}`) : undefined };
+    });
+  } catch (e) {
+    console.error('team unavailable', e);
+    return PEOPLE;
+  }
+}
 
 /**
  * Every published job and whether it is open. Open / closed lives on the job's row in the roles table

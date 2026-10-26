@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Fragment } from 'react';
 import { OrgChart } from '@/components/OrgChart';
-import { ABOUT, BENEFITS, HISTORY, PEOPLE, ROLE_PAGES, VALUES, type BenefitIcon, type CareerRole } from '@/lib/careers';
+import { ABOUT, BENEFITS, HISTORY, ROLE_PAGES, VALUES, type BenefitIcon, type CareerPerson, type CareerRole } from '@/lib/careers';
 import { ORG_CHARTS } from '@/lib/jobs';
 import { AssembleOnScroll } from './AssembleOnScroll';
 import { PeopleMarquee } from './PeopleMarquee';
@@ -82,7 +82,7 @@ function BenefitCard({ b, style }: { b: Card; style?: React.CSSProperties }) {
   );
 }
 
-export function CareersPage({ roles, admin, saved }: { roles: CareerRole[]; admin?: boolean; saved?: boolean }) {
+export function CareersPage({ roles, people, admin, saved }: { roles: CareerRole[]; people: CareerPerson[]; admin?: boolean; saved?: boolean }) {
   const shown = admin ? roles : roles.filter((r) => r.open);
   const org = ORG_CHARTS['head-of-operations'];
   const links = admin && org
@@ -164,7 +164,7 @@ export function CareersPage({ roles, admin, saved }: { roles: CareerRole[]; admi
           <h2>Meet a few of our <span className="accent">people</span></h2>
           <p>Our philosophy is simple: hire exceptional people and give them the opportunity to make a real impact every day.</p>
         </div>
-        <PeopleMarquee people={PEOPLE} />
+        <PeopleMarquee people={people} />
       </section>
 
       <section className="cr-section" id="benefits">
