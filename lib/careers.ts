@@ -35,7 +35,7 @@ export const PEOPLE: { name: string; role: string; photo: string; linkedin?: str
   { name: 'Inigo Rivero', role: 'Chief Executive Officer', photo: '/team/inigo.png', linkedin: 'https://www.linkedin.com/in/inigorivero' },
   { name: 'Valeria Semibratnya', role: 'Head of Operations', photo: '/team/valeria.png', linkedin: 'https://www.linkedin.com/in/valeria-semibratnya/' },
   { name: 'Valeriia Mukhai', role: 'Client Director', photo: '/team/valeriia.png', linkedin: 'https://www.linkedin.com/in/valeriia-mukhai-115007190/' },
-  { name: 'Ritchie Boubouli', role: 'Director of New Partnerships', photo: '/team/ritchie.png', linkedin: 'https://www.linkedin.com/in/ritchie-boubouli-42997713/' },
+  { name: 'Ritchie Boubouli', role: 'New Partnerships Director', photo: '/team/ritchie.png', linkedin: 'https://www.linkedin.com/in/ritchie-boubouli-42997713/' },
   { name: 'Chris Wilson', role: 'Paid Marketing Director', photo: '/team/chris.png', linkedin: 'https://www.linkedin.com/in/its-chris-wilson/' },
   { name: 'Emily King', role: 'Account Director', photo: '/team/emily.png' },
   { name: 'Carrick Klopper', role: 'Partnership Manager', photo: '/team/carrick.png', linkedin: 'https://www.linkedin.com/in/carrick-klopper-5572742a/' },

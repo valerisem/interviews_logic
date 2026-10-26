@@ -5,34 +5,31 @@ import { useEffect, useRef } from 'react';
 type Person = { name: string; role: string; photo: string; linkedin?: string };
 
 /*
- * A row of team cards that drifts sideways on its own and slides faster as the page scrolls
- * (left when scrolling down, back when scrolling up). The row is drawn twice and wraps after exactly
- * one copy (cards plus the gap before the second copy), so the loop has no visible jump.
- * Each person is cut out from their background and tinted fuchsia (the #cr-duotone filter below); hovering a
- * card brings their colour back and holds the row still so the LinkedIn link can be clicked.
+ * A row of team cards that slides sideways at a steady speed, whatever the mouse or scroll does. The row is
+ * drawn twice and wraps after exactly one copy (cards plus the gap before the second copy), so the loop has
+ * no visible jump. Each person is cut out from their background and tinted fuchsia (the #cr-duotone filter
+ * below); hovering a card brings their colour back.
  */
 export function PeopleMarquee({ people }: { people: Person[] }) {
   const track = useRef<HTMLDivElement>(null);
-  const paused = useRef(false);
 
   useEffect(() => {
     const el = track.current;
     if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    let x = 0, last = window.scrollY, raf = 0;
-    const step = () => {
-      const dy = window.scrollY - last;
-      last = window.scrollY;
-      if (!paused.current) {
-        const first = el.children[0] as HTMLElement | undefined;
-        const second = el.children[people.length] as HTMLElement | undefined;
-        const period = first && second ? second.offsetLeft - first.offsetLeft : 0;
-        x -= 0.35 + dy * 0.6;
-        if (period > 0) {
-          while (x <= -period) x += period;
-          while (x > 0) x -= period;
-        }
-        el.style.transform = `translate3d(${x}px, 0, 0)`;
+    let x = 0, prev = 0, raf = 0;
+    const step = (now: number) => {
+      // Same speed on every screen: 30px a second, measured by time rather than by frame.
+      const dt = prev ? Math.min(now - prev, 100) : 0;
+      prev = now;
+      const first = el.children[0] as HTMLElement | undefined;
+      const second = el.children[people.length] as HTMLElement | undefined;
+      const period = first && second ? second.offsetLeft - first.offsetLeft : 0;
+      x -= dt * 0.03;
+      if (period > 0) {
+        while (x <= -period) x += period;
+        while (x > 0) x -= period;
       }
+      el.style.transform = `translate3d(${x}px, 0, 0)`;
       raf = requestAnimationFrame(step);
     };
     raf = requestAnimationFrame(step);
@@ -40,7 +37,7 @@ export function PeopleMarquee({ people }: { people: Person[] }) {
   }, [people.length]);
 
   return (
-    <div className="cr-marquee" onPointerOver={() => { paused.current = true; }} onPointerLeave={() => { paused.current = false; }}>
+    <div className="cr-marquee">
       {/* Fuchsia duotone: dark tones become brand pink, light tones a pale pink. Transparency is kept. */}
       <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true">
         <filter id="cr-duotone" colorInterpolationFilters="sRGB">

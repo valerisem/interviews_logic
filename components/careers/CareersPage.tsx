@@ -3,6 +3,7 @@ import { Fragment } from 'react';
 import { OrgChart } from '@/components/OrgChart';
 import { ABOUT, BENEFITS, HISTORY, PEOPLE, ROLE_PAGES, VALUES, type BenefitIcon, type CareerRole } from '@/lib/careers';
 import { ORG_CHARTS } from '@/lib/jobs';
+import { AssembleOnScroll } from './AssembleOnScroll';
 import { PeopleMarquee } from './PeopleMarquee';
 import { RoleToggle } from './RoleToggle';
 
@@ -170,7 +171,7 @@ export function CareersPage({ roles, admin, saved }: { roles: CareerRole[]; admi
         <div className="cr-head">
           <h2>Our <span className="accent">benefits</span></h2>
         </div>
-        <div className="cr-benefits">
+        <AssembleOnScroll className="cr-benefits">
           {BENEFITS.map((b) =>
             'photo' in b ? (
               // eslint-disable-next-line @next/next/no-img-element
@@ -179,7 +180,7 @@ export function CareersPage({ roles, admin, saved }: { roles: CareerRole[]; admi
               <BenefitCard key={b.title} b={b} style={{ gridArea: b.area }} />
             ),
           )}
-        </div>
+        </AssembleOnScroll>
         {/* Phones: a team photo, the benefits as a row you swipe through, then the other team photo. */}
         <div className="cr-benefits-phone">
           {photos[0] && (
